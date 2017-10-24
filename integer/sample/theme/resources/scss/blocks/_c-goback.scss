@@ -1,0 +1,20 @@
+.c-goback {
+  .c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__wrap {
+    padding-left: 20px;
+    padding-right: 20px;
+    background: white;
+  }
+  &__center {
+    @extend .max-width-inner;
+    margin: 0 auto;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    &:after {
+      @extend .clearfix;
+    }
+  }
+}

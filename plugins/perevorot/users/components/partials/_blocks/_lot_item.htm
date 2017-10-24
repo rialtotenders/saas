@@ -1,0 +1,90 @@
+{% set validator_name_prefix = input_name_prefix|replace({'[': '.', ']': '.'})|replace({'..': '.'}) %}
+
+<div class="lot-item-block" data-lot-item-index="{{ item_key }}">
+    <div class="delete_lot_item">{{ 'tender.lot.item_delete'|_ }}</div>
+    <input type="hidden" name="{{ input_name_prefix }}[id]" value="{{ item.id }}"/>
+
+    <div class="form-holder">
+        <label for="tender_create_nomenclature_description-{{ validator_name_prefix }}">{{ 'tender.create.nomenclature_description'|_}}</label>
+        <div class="form-holder">
+            <textarea id="tender_create_nomenclature_description-{{ validator_name_prefix }}" name="{{ input_name_prefix }}[description]">{{ item.description }}</textarea>
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}description"></div>
+        </div>
+    </div>
+
+    <div class="form-holder">
+        <label for="tender_create_please_choose_cpv-{{ validator_name_prefix }}">{{ 'tender.create.please_choose_cpv'|_}}</label>
+        <div class="form-holder">
+            <input id="tender_create_please_choose_cpv-{{ validator_name_prefix }}" class="search_cpv" placeholder="{{ 'tender.create.search_cpv'|_ }}" type="text" cpv-search-closed/>
+            <input class="search_cpv none" type="text" placeholder="{{ 'tender.create.search_cpv'|_ }}" cpv-search-opened/>
+            <div class="loader"></div>
+            {% partial '@_blocks/_cpv'
+                parent_item=tender.cpv
+                class='normal_list_cpv'
+                input_name=input_name_prefix~'[classification][id]'
+                selected_item=item.classification.id
+                type='single'
+                id_prefix=(lot_key~item_key)
+                auto_height=true
+            %}
+
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}classification.id"></div>
+        </div>
+    </div>
+
+    <div class="form-holder">
+        <label for="tender_create_quantity-{{ validator_name_prefix }}">{{ 'tender.create.quantity'|_ }}</label>
+        <input id="tender_create_quantity-{{ validator_name_prefix }}" type="text" name="{{ input_name_prefix }}[quantity]" value="{{ item.quantity }}"/>
+        <div class="error-holder none" data-validation="{{ validator_name_prefix }}quantity"></div>
+    </div>
+
+    <div class="form-holder">
+        <label for="lot_units-{{ validator_name_prefix }}" >{{ 'tender.create.units'|_}}</label>
+        <select id="lot_units-{{ validator_name_prefix }}" name="{{ input_name_prefix }}[unit][code]">
+            {% for mkey, unit in measurers %}
+            <option value="{{ mkey }}" {% if mkey == item.unit.code %} selected {% endif %}>{{ unit }}</option>
+            {% endfor %}
+        </select>
+        <div class="error-holder none" data-validation="{{ validator_name_prefix }}unit.code"></div>
+    </div>
+
+    <div class="form-holder">
+        <label for="tender_create_deliveryDate_startDate-{{ validator_name_prefix }}">{{ 'tender.create.deliveryDate_startDate'|_}}</label>
+        <div class="input-group date">
+            <input autocomplete="off" id="tender_create_deliveryDate_startDate-{{ validator_name_prefix }}" name="{{ input_name_prefix }}[deliveryDate][startDate]" value="{{ item.deliveryDate.startDate }}" type="text" class="form-control">
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}deliveryDate.startDate"></div>
+        </div>
+    </div>
+    <div class="form-holder">
+        <label for="tender_create_deliveryDate_endDate-{{ validator_name_prefix }}">{{ 'tender.create.deliveryDate_endDate'|_}}</label>
+        <div class="input-group date">
+            <input autocomplete="off" id="tender_create_deliveryDate_endDate-{{ validator_name_prefix }}" name="{{ input_name_prefix }}[deliveryDate][endDate]" value="{{ item.deliveryDate.endDate }}" type="text" class="form-control">
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}deliveryDate.endDate"></div>
+        </div>
+    </div>
+
+    <div class="form-holder">
+        <label for="tender_create_deliveryAddress_postalCode-{{ validator_name_prefix }}">{{ 'tender.create.deliveryAddress_postalCode'|_ }}</label>
+        <input id="tender_create_deliveryAddress_postalCode-{{ validator_name_prefix }}" type="text" name="{{ input_name_prefix }}[deliveryAddress][postalCode]" value="{% if item.deliveryAddress.postalCode and not new_item %}{{ item.deliveryAddress.postalCode }}{% else %}{{ user.company_index }}{% endif %}"/>
+        <div class="error-holder none" data-validation="{{ validator_name_prefix }}deliveryAddress.postalCode"></div>
+    </div>
+
+    <div class="form-holder">
+        <label for="tender_create_deliveryAddress_region-{{ validator_name_prefix }}">{{ 'tender.create.deliveryAddress_region'|_ }}</label>
+        <input id="tender_create_deliveryAddress_region-{{ validator_name_prefix }}" type="text" name="{{ input_name_prefix }}[deliveryAddress][region]" value="{% if item.deliveryAddress.region and not new_item %}{{ item.deliveryAddress.region }}{% else %}{{ user.company_region }}{% endif %}"/>
+        <div class="error-holder none" data-validation="{{ validator_name_prefix }}region"></div>
+    </div>
+
+    <div class="form-holder">
+        <label for="tender_create_deliveryAddress_locality-{{ validator_name_prefix }}">{{ 'tender.create.deliveryAddress_locality'|_ }}</label>
+        <input id="tender_create_deliveryAddress_locality-{{ validator_name_prefix }}" type="text" name="{{ input_name_prefix }}[deliveryAddress][locality]" value="{% if item.deliveryAddress.locality and not new_item %}{{ item.deliveryAddress.locality }}{% else %}{{ user.company_city }}{% endif %}"/>
+        <div class="error-holder none" data-validation="{{ validator_name_prefix }}deliveryAddress.locality"></div>
+    </div>
+
+    <div class="form-holder">
+        <label for="tender_create_deliveryAddress_streetAddress-{{ validator_name_prefix }}">{{ 'tender.create.deliveryAddress_streetAddress'|_ }}</label>
+        <input id="tender_create_deliveryAddress_streetAddress-{{ validator_name_prefix }}" type="text" name="{{ input_name_prefix }}[deliveryAddress][streetAddress]" value="{% if item.deliveryAddress.streetAddress and not new_item %}{{ item.deliveryAddress.streetAddress }}{% else %}{{ user.company_address }}{% endif %}"/>
+        <div class="error-holder none" data-validation="{{ validator_name_prefix }}deliveryAddress.streetAddress"></div>
+    </div>
+
+</div>

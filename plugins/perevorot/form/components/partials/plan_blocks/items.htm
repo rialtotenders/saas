@@ -1,0 +1,49 @@
+{% if items|length %}
+    <h2>{{ 'plan.items_title'|_ }}</h2>
+
+    <div class="sb-table sb-table__table-row--50-30-20">
+        <div class="sb-table__table">
+
+            <div class="sb-table__table-row sb-table__table-row--border-bottom">
+                <div class="sb-table__table-cell sb-table__table-cell--th">
+                    {{ 'plan.items_title'|_ }}
+                </div>
+                <div class="sb-table__table-cell sb-table__table-cell--th">
+                    {{ 'plan.items_delivery'|_ }}
+                </div>
+                <div class="sb-table__table-cell sb-table__table-cell--th">
+                    {{ 'plan.items_quantity'|_ }}
+                </div>
+            </div>
+            {% for one in items %}
+                <div class="sb-table__table-row sb-table__table-row--pb0">
+                    <div class="sb-table__table-cell">
+                        <p>{{ one.description }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-row sb-table__table-row--border-bottom sb-table__table-row--pt0">
+                    <div class="sb-table__table-cell">
+                        {% if one.classification is not empty %}
+                            <p class="sb-table__text sb-table__text--small">{{ 'plan.cpv'|_ }}: {{ one.classification.id }} — {{ one.classification.description }}</p>
+                        {% else %}
+                            <p class="sb-table__text sb-table__text--small">{{ 'plan.no_cpv'|_ }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="sb-table__table-cell">
+                        <p>
+                            {{ 'plan.deliveryDate_startDate'|_ ~ ' ' ~ one.deliveryDate.startDate|date('d.m.Y H:i') }}
+                        </p>
+                        <p>
+                            {{ 'plan.deliveryDate_endDate'|_ ~ ' ' ~ one.deliveryDate.endDate|date('d.m.Y H:i') }}
+                        </p>
+                    </div>
+
+                    <div class="sb-table__table-cell">
+                        <p>{{ one.quantity }} {{ one.unit.name }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

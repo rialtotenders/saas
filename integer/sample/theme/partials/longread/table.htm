@@ -1,0 +1,29 @@
+<div class="w c-s wrapper">
+    <div class="c ">
+        <div class="c-s__wrap">
+
+            <div class="block_table">
+
+                <div class="overflow-table">
+
+                    <table>
+                        <tr>
+                            {% for item in data['table_fields'] %}
+                            <th>{{ item.field_title }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for row in results %}
+                        <tr>
+                            {% for item in data['table_fields'] %}
+                                {% if row[item.field_name] is not empty %}
+                                    <td>{{ row[item.field_name] }}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

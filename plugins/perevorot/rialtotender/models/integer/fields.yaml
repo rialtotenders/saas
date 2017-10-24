@@ -1,0 +1,29 @@
+fields:
+    title:
+        label: Название
+        span: full
+        required: 1
+        type: text
+    domain:
+        label: Доменное имя
+        span: right
+        type: text
+        required: 1
+    theme_folder:
+        label: Папка с темой
+        span: left
+        type: dropdown
+    env:
+        label: Настройки площадки
+        span: full
+        type: textarea
+        size: giant
+        required: 1
+        dependsOn: theme_folder
+    button_migrations:
+        label: Обновление структуры базы данны
+        span: left
+        type: partial
+    is_enabled:
+        label: Активная площадка
+        type: switch

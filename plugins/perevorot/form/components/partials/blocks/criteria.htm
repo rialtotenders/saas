@@ -1,0 +1,48 @@
+{% if features is not empty and show_criteria %}
+<h2>{{ 'tender.criteria_title'|_ }}</h2>
+
+<div class="overflow-table">
+    <table>
+        <tbody>
+            <tr>
+                <th>{{ 'tender.criteria_table_name'|_ }}</th>
+                <th>{{ 'tender.criteria_table_option'|_ }}</th>
+                <th>{{ 'tender.criteria_table_weight'|_ }}</th>
+            </tr>
+            {% for feature in features %}
+                {% if feature.max>0 %}
+                    {% for key, enum in feature.enum %}
+                    <tr>
+                        {% if key == 0 %}
+                        <td rowspan="{{ feature.enum|length}}">
+                            <p>{{ feature.title|stripslashes }}</p>
+                        </td>
+                        {% endif %}
+                        <td>
+                            <p>{{ enum.title|stripslashes }}</p>
+                        </td>
+                        <td>
+                            {% set value=enum.value*100 %}
+                            <p>{{ value }}%</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+
+            {% if show_criteria_price %}
+                <tr class="border_top">
+                    <td>
+                        <p>{{ 'tender.criteria_price'|_ }}</p>
+                    </td>
+                    <td></td>
+                    <td>
+                        <p><b>{% set __features_price=item.__features_price*100 %}{{ __features_price }}%</b></p>
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+{% endif %}

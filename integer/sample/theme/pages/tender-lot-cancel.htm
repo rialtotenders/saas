@@ -1,0 +1,12 @@
+title = "tender lot cancel"
+url = "/tender/:tenderID/lot/:lotID/cancel"
+layout = "default"
+is_hidden = 0
+
+[TenderCancelling]
+tender_id = "{{ :tenderID }}"
+lot_id = "{{ :lotID }}"
+==
+<div id="tender-content">
+{% component 'TenderCancelling' %}
+</div>

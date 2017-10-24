@@ -1,0 +1,45 @@
+{% if areas|length %}
+    <div class="w c-block{% if data.areas_up %} go-prev{% endif %}">
+        <div class="c">
+            <div class="c-block__wrap">
+                <div class="c-block__center">
+                    {% if data.areas_title %}
+                        <h2 class="sb-h2">{{ data.areas_title }}</h2>
+                    {% endif %}
+                    <div class="row mx-minus-5">
+                        {% for item in areas %}
+                            <div class="col-25 sb-card{{ item.url is empty ? ' sb-card--soon':'' }}">
+                                <div class="sb-card__item-wrap">
+                                    <div class="sb-card__soon-wrap">
+                                        <div>{{ 'platform.soon'|_ }}</div>
+                                    </div>
+                                    <div class="sb-card__content">
+                                        {% if item.image.path %}
+                                            {% if item.url %}
+                                                <a href="{{ item.url }}">
+                                                    <img src="{{ item.image.path }}">
+                                                </a>
+                                            {% else %}
+                                                <img src="{{ item.image.path }}">
+                                            {% endif %}
+                                        {% endif %}
+                                        <p>{{ item.description }}</p>
+                                    </div>
+                                    {% if item.url %}
+                                        <a href="{{ item.url }}" class="sb-card__item-link">
+                                            {{ 'platform.register'|_ }}
+                                        </a>
+                                    {% else %}
+                                        <span class="sb-card__item-link">
+                                            {{ 'platform.register'|_ }}
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

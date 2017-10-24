@@ -1,0 +1,11 @@
+title = "Подача заявки на тендер"
+url = "/tender/:tenderID/application"
+layout = "default"
+is_hidden = 0
+
+[ApplicationCreater]
+tender_id = {{ :tenderID }}
+==
+<div id="tender-application-content">
+    {% component 'ApplicationCreater' %}
+</div>

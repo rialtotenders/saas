@@ -1,0 +1,191 @@
+{% put scripts %}
+    <script type="text/javascript">
+    
+        var opts = {
+                lines: 13, length: 28, width: 14, radius: 42, scale: 0.25, corners: 1, color: '#000', opacity: 0.25, rotate: 0, direction: 1, speed: 1, trail: 60, fps: 20, zIndex: 2e9, className: 'spinner', top: '47%', left: '20%', shadow: false, hwaccel: false, position: 'absolute'
+            },
+            target = document.getElementById('application-submit'),
+            spinner = new Spinner(opts).spin(target);
+    
+        $('.spinner').hide();
+        
+        jQuery(function($) {
+
+        $('#application-form').on('click', ".doc-confidentiality", function () {
+            if($(this).find('input').is( ":checked" )) {
+                $(this).find('textarea').show();
+                $(this).find('textarea').attr('required', 'required');
+            } else {
+                $(this).find('textarea').hide();
+                $(this).find('textarea').removeAttr('required');
+            }
+        });
+
+        $("#application-form").on( "click", "#application-submit button", function() {
+            if($(this).hasClass('disabled')) {
+                return false;
+            }
+
+            $("#application-form").find('.bid-price').removeAttr('disabled');
+            $(this).addClass('disabled');
+        });
+
+        $("#application-form").find("[data-features]").each(function (index, element) {
+            showEnumsByFeatures($(element));
+
+            if($(this).attr('data-tender-features') != undefined) {
+
+                var tr = $(this).closest('table').find('tr');
+
+                if(!tr.get().length) {
+                    tr = $(this).closest('.list_lot_application').find('.item-lot');
+                }
+
+                tr.find('.bid-price').each(function(index, element) {
+                    setPriceByFeatures($(element));
+                });
+            } else {
+
+                var tr = $(this).closest('tr');
+
+                if(!tr.get().length) {
+                    tr = $(this).closest('.item-lot');
+                }
+
+                setPriceByFeatures(tr.find('.bid-price'));
+            }
+        });
+
+        $("#application-form").on('change', "[data-features]", function () {
+            showEnumsByFeatures($(this));
+
+            if($(this).attr('data-tender-features') != undefined) {
+
+                var tr = $(this).closest('table').find('tr');
+
+                if(!tr.get().length) {
+                    tr = $(this).closest('.list_lot_application').find('.item-lot');
+                }
+
+                tr.find('.bid-price').each(function(index, element) {
+                    setPriceByFeatures($(element));
+                });
+            } else {
+
+                var tr = $(this).closest('tr');
+
+                if(!tr.get().length) {
+                    tr = $(this).closest('.item-lot');
+                }
+
+                setPriceByFeatures(tr.find('.bid-price'));
+            }
+        });
+        
+        $("input").on('keyup', function () {
+            setPriceByFeatures($(this));
+        });
+
+        function setPriceByFeatures(_this) {
+
+            var features = _this.closest('tr');
+            var _next_f;
+            var new_price;
+            var max = 0;
+            var enums = 0;
+
+            if(!features.get().length) {
+                features = _this.closest('.item-lot');
+                _next_f = features;
+            } else {
+                _next_f = features.next();
+            }
+
+            var bid_price = features.find('.bid-price').val();
+
+            if(!bid_price) {
+                return false;
+            }
+
+            features.find('[data-features]').each(function(index, element) {
+                max = max + parseFloat($(element).attr('data-max'));
+                enums = enums + parseFloat($(element).find('option:selected').val());
+            });
+            $('.tr-tender-features').find('[data-features]').each(function(index, element) {
+                max = max + parseFloat($(element).attr('data-max'));
+                enums = enums + parseFloat($(element).find('option:selected').val());
+            });
+
+            new_price = 1 + enums / (1 - max);
+            new_price = Number((bid_price / new_price).toFixed(2));
+
+            features.find('.feature-bid-price').val(new_price);
+            _next_f.find('.new-bid-price').html(new_price);
+            _next_f.find('.current-bid-price').show().children('span').html(bid_price);
+        }
+
+        function showEnumsByFeatures(_this) {
+
+            var enums_sum = 0;
+            var max = 0;
+            var td_features = _this.closest('.features-block');
+
+            td_features.find('[data-features]').each(function(index, element) {
+
+                max = max + parseFloat($(element).attr('data-max'));
+                enums_sum = enums_sum + parseFloat($(element).find('option:selected').val());
+
+            });
+
+            enums_sum = Number(enums_sum).toFixed(2);
+            max = Number(max).toFixed(2);
+
+            td_features.find('.vash-kojefficient').html(enums_sum);
+            td_features.find('.max-kojefficient').html(max);
+
+        }
+
+        function showPriceByFeatures() {
+            $('.create_application').find('.lot-data').each(function(_index, _element) {
+
+                var enums = 0;
+                var max = 0;
+                var lot_data;
+                var lot_title;
+                var lot_number;
+                var lot_currency;
+                var bid_price;
+                var new_price
+
+                lot_data = $(_element);
+                lot_title = lot_data.attr('data-title');
+                lot_number = lot_data.attr('data-number');
+                lot_currency = lot_data.attr('data-currency');
+                bid_price = $('#bid-' + lot_number).val();
+
+                if($('#lot-' + lot_number) == undefined) {
+                    return false;
+                }
+
+                $('#lot-' + lot_number + ' .lot-title').html(lot_title);
+                $('#lot-' + lot_number + ' .current-bid-price').html(bid_price + lot_currency);
+
+                lot_data.find('[data-features]').each(function(index, element) {
+
+                    max = max + parseFloat($(element).attr('data-max'));
+                    enums = enums + parseFloat($(element).find('option:selected').val());
+
+                });
+
+                new_price = 1 + enums / (1 - max);
+                new_price = Number((bid_price / new_price).toFixed(2));
+
+                $('#lot-' + lot_number + ' .new-bid-price').html(new_price + lot_currency);
+                $('#new-bid-' + lot_number).val(new_price);
+            });
+        }
+        
+    });
+
+    </script>
+{% endput %}

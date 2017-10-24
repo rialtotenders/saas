@@ -1,0 +1,20 @@
+fields:
+    tender_id:
+        label: 'tender id'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    tender_system_id:
+        label: 'tender system id'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    json:
+        label: json
+        size: ''
+        oc.commentPosition: ''
+        span: auto
+        type: partial
+    is_closed:
+        label: 'is_closed'
+        type: text

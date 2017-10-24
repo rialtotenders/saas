@@ -1,0 +1,74 @@
+
+$sb-table-list-header-border-color: #e5e5e5;
+.sb-table-list-item {
+    border-bottom: 1px solid $sb-table-list-header-border-color;
+    padding: 15px 0;
+    &__link {
+        &--fw-normal {
+            font-weight: 300 !important;
+        }
+    }
+    & > div:nth-child(1) {
+        float: left;
+        width: 100%;
+    }
+    &:after {
+        @extend .clearfix;
+    }
+    p {
+        font-size: 13px;
+        font-weight: 300;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.46;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        float: left;
+        width: 100%;
+    }
+    &__status {
+        font-size: 13px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.85;
+        color: #16a085;
+    }
+    &__table {
+        display: table;
+        width: 100%;
+        float: left;
+    }
+    &__cell {
+        display: table-cell;
+        padding-right: 30px;
+        vertical-align: top;
+        &:nth-child(1) {
+            width: 50%;
+        }
+        &:nth-child(2) {
+            width: 30%;
+        }
+        .tender-icon{
+            padding-left: 40px;
+            background: url("/integer/yptender.md/theme/assets/img/design/comercial-icons.png") no-repeat left top;
+            &.tender-state{
+                background: url("/integer/yptender.md/theme/assets/img/design/state-icons.png") no-repeat left top;
+            }
+            p{
+                float: none;
+            }
+        }
+    }
+    a {
+        color: $bg-main-color;
+        @extend .transition-down;
+        border-bottom: 1px solid transparent !important;
+        font-weight: 500;
+        &:hover {
+            border-bottom: 1px solid $bg-main-color !important;
+            @extend .transition;
+        }
+    }
+
+}

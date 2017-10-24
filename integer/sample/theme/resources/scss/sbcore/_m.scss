@@ -1,0 +1,77 @@
+@mixin ab() {
+  $width2: $b;
+  @media screen and (max-width: $width2) {
+       @content;
+  }
+}
+@mixin ac() {
+  $width2: $c;
+  @media screen and (max-width: $width2) {
+       @content;
+  }
+}
+@mixin ad() {
+  $width2: $d;
+  @media screen and (max-width: $width2) {
+       @content;
+  }
+}
+@mixin be() {
+  $width1: $b + 1;
+  @media screen and (min-width: $width1) {
+       @content;
+  }
+}
+@mixin ce() {
+  $width1: $c + 1;
+  @media screen and (min-width: $width1) {
+       @content;
+  }
+}
+@mixin de() {
+  $width1: $d + 1;
+  @media screen and (min-width: $width1) {
+       @content;
+  }
+}
+
+@mixin bd() {
+  $width1: $b + 1;
+  $width2: $d;
+  @media (min-width: $width1) and (max-width: $width2) {
+       @content;
+  }
+}
+@mixin bc() {
+  $width1: $b + 1;
+  $width2: $c;
+  @media (min-width: $width1) and (max-width: $width2) {
+       @content;
+  }
+}
+@mixin cd() {
+  $width1: $c + 1;
+  $width2: $d;
+  @media (min-width: $width1) and (max-width: $width2) {
+       @content;
+  }
+}
+@mixin a1() {
+  $width2: $a1;
+  @media screen and (max-width: $width2) {
+       @content;
+  }
+}
+@mixin e1() {
+  $width1: $e1 + 1;
+  @media screen and (min-width: $width1) {
+       @content;
+  }
+}
+@mixin p1() {
+  $width1: #{nth($p1, 1)} + 1;
+  $width2: #{nth($p1, 2)};
+  @media (min-width: $width1) and (max-width: $width2) {
+       @content;
+  }
+}

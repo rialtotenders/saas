@@ -1,0 +1,191 @@
+<div class="w c-main" id="registration-form">
+    <div class="c ">
+        <div class="registered-step plan-create">
+
+            <h3>{{ header }}</h3>
+            <div class="inline-layout">
+                <div class="form-registration">
+
+                    <form data-request-loading=".spinner" data-request="onHandleForm" data-tender data-request-data="'step': '2'" data-request-complete="validation(this)">
+
+                        <div class="new-item-block">
+                            {% if items|length %}
+                                {% for key, item in items %}
+                                    {% partial('@plancreate/_item') key=key item=item %}
+                                {% endfor %}
+                            {% else %}
+                                {% partial('@plancreate/_item') key=0 %}
+                            {% endif %}
+                        </div>
+
+                        <div class="new-item-links  inline-layout">
+                            <a href="#" class="add-new-item-block"><span>{{ 'plan.create.add_new_item'|_ }}</span></a>
+                        </div>
+                        <div class="block-button" id="for-spinner">
+                            <button data-request-loading=".spinner" data-save="0" data-request="onReturnBack" data-request-data="'step': '1'" class="prev_step">{{ 'plan.create.prev_button'|_}}</button>
+                            <button data-save="0" type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'plan.create.finish_button'|_}}</button>
+                            <button data-save="1" type="submit" class="next_step save_step" onClick="$('.error-holder').hide().html('');">{{ 'plan.create.save'|_}}</button>
+                        </div>
+                        <div id="tender-access-error"></div>
+
+                        <input type="hidden" name="save" id="tender-save" value="0">
+                    </form>
+                </div>
+
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var data = {'item_index': {{ item_index }}, 'title_index': {{ item_index + 1}}};
+
+    var dt_opts = {
+        dayOfWeekStart: 1,
+        format:'d.m.Y',
+        showClose: true,
+        minDate: 0,
+        timepicker: false,
+        scrollMonth : false,
+        scrollInput : false
+    };
+
+    function init() {
+        $.datetimepicker.setLocale('{{ CurrentLocale }}');
+
+        stateDeleteButton();
+
+        $(".add-new-item-block" ).click(function() {
+            $('#new-item-tpl').tmpl(data).appendTo('.new-item-block');
+
+            $('.input-group.date input').each(function () {
+                $(this).datetimepicker(dt_opts);
+                $(this).bind("mousewheel", function () {
+
+                });
+            });
+
+            data.item_index = data.item_index + 1;
+            data.title_index = data.item_index + 1;
+
+            stateDeleteButton();
+
+            cpvInit($(this).parent().parent().children('.new-item-block').children('.item-block:last-child').find('.list_cpv'));
+
+            return false;
+        });
+
+        $(".new-item-block").on( "click", ".item-block .remove-item-block", function() {
+            if (confirm("{{ 'plan.create.confirm_delete_item'|_ }}")) {
+                $(this).parent().parent().parent().remove();
+                stateDeleteButton();
+            }
+        });
+
+        $(".new-item-block").on('click', '.js-slide-item', function () {
+            $(this).closest(".item-block").toggleClass('hide-class').find('.form-item').slideToggle();
+        });
+    }
+
+    function stateDeleteButton()
+    {
+        if($('.item-block .remove-item-block').length > 1) {
+            $('.item-block .remove-item-block').show();
+        }
+        else {
+            $('.item-block .remove-item-block').hide();
+        }
+    }
+
+    if (window.jQuery !== undefined) {
+        init();
+    }
+</script>
+
+{% put scripts %}
+<script>
+    jQuery(function($) {
+        init();
+    });
+</script>
+{% endput %}
+
+{% partial '@plancreate/_scripts' %}
+
+{% partial '@_blocks/_cpv_item_tpl' type='single' %}
+<script id="new-item-tpl" type="text/x-jquery-tmpl">
+<div class="item-block">
+    <div class="inline-layout ">
+        <h4>{{ 'plan.create.item_position'|_ }} ${title_index}</h4>
+        <div class="item-button inline-layout">
+            <div class="remove-item-block"></div>
+            <div class="slide-item-block js-slide-item"></div>
+        </div>
+    </div>
+    <div class="form-item">
+        <input type="hidden" name="items[${item_index}][id]" value=""/>
+        <div class="form-holder">
+            <label for="plan_create_nomenclature_description-${item_index}">{{ 'plan.create.nomenclature_description'|_}}</label>
+            <div class="form-holder">
+                <textarea id="plan_create_nomenclature_description-${item_index}" placeholder="" name="items[${item_index}][description]"></textarea>
+                <div class="error-holder none" data-validation="items.${item_index}.description"></div>
+            </div>
+        </div>
+
+        <div class="form-holder">
+            <label for="plan_create_please_choose_cpv-${item_index}">{{ 'plan.create.please_choose_cpv'|_}}</label>
+            <input id="plan_create_please_choose_cpv-${item_index}" class="search_cpv" placeholder="{{ 'plan.create.search_cpv'|_ }}" type="text" cpv-search-opened />
+            <input class="search_cpv none" type="text" placeholder="{{ 'plan.create.search_cpv'|_ }}" cpv-search-closed />
+                <div class="loader"></div>
+                {% partial '@_blocks/_cpv'
+                    class='js_list_cpv'
+                     parent_item=plan.classification.id
+                     input_name='items[${item_index}][classification][id]'
+                     type='any'
+                     id_prefix='${item_index}'
+                %}
+
+            <div class="error-holder none" data-validation="items.${item_index}.classification.id"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="plan_create_quantity-${item_index}">{{ 'plan.create.quantity'|_ }}</label>
+            <input id="plan_create_quantity-${item_index}" placeholder="" type="text" name="items[${item_index}][quantity]" value=""/>
+            <div class="error-holder none" data-validation="items.${item_index}.quantity"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="plan_units-{{ key }}">{{ 'plan.create.units'|_}}</label>
+            <select id="plan_units-{{ key }}" name="items[${item_index}][unit][code]" data-unit-select>
+                    {% for key, unit in measurers %}
+                    <option value="{{ key }}">{{ unit }}</option>
+                    {% endfor %}
+            </select>
+            <div class="error-holder none" data-validation="items.${item_index}.unit.code"></div>
+        </div>
+
+        <div class="form-holder">
+            <div class="input-group date">
+                <label for="plan_create_deliveryDate_startDate-${item_index}" >{{ 'plan.create.deliveryDate_startDate'|_}}</label>
+                <input id="plan_create_deliveryDate_startDate-${item_index}" placeholder="" name="items[${item_index}][deliveryDate][startDate]" value="" type="text" class="form-control">
+            </div>
+            <div class="error-holder none" data-validation="items.${item_index}.deliveryDate.startDate"></div>
+        </div>
+        <div class="form-holder">
+            <label for="plan_create_deliveryDate_endDate-${item_index}" >{{ 'plan.create.deliveryDate_endDate'|_}}</label>
+            <div class="input-group date">
+                <input id="plan_create_deliveryDate_endDate-${item_index}" placeholder="" name="items[${item_index}][deliveryDate][endDate]" value="" type="text" class="form-control">
+            </div>
+            <div class="error-holder none" data-validation="items.${item_index}.deliveryDate.endDate"></div>
+        </div>
+    </div>
+</div>
+
+</script>

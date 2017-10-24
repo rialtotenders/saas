@@ -1,0 +1,218 @@
+tabs:
+  fields:
+      bidTwoStage:
+          label: "Разрешается подавать предложение на 2-уровневые торги"
+          type: switch
+          tab: Блоки
+      tenderTwoStage:
+          label: "Разрешается подавать 2-уровневый тендер"
+          type: switch
+          tab: Блоки
+      guarantee:
+          label: Банковская гарантия
+          type: switch
+          tab: Блоки
+      criteria:
+          label: Неценовые критерии
+          type: switch
+          tab: Блоки
+      contracts:
+          label: Контрактинг
+          type: switch
+          tab: Блоки
+      features:
+          label: "Неценовые критерии"
+          comment: "при создании тендера"
+          type: switch
+          tab: Блоки
+      lots:
+          label: "Лоты"
+          comment: "при создании тендера"
+          type: switch
+          tab: Блоки
+      additionalClassifications:
+          label: additionalClassifications
+          type: switch
+          tab: Блоки
+      procurementMethod:
+          label: procurementMethod
+          type: switch
+          tab: Блоки
+      procurementMethodType:
+          label: procurementMethodType
+          type: switch
+          tab: Блоки
+      procurementMethodTypeDefault:
+          label: "Показывать только одно 'belowThreshold'"
+          comment: "при создании тендера"
+          type: switch
+          tab: Блоки
+      withEmptyPrice:
+          label: "Создание тендера без суммы"
+          type: switch
+          tab: Блоки
+      choseTax:
+          label: "Возможность выбора НДС"
+          comment: "при создании тендера"
+          type: switch
+          tab: Валидация
+      requiredDescription:
+          label: "Обязательность поля описание"
+          comment: "при создании тендера"
+          type: switch
+          tab: Валидация
+      requiredPostalCode:
+          label: "Обязательность поля индекс"
+          comment: "при создании тендера"
+          type: switch
+          tab: Валидация
+      postalCodeLength:
+          label: "Количество цифр для поля индекс, если оно обязательное"
+          comment: "при создании тендера"
+          type: text
+          tab: Валидация
+          span: auto
+      postalCodePrefix:
+          label: "Префикс для поля индекс, если оно обязательное"
+          comment: "при создании тендера"
+          type: text
+          tab: Валидация
+          span: auto
+      createTwoStageTenderPeriod:
+          label: "Минимальное количество дней периода подачи предложений"
+          comment: "при создании тендера"
+          type: number
+          tab: Валидация
+          span: auto
+      editTwoStageTenderPeriod:
+          label: "Минимальное количество дней периода подачи предложений"
+          comment: "при редактировании уже опубликованного тендера"
+          type: number
+          tab: Валидация
+          span: auto
+      auction_step_from:
+          label: % от
+          type: text
+          tab: Шаг аукциона
+          span: auto
+      auction_step_to:
+          label: % до
+          type: text
+          tab: Шаг аукциона
+          span: auto
+      max_file_size:
+          label: "Размер загружаемого файла"
+          type: number
+          tab: Файлы
+          span: auto
+      file_types:
+          label: 'Типы файлов'
+          span: auto
+          type: checkboxlist
+          tab: 'Файлы'
+          options:
+            xls: xls
+            xlsx: xlsx
+            doc: doc
+            docx: docx
+            pdf: pdf
+      contract:
+          tab: 'Контракт с поставщиком'
+          label: 'Контракт'
+          span: auto
+          type: fileupload
+          mode: file
+          fileTypes: docx
+      contract_name:
+          tab: 'Контракт с поставщиком'
+          label: 'Название файла контракта'
+          span: auto
+          type: text
+          comment: Например, contract.docx
+      contract_hint:
+          tab: 'Контракт с поставщиком'
+          type: hint
+          path: $/perevorot/rialtotender/controllers/settings/_contract_hint.htm
+      user_edit_group:
+          label: Редактирование группы
+          comment: 'Запретить редактирование пользователем своей группы'
+          type: switch
+          tab: Пользователи
+      user_edit_gov:
+          label: Редактирование признака госкомпании
+          comment: 'Запретить редактирование пользователем признака госкомпании'
+          type: switch
+          tab: Пользователи
+      requiredUserPostalCode:
+          label: "Обязательность поля индекс"
+          comment: "в профиле"
+          type: switch
+          tab: Пользователи
+      showUserIsGo:
+          label: "Галочка гражданская организация"
+          comment: "её отображение в профиле"
+          type: switch
+          tab: Пользователи
+      userPostalCodeLength:
+          label: "Количество цифр для поля индекс, если оно обязательное"
+          comment: "в профиле"
+          type: text
+          tab: Пользователи
+          span: auto
+      userPostalCodePrefix:
+          label: "Префикс для поля индекс, если оно обязательное"
+          comment: "в профиле"
+          type: text
+          tab: Пользователи
+          span: auto
+      accelerator_time:
+          label: "Ускорение"
+          type: text
+          tab: Тестирование
+      logo_url:
+          label: "Ссылка логотипа"
+          type: text
+          tab: Разное
+      is_tender:
+          label: "Тендеры"
+          type: switch
+          tab: Индексы
+      is_plan:
+          label: "Планы"
+          type: switch
+          tab: Индексы
+      is_gov:
+          label: "Государственные тендеры"
+          type: switch
+          tab: Индексы
+      is_gov_plan:
+          label: "Государственные планы"
+          type: switch
+          tab: Индексы
+      offerta_link:
+          label: "Ссылка на публичную оферту"
+          type: mltext
+          tab: Разное
+      show_offerta:
+          label: "показывать шаг с публичной офертой"
+          type: switch
+          tab: Разное
+      invoice:
+          label: 'Счет'
+          span: auto
+          type: fileupload
+          mode: file
+          fileTypes: docx
+          tab: Счета-фактура
+      invoice_prefix:
+          label: "Префикс"
+          type: text
+          tab: Счета-фактура
+      invoice_number:
+          label: "Текущий номер"
+          type: number
+          tab: Счета-фактура
+      invoices_hint:
+          tab: 'Счета-фактура'
+          type: hint
+          path: $/perevorot/rialtotender/controllers/settings/_invoices_hint.htm

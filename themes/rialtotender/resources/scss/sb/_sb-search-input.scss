@@ -1,0 +1,195 @@
+$padding-left-input: 130px;
+$padding-right-input: 194px;
+$height-search-bottom: 30px;
+.sb-search-input {
+  color: white;
+  height: 100px;
+  //text-align: center;
+  .advanced_search{
+    color: $bg-main-color;
+    font-size: 14px;
+    text-align: left;
+    padding-bottom: 2px;
+    border-bottom: 1px dashed $bg-main-color;
+    margin-top: 5px;
+    display: inline-block;
+  }
+  &__center {
+    max-width: 900px;
+    margin: 0 auto;
+
+    .search-with-category{
+      .select-category{
+        width: 25%;
+        height: 73px;
+        padding: 15px;
+        box-sizing: border-box;
+        background: #e1e1e1;
+
+      }
+      select{
+        width: 100%;
+        font-size: 14px;
+        color: #2d2d2d!important;
+        appearance: none;
+        line-height: 43px;
+        border: 0;
+        outline: none;
+        height: 43px;
+        box-sizing: border-box;
+        padding: 0 30px 0 20px;
+        cursor: pointer;
+        background: url("/themes/rialtotender/assets/img/design/icon-select.jpg") center  no-repeat #fff;
+        background-position: calc(100% - 10px) center;
+
+
+        &:-moz-focusring{
+          color: transparent;
+          text-shadow: none;
+        }
+      }
+      .sb-search-input__bottom{
+        width: 75%;
+      }
+    }
+
+  }
+  &__top {
+    text-align: left;
+    padding-bottom: 15px;
+    span {
+      &:nth-child(1) {
+        font-size: 13px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        text-align: center;
+      }
+      &:nth-child(2) {
+        font-size: 13px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        text-align: center;
+        color: #ec5e24;
+        margin-left: 20px;
+        cursor: pointer;
+        position: relative;
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          bottom: -3px;
+          width: 100%;
+          height: 1px;
+          border-bottom: 1px dashed #ec5e24;
+          left: 0;
+        }
+      }
+    }
+  }
+  &__bottom {
+    height: $height-search-bottom;
+    @include a1() {
+	    padding-right: 100px !important;
+    }
+  }
+  &__cat {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: $padding-left-input;
+    background: white;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    line-height: $height-search-bottom;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: center;
+    color: #000000;
+    border-right: solid 1px #f2f2f2;
+    
+  }
+  &__cat-span {
+    margin-right: 10px;
+    &:after {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      border-right: 2px solid #000000;
+      border-bottom: 2px solid #000000;
+      position: absolute;
+      top: 50%;
+      margin-top: -4px;
+      right: -13px;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+  &__button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: $bg-main-color;
+    width: $padding-right-input;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    line-height: $height-search-bottom;
+    cursor: pointer;
+    @include a1() {
+	    width: 73px;
+	    overflow: hidden;
+    }
+    button {
+    	@include a1() {
+		    text-indent: -1000px;
+		    background-image: url('/themes/rialtotender/assets/img/design/search-button-white.svg');background-size: 20px;
+		    background-repeat: no-repeat;
+		    background-position: center;
+		}
+    }
+  }
+  &__input-wrap {
+    padding-left: $padding-left-input;
+    padding-right: $padding-right-input;
+    @include ac() {
+	    padding-right: 20px;
+    }
+  }
+  &__input-field {
+    background: white;
+    width: 100%;
+    box-sizing: border-box;
+    height: $height-search-bottom;
+    border: none;
+    box-sizing: border-box;
+    padding: 0 20px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: left;
+    color: #9b9b9b;
+    
+  }
+}
+
+
+@media screen and (max-width: 800px){
+  .sb-search-input #simple-form-filter{
+    //margin-bottom: 40px;
+  }
+
+
+  .sb-search-input__center .search-with-category .select-category,
+  .sb-search-input__center .search-with-category .sb-search-input__bottom{
+    width: 100%;
+  }
+}

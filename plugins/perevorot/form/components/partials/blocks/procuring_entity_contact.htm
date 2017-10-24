@@ -1,0 +1,54 @@
+<h2>{{ 'tender.procuring_Entity_contact_title'|_ }}</h2>
+<div class="mobile-table">
+
+    <div class="sb-table sb-table--td-py-small">
+        <div class="sb-table__table">
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'tender.procuring_Entity_contact_face'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                     {% if item.procuringEntity.contactPoint.name %}
+                        <p>{{ item.procuringEntity.contactPoint.name|stripslashes }}</p>
+                    {% else %}
+                        <p>{{ 'tender.no_name'|_ }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'tender.procuring_Entity_contact_phone'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    {% if item.procuringEntity.contactPoint.telephone %}
+                    <p>{{ item.procuringEntity.contactPoint.telephone|stripslashes }}</p>
+                    {% else %}
+                    <p>{{ 'tender.no_phone'|_ }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'tender.procuring_Entity_contact_email'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    {% if item.procuringEntity.contactPoint.email %}
+                    <p>{{ item.procuringEntity.contactPoint.email }}</p>
+                    {% else %}
+                    <p>{{ 'tender.no_email'|_ }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+fields:
+    title:
+        label: Название
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: text
+    edrpou:
+        label: Идентификатор (ЕДРПОУ)
+        span: auto
+        type: textarea
+    url:
+        label: Гиперссылка
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    is_enabled:
+        label: 'На сайте'
+        span: auto
+        type: switch
+    is_index:
+        label: 'Выводить на главную'
+        span: auto
+        type: switch
+    image:
+        label: Лого
+        oc.commentPosition: ''
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        required: 1
+        type: fileupload

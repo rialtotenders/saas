@@ -1,0 +1,10 @@
+name: Tenders
+form: $/perevorot/rialtotender/models/tender/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\Tender
+defaultRedirect: perevorot/rialtotender/tenders
+create:
+    redirect: 'perevorot/rialtotender/tenders/update/:id'
+    redirectClose: perevorot/rialtotender/tenders
+update:
+    redirect: perevorot/rialtotender/tenders
+    redirectClose: perevorot/rialtotender/tenders

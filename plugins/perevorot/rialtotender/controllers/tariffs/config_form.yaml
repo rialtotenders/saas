@@ -1,0 +1,10 @@
+name: Tariffs
+form: $/perevorot/rialtotender/models/tariff/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\Tariff
+defaultRedirect: perevorot/rialtotender/tariffs
+create:
+    redirect: 'perevorot/rialtotender/tariffs/update/:id/?is_gov=:is_gov'
+    redirectClose: perevorot/rialtotender/tariffs
+update:
+    redirect: perevorot/rialtotender/tariffs
+    redirectClose: perevorot/rialtotender/tariffs

@@ -1,0 +1,11 @@
+name: Blogs
+modelClass: Perevorot\Blog\Models\Blog
+form: $/perevorot/blog/models/blog/blogPostFields.yaml
+defaultRedirect: perevorot/blog/blogs
+create:
+    redirect: 'perevorot/blog/blogs/update/:id'
+    redirectClose: perevorot/blog/blogs
+update:
+    redirect: perevorot/blog/blogs
+    redirectClose: perevorot/blog/blogs
+preview: {  }

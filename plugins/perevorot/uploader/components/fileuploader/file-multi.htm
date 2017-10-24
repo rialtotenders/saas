@@ -1,0 +1,245 @@
+<div
+        class="responsiv-uploader-fileupload style-file-multi is-multi {{ __SELF__.isPopulated() ? 'is-populated' }}"
+        data-control="fileupload"
+        data-template="#uploaderTemplate{{ __SELF__ }}"
+        data-unique-id="{{ __SELF__ }}"
+        {% if __SELF__.fileTypes %}data-file-types="{{ __SELF__.fileTypes }}"{% endif %}
+>
+
+    <!-- Field placeholder -->
+    <input type="hidden" name="_uploader[{{ __SELF__.attribute }}]" value="" />
+
+    <!-- Upload Button -->
+    <button type="button" class="ui button btn btn-default oc-icon-upload upload-button" id="file-button">
+        {{ 'upload.click_or_drag_to_upload'|_ }}
+    </button>
+
+    <!-- Existing files -->
+    <div class="upload-files-container">
+        {% for file in __SELF__.fileList %}
+        <div class="upload-object inline-layout is-success file-upload-save" data-id="{{ file.id }}" data-path="{{ file.pathUrl }}">
+
+            <div class="link_file meta">
+                <div class="icon_link_file"></div>
+                <div class="link_wrap">
+                    <div>
+                        <div
+                                class="responsiv-uploader-fileupload style-file-single"
+                                data-control="fileupload"
+                                data-template="#uploaderTemplate{{ __SELF__ }}"
+                                data-unique-id="{{ __SELF__ }}"
+                                {% if __SELF__.fileTypes %}data-file-types="{{ __SELF__.fileTypes }}"{% endif %}
+                        >
+
+                            <!-- Field placeholder -->
+                            <input type="hidden" name="_uploader[{{ __SELF__.attribute }}]" value="" />
+
+                            <!-- Upload button -->
+                            <!--<button type="button" class="ui button btn btn-default upload-button file-button-single hide" >
+                                Browse
+                            </button>-->
+                        </div>
+
+                        <button
+                                data-request="{{ __SELF__ ~ '::onEditAttachment' }}"
+                                data-request-data="file_id: {{ file.id }}"
+                                class="hide replace-button"
+                        >
+                        </button>
+                        {% if __SELF__.isEdit and not file.not_replace %}
+                        <a class="replace_link"
+                           href="javascript:;"
+                           data-replace
+                        >{{ 'upload.replace_file'|_ }}</a>
+                        {% elseif __SELF__.isDelete or file.not_replace %}
+                        <a
+                                href="javascript:;"
+                                class="upload-remove-button"
+                                data-request="{{ __SELF__ ~ '::onRemoveAttachment' }}"
+                                data-request-confirm="{{ 'upload.are_you_sure'|_ }}"
+                                data-request-data="file_id: {{ file.id }}"
+                        >{{ 'upload.remove_file'|_ }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="filename" {{ file.changed ? 'style="text-decoration: line-through;"' : '' }}>
+                <div class="icon-container none">
+                    {% if file.isImage %}
+                    <img src="{{ file.thumbUrl }}" alt="" />
+                    {% else %}
+                    <img src="{{ 'plugins/responsiv/uploader/assets/images/upload.png'|app }}" alt="" width="25" height="30"/>
+                    {% endif %}
+                </div>
+                <span data-dz-name>{{ file.title ?: file.file_name }}</span>
+            </div>
+
+            <p class="size">{{ __SELF__.fileSize(file.sizeToString) }}</p>
+
+            {% if tender_document_types|length %}
+            <div class="form-holder choose-tender-document-type no-done">
+                <label class="none" for="tender-document{{ file.id }}">{{ 'tender.choose_doc_type'|_ }}</label>
+                <select id="tender-document{{ file.id }}" name="doc_type[{{ file.id }}]">
+                    {% for code, name in tender_document_types %}
+                    <option value="{{ code }}" {% if file.doc_cdb_type == code %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% elseif document_types|length %}
+
+                {% set exclude = __SELF__.exclude %}
+
+                {% if exclude is iterable %}
+                    {% if exclude[file.doc_type] is not empty and exclude[file.doc_type] != 'all' %}
+                    <div class="form-holder choose-doc-type no-done">
+                        <label class="none" for="doctype{{ file.id }}">{{ 'tender.bid.choose_doc_type'|_ }}</label>
+                        <select id="doctype{{ file.id }}" name="doc_type[{{ file.id }}]">
+                            {% for code, name in document_types %}
+                                {% if exclude[file.doc_type] is not empty and exclude[file.doc_type] != code %}
+                                <option value="{{ code }}" {% if file.doc_cdb_type == code %}selected{% endif %}>{{ name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% elseif file.doc_type == 2 %}
+                    <input type="hidden" name="doc_type[{{ file.id }}]" value="commercialProposal">
+                    {% endif %}
+                {% else %}
+                    {% if exclude != 'all' %}
+                    <div class="form-holder choose-doc-type no-done">
+                        <label class="none" for="doctype{{ file.id }}">{{ 'tender.bid.choose_doc_type'|_ }}</label>
+                        <select id="doctype{{ file.id }}" name="doc_type[{{ file.id }}]">
+                            {% for code, name in document_types %}
+                                {% if exclude != code %}
+                                <option value="{{ code }}" {% if file.doc_cdb_type == code %}selected{% endif %}>{{ name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% elseif file.doc_type == 2 %}
+                    <input type="hidden" name="doc_type[{{ file.id }}]" value="commercialProposal">
+                    {% endif %}
+                {% endif %}
+
+            <div class="doc-confidentiality form-holder no-done js-doc-confidentiality checkbox">
+                <input id="conf{{ file.id }}" type="checkbox" name="confidentiality[{{ file.id }}]" value="1" {% if file.conf_text %}checked{% endif %}>
+                <label for="conf{{ file.id }}">{{ 'tender.bid.doc_confidentiality'|_ }}</label>
+            </div>
+            <div class="form-holder doc-confidentiality-textarea js-doc-confidentiality-textarea" {% if file.conf_text %}style="display:block"{% endif %}>
+                <textarea minlength="30" name="confidentiality_text[{{ file.id }}]">{{ file.conf_text }}</textarea>
+            </div>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% if not hide_tpl %}
+<!-- Template for new files -->
+<script type="text/template" id="uploaderTemplate{{ __SELF__ }}">
+
+    <div class="upload-object inline-layout dz-preview dz-file-preview {% if document_types|length<=0 %} file-upload-save {% endif %}">
+
+
+        <div class="link_file meta">
+            <div class="icon_link_file"></div>
+            <div class="link_wrap">
+                <div>
+
+                    <div
+                            class="responsiv-uploader-fileupload style-file-single"
+                            data-control="fileupload"
+                            data-template="#uploaderTemplate{{ __SELF__ }}"
+                            data-unique-id="{{ __SELF__ }}"
+                            {% if __SELF__.fileTypes %}data-file-types="{{ __SELF__.fileTypes }}"{% endif %}
+                    >
+
+                        <!-- Field placeholder -->
+                        <input type="hidden" name="_uploader[{{ __SELF__.attribute }}]" value="" />
+
+                        <!-- Upload button -->
+                        <!--<button type="button" class="ui button btn btn-default upload-button file-button-single hide">
+                            Browse
+                        </button>-->
+                    </div>
+                    <!--
+                    <button
+                            data-request="{{ __SELF__ ~ '::onEditAttachment' }}"
+                            {% if file_id %} data-request-data="file_id: {{ file.id }}" {% endif %}
+                            class="hide replace-button"
+                    >
+
+                    </button> -->
+                    <div class="progress-bar"><span class="upload-progress" data-dz-uploadprogress></span></div>
+                    <a
+                            href="javascript:;"
+                            class="upload-remove-button"
+                            data-request="{{ __SELF__ ~ '::onRemoveAttachment' }}"
+                            data-request-confirm="{{ 'upload.are_you_sure'|_ }}"
+                    >{{ 'upload.remove_file'|_ }} </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="filename">
+            <div class="icon-container none">
+                <img data-dz-thumbnail src="{{ 'plugins/responsiv/uploader/assets/images/upload.png'|app }}" width="25" height="30"/>
+            </div>
+            <span data-dz-name></span>
+        </div>
+
+        <p class="size" data-dz-size></p>
+        <p class="error"><span data-dz-errormessage></span></p>
+
+        {% if tender_document_types|length %}
+        <div class="form-holder choose-tender-document-type no-done">
+            <label class="none" for="">{{ 'tender.choose_doc_type'|_ }}</label>
+            <select id="" name="doc_type">
+                {% for code, name in tender_document_types %}
+                <option value="{{ code }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% elseif c_document_types|length %}
+        <div class="form-holder choose-contract-document-type no-done">
+            <label class="none" for="">{{ 'contract.choose_doc_type'|_ }}</label>
+            <select id="" name="type">
+                {% for code, name in c_document_types %}
+                <option value="{{ code }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% elseif document_types|length %}
+            {% if __SELF__.exclude != 'all' %}
+            <div class="form-holder choose-doc-type no-done">
+                <label class="none" for="">{{ 'tender.bid.choose_doc_type'|_ }}</label>
+                <select id="" name="doc_type">
+                    {% for code, name in document_types %}
+                        {% if __SELF__.exclude != code %}
+                        <option value="{{ code }}">{{ name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            {% elseif __SELF__.docType == 2 %}
+            <div class="choose-doc-type no-done none">
+                <label for="">{{ 'tender.bid.choose_doc_type'|_ }}</label>
+                <select id="" name="doc_type">
+                    <option value="commercialProposal"></option>
+                </select>
+            </div>
+            {% endif %}
+            <div class="doc-confidentiality form-holder no-done js-doc-confidentiality checkbox">
+                <input id="" type="checkbox" name="confidentiality" value="1">
+                <label for="">{{ 'tender.bid.doc_confidentiality'|_ }}</label>
+            </div>
+            <div class="form-holder doc-confidentiality-textarea js-doc-confidentiality-textarea">
+                <textarea minlength="30" name="confidentiality_text"></textarea>
+            </div>
+        {% endif %}
+    </div>
+
+</script>
+{% endif %}

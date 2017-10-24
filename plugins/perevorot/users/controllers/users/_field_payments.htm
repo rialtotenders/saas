@@ -1,0 +1,5 @@
+<?php if($this->user->is_superuser || $this->user->hasPermission('rialtotender.users.all_permissions')): ?>
+<?= $this->relationRender('payments') ?>
+<?php else: ?>
+<?= $this->relationRender('read_payments') ?>
+<?php endif; ?>

@@ -1,0 +1,28 @@
+$footer-height: 60px;
+.c-footer {
+  background: #2e2e2e;
+  /*.c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }*/
+  &__wrap {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__center {
+    @extend .max-width-inner;
+    margin: 0 auto;
+    height: $footer-height;
+    text-align: center;
+  }
+  &__copy {
+
+    font-size: 14px;
+    font-family: $font-family-bold;
+    opacity: 0.7;
+    color: #ffffff;
+    display: inline-block;
+    line-height: $footer-height;
+    font-weight: 600;
+  }
+}

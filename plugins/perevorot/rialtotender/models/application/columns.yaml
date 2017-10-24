@@ -1,0 +1,13 @@
+columns:
+    price:
+        label: Цена
+        type: number
+    created_at:
+        label: 'Дата добавления'
+        type: datetime
+    tender_id:
+        label: 'Идентификатор тендера'
+        type: text
+    is_gov:
+        label: 'is_gov'
+        type: text

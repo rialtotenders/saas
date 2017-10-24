@@ -1,0 +1,139 @@
+plugin:
+    name: Rialtotender
+    description: ''
+    author: Perevorot
+    icon: oc-icon-adjust
+    homepage: ''
+navigation:
+    rialtotender:
+        label: Информация
+        url: perevorot/rialtotender/home
+        icon: icon-file-text
+        permissions:
+            - 'rialtotender.inform.*'
+        sideMenu:
+            customers:
+                label: Заказчики
+                url: perevorot/rialtotender/customers
+                icon: icon-users
+                permissions:
+                    - rialtotender.inform.cusotomers_permission
+            areas:
+                label: Площадки
+                url: perevorot/rialtotender/areas
+                icon: icon-sitemap
+                permissions:
+                    - rialtotender.inform.areas_permisssion
+            icons:
+                label: Иконки
+                url: perevorot/rialtotender/icons
+                icon: icon-delicious
+                permissions:
+                    - rialtotender.inform.icons_permission
+            applications:
+                label: Заявки
+                url: perevorot/rialtotender/applications
+                icon: icon-sitemap
+                permissions:
+                    - rialtotender.inform.applications_permission
+            side-menu-item:
+                label: Вопросы
+                url: perevorot/rialtotender/questions
+                icon: icon-question
+                permissions:
+                    - rialtotender.inform.questions_permission
+            side-menu-item2:
+                label: 'menu item'
+                url: perevorot/rialtotender/home
+                icon: icon-sitemap
+                attributes:
+                    - 'style="display:none;"'
+            side-menu-item3:
+                label: Тендеры
+                url: perevorot/rialtotender/tenders
+                icon: icon-sitemap
+                permissions:
+                    - rialtotender.inform.tenders_permission
+            side-menu-item4:
+                label: Планы
+                url: perevorot/rialtotender/plans
+                icon: icon-sitemap
+                permissions:
+                    - rialtotender.inform.plans_permission
+            side-menu-item5:
+                label: Файлы
+                url: perevorot/rialtotender/systemfiles
+                icon: icon-file
+permissions:
+    rialtotender.inform.cusotomers_permission:
+        tab: Информация
+        label: Заказчики
+    rialtotender.inform.areas_permisssion:
+        tab: Информация
+        label: Плоащдки
+    rialtotender.inform.icons_permission:
+        tab: Информация
+        label: Иконки
+    rialtotender.inform.applications_permission:
+        tab: Информация
+        label: Заявки
+    rialtotender.inform.questions_permission:
+        tab: Информация
+        label: Вопросы
+    rialtotender.seo_permission:
+        tab: Настройки
+        label: Seo
+    rialtotender.statuses_permission:
+        tab: Настройки
+        label: Статусы
+    rialtotender.regtips_permission:
+        tab: Настройки
+        label: 'Подсказки при регистрации'
+    rialtotender.bidtips_permission:
+        tab: Настройки
+        label: 'Подсказки при подаче предложения'
+    rialtotender.apilog_permission:
+        tab: Настройки
+        label: 'Система логгирования ошибок API'
+    rialtotender.currencies_permission:
+        tab: Настройки
+        label: Валюты
+    rialtotender.tariffs_permission:
+        tab: Настройки
+        label: Тарифы
+    rialtotender.classifiers_permission:
+        tab: Настройки
+        label: Классификаторы
+    rialtotender.inform.tenders_permission:
+        tab: Информация
+        label: Тендеры
+    rialtotender.inform.plans_permission:
+        tab: Информация
+        label: Планы
+    rialtotender.tendertips_permission:
+        tab: Настройки
+        label: 'Подсказки при добавлении тендера'
+    rialtotender.tenderpagetips_permission:
+        tab: Настройки
+        label: 'Подсказки на странице тендера'
+    rialtotender.plantips_permission:
+        tab: Настройки
+        label: 'Подсказки при добавлении плана'
+    rialtotender.categories_permission:
+        tab: Настройки
+        label: Категории
+    rialtotender.settings_permission:
+        tab: Настройки
+        label: Функциональность
+    rialtotender.timing_controls_permission:
+        tab: Сроки
+        label: 'Контроль сроков'
+    rialtotender.procurements_permission:
+        tab: Настройки
+        label: 'Типы тендеров и типы процедур'
+    rialtotender.complaintPeriod_permission:
+        tab: Сроки
+        label: 'Период обжалования'
+    rialtotender.envsettings_permission:
+        tab: Настройки
+        label: ENV-настройки

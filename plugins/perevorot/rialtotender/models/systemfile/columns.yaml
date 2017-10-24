@@ -1,0 +1,19 @@
+columns:
+    id:
+        label: ID
+        type: number
+    file_name:
+        label: Название файла
+        type: partial
+    type:
+        label: Тип
+        type: partial
+        sortable: false
+    objectID:
+        label: ID объекта
+        type: partial
+        sortable: false
+    status:
+        label: Статус
+        type: partial
+        sortable: false

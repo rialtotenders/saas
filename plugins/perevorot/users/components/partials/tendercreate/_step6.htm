@@ -1,0 +1,54 @@
+<div class="w c-main" id="registration-form">
+    <div class="c ">
+        <div class="registered-step tender-create">
+
+            {% partial('@_blocks/_steps') step=6 next=7 %}
+
+            <div class="inline-layout">
+                <div class="form-registration">
+
+                    <form id="tender-form" data-update="{{ _update }}" data-request-loading=".spinner" data-request="onHandleForm" data-step="6" data-tender data-request-data="'step': '6'" data-request-complete="validation(this)">
+                        <input type="hidden" name="next_step" id="tender-next-step" value="">
+                        <input type="hidden" name="save" id="tender-save" value="0">
+
+                        <div class="form-holder">
+                            <label for="contactPoint_name">{{ 'profile.contact_fio'|_}}</label>
+                            <input name="procuringEntity[contactPoint][name]" value="{% if tender.procuringEntity.contactPoint.name %}{{ tender.procuringEntity.contactPoint.name }}{% else %}{{ user.contact_fio }}{% endif %}" type="text" class="form-control" id="contactPoint_name" placeholder="">
+                            <div class="error-holder none" data-validation="procuringEntity.contactPoint.name"></div>
+                        </div>
+                        <div class="form-holder">
+                            <label for="contactPoint_email">{{ 'profile.contact_email'|_}}</label>
+                            <input id="contactPoint_email" type="email" name="procuringEntity[contactPoint][email]" value="{% if tender.procuringEntity.contactPoint.email %}{{ tender.procuringEntity.contactPoint.email }}{% else %}{{ user.contact_email }}{% endif %}" placeholder=""/>
+                            <div class="error-holder none" data-validation="procuringEntity.contactPoint.email"></div>
+                        </div>
+                        <div class="form-holder">
+                            <label for="contactPoint_fax">{{ 'profile.contact_office_phone'|_}}</label>
+                            <input id="contactPoint_fax" type="text" name="procuringEntity[contactPoint][faxNumber]" value="{% if tender.procuringEntity.contactPoint.faxNumber %}{{ tender.procuringEntity.contactPoint.faxNumber }}{% else %}{{ user.contact_office_phone }}{% endif %}" placeholder="" />
+                            <div class="error-holder none" data-validation="procuringEntity.contactPoint.faxNumber"></div>
+                        </div>
+                        <div class="form-holder">
+                            <label for="contactPoint_telephone">{{ 'profile.contact_mobile_phone'|_}}</label>
+                            <input name="procuringEntity[contactPoint][telephone]" value="{% if ender.procuringEntity.contactPoint.telephone %}{{ tender.procuringEntity.contactPoint.telephone }}{% else %}{{ user.contact_mobile_phone }}{% endif %}" type="text" class="form-control" id="contactPoint_telephone" placeholder="">
+                            <div class="error-holder none" data-validation="procuringEntity.contactPoint.telephone"></div>
+                        </div>
+
+                        <div class="block-button" id="for-spinner">
+                            <button data-request-loading=".spinner" data-request="onReturnBack" data-request-data="'step': '5'" class="prev_step">{{ 'tender.create.prev_button'|_}}</button>
+                            <button data-save="0" type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'tender.create.next_button'|_}}</button>
+                            <button data-save="1" type="submit" class="next_step save_step" onClick="$('.error-holder').hide().html('');">{{ 'tender.create.save'|_}}</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% partial '@_tendercreate_scripts/_scripts' %}

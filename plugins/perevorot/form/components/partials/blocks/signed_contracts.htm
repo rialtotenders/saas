@@ -1,0 +1,43 @@
+{% if item.__signed_contracts is not empty %}
+<br>
+<div class="table__table-row table__table-row3">
+    <div class="table__table-cell table__table-cell--th">
+        {{ 'tender.contract.fulfillment'|_ }}
+    </div>
+    <div class="table__table-cell table__table-cell--th">
+        {{ 'tender.contract.causes_changes'|_ }}
+    </div>
+    <div class="table__table-cell table__table-cell--th">
+        {{ 'tender.contract.signed'|_ }}
+    </div>
+</div>
+
+{% for contract in item.__signed_contracts  %}
+<div class="table__table-row table__table-row3">
+    <div class="table__table-cell">
+        <p>
+            {% if not contract.terminationDetails %}
+                {{ 'tender.contract.completed_successfully'|_ }}
+            {% else %}
+                {{ 'tender.contract.torn'|_ }}
+            {% endif %}
+        </p>
+    </div>
+    <div class="table__table-cell">
+        <p>
+            {% if not contract.terminationDetails %}
+                {{ contract.amountPaid }}
+            {% else %}
+                {{ contract.terminationDetails }}
+            {% endif %}
+        </p>
+    </div>
+    <div class="table__table-cell">
+        <p>
+            {{ contract.date|date('d.m.Y H:i') }}
+        </p>
+    </div>
+</div>
+{% endfor %}
+
+{% endif %}

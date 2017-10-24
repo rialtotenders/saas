@@ -1,0 +1,31 @@
+.sb-social-icons {
+  &__list {
+    display: inline-block;
+  }
+  &__list-item {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin-right: 10px;
+    float: left;
+    background-size: contain;
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      &:hover {
+        border-bottom: 1px solid transparent !important;
+      }
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+    &--fb {
+      background-image: url('../img/design/icon-facebook.svg');
+    }
+    &--tw {
+      background-image: url('../img/design/icon-twitter.svg');
+    }
+  }
+}

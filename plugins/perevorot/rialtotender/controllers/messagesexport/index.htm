@@ -1,0 +1,105 @@
+<div class="layout-row min-size">
+    <div id="Form-primaryTabs" class="control-tabs primary-tabs layout" data-control="tab" data-slidable>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#primarytab-1">Экспорт</a></li>
+            <li class=""><a href="#primarytab-2">Импорт</a></li>
+            <li class=""><a href="#primarytab-3">Исключения импорта</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="primarytab-1">
+                <form>
+                    <div class="form-group radio-field span-left">
+                        <label>Экспорт языковых меток</label>
+                    
+                        <select class="form-control custom-select" name="locale">
+                            <?php foreach($this->locales as $code=>$locale): ?>
+                                <option value="<?=$code?>"><?=$locale?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group button-field span-left">
+                        <textarea id="export" class="form-control field-textarea size-large"></textarea>
+                    </div>
+                    <div class="form-group button-field span-left">
+                        <div class="loading-indicator-container">
+                            <button
+                                type="submit"
+                                data-request="onExport"
+                                data-request-success="$('#export').val(data.export)"
+                                data-load-indicator="Экспортирую..."
+                                class="btn btn-default">
+                                Экспортировать
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="primarytab-2">
+                <form>
+                    <div id="import-confirm">
+                        
+                    </div>
+
+                    <div class="form-group button-field span-left">
+                        <label>Импорт языковых меток</label>
+                        <textarea name="messages" id="import" class="form-control field-textarea size-large"></textarea>
+                    </div>
+                    <div class="form-group button-field span-left">
+                        <div class="loading-indicator-container">
+                            <button
+                                type="submit"
+                                class="btn btn-default"
+                                data-request="onImport"
+                                data-request-update="import_confirm: '#import-confirm'"
+                                data-request-success="$('#export').val(data.export)"
+                                data-load-indicator="Проверяю сообщения..."
+                                data-stripe-load-indicator>
+                                Проверить сообщения для импорта
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane" id="primarytab-3">
+                <form>
+                    <div class="form-group button-field span-left">
+                        <label>Исключение меток для импорта</label>
+                        <textarea name="messages_exclude" class="form-control field-textarea size-large"><?=$this->messages_exclude?></textarea>
+                    </div>
+                    <div class="form-group button-field span-left">
+                        <div class="loading-indicator-container">
+                            <button
+                                type="submit"
+                                class="btn btn-default"
+                                data-request="onExcludeSave"
+                                data-load-indicator="Сохраняю метки..."
+                                data-hotkey="ctrl+s, cmd+s"
+                                data-stripe-load-indicator
+                                data-request-flash>
+                                Сохранить
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).on('click', '.list-checkbox input[type="checkbox"]', function(){
+        var $el = $(this)
+        if ($el.is(':checked'))
+            $el.closest('tr').addClass('active')
+    });
+
+    $(document).on('click', '#checkboxAll', function(){
+        var $checkboxs = $('.list-checkbox input[type="checkbox"]');
+
+        $checkboxs.each(function(){
+            var self=$(this);
+
+            self.click();
+        });
+    });
+</script>

@@ -1,0 +1,11 @@
+columns:
+    title:
+        label: Группа
+        type: text
+        searchable: true
+        sortable: false
+    is_enabled:
+        label: На сайте
+        type: switch
+        searchable: true
+        sortable: false

@@ -1,0 +1,61 @@
+.c-partners {
+  .c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__wrap {
+    @extend .padding-top;
+    @extend .padding-bottom;
+    padding-left: 120px;
+    padding-right: 120px;
+    background: white;
+  }
+  &__center {
+    @extend .max-width-inner; 
+    margin: 0 auto;
+  }
+  &__slider {
+    .slick-arrow {
+      width: 27px;
+      height: 42px;
+      color: transparent;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      margin-top: -21px;
+    }
+    .slick-prev {
+      background-image: url('/themes/rialtotender/assets/img/design/group-7.svg');
+      left: -70px;
+    }
+    .slick-next {
+      background-image: url('/themes/rialtotender/assets/img/design/group-8.svg');
+      right: -70px;
+    }
+  }
+  &__slider-item {
+    img {
+      width: 100%;
+    }
+  }
+  p {
+    margin: 10px 0;
+  }
+  &__main-link {
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 2px;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 25px;
+    box-sizing: border-box;
+    background: $bg-main-color;
+    border: 2px solid $bg-main-color;
+  }
+}

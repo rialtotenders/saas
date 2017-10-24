@@ -1,0 +1,55 @@
+
+<div class="w c-s none {{ user.is_gov ? 'gov-' : ''}}tenders-content" tab-content>
+    <div class="c">
+        <a href="{{ siteLocale }}tender/create{{ user.is_gov ? '/gov' : ''}}" class="sb-bigbutton sb-bigbutton--bg-color" style="margin-top: 0;">{{ 'user.tender.create'|_ }}</a>
+        <br><br>
+        <div class="w c-s tabs-3">
+            <div class="c">
+                <div class="inline-layout">
+                    <div class="{% if search_type=='tender' and user_tenders_type == false %}active{% endif %} tab-item">
+                        <a href="{{ siteLocale ~ 'tender/search' }}{{ user.is_gov ? '/gov#gov-tenders' : '#tenders'}}"><span>{{ 'user.tenders.all'|_ }}</span></a>
+                    </div>
+                    <div class="{% if search_type=='tender' and user_tenders_type == 1 %}active{% endif %} tab-item">
+                        <a href="{{ siteLocale ~ 'tender/search' }}{{ user.is_gov ? '/gov' : '' }}?user_tenders_type=1#{{ user.is_gov ? 'gov-' : '' }}tenders"><span>{{ 'user.tenders.published'|_ }}</span></a>
+                    </div>
+                    <div class="{% if search_type=='tender' and user_tenders_type == 2 %}active{% endif %} tab-item">
+                        <a href="{{ siteLocale ~ 'tender/search' }}{{ user.is_gov ? '/gov' : '' }}?user_tenders_type=2#{{ user.is_gov ? 'gov-' : '' }}tenders"><span>{{ 'user.tenders.projects'|_ }}</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="overflow-table">
+            <table>
+                <tr>
+                    <th>{{ 'user.tenders.name'|_ }}</th>
+                    <th>{{ 'user.tenders.price'|_ }}</th>
+                    <th>{{ 'user.tenders.status'|_ }}</th>
+                    {% if user_tenders_type != 2 %}
+                        <th>{{ 'user.tenders.date'|_ }}</th>
+                        <th>{{ 'user.tenders.empty_questions'|_ }}</th>
+                    {% else %}
+                        <th>{{ 'user.tenders.project_link'|_ }}</th>
+                    {% endif %}
+                </tr>
+                {% if user_tenders_type != 2 %}
+                    {% for tender in tenders %}
+                        {% if tender.empty_questions %}
+                            {% partial('form/_tender') tender=tender %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for tender in tenders %}
+                        {% if not tender.empty_questions %}
+                            {% partial('form/_tender') tender=tender %}
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% for tender in tenders %}
+                        {% partial('form/_tender_project') tender=tender %}
+                    {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+
+    </div>
+</div>

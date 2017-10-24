@@ -1,0 +1,19 @@
+<p class="lead">
+    {{ 'reset.check_your_email'|_ }}
+</p>
+
+<form
+    data-request="resetPassword::onResetPassword"
+    data-request-update="'resetpassword/complete': '#partialUserResetForm'">
+    <div class="form-group">
+        <label for="resetCode">{{ 'reset.activation_code'|_ }}</label>
+        <input name="code" type="text" class="form-control" id="resetCode" placeholder="{{ 'reset.enter_activation_code'|_ }}" value="{{ __SELF__.code }}">
+    </div>
+
+    <div class="form-group">
+        <label for="resetPassword">{{ 'reset.new_password'|_ }}</label>
+        <input name="password" type="password" class="form-control" id="resetPassword" placeholder="{{ 'reset.enter_new_password'|_ }}">
+    </div>
+
+    <button type="submit" class="btn btn-default">{{ 'reset.submit'|_ }}</button>
+</form>

@@ -1,0 +1,179 @@
+fields: {  }
+tabs:
+    fields:
+        username:
+            label: 'rainlab.user::lang.user.username'
+            tab: 'rainlab.user::lang.user.account'
+            span: full
+            type: text
+        email:
+            label: 'rainlab.user::lang.user.email'
+            tab: 'rainlab.user::lang.user.account'
+            span: full
+            type: text
+        send_invite:
+            type: checkbox
+            label: 'rainlab.user::lang.user.send_invite'
+            comment: 'rainlab.user::lang.user.send_invite_comment'
+            tab: 'rainlab.user::lang.user.account'
+            default: true
+            context: create
+        block_mail:
+            label: 'rainlab.user::lang.user.block_mail'
+            tab: 'rainlab.user::lang.user.account'
+            type: checkbox
+            span: full
+            cssClass: field-align-above
+            context: update
+        password@create:
+            label: 'rainlab.user::lang.user.create_password'
+            comment: 'rainlab.user::lang.user.create_password_comment'
+            tab: 'rainlab.user::lang.user.account'
+            type: password
+            span: left
+        password@update:
+            label: 'rainlab.user::lang.user.reset_password'
+            comment: 'rainlab.user::lang.user.reset_password_comment'
+            tab: 'rainlab.user::lang.user.account'
+            type: password
+            span: left
+        password_confirmation:
+            label: 'rainlab.user::lang.user.confirm_password'
+            comment: 'rainlab.user::lang.user.confirm_password_comment'
+            tab: 'rainlab.user::lang.user.account'
+            type: password
+            span: right
+            context:
+                - create
+                - update
+        username:
+            label: 'Код ЕДРПОУ'
+            tab: 'rainlab.user::lang.user.account'
+            hidden: true
+            span: left
+            type: text
+        groups:
+            label: 'rainlab.user::lang.user.groups'
+            tab: 'rainlab.user::lang.user.account'
+            type: relation
+            emptyOption: 'rainlab.user::lang.user.empty_groups'
+        is_overdraft:
+            label: 'Разрешить овердрафт'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+        is_gov:
+            label: 'Государственная компания'
+            comment: 'Может подавать тендеры только в ЦБД с государственными тендерами'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+        is_go:
+            label: 'Гражданская компания'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+        is_test:
+            label: 'Работа в тестовом режиме'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+        is_accelerator:
+            label: 'Работа в режиме акселерации'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+        is_test_user:
+            label: 'Тестовый юзер'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+        is_do:
+            label: 'Согласие с ПО'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+        company_name:
+            label: 'Название компании'
+            tab: 'Информация о предприятии'
+            type: text
+        company_address:
+            label: 'Адрес компании'
+            tab: 'Информация о предприятии'
+            type: text
+            span: full
+        company_index:
+            label: 'Индекс компании'
+            tab: 'Информация о предприятии'
+            type: text
+        company_region:
+            label: 'Регион компании'
+            tab: 'Информация о предприятии'
+            type: text
+        company_city:
+            label: 'Город компании'
+            tab: 'Информация о предприятии'
+            type: text
+        company_country:
+            label: 'Страна компании'
+            tab: 'Информация о предприятии'
+            type: text
+        payer:
+            label: 'Плательщик НДС'
+            tab: 'Информация о предприятии'
+            type: partial
+        activity:
+            label: 'Деятельность'
+            tab: 'Информация о предприятии'
+            type: textarea
+        director_position:
+            label: 'Должность руководителя'
+            tab: 'Информация для подписания договора'
+            type: text
+        director_fio:
+            label: 'ФИО руководителя'
+            tab: 'Информация для подписания договора'
+            type: text
+        director_document:
+            label: 'Документ (полномочия)'
+            tab: 'Информация для подписания договора'
+            type: text
+        contact_fio:
+            label: ФИО
+            tab: 'Контактное лицо'
+            type: text
+        contact_position:
+            label: Должность
+            tab: 'Контактное лицо'
+            type: text
+        contact_email:
+            label: Email
+            tab: 'Контактное лицо'
+            type: text
+        contact_office_phone:
+            label: 'Контактный телефон (офис)'
+            tab: 'Контактное лицо'
+            type: text
+        contact_mobile_phone:
+            label: 'Контактный телефон (моб)'
+            tab: 'Контактное лицо'
+            type: text
+        is_formed:
+            label: 'Акты сформировано'
+            span: auto
+            type: switch
+            tab: 'Финансы'
+        payments:
+            label: 'Payments'
+            tab: 'Финансы'
+            type: partial
+            path: field_payments
+secondaryTabs:
+    fields:
+        avatar:
+            label: 'rainlab.user::lang.user.avatar'
+            type: fileupload
+            mode: image
+            imageHeight: 260
+            imageWidth: 260
+            tab: Разное

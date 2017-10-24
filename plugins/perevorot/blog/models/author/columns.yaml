@@ -1,0 +1,6 @@
+columns:
+    full_name:
+        label: 'perevorot.blog::lang.plugin.blog.author.full_name'
+        type: text
+        searchable: true
+        sortable: true

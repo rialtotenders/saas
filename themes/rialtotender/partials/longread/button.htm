@@ -1,0 +1,11 @@
+{% if data.button_url %}
+    <div class="w c-part-button c-part-button--b-{{ data.button_position }} {% if data.button_up %} go-prev{% endif %}">
+        <div class="c">
+            <div class="c-part-button__wrap c-part-button__wrap--{{ data.button_bgcolor }}">
+                <div class="c-part-button__center">
+                    <a href="{{ data.button_url }}" class="c-part-button__main-link">{{ data.button_text }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,24 @@
+<div class="w c-ben">
+    <div class="c">
+        <div class="c-text__wrap" >
+            <div class="c-text__center" id="disqus_thread"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = '{{ url }}';
+        this.page.identifier = '{{ identifier }}';
+        this.language = '{{ locale }}';
+    };
+
+    (function() {
+        var d = document, s = d.createElement('script');
+        s.src = '{{ domain }}/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<script id="dsq-count-scr" src="//rialtotenders-com-ua.disqus.com/count.js" async></script>

@@ -1,0 +1,25 @@
+title = "blog-article"
+url = "/blog/:aslug"
+layout = "default"
+is_hidden = 0
+
+[article]
+
+[groups]
+
+[last]
+==
+<div class="w c-s wrapper article-page">
+    <div class="c">
+        <div class="c-s__wrap">
+            <div class="c-s__center inline-layout">
+                {% component 'article' %}
+
+                <div class="sidebar-right">
+                    {% component 'groups' %}
+                    {% component 'last' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

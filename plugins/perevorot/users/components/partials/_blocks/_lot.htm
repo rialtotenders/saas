@@ -1,0 +1,112 @@
+<div class="lot-block" data-lot-index="{{ lot_key }}">
+    <div class="inline-layout">
+        <h4>{{ 'tender.create.lot_position'|_ }} {{ title_key }}</h4>
+        <div class="item-button inline-layout">
+            {% if not not_delete_lot %}
+            <div class="remove-item-block"></div>
+            {% endif %}
+            <div class="slide-item-block js-slide-item"></div>
+        </div>
+    </div>
+
+    <div class="form-item">
+        <input type="hidden" name="lots[{{ lot_key }}][id]" value="{{ lot.id }}"/>
+
+        <div class="form-holder">
+            <label for="tender_create_lot_title-{{ lot_key }}">{{ 'tender.create.lot_title'|_ }}</label>
+            <input id="tender_create_lot_title-{{ lot_key }}" type="text" name="lots[{{ lot_key }}][title]" value="{{ lot.title }}"/>
+            <div class="error-holder none" data-validation="lots.{{ lot_key }}.title"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="tender_create_lot_description-{{ lot_key }}">{{ 'tender.create.lot_description'|_}}</label>
+            <div class="form-holder">
+                <textarea id="tender_create_lot_description-{{ lot_key }}" name="lots[{{ lot_key }}][description]">{{ lot.description }}</textarea>
+                <div class="error-holder none" data-validation="lots.{{ lot_key }}.description"></div>
+            </div>
+        </div>
+
+        <div class="form-holder">
+            <label for="{{ lot_key }}tender_create_price">{{ 'tender.create.price'|_ }}</label>
+            <input id="{{ lot_key }}tender_create_price" class="tender_create_price" type="text" name="lots[{{ lot_key }}][value][amount]" value="{{ lot.value.amount }}" {% if withEmptyPrice and lot.is_empty_price %}disabled{% endif %} />
+            <div class="error-holder none" data-validation="lots.{{ lot_key }}.value.amount"></div>
+        </div>
+        {% if withEmptyPrice %}
+        <div class="checkbox">
+            <input id="{{ lot_key }}tender_create_is_empty_price" class="tender_create_is_empty_price" type="checkbox" name="lots[{{ lot_key }}][is_empty_price]" value="1" {% if lot.is_empty_price %}checked{% endif %} />
+            <label for="{{ lot_key }}tender_create_is_empty_price">{{ 'tender.create.is_empty_price'|_ }}</label>
+        </div>
+        {% endif %}
+
+        <div class="form-holder">
+            <label for="tender_minimalStep-{{ lot_key }}">{{ 'tender.create.choose_minimalStep'|_}}</label>
+            <div class="form-holder">
+                <input id="tender_minimalStep-{{ lot_key }}" name="lots[{{ lot_key }}][minimalStep][amount]" value="{{ lot.minimalStep.amount }}" type="text">
+                <div class="error-holder none" data-validation="lots.{{ lot_key }}.minimalStep.amount"></div>
+            </div>
+            <div class="link_tender_create">
+                {% if auction_step_from and auction_step_to %}
+                    {% if auction_step_from < 1 %}
+                    <a href="#" data-auction-step="{{ auction_step_from }}">{{ auction_step_from }}%</a>
+                    {% for i in 1..auction_step_to %}
+                    <a href="#" data-auction-step="{{ i }}">{{ i }}%</a>
+                    {% endfor %}
+                    {% elseif auction_step_from >= 1 %}
+                    {% for i in auction_step_from..auction_step_to %}
+                    <a href="#" data-auction-step="{{ i }}">{{ i }}%</a>
+                    {% endfor %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+        {%if show_guarantee %}
+        <div class="form-holder">
+            <label for="tender_create_guarantee_provision-{{ lot_key }}">{{ 'tender.create.guarantee_provision'|_ }}</label>
+            <input id="tender_create_guarantee_provision-{{ lot_key }}" type="text" name="lots[{{ lot_key }}][guarantee][amount]" value="{{ lot.guarantee.amount }}"/>
+            <div class="error-holder none" data-validation="lots.{{ lot_key }}.guarantee.amount"></div>
+        </div>
+        {% endif %}
+
+        <div class="file-button">
+            {% component 'fileUploader_lot_'~lot_key hide_tpl=hide_tpl %}
+        </div>
+
+        {% if show_features and tender.criteria and tender.lot %}
+        <div class="features">
+            {% if lot.features|length %}
+                {% for fkey, feature in lot.features %}
+                    {% partial '@_blocks/_feature' feature_type='lot' fkey=fkey feature=feature input_name_prefix='lots['~lot_key~'][features]' %}
+                {% endfor %}
+            {% else %}
+                {# partial '@_blocks/_feature' feature_type='lot' fkey=0 input_name_prefix='lots['~lot_key~'][features]' #}
+            {% endif %}
+        </div>
+
+        <div class="add-price-category">
+            <span>{{ 'tender.feature.add'|_ }}</span>
+        </div>
+        {% endif %}
+
+        <div class="new-lot-item-block">
+
+            {% if lot.items|length %}
+                {% for item_key, item in lot.items %}
+                    {% partial '@_blocks/_lot_item' lot_key=lot_key item_key=item_key item=item input_name_prefix='lots['~lot_key~'][items]['~item_key~']' %}
+                {% endfor %}
+            {% else %}
+
+                {% if not item_key %}
+                    {% set item_key = 0 %}
+                {% endif %}
+
+                {% partial '@_blocks/_lot_item' lot_key=lot_key item_key=item_key input_name_prefix='lots['~lot_key~'][items]['~item_key~']' %}
+            {% endif %}
+        </div>
+
+        <div class="add-new-lot-item">
+            <span>{{ 'tender.create.add_new_item'|_ }}</span>
+        </div>
+
+    </div>
+</div>

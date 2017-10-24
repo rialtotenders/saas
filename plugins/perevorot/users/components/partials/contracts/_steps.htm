@@ -1,0 +1,36 @@
+<div class="list-step inline-layout col-4">
+    <div class="item {% if step == 1 %}active{% endif %}">
+        <span>
+            {% if step > 1 %}
+                <a href="#" data-step="1">{{ 'contract.edit.step1'|_ }}</a>
+            {% else %}
+                {{ 'contract.edit.step1'|_ }}
+            {% endif %}
+        </span>
+    </div>
+    <div class="item {% if step == 2 %}active{% endif %}">
+        <span>
+            {% if step > 2 %}
+                <a href="#" data-step="2">{{ 'contract.edit.step2'|_ }}</a>
+            {% else %}
+                {{ 'contract.edit.step2'|_ }}
+            {% endif %}
+        </span>
+    </div>
+    <div class="item {% if step == 3 %}active{% endif %}">
+        <span>
+            {% if step > 3 %}
+                <a href="#" data-step="3">{{ 'contract.edit.step3'|_ }}</a>
+            {% else %}
+                {{ 'contract.edit.step3'|_ }}
+            {% endif %}
+        </span>
+    </div>
+    <div class="item {% if step == 4 %}active{% endif %}">
+        <span>
+            {{ 'contract.edit.step4'|_ }}
+        </span>
+    </div>
+</div>
+
+<h3>{{ header }}</h3>

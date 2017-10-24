@@ -1,0 +1,14 @@
+columns:
+    title:
+        label: 'perevorot.blog::lang.plugin.blog.title'
+        type: text
+        searchable: true
+        sortable: true
+    published_at:
+        label: 'perevorot.blog::lang.plugin.blog.published'
+        type: datetime
+        sortable: true
+    short_description:
+        label: 'perevorot.blog::lang.plugin.blog.sdesc'
+        type: text
+        searchable: true

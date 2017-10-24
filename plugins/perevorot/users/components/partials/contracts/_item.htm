@@ -1,0 +1,79 @@
+{% set validator_name_prefix = input_name_prefix|replace({'[': '.', ']': '.'})|replace({'..': '.'}) %}
+
+<div class="item-block" data-item-index="{{ key }}">
+    <div class="inline-layout">
+        <h4>{{ 'contract.edit.item_position'|_ }} {{ title_key }}</h4>
+        <div class="item-button inline-layout">
+            <div class="slide-item-block js-slide-item"></div>
+        </div>
+    </div>
+
+    <div class="form-item">
+        <input type="hidden" name="{{ input_name_prefix }}[id]" value="{{ item.id }}"/>
+        <div class="form-holder">
+            <label for="contract_edit_nomenclature_description-{{ key }}">{{ 'contract.edit.nomenclature_description'|_}}</label>
+            <div class="form-holder">
+                <textarea id="contract_edit_nomenclature_description-{{ key }}" name="{{ input_name_prefix }}[description]">{{ item.description }}</textarea>
+                <div class="error-holder none" data-validation="{{ validator_name_prefix }}description"></div>
+            </div>
+        </div>
+
+        <div class="form-holder">
+            <label for="contract_edit_classification_scheme-{{ key }}">{{ 'contract.edit.classification_scheme'|_}}</label>
+            <input id="contract_edit_classification_scheme-{{ key }}" name="{{ input_name_prefix }}[classification][scheme]" type="text" readonly value="{{ item.classification.scheme }}"/>
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}classification.scheme"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="contract_edit_classification_id-{{ key }}">{{ 'contract.edit.classification_id'|_}}</label>
+            <input id="contract_edit_classification_id-{{ key }}" name="{{ input_name_prefix }}[classification][id]" type="text" readonly value="{{ item.classification.id }}"/>
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}classification.id"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="contract_edit_classification_description-{{ key }}">{{ 'contract.edit.classification_description'|_}}</label>
+            <input id="contract_edit_classification_description-{{ key }}" name="{{ input_name_prefix }}[classification][description]" type="text" readonly value="{{ item.classification.description }}"/>
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}classification.description"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="contract_edit_quantity-{{ key }}">{{ 'contract.edit.quantity'|_ }}</label>
+            <input id="contract_edit_quantity-{{ key }}" type="text" name="{{ input_name_prefix }}[quantity]" value="{{ item.quantity }}"/>
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}quantity"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="contract_edit_units-{{ key }}">{{ 'contract.edit.units'|_}}</label>
+            <select id="contract_edit_units-{{ key }}" name="{{ input_name_prefix }}[unit][code]">
+                {% for mkey, unit in measurers %}
+                <option value="{{ mkey }}" {% if mkey == item.unit.code %} selected {% endif %}>{{ unit }}</option>
+                {% endfor %}
+            </select>
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}unit.code"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="contract_edit_deliveryAddress_postalCode-{{ key }}">{{ 'contract.edit.deliveryAddress_postalCode'|_ }}</label>
+            <input id="contract_edit_deliveryAddress_postalCode-{{ key }}" type="text" name="{{ input_name_prefix }}[deliveryAddress][postalCode]" value="{% if edit %}{{ item.deliveryAddress.postalCode }}{% else %}{{ user.company_index }}{% endif %}"/>
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}deliveryAddress.postalCode"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="contract_edit_deliveryAddress_region-{{ key }}">{{ 'contract.edit.deliveryAddress_region'|_ }}</label>
+            <input id="contract_edit_deliveryAddress_region-{{ key }}" type="text" name="{{ input_name_prefix }}[deliveryAddress][region]" value="{% if edit %}{{ item.deliveryAddress.region }}{% else %}{{ user.company_region }}{% endif %}"/>
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}deliveryAddress.region"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="contract_edit_deliveryAddress_locality-{{ key }}">{{ 'contract.edit.deliveryAddress_locality'|_ }}</label>
+            <input id="contract_edit_deliveryAddress_locality-{{ key }}" type="text" name="{{ input_name_prefix }}[deliveryAddress][locality]" value="{% if edit %}{{ item.deliveryAddress.locality }}{% else %}{{ user.company_city }}{% endif %}"/>
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}deliveryAddress.locality"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="contract_edit_deliveryAddress_streetAddress-{{ key }}">{{ 'contract.edit.deliveryAddress_streetAddress'|_ }}</label>
+            <input id="contract_edit_deliveryAddress_streetAddress-{{ key }}" type="text" name="{{ input_name_prefix }}[deliveryAddress][streetAddress]" value="{% if edit %}{{ item.deliveryAddress.streetAddress }}{% else %}{{ user.company_address }}{% endif %}"/>
+            <div class="error-holder none" data-validation="{{ validator_name_prefix }}deliveryAddress.streetAddress"></div>
+        </div>
+    </div>
+</div>

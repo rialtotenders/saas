@@ -1,0 +1,33 @@
+.c-video {
+  .c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__wrap {
+    padding-top: 75px;
+    padding-bottom: 119px;
+    @extend .padding-left;
+    @extend .padding-right;
+    background-color: #1f1f1f;
+  }
+  &__center {
+    @extend .max-width-inner;
+    margin: 0 auto;
+  }
+  h2 {
+    color: white;
+  }
+  &__box {
+    margin-top: 20px;
+    position: relative;
+  	padding-bottom: 56.25%; /* 16:9 */
+  	height: 0;
+    iframe {
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    	width: 100%;
+    	height: 100%;
+    }
+  }
+}

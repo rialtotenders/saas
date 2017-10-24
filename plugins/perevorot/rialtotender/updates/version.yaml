@@ -1,0 +1,358 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table perevorot_rialtotender_customers'
+    - builder_table_create_perevorot_rialtotender_customers.php
+1.0.3:
+    - 'Created table perevorot_rialtotender_icons'
+    - builder_table_create_perevorot_rialtotender_icons.php
+1.0.4:
+    - 'Created table perevorot_rialtotender_areas'
+    - builder_table_create_perevorot_rialtotender_areas.php
+1.0.5:
+    - 'Updated table perevorot_rialtotender_areas'
+    - builder_table_update_perevorot_rialtotender_areas.php
+1.0.6:
+    - 'Added edrpou identifier field to table perevorot_rialtotender_customers'
+    - update_customers_table.php
+    - update_customers_table_1.php
+    - builder_table_create_perevorot_rialtotender_integer.php
+1.0.7:
+    - 'Updated table perevorot_rialtotender_integer'
+    - builder_table_update_perevorot_rialtotender_integer.php
+1.0.8:
+    - 'Updated table perevorot_rialtotender_integer'
+    - builder_table_update_perevorot_rialtotender_integer_2.php
+1.0.9:
+    - 'Created table perevorot_rialtotender_applications'
+    - builder_table_create_perevorot_rialtotender_applications.php
+1.0.10:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications.php
+1.0.11:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications_2.php
+1.0.12:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications_3.php
+1.0.13:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications_4.php
+1.0.14:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications_5.php
+1.0.15:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications_6.php
+1.0.16:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications_7.php
+1.0.17:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications_8.php
+1.0.18:
+    - 'Created table perevorot_rialtotender_application_files'
+    - builder_table_create_perevorot_rialtotender_application_files.php
+1.0.19:
+    - 'Updated table perevorot_rialtotender_application_files'
+    - builder_table_update_perevorot_rialtotender_application_files.php
+1.0.20:
+    - 'Updated table perevorot_rialtotender_application_files'
+    - builder_table_update_perevorot_rialtotender_application_files_2.php
+1.0.21:
+    - 'Updated table perevorot_rialtotender_application_files'
+    - builder_table_update_perevorot_rialtotender_application_files_3.php
+1.0.22:
+    - 'Created table perevorot_rialtotender_questions'
+    - builder_table_create_perevorot_rialtotender_questions.php
+1.0.23:
+    - 'Updated table perevorot_rialtotender_questions'
+    - builder_table_update_perevorot_rialtotender_questions.php
+1.0.24:
+    - 'Updated table perevorot_rialtotender_application_files'
+    - builder_table_update_perevorot_rialtotender_application_files_4.php
+1.0.25:
+    - 'Updated table perevorot_rialtotender_application_files'
+    - builder_table_update_perevorot_rialtotender_application_files_5.php
+1.0.26:
+    - 'Updated table perevorot_rialtotender_application_files'
+    - builder_table_update_perevorot_rialtotender_application_files_6.php
+1.0.27:
+    - 'Created table perevorot_rialtotender_form_messages'
+    - builder_table_create_perevorot_rialtotender_form_messages.php
+1.0.28:
+    - 'Updated table perevorot_rialtotender_form_messages'
+    - builder_table_update_perevorot_rialtotender_form_messages.php
+1.0.29:
+    - default_seed_for_form_messages
+    - seeder1029.php
+1.0.30:
+    - 'Created table perevorot_rialtotender_reg_tips'
+    - builder_table_create_perevorot_rialtotender_reg_tips.php
+1.0.31:
+    - 'reg_tips default data'
+    - seeder1031.php
+1.0.32:
+    - 'Drop table perevorot_rialtotender_reg_tips'
+    - builder_table_delete_perevorot_rialtotender_reg_tips.php
+1.0.33:
+    - 'Drop table perevorot_rialtotender_form_messages'
+    - builder_table_delete_perevorot_rialtotender_form_messages.php
+1.0.34:
+    - 'Created table perevorot_rialtotender_statuses'
+    - builder_table_create_perevorot_rialtotender_statuses.php
+1.0.35:
+    - 'Updated table perevorot_rialtotender_statuses'
+    - builder_table_update_perevorot_rialtotender_statuses.php
+1.0.36:
+    - 'Updated table perevorot_rialtotender_statuses'
+    - builder_table_update_perevorot_rialtotender_statuses_2.php
+1.0.37:
+    - 'Drop table perevorot_rialtotender_statuses'
+    - builder_table_delete_perevorot_rialtotender_statuses.php
+1.0.38:
+    - 'Created table perevorot_rialtotender_apilog'
+    - builder_table_create_perevorot_rialtotender_apilog.php
+1.0.39:
+    - 'Updated table perevorot_rialtotender_apilog'
+    - builder_table_update_perevorot_rialtotender_apilog.php
+1.0.40:
+    - 'Updated table perevorot_rialtotender_apilog'
+    - builder_table_update_perevorot_rialtotender_apilog_2.php
+1.0.41:
+    - 'Updated table perevorot_rialtotender_apilog'
+    - builder_table_update_perevorot_rialtotender_apilog_3.php
+1.0.42:
+    - 'Updated table perevorot_rialtotender_apilog'
+    - builder_table_update_perevorot_rialtotender_apilog_4.php
+1.0.43:
+    - 'Updated table perevorot_rialtotender_apilog'
+    - builder_table_update_perevorot_rialtotender_apilog5.php
+1.0.44:
+    - 'Updated table perevorot_rialtotender_apilog'
+    - builder_table_update_perevorot_rialtotender_apilog_6.php
+1.0.45:
+    - 'Created table perevorot_rialtotender_currencies'
+    - builder_table_create_perevorot_rialtotender_currencies.php
+1.0.46:
+    - 'Created table perevorot_rialtotender_tariffs'
+    - builder_table_create_perevorot_rialtotender_tariffs.php
+1.0.47:
+    - 'add foreign in tariffs'
+    - migration1047.php
+1.0.48:
+    - 'Created table perevorot_rialtotender_payments'
+    - builder_table_create_perevorot_rialtotender_payments.php
+1.0.49:
+    - 'add foreign to payments'
+    - migration1049.php
+1.0.50:
+    - 'Updated table perevorot_rialtotender_currencies'
+    - builder_table_update_perevorot_rialtotender_currencies.php
+1.0.51:
+    - 'Updated table perevorot_rialtotender_payments'
+    - builder_table_update_perevorot_rialtotender_payments.php
+1.0.52:
+    - 'Created table perevorot_rialtotender_tenders'
+    - builder_table_create_perevorot_rialtotender_tenders.php
+1.0.53:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders.php
+1.0.54:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders_2.php
+1.0.55:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders_3.php
+1.0.56:
+    - 'Created table perevorot_rialtotender_tender_files'
+    - builder_table_create_perevorot_rialtotender_tender_files.php
+1.0.57:
+    - 'Created table perevorot_rialtotender_plans'
+    - builder_table_create_perevorot_rialtotender_plans.php
+1.0.58:
+    - 'Updated table perevorot_rialtotender_plans'
+    - builder_table_update_perevorot_rialtotender_plans.php
+1.0.59:
+    - 'Created table perevorot_rialtotender_categories'
+    - builder_table_create_perevorot_rialtotender_categories.php
+1.0.60:
+    - 'Updated table perevorot_rialtotender_questions'
+    - builder_table_update_perevorot_rialtotender_questions_2.php
+1.0.61:
+    - 'Updated table perevorot_rialtotender_apilog'
+    - builder_table_update_perevorot_rialtotender_apilog7.php
+1.0.62:
+    - 'Created table perevorot_rialtotender_timing_controls'
+    - builder_table_create_perevorot_rialtotender_timing_controls.php
+1.0.63:
+    - 'Updated table perevorot_rialtotender_integer'
+    - builder_table_update_perevorot_rialtotender_integer3.php
+1.0.64:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications9a.php
+1.0.65:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders4.php
+1.0.66:
+    - 'Updated table perevorot_rialtotender_plans'
+    - builder_table_update_perevorot_rialtotender_plans2.php
+1.0.67:
+    - 'change foreing keys'
+    - migration1067.php
+1.0.68:
+    - 'Created table perevorot_rialtotender_contract_files'
+    - builder_table_create_perevorot_rialtotender_contract_files.php
+1.0.69:
+    - 'Created table perevorot_rialtotender_contracts'
+    - builder_table_create_perevorot_rialtotender_contracts.php
+1.0.70:
+    - 'Created table perevorot_rialtotender_complaint_periods'
+    - builder_table_create_perevorot_rialtotender_complaint_periods.php
+1.0.71:
+    - 'Updated table perevorot_rialtotender_contracts'
+    - builder_table_update_perevorot_rialtotender_contracts.php
+1.0.72:
+    - 'Updated table perevorot_rialtotender_contracts'
+    - builder_table_update_perevorot_rialtotender_contracts_2.php
+1.0.73:
+    - 'Updated table perevorot_rialtotender_contracts'
+    - builder_table_update_perevorot_rialtotender_contracts_3.php
+1.0.74:
+    - 'Updated table perevorot_rialtotender_contracts'
+    - builder_table_update_perevorot_rialtotender_contracts_4.php
+1.0.75:
+    - 'Updated table perevorot_rialtotender_contracts'
+    - builder_table_update_perevorot_rialtotender_contracts_5.php
+1.0.76:
+    - 'Updated table perevorot_rialtotender_contracts'
+    - builder_table_update_perevorot_rialtotender_contracts_6.php
+1.0.77:
+    - 'Updated table perevorot_rialtotender_contracts'
+    - builder_table_update_perevorot_rialtotender_contracts_7.php
+1.0.78:
+    - 'Created table perevorot_rialtotender_change_files'
+    - builder_table_create_perevorot_rialtotender_change_files.php
+1.0.79:
+    - 'Updated table perevorot_rialtotender_contracts'
+    - builder_table_update_perevorot_rialtotender_contracts_8.php
+1.0.80:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications_9.php
+1.0.81:
+    - 'Updated table perevorot_rialtotender_questions'
+    - builder_table_update_perevorot_rialtotender_questions_3.php
+1.0.82:
+    - 'Updated table perevorot_rialtotender_contracts'
+    - builder_table_update_perevorot_rialtotender_contracts_9.php
+1.0.83:
+    - 'Updated table perevorot_rialtotender_currencies'
+    - builder_table_update_perevorot_rialtotender_currencies2.php
+1.0.84:
+    - 'Currencies order update'
+    - seeder1083.php
+1.0.85:
+    - 'Clear blank messages'
+    - seeder1085.php
+1.0.86:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications10.php
+1.0.87:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders_44.php
+1.0.88:
+    - 'Updated table perevorot_rialtotender_plans'
+    - builder_table_update_perevorot_rialtotender_plans_22.php
+1.0.89:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications_10a.php
+1.0.90:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders_5.php
+1.0.91:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders_6.php
+1.0.92:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders_7.php
+1.0.93:
+    - 'Updated table perevorot_rialtotender_plans'
+    - builder_table_update_perevorot_rialtotender_plans_3.php
+1.0.94:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications11.php
+1.0.95:
+    - 'Updated table perevorot_rialtotender_application_files'
+    - builder_table_update_perevorot_rialtotender_application_files_7.php
+1.0.96:
+    - 'Updated table perevorot_rialtotender_questions'
+    - builder_table_update_perevorot_rialtotender_questions_4.php
+1.0.97:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders_8.php
+1.0.98:
+    - 'Created table perevorot_rialtotender_qualifications'
+    - builder_table_create_perevorot_rialtotender_qualifications.php
+1.0.99:
+    - 'Created table perevorot_rialtotender_qualification_files'
+    - builder_table_create_perevorot_rialtotender_qualification_files.php
+1.0.100:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders9.php
+1.0.101:
+    - 'Updated table perevorot_rialtotender_applications'
+    - builder_table_update_perevorot_rialtotender_applications10b.php
+1.0.102:
+    - 'Updated table perevorot_rialtotender_tender_files'
+    - builder_table_update_perevorot_rialtotender_tender_files.php
+1.0.103:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders10.php
+1.0.104:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders11.php
+1.0.105:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders12.php
+1.0.106:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders_9.php
+1.0.107:
+    - 'Updated table perevorot_rialtotender_tariffs'
+    - builder_table_update_perevorot_rialtotender_tariffs.php
+1.0.108:
+    - 'add field to user'
+    - migration10108.php
+1.0.109:
+    - 'readd column is_gov'
+    - migration10109.php
+1.0.110:
+    - 'add company_name to users table'
+    - migration10110.php
+1.0.111:
+    - 'add some columns to users table'
+    - migration10111.php
+1.0.112:
+    - 'test seed'
+    - seeder10109.php
+1.0.113:
+    - 'test auto update db'
+    - seeder10113.php
+1.0.114:
+    - 'resaved user profile'
+    - seeder10114.php
+1.0.115:
+    - 'Updated table perevorot_rialtotender_payments'
+    - builder_table_update_perevorot_rialtotender_payments_2.php
+1.0.116:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders13.php
+1.0.117:
+    - 'Updated table perevorot_rialtotender_payments'
+    - builder_table_update_perevorot_rialtotender_payments_3.php
+1.0.118:
+    - 'Updated table perevorot_rialtotender_apilog'
+    - builder_table_update_perevorot_rialtotender_apilog8.php
+1.0.119:
+    - 'Updated table perevorot_rialtotender_tenders'
+    - builder_table_update_perevorot_rialtotender_tenders14.php

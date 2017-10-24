@@ -1,0 +1,17 @@
+fields:
+    title:
+        label: 'Группа'
+        span: auto
+        type: text
+    slug:
+        label: 'Гиперссылка'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    is_enabled:
+        label: 'perevorot.blog::lang.plugin.blog.enabled'
+        span: auto
+        required: 0
+        type: switch

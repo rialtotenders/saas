@@ -1,0 +1,24 @@
+fields:
+    tender_page_massages:
+        label: Поля
+        span: full
+        type: repeater
+        form:
+            fields:
+                tender_status:
+                    label: "Статус тендера"
+                    type: dropdown
+                    span: auto
+                user_type:
+                    label: "Тип юзера"
+                    type: dropdown
+                    span: auto
+                title:
+                    label: Заголовок
+                    type: mltext
+                    span: full
+                text:
+                    label: Подсказка
+                    type: mlricheditor
+                    span: full
+                    size: giant

@@ -1,0 +1,59 @@
+tabs:
+    fields:
+        header1:
+            label: Заголовок
+            tab: Шаг 1
+            type: mltext
+            span: full
+
+        step1:
+            label: Подсказка
+            tab: Шаг 1
+            type: mlricheditor
+            span: full
+            size: giant
+
+        header2:
+            label: Заголовок
+            tab: Шаг 2
+            type: mltext
+            span: full
+
+        step2:
+            label: Подсказка
+            tab: Шаг 2
+            type: mlricheditor
+            span: full
+            size: giant
+
+        header3:
+            label: Заголовок
+            tab: Шаг 3
+            type: mltext
+            span: full
+
+        step3:
+            label: Подсказка
+            tab: Шаг 3
+            type: mlricheditor
+            span: full
+            size: giant
+
+        header4:
+            label: Заголовок
+            tab: Шаг 4
+            type: mltext
+            span: full
+
+        step4:
+            label: Подсказка
+            tab: Шаг 4
+            type: mlricheditor
+            span: full
+            size: giant
+
+        header5:
+            label: Заголовок
+            tab: Шаг 5
+            type: mltext
+            span: full

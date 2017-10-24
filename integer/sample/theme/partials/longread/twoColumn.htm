@@ -1,0 +1,21 @@
+<div class="w c-text{% if data.tcolumn_up %} go-prev{% endif %}">
+    <div class="c">
+        <div class="c-text__wrap">
+            <div class="c-text__center">
+                <div class="row">
+                    {% if data.tcolumn_title %}
+                        <h2 class="sb-h2">{{ data.tcolumn_title }}</h2>
+                    {% endif %}
+                </div>
+                <div class="row">
+                    <div class="col-50 border-right gpr">
+                        {{ data.tcolumn_first|raw }}
+                    </div>
+                    <div class="col-50 border-left ml-minus-1 gpl">
+                        {{ data.tcolumn_second|raw }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

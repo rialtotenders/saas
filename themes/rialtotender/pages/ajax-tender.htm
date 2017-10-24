@@ -1,0 +1,12 @@
+title = "Ajax поиск по тендерам"
+url = "/tender/form/search/:source?"
+layout = "ajax"
+is_hidden = 0
+
+[viewBag]
+localeUrl[en] = "/tender/form/search"
+localeUrl[fr] = "/ajax-poisk-po-tenderam"
+
+[searchresult]
+==
+{% component 'searchresult' %}

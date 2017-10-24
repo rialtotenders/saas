@@ -1,0 +1,25 @@
+fields:
+    price_from:
+        label: 'Сумма от'
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: number
+    price_to:
+        label: 'Сумма до'
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: number
+    sum:
+        label: Тариф
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: number
+    currency_id:
+        label: Валюта
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: dropdown

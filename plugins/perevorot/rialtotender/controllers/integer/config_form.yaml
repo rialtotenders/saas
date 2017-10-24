@@ -1,0 +1,14 @@
+name: Площадка
+form: $/perevorot/rialtotender/models/integer/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\Integer
+defaultRedirect: perevorot/rialtotender/integer
+create:
+    title: 'Создание площадки'
+    redirect: 'perevorot/rialtotender/integer/update/:id'
+    redirectClose: perevorot/rialtotender/integer
+update:
+    title: 'Редактирование площадки'
+    redirect: perevorot/rialtotender/integer
+    redirectClose: perevorot/rialtotender/integer
+preview:
+    title: 'Предпросмотр площадки'

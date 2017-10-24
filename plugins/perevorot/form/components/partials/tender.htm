@@ -1,0 +1,459 @@
+{% if back_url %}
+    <div class="w c-goback">
+        <div class="c">
+            <div class="c-goback__wrap border-bottom">
+                <div class="c-goback__center">
+                    <div class="sb-go-back-button">
+                        <a href="{{ back_url }}">{{ 'tender.back_to_search_results'|_ }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<style>
+    div[data-js="tabs"] .active{
+        font-weight: bold;
+        color:#000;
+    }
+    div[data-js="tabs"] div{
+        cursor: pointer;
+        cursor: hand;
+    }
+</style>
+
+<div class="w c-tender">
+    <div class="c">
+        <div class="c-tender__wrap">
+
+                <div class="row inline-layout">
+                    <div class="block-text-tender">
+
+                        {% if item.__isMultiLot is empty %}
+                            {% partial('@pages/single') %}
+                        {% else %}
+                            {% partial('@pages/multi') %}
+                        {% endif %}
+
+                    </div>
+
+                    <div class="block-button-tender">
+
+                        <div class="c-tender__right-block">
+
+                            <p class="c-tender__text-small tender-status">{{ 'tender.status'|_}}</p>
+                            <p class="status_name mb-20">{{ item.__status_name }}</p>
+                            {% if item.status in ['active.enquiries', 'active.tendering', 'active.auction'] %}
+                            <p class="tender-date">
+                                <strong>
+                                {% if item.status == 'active.enquiries' %}
+                                    {{ 'tender.status.until'|_ }} {{ item.enquiryPeriod.endDate|date('d.m.Y') }}<span>{{ item.enquiryPeriod.endDate|date('H:i') }}</span>
+                                {% elseif item.status == 'active.tendering' %}
+                                    {{ 'tender.status.until'|_ }} {{ item.tenderPeriod.endDate|date('d.m.Y') }}<span>{{ item.tenderPeriod.endDate|date('H:i') }}</span>
+                                {% elseif item.status == 'active.auction' %}
+                                    {% if lot %}
+                                        {{ 'tender.lot.auction_start'|_ }} {{ lot.auctionPeriod.startDate|date('d.m.Y') }}<span>{{ lot.auctionPeriod.startDate|date('H:i') }}</span>
+                                    {% elseif item.__isMultiLot %}
+                                        {{ 'tender.status.start'|_ }} {{ item.__lotAuctionPeriod.startDate|date('d.m.Y') }}
+                                    {% else %}
+                                        {{ 'tender.status.start'|_ }} {{ item.auctionPeriod.startDate|date('d.m.Y') }}<span>{{ item.auctionPeriod.startDate|date('H:i') }}</span>
+                                    {% endif %}
+                                {% endif %}
+                                </strong>
+                            </p>
+                            {% endif %}
+
+                            {% if item.status=='active.enquiries' %}
+                                {{ 'tender.tenderPeriod_startDate'|_ }} {{ item.tenderPeriod.startDate|date('d.m.Y') }}
+                            {% elseif item.status in ['active.tendering', 'active.auction', 'active.qualification', 'active.awarded', 'unsuccessful', 'cancelled', 'complete'] and item.auctionUrl is not empty %}
+                                <div><a href="{{ item.auctionUrl }}" class="button-tender" target="_blank">{{ 'tender.goto_auction'|_ }}</a></div>
+                                {% if item.status in ['active.qualification', 'active.awarded', 'unsuccessful', 'cancelled', 'complete'] and item.auctionPeriod.endDate is not empty %}
+                                    <p class="tender-date">{{ 'tender.auction_finished'|_ }} {{ item.auctionPeriod.endDate|date('d.m.Y H:i') }}</p>
+                                {% elseif item.status in ['active.qualification', 'active.awarded', 'unsuccessful', 'cancelled', 'complete'] %}
+                                    <p class="tender-date">{{ 'tender.auction_not_happened'|_ }}</p>
+                                {% endif %}
+                            {% endif %}
+
+                            <p class="c-tender__price">
+                                {% if item.value.amount >= 999999999 %}
+                                    {{ 'tender.is_empty_price'|_ }}
+                                {% else %}
+                                    {{ item.__amount }} {{ item.value.currency}}
+                                {% endif %}
+                            </p>
+                            <p class="c-tender__price-description">
+                                {% if item.value.valueAddedTaxIncluded %}
+                                {{ 'tender.with_VAT'|_ }}
+                                {% else %}
+                                {{ 'tender.without_VAT'|_ }}
+                                {% endif %}
+                            </p>
+
+                            {% if user_tender and item.status == 'active.qualification' %}
+                                <br><a href="{% if item.__isMultiLot is empty or lot is not empty %}#bids{% else %}#lots{% endif %}" class="button-tender">{{ 'tender.go_to_bids'|_ }}</a><br>
+                            {% endif %}
+
+                            {% if not user_tender %}
+
+                                {#
+                                <div class="sb-social-icons">
+                                    <ul class="sb-social-icons__list">
+                                        <li class="sb-social-icons__list-item sb-social-icons__list-item--fb"><a href=""></a></li>
+                                        <li class="sb-social-icons__list-item sb-social-icons__list-item--tw"><a href=""></a></li>
+                                    </ul>
+                                </div>
+                                #}
+
+                                <div id="application">
+                                    {% if is_multilot %}
+                                        {% if tender_app|length > 0 %}
+
+
+                                            <h3>{{ 'profile.your_bids'|_}}</h3>
+                                            {% for key, app in tender_app %}
+
+
+                                                {% if key == 0 %}
+                                                {% set dkey = 0 %}
+                                                    <div class="document-lot">
+                                                        {% for document in app.bidDocuments %}
+
+                                                                {% if not document.lot_id and document._document is not empty %}
+                                                                    {% if dkey == 0 %}
+                                                                        <div class="name-lot">{{ 'tender.bids.tender_documents'|_}}</div><div class="item-doc">
+                                                                    {% endif %}
+
+                                                                    {% set dkey = dkey + 1 %}
+                                                                    <a href="{{ document._document.path }}"> {{ document.filename }}</a>
+                                                                {% endif %}
+
+                                                        {% endfor %}
+
+                                                        {% if dkey > 0 %}</div>{% endif %}
+                                                        {% if dkey > 2 %}
+                                                        <div class="button-more">
+                                                            <div class="more-open">{{ 'document.filename.show_text'|_ }}</div>
+                                                            <div class="more-hide">{{ 'document.filename.hide_text'|_ }}</div>
+                                                        </div>
+                                                        {% endif%}
+                                                    </div>
+
+                                                {% endif %}
+
+                                                    <div class="document-lot">
+                                                        <div class="name-lot"><strong class="metka">{{ 'tender.bid.lot'|_}} </strong> {{ app.lot_title }}</div>
+                                                        {% if app.lot_title|length> 60%}
+                                                        <div class="button-more">
+
+                                                            <div class="more-open">{{ 'document.lot_name.show_text'|_ }}</div>
+                                                            <div class="more-hide">{{ 'document.lot_name.hide_text'|_ }}</div>
+
+                                                        </div>
+                                                        {% endif %}
+
+                                                        {% if app.feature_price %}
+                                                            <div class="price_lot">{{ app.feature_price|number_format(2, '.', ' ')|replace({'.00': ''}) }} {{ item.value.currency}}</div>
+                                                        {% else %}
+                                                            <div class="price_lot">{{ app.price|number_format(2, '.', ' ')|replace({'.00': ''}) }} {{ item.value.currency}}</div>
+                                                        {% endif %}
+
+                                                        <!--<strong>{{ 'tender.bid.lot_documents'|_}}</strong>-->
+                                                        <div class="item-doc">
+                                                            {% set dkey = 0 %}
+                                                            {% for document in app.bidDocuments %}
+                                                                {% if document.lot_id == app.lot_id and document._document is not empty %}
+                                                                    {% set dkey = dkey + 1 %}
+                                                                    <a href="{{ document._document.path }}"> {{ document.filename }}</a>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+
+                                                        {% if dkey > 2 %}
+                                                        <div class="button-more">
+
+                                                                <div class="more-open">{{ 'document.filename.show_text'|_ }}</div>
+                                                                <div class="more-hide">{{ 'document.filename.hide_text'|_ }}</div>
+
+                                                        </div>
+                                                        {% endif%}
+
+                                                    </div>
+
+                                            {% endfor %}
+
+                                            {% if item.status in ['active.tendering'] %}
+                                                <a href="{{ siteLocale }}tender/{{ tender_id }}/application/update" class="button-tender top50">{{ 'profile.edit_bid'|_}}</a><br>
+                                                <a href="{{ siteLocale }}tender/{{ tender_id }}/application/declide" data-request="onDeclineMulti" class="button-tender button-edit">{{ 'profile.decline_bid'|_}}</a>
+                                            {% endif %}
+                                        {% elseif user %}
+
+                                            {% if lot %}
+                                                {% partial '@_tender_page_blocks/_access_to_bid' bid_url=true %}
+                                            {% else %}
+                                                {% partial '@_tender_page_blocks/_access_to_bid' %}
+                                            {% endif %}
+
+                                        {% endif %}
+                                    {% else %}
+                                        {% if tender_app %}
+                                            <h3>{{ 'profile.your_bids'|_}}</h3>
+                                            <div>
+                                                <div class="tender_price_podacha">{{ tender_app.formattedPrice }} {{ item.value.currency }}</div>
+                                                {% if item.value.valueAddedTaxIncluded %}
+                                                    {{ 'tender.with_VAT'|_ }}
+                                                {% else %}
+                                                    {{ 'tender.without_VAT'|_ }}
+                                                {% endif %}
+                                            </div>
+                                            <br>
+                                            {% if tender_app.__documents|length %}
+                                                {% for document in tender_app.__documents %}
+                                                    <div><a href="{{ document.path }}">{{ document.getFilename }}</a></div>
+                                                    <p class="c-tender__text-small">{{ document.created_at }}</p>
+                                                {% endfor %}
+                                                <br>
+                                            {% endif %}
+                                            {% if item.status == 'active.auction' and participationUrl %}
+                                                <a href="{{ participationUrl }}" class="button-tender " target="_blank">{{ 'tender.auction_participate'|_ }}</a><br>
+                                            {% endif %}
+
+                                            {% if item.status == 'active.tendering' %}
+                                                <a href="{{ siteLocale }}tender/{{ tender_id }}/application/update" class="button-tender mb-20" style="background-color: silver;">{{ 'profile.edit_bid'|_}}</a><br>
+                                                <a href="{{ siteLocale }}tender/{{ tender_id }}/application/declide" data-request="onDeclineSingle">{{ 'profile.decline_bid'|_}}</a>
+                                            {% endif %}
+                                        {% elseif user %}
+                                            {% partial '@_tender_page_blocks/_access_to_bid' %}
+                                        {% endif %}
+                                    {% endif %}
+
+                                    {% if tender_app|length > 0 and item.status=='active.qualification' %}
+                                        <div><a href="{{ siteLocale }}tender/{{ tender_id }}/application/files" class="button-tender" style="background-color: silver;">{{ 'tender.add_files_auction'|_ }}</a></div>
+                                    {% endif %}
+                                </div>
+
+                            {% else %}
+                                    <p>
+                                        {% if ((item.procurementMethodType == 'aboveThresholdTS' and item.status in ['active.enquiries', 'active.tendering']) or (item.procurementMethodType != 'aboveThresholdTS' and item.status == 'active.enquiries')) %}
+                                            <a href="{{ siteLocale }}tender/{{ tender_id }}/edit" class="button-tender mb-20">{{ 'user.tender.edit'|_ }}</a><br>
+                                        {% endif %}
+                                        {% if item.status not in ['unsuccessful', 'cancelled', 'complete'] %}
+                                            <a href="{{ siteLocale }}tender/{{ tender_id }}/cancel" class="button-tender">{{ 'user.tender.cancel'|_ }}</a>
+                                        {% endif %}
+                                    </p>
+                            {% endif %}
+                    </div>
+                        {% if messages|length %}
+                            {% for massage in messages %}
+                            <br><br>
+                            <div class="c-tender__right-block">
+                                <h1>{{ massage['title'] }}</h1>
+                                <p>{{ massage['text']|raw }}</p>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                </div>
+
+        </div>
+        {% if item.status in ['active.enquiries', 'active.tendering'] %}
+            {% partial 'areas.htm' %}
+        {% endif %}
+    </div>
+</div>
+
+{% put scripts %}
+    <script>
+
+        var opts = {
+            lines: 13 // The number of lines to draw
+            , length: 28 // The length of each line
+            , width: 14 // The line thickness
+            , radius: 42 // The radius of the inner circle
+            , scale: 0.25 // Scales overall size of the spinner
+            , corners: 1 // Corner roundness (0..1)
+            , color: '#000' // #rgb or #rrggbb or array of colors
+            , opacity: 0.25 // Opacity of the lines
+            , rotate: 0 // The rotation offset
+            , direction: 1 // 1: clockwise, -1: counterclockwise
+            , speed: 1 // Rounds per second
+            , trail: 60 // Afterglow percentage
+            , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+            , zIndex: 2e9 // The z-index (defaults to 2000000000)
+            , className: 'spinner' // The CSS class to assign to the spinner
+            , top: '50%' // Top position relative to parent
+            , left: '50%' // Left position relative to parent
+            , shadow: false // Whether to render a shadow
+            , hwaccel: false // Whether to use hardware acceleration
+            , position: 'absolute' // Element positioning
+        }
+
+    jQuery(function($) {
+        $('[data-request="onDeclineSingle"], [data-request="onDeclineMulti"]').on('click', function () {
+            if(!confirm('{{ 'tender.bid.decline'|_ }}')) {
+                return false;
+            }
+        });
+    });
+    </script>
+{% endput %}
+
+{% if item.awards|length %}
+    {% put scripts %}
+    <script>
+
+        function awardSuccessfullyAdded(data)
+        {
+            $("#award-container-rezult").load(window.location.pathname + " #award-container");
+        }
+
+        jQuery(function($) {
+
+            var target = document.getElementById('for-spinner2');
+            var spinner = new Spinner(opts).spin(target);
+
+            $('.spinner').hide();
+
+            $('.c-tender').on('click', '.award-cancel, .award-cancel-active, .award-cancel', function() {
+                $('.show-award-success').hide();
+                return false;
+            });
+
+            $('.c-tender').on( "click", ".show-award-form", function() {
+
+                var type = $(this).attr('data-type');
+
+                $('.c-tender #award_type').val(type);
+
+                $('.c-tender .award-success-title').hide();
+                $('.c-tender .award-cancel-title').hide();
+                $('.c-tender .award-cancel-active-title').hide();
+
+                if(type == 1)
+                {
+                    $('.c-tender .award-success-title').show();
+                    $('#a-reason-title').attr('placeholder', '{{ 'tender.award_reason_title'|_ }}');
+                    $('#a-reason-text').attr('placeholder', '{{ 'tender.award_reason_text'|_ }}');
+                    $('#award-submit').text('{{ 'tender.award_submit'|_ }}');
+                    $('#award-cancel').text('{{ 'tender.award_cancel'|_ }}');
+                } else if(type == 2) {
+                    $('.c-tender .award-cancel-title').show();
+                    $('#a-reason-title').attr('placeholder', '{{ 'tender.award_cancel_reason_title'|_ }}');
+                    $('#a-reason-text').attr('placeholder', '{{ 'tender.award_cancel_reason_text'|_ }}');
+                    $('#award-submit').text('{{ 'tender.award_submit_cancel'|_ }}');
+                    $('#award-cancel').text('{{ 'tender.award_cancel_cancel'|_ }}');
+                } else if(type == 3) {
+                    $('.c-tender .award-cancel-active-title').show();
+                    $('#a-reason-title').attr('placeholder', '{{ 'tender.award_active_cancel_reason_title'|_ }}')
+                    $('#a-reason-text').attr('placeholder', '{{ 'tender.award_active_cancel_reason_text'|_ }}')
+                    $('#award-submit').text('{{ 'tender.award_submit_cancel_active'|_ }}');
+                    $('#award-cancel').text('{{ 'tender.award_cancel_cancel_active'|_ }}');
+                }
+
+                /*
+                if(type == 1)
+                {
+                    $('.c-tender .award-reason-block').hide();
+                    $('.c-tender .award-reason-block textarea').removeAttr('required');
+                    $('.c-tender .award-reason-block input').removeAttr('required');
+                }
+                else
+                {
+                    $('.c-tender .award-reason-block').show();
+                    $('.c-tender .award-reason-block textarea').attr('required', 'required');
+                    $('.c-tender .award-reason-block input').attr('required', 'required');
+                }
+                */
+
+                $('.c-tender .show-award-success').show();
+
+                return false;
+            });
+        });
+
+    </script>
+    {% endput %}
+
+{% elseif(item.status in ['active.enquiries', 'active.tendering']) %}
+
+    {% put scripts %}
+    <script>
+
+        $("#form-q #add-q-to-tender").prop('checked', true);
+
+        $( "#form-q").on( "click", "#add-q-to-lot", function() {
+            $("#form-q #q-lot").parent().show();
+        });
+
+        $( "#form-q").on( "click", "#add-q-to-tender", function() {
+            $("#form-q #q-lot").parent().hide();
+        });
+
+        $( ".c-tender").on( "click", ".answer-submit button", function() {
+            var target = document.getElementById('answer-submit-' + $(this).attr('data-qid'));
+            var spinner = new Spinner(opts).spin(target);
+
+            $('.spinner').hide();
+
+            if($(this).hasClass('disabled'))
+            {
+                return false;
+            }
+
+            $(this).addClass('disabled');
+
+        });
+
+        $( ".c-tender").on( "click", "#question-submit button", function() {
+            var target = document.getElementById('question-submit');
+            var spinner = new Spinner(opts).spin(target);
+
+            $('.spinner').hide();
+
+            if($(this).hasClass('disabled'))
+            {
+                return false;
+            }
+
+            $(this).addClass('disabled');
+        });
+
+        function answerSuccessfullyAdded(data)
+        {
+            //if($("#lot-container-rezult") == undefined) {
+             //   $("#questions-container-rezult").load(window.location.pathname + " #questions-container");
+            var _q = $("[data-qid='"+data.qid+"']");
+
+            if(data.answer_success == '1') {
+                _q.hide();
+            }
+            _q.next('.answer_submit').html(data.answer_submit);
+            _q.next('.answer_submit').show();
+
+            /*} else {
+                $("#lot-container #questions-container-rezult").load(window.location.pathname + " #questions-container");
+            }*/
+        }
+
+        function questionSuccessfullyAdded(data)
+        {
+            $('#question_submit').hide();
+            $('#q-title').css('border', '');
+            $('#q-question').css('border', '');
+
+            if(data.result == '0')
+            {
+                for (var i = 0; i < data.error_field.length; i++) {
+                    $('#q-' + data.error_field[i]).css('border', '1px solid red')
+                }
+            }
+            else
+            {
+                $('#form-q').hide();
+                $('#question_submit').html(data.question_submit);
+                $('#question_submit').show();
+                $("#questions-container-rezult").load(window.location.pathname + " #questions-container");
+
+            }
+        }
+    </script>
+    {% endput %}
+{% endif %}

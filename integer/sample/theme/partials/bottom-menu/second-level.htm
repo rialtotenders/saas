@@ -1,0 +1,5 @@
+{% for item in menu %}
+    <li>
+        <a href="{{ item.href }}" class="{% if item.active %} c-footmenu__item--active {% endif %}" {{item.is_target_blank ? ' target="_blank"'}}>{{ item.title }}</a>
+    </li>
+{% endfor %}

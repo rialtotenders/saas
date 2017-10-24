@@ -1,0 +1,50 @@
+<div class="c-main background-absolute" {% if data.image %} style="background-image: url({{ data.image.thumb(1440, 540) }});"{% endif %}></div>
+<div class="w c-main">
+    <div class="c-main__table">
+        <div class="c-main__cell">
+
+            <div class="c inline-layout">
+                {% if data.header or data.text %}
+                <div class="header-text">
+
+                        {% if data.header %}
+                        <h2 class="c-main__header">
+                            {{ data.header }}
+                        </h2>
+                        {% endif %}
+                        {% if data.text %}
+                        <div class="description-register-search">
+                            {{ data.text }}
+                        </div>
+                        {% endif %}
+
+                </div>
+                {% endif %}
+
+                <div class="forms-register-search forms-register-search-register {% if user%}user-login{% endif %}">
+                    <div class="c inline-layout">
+                        {% if not user %}
+                            <div class="form-registration-home">
+                                <h3>{{ 'form.registration_and_search.register_title'|_}}</h3>
+                                <p>Вы новый пользователь? Рекомендуем зарегистрироваться</p>
+                                <form data-request="onHandleForm" data-request-data="'step': '0'" data-registration class="inline-layout" data-request-complete="$(this).find('.error-holder:not(:empty)').show();">
+                                    <div class="form-holder-input">
+                                        <input type="text" name="username" placeholder="{{ 'profile.username'|_}}" />
+                                        <div class="error-holder none" data-validation="username"></div>
+                                    </div>
+                                    <div class="form-holder-input input-holder-email">
+                                        <input type="text" name="email" id="email" placeholder="{{ 'profile.email'|_}}"/>
+                                        <span class="error-holder none" data-validation="email"></span>
+                                    </div>
+                                    <div class="form-holder">
+                                        <button type="submit" data-attach-loading onClick="$('.error-holder').hide().html('');">зарегистрироваться</button>
+                                    </div>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="control-tabs primary-tabs layout has-tabs" data-control="tab">
+    <ul class="nav nav-tabs" style="padding: 0px 0px 0px 20px;">
+        <li class="active"><a href="#primaryTabOne" id="primaryTabOne">Государственные тендеры</a></li>
+        <li><a href="#primaryTabTwo" id="primaryTabTwo">Коммерческие тендеры</a></li>
+    </ul>
+    <br>
+    <?= $this->listRender() ?>
+</div>
+
+<script type="text/javascript">
+    jQuery(function($) {
+        var referer = '<?=@$_SERVER["HTTP_REFERER"]?>';
+        $('.list-cell-name-is_gov').hide();
+        $('#primaryTabOne').on('click', function () {
+            $('#create-tariff').attr('href',$('#create-tariff').data('href')+'?is_gov=1');
+            $('#Lists tbody').find('input[type=checkbox]').prop('checked', false);
+            $('#Lists tbody').find('.list-cell-name-is_gov').each(function() {
+                if ($(this).text().indexOf('Нет') >= 0) {
+                    $(this).closest('tr').hide();
+                } else {
+                    $(this).closest('tr').show();
+                }
+            });
+        });
+        $('#primaryTabTwo').on('click', function () {
+            $('#create-tariff').attr('href',$('#create-tariff').data('href')+'?is_gov=0');
+            $('#Lists tbody').find('input[type=checkbox]').prop('checked', false);
+            $('#Lists tbody').find('.list-cell-name-is_gov').each(function() {
+                if ($(this).text().indexOf('Нет') < 0) {
+                    $(this).closest('tr').hide();
+                } else {
+                    $(this).closest('tr').show();
+                }
+            });
+        });
+        if(referer.indexOf('is_gov=0') >= 0) {
+            $('#primaryTabTwo').trigger('click');
+        } else {
+            $('#primaryTabOne').trigger('click');
+        }
+
+    });
+
+    function start() {
+        if($('#primaryTabOne').parent().hasClass('active')) {
+            $('#primaryTabOne').trigger('click');
+        } else {
+            $('#primaryTabTwo').trigger('click');
+        }
+    }
+</script>

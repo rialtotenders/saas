@@ -1,0 +1,36 @@
+
+<div class="w c-tender">
+    <div class="c">
+        <div class="c-tender__wrap">
+
+                <div class="row inline-layout">
+                    <div class="block-text-tender">
+                        {% partial('@pages/contract') %}
+                    </div>
+
+                    <div class="block-button-tender">
+
+                        <div class="c-tender__right-block">
+
+                            <p class="c-tender__text-small tender-status">{{ 'contract.status'|_}}</p>
+                            <p class="status_name">
+                                {% if contracts_status[contract.status] %}
+                                    {{ contracts_status[contract.status] }}
+                                {% else %}
+                                    {{ contract.status }}
+                                {% endif %}
+                            </p>
+                           
+                            {% if user_contract and user_contract.status == 'active' %}
+                                <p>
+                                    <a href="#complete" class="button-tender">{{ 'user.contract.complete'|_ }}</a><br>
+                                    <a href="{{ siteLocale }}contract/{{ contract.contractID }}/edit" class="button-tender">{{ 'user.contract.edit'|_ }}</a>
+                                </p>
+                            {% endif %}
+                          </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>

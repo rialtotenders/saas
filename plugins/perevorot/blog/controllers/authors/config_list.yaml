@@ -1,0 +1,11 @@
+list: $/perevorot/blog/models/author/columns.yaml
+modelClass: Perevorot\Blog\Models\Author
+title: Authors
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'perevorot/blog/authors/update/:id'

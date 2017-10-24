@@ -1,0 +1,4 @@
+title: ApiLogs
+modelClass: Perevorot\Rialtotender\Models\ApiLog
+toolbar:
+    buttons: reorder_toolbar

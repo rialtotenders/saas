@@ -1,0 +1,163 @@
+tabs:
+    fields:
+        section1:
+            label: Ценовое предложение
+            tab: Однолотовый
+            type: section
+
+        header1:
+            label: Заголовок
+            tab: Однолотовый
+            type: mltext
+            span: full
+
+        step1:
+            label: Подсказка
+            tab: Однолотовый
+            type: mlricheditor
+            span: full
+            size: giant
+        
+        section8:
+            label: Предложение добавлено
+            tab: Однолотовый
+            type: section
+
+        header8:
+            label: Заголовок
+            tab: Однолотовый
+            type: mltext
+            span: full
+
+        step8:
+            label: Подсказка
+            tab: Однолотовый
+            type: mlricheditor
+            span: full
+            size: giant
+            
+        section9:
+            label: Предложение обновлено
+            tab: Однолотовый
+            type: section
+
+        header9:
+            label: Заголовок
+            tab: Однолотовый
+            type: mltext
+            span: full
+
+        step9:
+            label: Подсказка
+            tab: Однолотовый
+            type: mlricheditor
+            span: full
+            size: giant
+            
+        section2:
+            label: Ценовое предложение на лоты
+            tab: Многолотовый
+            type: section
+
+        header2:
+            label: Заголовок
+            tab: Многолотовый
+            type: mltext
+            span: full
+
+        step2:
+            label: Подсказка
+            tab: Многолотовый
+            type: mlricheditor
+            span: full
+            size: giant
+
+        section3:
+            label: Документы на всю процедуру
+            tab: Многолотовый
+            type: section
+
+        header3:
+            label: Заголовок
+            tab: Многолотовый
+            type: mltext
+            span: full
+
+        step3:
+            label: Подсказка
+            tab: Многолотовый
+            type: mlricheditor
+            span: full
+            size: giant
+
+        section4:
+            label: Документы на каждый лот
+            tab: Многолотовый
+            type: section
+
+        header4:
+            label: Заголовок
+            tab: Многолотовый
+            type: mltext
+            span: full
+
+        step4:
+            label: Подсказка
+            tab: Многолотовый
+            type: mlricheditor
+            span: full
+            size: giant
+
+        section5:
+            label: Проверка предложения
+            tab: Многолотовый
+            type: section
+
+        header5:
+            label: Заголовок
+            tab: Многолотовый
+            type: mltext
+            span: full
+
+        step5:
+            label: Подсказка
+            tab: Многолотовый
+            type: mlricheditor
+            span: full
+            size: giant
+
+        section6:
+            label: Подпись предложения
+            tab: Многолотовый
+            type: section
+
+        header6:
+            label: Заголовок
+            tab: Многолотовый
+            type: mltext
+            span: full
+
+        step6:
+            label: Подсказка
+            tab: Многолотовый
+            type: mlricheditor
+            span: full
+            size: giant
+
+        section7:
+            label: Предложение добавлено
+            tab: Многолотовый
+            type: section
+
+        header7:
+            label: Заголовок
+            tab: Многолотовый
+            type: mltext
+            span: full
+
+        step7:
+            label: Подсказка
+            tab: Многолотовый
+            type: mlricheditor
+            span: full
+            size: giant

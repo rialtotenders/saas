@@ -1,0 +1,23 @@
+<script id="banner_register" type="text/x-jquery-tmpl">
+    <div class="sb-table-list-item banner_register" style="background: url('/integer/yptender.md/theme/assets/img/design/bg_realto.png') no-repeat center; background-size: cover">
+        <div class="banner_register__wrap">
+            <form class="inline-layout banner_register__form" data-request="onHandleForm" data-request-data="'step': '0'" data-registration data-request-complete="$(this).find('.error-holder:not(:empty)').show();">
+                <div class="form-control">
+                    <input type="text" placeholder="{{ 'form.registration.company_number'|_}}" name="username">
+                    <div class="error-holder none" data-validation="username"></div>
+                </div>
+                <div class="form-control">
+                    <input type="text" placeholder="{{ 'form.registration.company_email'|_}}" name="email">
+                    <div class="error-holder none" data-validation="email"></div>
+                </div>
+                <div class="form-control form-button">
+                    <button type="submit" data-attach-loading onClick="$('.error-holder').hide().html('');">{{ 'form.registration.submit'|_}}</button>
+                </div>
+            </form>
+            <div class="text-center banner_register__login_text inline-layout">
+                <h4>{{ 'form.registration.already'|_}}</h4>
+                <a href="{{ siteLocale }}login">{{ 'form.registration.login'|_}}</a>
+            </div>
+        </div>
+    </div>
+</script>

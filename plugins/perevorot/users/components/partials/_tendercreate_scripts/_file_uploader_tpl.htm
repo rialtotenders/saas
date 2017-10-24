@@ -1,0 +1,79 @@
+<div id="forAjaxUploader">
+
+<div
+        class="responsiv-uploader-fileupload style-file-multi is-multi is-populated none"
+        data-control="fileupload"
+        data-template="#uploaderTemplate_uploaderName_"
+        data-unique-id="_uploaderName_"
+        data-file-types="{{ file_types }}"
+>
+
+    <!-- Field placeholder -->
+    <input type="hidden" name="_uploader[documents]" value="" />
+
+    <!-- Upload Button -->
+    <button type="button" class="ui button btn btn-default oc-icon-upload upload-button" id="file-button">
+        {{ 'upload.click_or_drag_to_upload'|_ }}
+    </button>
+
+    <!-- Existing files -->
+    <div class="upload-files-container ">
+    </div>
+</div>
+
+<!-- Template for new files -->
+<script type="text/template" id="uploaderTemplate_uploaderName_">
+
+    <div class="upload-object inline-layout dz-preview dz-file-preview file-upload-save">
+
+        <div class="link_file meta">
+                <div class="icon_link_file"></div>
+                <div class="link_wrap">
+                    <div>
+                        <div
+                                class="responsiv-uploader-fileupload style-file-single"
+                                data-control="fileupload"
+                                data-template="#uploaderTemplate_uploaderName_"
+                                data-unique-id="_uploaderName_"
+                                data-file-types=""
+                        >
+
+                            <!-- Field placeholder -->
+                            <input type="hidden" name="_uploader[documents]" value="" />
+
+                        </div>
+                        <div class="progress-bar"><span class="upload-progress" data-dz-uploadprogress></span></div>
+                        <a
+                                href="javascript:;"
+                                class="upload-remove-button"
+                                data-request="_uploaderName_::onRemoveAttachment"
+                                data-request-confirm="{{ 'upload.are_you_sure'|_ }}"
+                        >{{ 'upload.remove_file'|_ }}</a>
+                    </div>
+                </div>
+        </div>
+
+        <div class="filename">
+            <div class="icon-container none">
+                <img data-dz-thumbnail src="{{ 'plugins/responsiv/uploader/assets/images/upload.png'|app }}" width="25" height="30"/>
+            </div>
+            <span data-dz-name></span>
+        </div>
+
+        <p class="size" data-dz-size></p>
+        <p class="error"><span data-dz-errormessage></span></p>
+
+        {% if tender_document_types|length %}
+        <div class="form-holder choose-tender-document-type no-done">
+            <label class="none" for="">{{ 'tender.choose_doc_type'|_ }}</label>
+            <select id="" name="doc_type">
+                {% for code, name in tender_document_types %}
+                <option value="{{ code }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+    </div>
+
+</script>
+</div>

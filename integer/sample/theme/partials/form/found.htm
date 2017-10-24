@@ -1,0 +1,128 @@
+
+{% if noresults and query_array %}
+    <h2>{{ 'form.search.total_found'|_}}: 0</h2>
+    <div>{{ 'form.search.no_results'|_}}</div>
+{% elseif error %}
+    <h2>{{ 'form.search.total_found'|_}}: 0</h2>
+    <div>{{ 'form.search.error'|_}}</div>
+{% else %}
+    {% if start ==10 %}
+        <h2>{{ 'form.search.total_found'|_}}: {{ total|number_format(0, '', ' ') }}</h2>
+        <div class="sb-table-list-header">
+            <div class="sb-table-list-header__table">
+                <div class="sb-table-list-header__cell">
+                    {{ 'form.search.tender_title'|_ }}
+                </div>
+                <div class="sb-table-list-header__cell">
+                    {{ 'form.search.customer_and_price'|_ }}
+                </div>
+                {% if search_type == 'tender' %}
+                <div class="sb-table-list-header__cell">
+                    {{ 'form.search.tender_status'|_ }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% for item in items %}
+        <div class="sb-table-list-item">
+            {#
+            <div>
+                <p class="sb-table-list-item__status">Прийом предложений (Осталось 2 дня)</p>
+                <p></p>
+            </div>
+            #}
+            {% if (item.mode) and (item.mode=='test') %}
+                <div class="form_search_test_tender">{{ 'form.search.test_tender'|_ }}</div>
+            {% endif %}
+            <div class="sb-table-list-item__table">
+                <div class="sb-table-list-item__cell">
+                    {% if search_type == 'tender' %}
+                    <p>
+                        {% if not user.is_test or (user.is_test and item.mode == 'test') %}
+                        <a href="{{ siteLocale }}tender/{{ item.tenderID }}/">{{ item.title }}</a>
+                        {% else %}
+                        {{ item.title }}
+                        {% endif %}
+                    </p>
+                    <p>{{ item.tenderID }}</p>
+                    {% elseif search_type == 'plan' %}
+                    {% if not user.is_test or (user.is_test and item.mode == 'test') %}
+                    <a href="{{ siteLocale }}plan/{{ item.planID }}/">{{ item.budget.description }}</a>
+                    {% else %}
+                    {{ item.budget.description }}
+                    {% endif %}
+                    <p>{{ item.planID }}</p>
+                    {% endif %}
+                </div>
+                <div class="sb-table-list-item__cell">
+                    <div class="{% if is_gov %}
+                        {% if item.procuringEntity.kind == 'general' %}
+                        tender-state
+                        {% endif %}
+                        tender-icon
+                        {% endif %}
+                    ">
+                        {% if item.procuringEntity.name is not empty %}
+                        <p><a href="{{ siteLocale }}tender/search/{{ is_gov ? 'gov/' : '' }}?edrpou={{ item.procuringEntity.identifier.id}}" class="sb-table-list-item__link sb-table-list-item__link--fw-normal">{{ item.procuringEntity.name }}</a></p>
+                        {% endif %}
+                        <p>
+                            {% if search_type == 'tender' %}
+                                {% if item.value.amount >= 999999999 %}
+                                    {{ 'tender.is_empty_price'|_ }}
+                                {% else %}
+                                    {{ item.value.amount|number_format(0, '', ' ') }} {{ item.value.currency }}
+                                {% endif %}
+                            {% elseif search_type == 'plan' %}
+                            {{ item.budget.amount|number_format(0, '', ' ') }} {{ item.budget.currency }}
+                            {% endif %}
+                        </p>
+                    </div>
+
+                </div>
+                {% if search_type == 'tender' %}
+                <div class="sb-table-list-item__cell">
+                    <p>
+                        {% if dataStatus[item.status] %}
+                            {{ dataStatus[item.status] }}
+                        {% else %}
+                            {{ item.status }}
+                        {% endif %}
+                    </p>
+                    <p>
+                        {% if item.status == 'active.enquiries' %}
+                            {{ 'search.tender.until'|_ ~ ' ' ~ item.enquiryPeriod.endDate|date('d.m.Y H:i') }}
+                        {% elseif item.status == 'active.tendering' %}
+                            {{ 'search.tender.until'|_ ~ ' ' ~ item.tenderPeriod.endDate|date('d.m.Y H:i') }}
+                        {% elseif item.status == 'active.auction' %}
+                            {% if item.lots %}
+                                {{ 'search.tender.start_auction'|_ ~ ' ' ~ item.lots[0].auctionPeriod.startDate|date('d.m.Y') }}
+                            {% else %}
+                                {{ 'search.tender.start_auction'|_ ~ ' ' ~ item.auctionPeriod.startDate|date('d.m.Y H:i') }}
+                            {% endif %}
+                        {% endif %}
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    {% if start <  total %}
+        <div class="c-s__more-button-wrap show-more" data-start="{{ start }}" data-gov="{{ is_gov }}">
+            <div class="sb-bigbutton sb-bigbutton--bg-color">
+                {{ 'form.search.show_more'|_ }}<br>
+                {% set start = start+1 %}
+
+                {{ start|number_format(0, '', ' ') }} —
+                {% if (start+page_limit) > total %}
+                    {{ total|number_format(0, '', ' ') }}
+                {% else %}
+                    {% set next = (start+page_limit) %}
+                    {{ next|number_format(0, '', ' ') }}
+                {% endif %}
+                {{ 'form.show_more_from'|_ }} {{ total|number_format(0, '', ' ') }}
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

@@ -1,0 +1,38 @@
+<div class="w c-facts{% if data.numerals_up %} go-prev{% endif %}">
+    <div class="c">
+        <div class="c-facts__wrap">
+            <div class="c-facts__center">
+                <div class="c-facts__bottom-wrap">
+                    <div class="c-facts__table">
+                        <div class="c-facts__cell">
+                            <div class="row">
+                                {% for item in numerals_numerals %}
+                                    <div class="col-{{ w }}">
+                                        {% if item.repeater_url %}
+                                            <a href="{{ item.repeater_url }}"{% if item.repeater_blank %} target="_blank"{% endif %} class="c-facts__statistics">
+                                        {% else %}
+                                            <div class="c-facts__statistics">
+                                        {% endif %}
+                                            <h2><nobr>
+                                                {% if '%' in item.repeater_number %}
+                                                    {{ item.repeater_number }}
+                                                {% else %}
+                                                    {{ item.repeater_number|number_format(2, '.', ' ')|replace({'.00': ''}) }}
+                                                {% endif %}
+                                            </nobr></h2>
+                                            <h3 class="color_black">{{ item.repeater_description|nl2br }}</h3>
+                                        {% if item.repeater_url %}
+                                            </a>
+                                        {% else %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="c-main background-absolute background-eclips" ></div>
+
+<div class="w c-main" id="registration-form">
+    <div class="c ">
+        <div class=" registered-step">
+            <div class="list-step inline-layout">
+                <div class="item active"><span>{{ 'profile.register.step1'|_}}</span></div>
+                <div class="item "><span>{{ 'profile.register.step2'|_}}</span></div>
+                <div class="item "><span>{{ 'profile.register.step3'|_}}</span></div>
+                {% if steps == 4 %}
+                <div class="item "><span>{{ 'profile.register.step4'|_}}</span></div>
+                {% endif %}
+            </div>
+            <h3>{{ header }}</h3>
+            <div class="inline-layout ">
+
+                <div class="form-registration">
+                    <form data-request="onHandleForm" data-registration data-request-data="'step': '1'" data-request-complete="$(this).find('.error-holder:not(:empty)').show();">
+                        <div class="form-holder">
+
+                            <input type="text" name="company_name" value="{{ user.company_name }}" placeholder="{{ 'profile.company_name'|_}}"/>
+                            <div class="error-holder none" data-validation="company_name"></div>
+                        </div>
+
+                        <div class="form-holder">
+
+                            <input type="text" name="company_address" value="{{ user.company_address }}" placeholder="{{ 'profile.company_address'|_}}"/>
+                            <div class="error-holder none" data-validation="company_address"></div>
+                        </div>
+
+                        <div class="form-holder">
+
+                            <input type="text" name="company_index" value="{{ user.company_index }}" placeholder="{{ 'profile.company_index'|_}}"/>
+                            <div class="error-holder none" data-validation="company_index"></div>
+                        </div>
+
+                        <div class="form-holder">
+
+                            <input type="text" name="company_city" value="{{ user.company_city }}" placeholder="{{ 'profile.company_city'|_}}"/>
+                            <div class="error-holder none" data-validation="company_city"></div>
+                        </div>
+
+                        <div class="form-holder">
+
+                            <input type="text" name="company_region" value="{{ user.company_region }}" placeholder="{{ 'profile.company_region'|_}}"/>
+                            <div class="error-holder none" data-validation="company_region"></div>
+                        </div>
+
+                        <div class="form-holder">
+
+                            <input type="text" name="company_country" value="{{ user.company_country }}" placeholder="{{ 'profile.company_country'|_}}"/>
+                            <div class="error-holder none" data-validation="company_country"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <select name="payer" data-payer-select>
+                                <option value="" checked>{{ 'profile.please_choose_is_VAT'|_}}</option>
+                                <option value="1" {% if user.payer == 1 %} selected {% endif %}>{{ 'profile.VAT_payer'|_}}</option>
+                                <option value="2" {% if user.payer == 2 %} selected {% endif %}>{{ 'profile.not_VAT_payer'|_}}</option>
+                            </select>
+                            <div class="error-holder none" data-validation="payer"></div>
+                        </div>
+
+                        <div class="form-holder" {% if user.payer == 2 %} class="hide" {% endif %} id="payer-code">
+                            <input type="text" name="payer_code" value="{{ user.payer_code }}" placeholder="{{ 'profile.VAT_code'|_}}"/>
+                            <div class="error-holder none" data-validation="payer_code"></div>
+                        </div>
+                        <div class="form-holder">
+                            <textarea name="activity">{{user.activity}}</textarea>
+                        </div>
+
+                        <div class="block-button">
+                            <button type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'profile.register.next_button'|_}}</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                    <div class="block-phone-desc">
+                        <span>{{ 'profile.register.phone_title'|_}}:</span>
+                        <a href="tel:{{ 'common.support_phone'|_ }}">{{ 'common.support_phone'|_ }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    if (window.jQuery !== undefined) {
+        $('[data-payer-select]').each(function () {
+            new window.Select($(this));
+        });
+
+        new window.RegistrationValidation();
+    }
+</script>

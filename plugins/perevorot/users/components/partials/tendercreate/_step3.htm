@@ -1,0 +1,61 @@
+<div class="w c-main" id="registration-form">
+    <div class="c ">
+        <div class="registered-step tender-create">
+
+            {% partial('@_blocks/_steps') step=3 next=4 %}
+
+            <div class="inline-layout">
+                <div class="form-registration">
+
+                    <form id="tender-form" data-update="{{ _update }}" data-request-loading=".spinner" data-request="onHandleForm" data-tender data-step="3" data-request-data="'step': '3'" data-request-complete="validation(this)">
+                        <input type="hidden" name="save" id="tender-save" value="0">
+                        <input type="hidden" name="next_step" id="tender-next-step" value="">
+
+                        {% if tender.procurementMethodType != 'aboveThresholdTS' %}
+                        <input type="hidden" name="enquiryPeriod[startDate]" type="text" class="form-control">
+
+                        <div class="form-holder">
+                            <label for="tender_create_enquiryPeriod_endDate">{{ 'tender.create.enquiryPeriod_endDate'|_}}</label>
+                            <div class="input-group date">
+                                <input autocomplete="off" id="tender_create_enquiryPeriod_endDate" name="enquiryPeriod[endDate]" value="{{ tender.enquiryPeriod.endDate }}" type="text" class="form-control">
+                                <div class="error-holder none" data-validation="enquiryPeriod.endDate"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="tender_create_tenderPeriod_startDate">{{ 'tender.create.tenderPeriod_startDate'|_}}</label>
+                            <div class="input-group date">
+                                <input autocomplete="off" id="tender_create_tenderPeriod_startDate" name="tenderPeriod[startDate]" value="{{ tender.tenderPeriod.startDate }}" type="text" class="form-control">
+                                <div class="error-holder none" data-validation="tenderPeriod.startDate"></div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="form-holder">
+                            <label for="tender_create_tenderPeriod_endDate">{{ 'tender.create.tenderPeriod_endDate'|_}}</label>
+                            <div class="input-group date">
+                                <input autocomplete="off" id="tender_create_tenderPeriod_endDate" name="tenderPeriod[endDate]" value="{{ tender.tenderPeriod.endDate }}" type="text" class="form-control">
+                                <div class="error-holder none" data-validation="tenderPeriod.endDate"></div>
+                            </div>
+                        </div>
+
+                        <div class="block-button" id="for-spinner">
+                            <button data-request-loading=".spinner" data-request="onReturnBack" data-request-data="'step': '2'" class="prev_step">{{ 'tender.create.prev_button'|_}}</button>
+                            <button data-save="0" type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'tender.create.next_button'|_}}</button>
+                            <button data-save="1" type="submit" class="next_step save_step" onClick="$('.error-holder').hide().html('');">{{ 'tender.create.save'|_}}</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% partial '@_tendercreate_scripts/_scripts' disabled_weekends=true weekend_dates=weekend_dates %}

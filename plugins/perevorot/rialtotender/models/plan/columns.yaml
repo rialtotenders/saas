@@ -1,0 +1,17 @@
+columns:
+    title:
+        label: title
+        type: text
+    plan_id:
+        label: 'plan id'
+        type: text
+    created_at:
+        label: date
+        type: datetime
+        sortable: true
+    is_test:
+        label: 'is_test'
+        type: text
+    is_gov:
+        label: 'is_gov'
+        type: text

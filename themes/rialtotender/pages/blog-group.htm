@@ -1,0 +1,27 @@
+title = "blog-group"
+url = "/blog/group/:gslug"
+layout = "default"
+is_hidden = 0
+
+[blog]
+
+[groups]
+
+[last]
+==
+<div class="w c-s wrapper blog-page">
+    <div class="c">
+        <div class="c-s__wrap">
+            <div class="c-s__center inline-layout">
+                <div class="blog-content">
+                    {% component 'blog' %}
+                </div>
+
+                <div class="sidebar-right">
+                    {% component 'groups' %}
+                    {% component 'last' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

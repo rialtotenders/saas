@@ -1,0 +1,27 @@
+columns:
+    title:
+        label: Название
+        type: text
+        searchable: true
+    edrpou:
+        label: Идентификатор (ЕДРПОУ)
+        type: text
+        searchable: true
+    url:
+        label: Гиперссылка
+        type: text
+        searchable: true
+    image:
+        label: Изображение
+        type: partial
+        sortable: false
+        invisible: true
+    is_enabled:
+        label: 'На сайте'
+        type: switch
+    is_index:
+        label: 'Выводить на главную'
+        type: switch
+    sort_order:
+        label: Позиция
+        type: text

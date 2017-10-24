@@ -1,0 +1,13 @@
+title = "Добавление файлов на bid"
+url = "/tender/:tenderID/application/files"
+layout = "default"
+is_hidden = 0
+
+[ApplicationFiles]
+tender_id = {{ :tenderID }}
+==
+<div id="tender-application-content">
+    <div class="c">
+        {% component 'ApplicationFiles' %}
+    </div>
+</div>

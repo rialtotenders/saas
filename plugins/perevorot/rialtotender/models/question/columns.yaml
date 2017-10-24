@@ -1,0 +1,9 @@
+columns:
+    title:
+        label: Тема вопроса
+        type: text
+        searchable: true
+    created_at:
+        label: Дата
+        type: text
+        sortable: true

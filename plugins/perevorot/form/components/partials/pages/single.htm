@@ -1,0 +1,89 @@
+<h1>{{ item.title|stripslashes }}</h1>
+{% if item.mode == 'test' %}<strong>{{ 'tender.page.test_mode'|_ }}</strong>{% endif %}
+
+<div class="sb-icon-and-text inline-layout">
+    <div class="sb-icon-and-text__item" >
+        <span >
+            {% if item.procuringEntity.identifier.legalName %}
+                {{ item.procuringEntity.identifier.legalName|stripslashes }}
+            {% else %}
+                {{ item.procuringEntity.name|stripslashes }}
+            {% endif %}
+        </span>
+    </div>
+    <div class="sb-icon-and-text__item" >
+        <span >{{ item.tenderID }}</span>
+    </div>
+</div>
+
+<p class="mb-60">{{ item.description|stripslashes }}</p>
+
+{% partial('@blocks/procuring_entity') %}
+
+{% partial('@blocks/procuring_entity_contact') %}
+
+{% partial('@blocks/dates') %}
+
+{% partial('@blocks/ids') %}
+
+{% partial('@blocks/documents') %}
+
+{% partial('@blocks/cancellations') %}
+
+{% partial '@blocks/criteria' features=item.__features show_criteria_price=true %}
+
+<div data-js="tabs" id="tabs" class="inline-layout col-2">
+    <div class="general-tab active" tab >{{ 'tender.general_information'|_ }}</div>
+    <div class="question-tab" tab >{{ 'tender.questions_and_answers'|_ }}</div>
+</div>
+
+<div tab-content>
+
+    {% partial('@blocks/procedure') %}
+
+    {% partial '@blocks/items' items=item.items %}
+
+    {% partial('@blocks/bids') %}
+
+    {% partial '@blocks/qualifications' qualifications=item.__qualifications %}
+
+    {% partial '@blocks/awards' awards=item.awards %}
+
+    {% partial '@blocks/contracts' %}
+
+    {% partial('@blocks/contract_changes') %}
+
+    {# partial('@blocks/signed_contracts') #}
+
+</div>
+
+<div class="none" tab-content>
+    {% partial '@blocks/questions' questions=tender_questions show_qform=true %}
+</div>
+
+{% put scripts %}
+<script>
+    jQuery(function($) {
+
+        var hash = window.location.hash.replace("#","");
+        var url = '{{ siteLocale }}tender/{{ item.tenderID }}';
+
+        if(hash == 'questions')
+        {
+            $('[tab]').removeClass('active');
+            $('[tab-content]').addClass('none');
+            $('[tab]:last-child').addClass('active');
+            $('[tab-content]:last-child').removeClass('none');
+        }
+
+        $( ".question-tab" ).click(function() {
+            History.pushState({state: 1}, null, url + '#questions');
+        });
+
+        $( ".general-tab" ).click(function() {
+            History.pushState({state: 1}, null, url + '1');
+            History.pushState({state: 1}, null, url);
+        });
+    });
+</script>
+{% endput %}

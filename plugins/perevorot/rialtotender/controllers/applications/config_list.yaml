@@ -1,0 +1,12 @@
+list: $/perevorot/rialtotender/models/application/columns.yaml
+modelClass: Perevorot\Rialtotender\Models\Application
+title: Applications
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 30
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'perevorot/rialtotender/applications/preview/:id'

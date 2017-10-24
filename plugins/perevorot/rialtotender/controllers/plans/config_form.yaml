@@ -1,0 +1,10 @@
+name: Plans
+form: $/perevorot/rialtotender/models/plan/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\Plan
+defaultRedirect: perevorot/rialtotender/plans
+create:
+    redirect: 'perevorot/rialtotender/plans/update/:id'
+    redirectClose: perevorot/rialtotender/plans
+update:
+    redirect: perevorot/rialtotender/plans
+    redirectClose: perevorot/rialtotender/plans

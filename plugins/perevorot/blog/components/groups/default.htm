@@ -1,0 +1,10 @@
+{% if groups %}
+    <div class="category_blog">
+        <h4>Категории</h4>
+        <div class="list_category_blog">
+            {% for group in groups %}
+                <a href="{{ ('blog/group/'~group.slug)|url }}" class="{{ group.slug==slug?'active':'' }}">{{ group.title }}</a>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

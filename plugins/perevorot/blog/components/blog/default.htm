@@ -1,0 +1,51 @@
+{% if articles %}
+    <div class="list_article inline-layout">
+        {% for article in articles %}
+            <div class="item">
+                <div class="block-img">
+                    <a href="{{ ('blog/'~article.slug)|url }}">
+                        <div class="image-holder">
+                            <img src="{{ article.photo.thumb(679, 380, 'crop') }}" alt="name" class="fake-img">
+                            <div style="background: url('{{ article.photo.thumb(679, 380, 'crop') }}') no-repeat center ;background-size: cover;" class="img"></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="block_text">
+                    <a href="{{ ('blog/'~article.slug)|url }}" class="name">{{ article.title }}</a>
+                    <div class="info-article-item inline-layout">
+                        <time>{{ article.published_at|date('d.m.Y') }}</time>
+                        <div class="author">{{ article.author.full_name }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {{ articles.render|raw }}
+    {#
+    <div class="pagination">
+        <ul class="inline-layout">
+            <li class="prev">
+                <a href="#"></a>
+            </li>
+            <li >
+                <a href="#">1</a>
+            </li>
+            <li class="active">
+                <a href="#">2</a>
+            </li>
+            <li >
+                <a href="#">3</a>
+            </li>
+            <li >
+                <a href="#">4</a>
+            </li>
+            <li >
+                <a href="#">5</a>
+            </li>
+            <li class="next">
+                <a href="#"></a>
+            </li>
+        </ul>
+    </div>
+    #}
+{% endif %}

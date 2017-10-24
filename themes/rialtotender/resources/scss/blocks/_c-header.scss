@@ -1,0 +1,19 @@
+.c-header {
+  background: $bg-main;
+  z-index: 10000;
+  @include a-header-1() {
+	  overflow: hidden;
+  }
+  .c {
+    height: $height-header;
+    color: $text-color-light;
+  }
+  &__logo {
+    @extend .absolute-left;
+    color: $text-color-light;
+    position: absolute;
+    top: 50%;
+    display: block;
+    margin-top: -10px; 
+  }
+}

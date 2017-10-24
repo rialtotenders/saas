@@ -1,0 +1,6 @@
+<script id="new-feature-tpl" type="text/x-jquery-tmpl">
+    {% partial '@_blocks/_feature' feature_type='tenderer' key='${item_index}' fkey='${feature_index}' input_name_prefix='features.' %}
+</script>
+<script id="new-feature-enum-tpl" type="text/x-jquery-tmpl">
+    {% partial '@_blocks/_feature_enum' key='${item_index}' fkey='${feature_index}' ekey='${enum_index}' input_name_prefix='features.' reinit_input_name_prefix=true %}
+</script>

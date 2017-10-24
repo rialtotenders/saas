@@ -1,0 +1,68 @@
+<h2>{{ 'tender.procuring_Entity_title'|_ }}</h2>
+<div class="mobile-table">
+
+    <div class="sb-table sb-table--td-py-small">
+        <div class="sb-table__table">
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'tender.procuring_Entity_name'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>
+                    {% if item.procuringEntity.identifier.legalName %}
+                        {{ item.procuringEntity.identifier.legalName|stripslashes }}
+                    {% else %}
+                        {{ item.procuringEntity.name|stripslashes }}
+                    {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'tender.procuring_Entity_id'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.procuringEntity.identifier.id }}</p>
+                </div>
+            </div>
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'tender.procuring_Entity_website'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    {% if item.procuringEntity.contactPoint.url %}
+                        <p>{{ item.procuringEntity.contactPoint.url }}</p>
+                    {% else %}
+                        <p>{{ 'tender.no_website'|_ }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'tender.procuring_Entity_address'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>
+                        {{ item.procuringEntity.address.countryName ~ ', ' ~ item.procuringEntity.address.postalCode ~ ', ' ~
+                         item.procuringEntity.address.region ~ ', ' ~ item.procuringEntity.address.locality ~ ', ' ~
+                        item.procuringEntity.address.streetAddress }}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

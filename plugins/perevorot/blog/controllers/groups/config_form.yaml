@@ -1,0 +1,10 @@
+name: Groups
+form: $/perevorot/blog/models/group/fields.yaml
+modelClass: Perevorot\Blog\Models\Group
+defaultRedirect: perevorot/blog/groups
+create:
+    redirect: 'perevorot/blog/groups/update/:id'
+    redirectClose: perevorot/blog/groups
+update:
+    redirect: perevorot/blog/groups
+    redirectClose: perevorot/blog/groups

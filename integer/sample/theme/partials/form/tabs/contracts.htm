@@ -1,0 +1,42 @@
+<div class="w c-s none contracts-content" tab-content>
+    <div class="c">
+        <br>
+        <div class="overflow-table">
+            <table>
+                <tr>
+                    <th>{{ 'user.contract.title'|_ }}</th>
+                    <th>{{ 'user.contract.number'|_ }}</th>
+                    <th>{{ 'user.contract.date_signed'|_ }}</th>
+                    <th>{{ 'user.contract.amount'|_ }}</th>
+                    <th>{{ 'user.contract.status'|_ }}</th>
+                </tr>
+                {% for contract in contracts %}
+                    <tr>
+                        <td>
+                            <a href="{{ siteLocale }}contract/{{ contract.cid }}">{{ contract.title }}</a>
+                            <br>
+                            {{ contract.cid }}
+                        </td>
+                        <td>
+                            {{ contract.contract_number }}
+                        </td>
+                        <td>
+                            {{ contract.date_signed|date('d.m.Y') }}
+                        </td>
+                        <td>
+                            {{ contract.amount }}
+                        </td>
+                        <td>
+                            {% if contracts_status[contract.status] %}
+                            {{ contracts_status[contract.status] }}
+                            {% else %}
+                            {{ contract.status }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+</div>

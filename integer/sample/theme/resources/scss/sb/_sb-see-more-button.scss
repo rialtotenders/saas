@@ -1,0 +1,15 @@
+.sb-see-more-button {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  &__wrap {
+    display: inline-block;
+  }
+  button {
+    display: block;
+    background: red;
+  }
+  span {
+
+  }
+}

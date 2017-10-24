@@ -1,0 +1,11 @@
+list: $/perevorot/blog/models/blog/columns.yaml
+modelClass: Perevorot\Blog\Models\Blog
+title: Blogs
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'perevorot/blog/blogs/update/:id'

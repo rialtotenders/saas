@@ -1,0 +1,89 @@
+$sb-table-list-header-border-color: #e5e5e5;
+.sb-table-list-item {
+  border-bottom: 1px solid $sb-table-list-header-border-color;
+  padding: 15px 0;
+  &__link {
+    &--fw-normal {
+      font-weight: 300 !important;
+    }
+  }
+  & > div:nth-child(1) {
+    float: left;
+    width: 100%;
+  }
+  &:after {
+    @extend .clearfix;
+  }
+  p {
+    font-size: 13px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.46;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: left;
+    width: 100%;
+  }
+  &__status {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.85;
+    color: #16a085;
+  }
+  &__table {
+    display: table;
+    width: 100%;
+    float: left;
+    @include a1() {
+	    display: block;
+    }
+  }
+  &__cell {
+    display: table-cell;
+    padding-right: 30px;
+    vertical-align: top;
+    @include a1() {
+        display: block;
+        float: left;
+    }
+    &:nth-child(1) {
+      width: 50%;
+      /*
+      @include a1() {
+	    width: 100%;
+	    display: block;
+	    float: left;
+      }*/
+    }
+    &:nth-child(2) {
+        width: 25%;
+        @include a1() {
+            width: 50%;
+        }
+    }
+    &:nth-child(3) {
+        width: 25%;
+        clear: both;
+        @include a1() {
+            width: 100%;
+            p {
+                font-weight: bold;
+            }
+        }
+    }
+  }
+  a {
+    color: #6090d3;
+    @extend .transition-down;
+    border-bottom: 1px solid transparent !important;
+    font-weight: 500;
+    &:hover {
+      border-bottom: 1px solid #6090d3 !important;
+      @extend .transition;
+    }
+  }
+
+}

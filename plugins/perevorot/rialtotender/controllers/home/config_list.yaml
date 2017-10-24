@@ -1,0 +1,4 @@
+title: Home
+modelClass: Perevorot\Rialtotender\Models\Integer
+list: $/perevorot/rialtotender/models/integer/columns.yaml
+noRecordsMessage: 'backend::lang.list.no_records'

@@ -1,0 +1,35 @@
+<div class="w c-main" id="registration-form">
+    <div class="c ">
+        <div class="registered-step tender-create">
+
+            {% partial('@_blocks/_steps') step=7 %}
+
+            <div class="inline-layout">
+                <div class="form-registration create_tender">
+
+                    <form data-request-loading=".spinner" data-request="onHandleForm" data-tender data-request-data="'step': '7'" data-request-complete="$(this).find('.error-holder:not(:empty)').show();">
+                        {% partial '@_blocks/_preview_tender' tender=tender %}
+
+                        <div class="block-button" id="for-spinner">
+                            <button data-request-loading=".spinner" data-request="onReturnBack" data-request-data="'step': '6'" class="prev_step">{{ 'tender.create.prev_button'|_}}</button>
+                            <button type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'tender.create.finish'|_}}</button>
+                        </div>
+
+                        <div id="tender-access-error"></div>
+
+                    </form>
+                </div>
+
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% partial '@_tendercreate_scripts/_scripts' %}

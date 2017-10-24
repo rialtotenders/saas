@@ -1,0 +1,15 @@
+<div class="sb-nav__sub-wrap">
+    {% for item in menu %}
+        {% if item.title %}
+            <div class="sb-nav__sub-item">
+                <div class="sb-nav__second {% if item.active %} sb-nav__second--active {% endif %}">
+
+                    <a href="{{ item.href }}" {{item.is_target_blank ? ' target="_blank"'}} class="sb-nav__link">
+                        {{ item.title }}
+                    </a>
+
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

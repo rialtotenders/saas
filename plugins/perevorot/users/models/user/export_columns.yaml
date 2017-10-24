@@ -1,0 +1,19 @@
+columns:
+    username:
+        label: ЕДРПОУ
+    email:
+        label: Email
+    surname:
+        label: ФИО
+    company_name:
+        label: Компания
+    money:
+        label: Баланс
+    user_groups:
+        label: Группа
+    is_gov:
+        label: Гос. компания
+    created_at:
+        label: Дата регистрации
+    last_login:
+        label: Последняя активность

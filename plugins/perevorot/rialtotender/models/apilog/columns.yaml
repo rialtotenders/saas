@@ -1,0 +1,47 @@
+columns:
+    created_at:
+        label: Дата
+        type: datetime
+        sortable: true
+    action:
+        label: Действие
+        type: text
+        sortable: true
+        searchable: true
+    user:
+        label: Пользователь
+        type: text
+        searchable: true
+        sortable: true
+        select: username
+        relation: user
+    format_tender_id:
+        label: Номер тендера
+        type: text
+        searchable: true
+    ip:
+        label: IP
+        type: text
+        sortable: true
+        invisible: true
+    error:
+        label: Ошибка
+        type: text
+        searchable: true
+        sortable: true
+        invisible: true
+        width: 30%
+    response:
+        label: Ответ
+        type: text
+        searchable: true
+        sortable: false
+        invisible: true
+        width: 30%
+    data:
+        label: Отсылаемые данные
+        type: text
+        searchable: true
+        sortable: false
+        invisible: true
+        width: 30%

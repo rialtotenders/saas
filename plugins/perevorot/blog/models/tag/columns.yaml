@@ -1,0 +1,6 @@
+columns:
+    name:
+        label: 'perevorot.blog::lang.plugin.blog.tag.name'
+        type: text
+        searchable: true
+        sortable: true

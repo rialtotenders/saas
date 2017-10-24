@@ -1,0 +1,30 @@
+{% put scripts %}
+<script>
+
+    var opts = {
+                lines: 13, length: 28, width: 14, radius: 42, scale: 0.25, corners: 1, color: '#000', opacity: 0.25, rotate: 0, direction: 1, speed: 1, trail: 60, fps: 20, zIndex: 2e9, className: 'spinner', top: '47%', left: '20%', shadow: false, hwaccel: false, position: 'absolute'
+            },
+            target = document.getElementById('application-submit'),
+            spinner = new Spinner(opts).spin(target);
+
+    $('.spinner').hide();
+
+    $('#application-form').on('click', ".back_tender", function () {
+        if($('.upload-files-container').find('.upload-object.dz-success').length > 0) {
+            if(!confirm('{{ 'tender.bid.return_from_step2'|_ }}')) {
+                return false;
+            }
+        }
+    });
+
+    $('#application-form').on('click', ".doc-confidentiality", function () {
+        if($(this).find('input').is( ":checked" )) {
+            $(this).find('textarea').show();
+            $(this).find('textarea').attr('required', 'required');
+        } else {
+            $(this).find('textarea').hide();
+            $(this).find('textarea').removeAttr('required');
+        }
+    });
+</script>
+{% endput %}

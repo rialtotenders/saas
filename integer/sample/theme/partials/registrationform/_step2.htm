@@ -1,0 +1,156 @@
+<div class="c-main background-absolute background-eclips" ></div>
+
+<div class="w c-main" id="registration-form">
+    <div class="c ">
+        <div class="registered-step">
+            <div class="list-step inline-layout">
+                <div class="item"><span>{{ 'profile.register.step1'|_}}</span></div>
+                <div class="item active"><span>{{ 'profile.register.step2'|_}}</span></div>
+                <div class="item"><span>{{ 'profile.register.step3'|_}}</span></div>
+                {% if steps == 4 %}
+                <div class="item "><span>{{ 'profile.register.step4'|_}}</span></div>
+                {% endif %}
+            </div>
+
+            <h3>{{ header }}</h3>
+
+            <div class="inline-layout">
+                <div class="form-registration">
+                    <form data-request="onHandleForm" data-registration data-request-data="'step': '2'" data-request-complete="$(this).find('.error-holder:not(:empty)').show();">
+                        <div class="form-holder">
+
+                            <input type="text" name="director_position" value="{{ user.director_position }}" placeholder="{{ 'profile.director_position'|_}}"/>
+                            <div class="error-holder none" data-validation="director_position"></div>
+                        </div>
+
+                        <div class="form-holder">
+
+                            <input type="text" name="director_fio" value="{{ user.director_fio }}" placeholder="{{ 'profile.director_fio'|_}}"/>
+                            <div class="error-holder none" data-validation="director_fio"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <input type="text" name="director_document" value="{{ user.director_document }}" placeholder="{{ 'profile.director_document'|_}}"/>
+                            <div class="error-holder none" data-validation="director_document"></div>
+                        </div>
+
+                        <div class="form-holder ">
+                            <div class="checkbox">
+                                <input type="checkbox" name="roles[]" id="supplier" {% if ('supplier' in user.groupCodes()) %} checked {% endif %} value="supplier" />
+                                <label for="supplier">{{ 'profile.supplier'|_}}</label>
+
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="roles[]" id="customer" {% if ('customer' in user.groupCodes()) %} checked {% endif %} value="customer"/>
+                                <label for="customer">{{ 'profile.customer'|_}}</label>
+
+                            </div>
+                            <div class="error-holder none" data-validation="roles"></div>
+                        </div>
+
+                        <div class="form-holder ">
+                            <div class="checkbox">
+                                <input type="checkbox" name="is_gov" id="is_gov" {% if (user.is_gov) %} checked {% endif %} value="1" />
+                                <label for="is_gov">{{ 'profile.is_gov'|_}}</label>
+                            </div>
+                        </div>
+                        {% if showUserIsGo %}
+                        <div class="form-holder ">
+                            <div class="checkbox">
+                                <input type="checkbox" name="is_go" id="is_go" {% if (user.is_go) %} checked {% endif %} value="1" />
+                                <label for="is_go">{{ 'profile.is_go'|_}}</label>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="block-button">
+                            <button data-request="onReturnBack" data-request-data="'step': '1'" class="prev_step">{{ 'profile.register.prev_button'|_}}</button>
+                            <button type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'profile.register.next_button'|_}}</button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                    <div class="block-phone-desc">
+                        <span>{{ 'profile.register.phone_title'|_}}:</span>
+                        <a href="tel:{{ 'common.support_phone'|_ }}">{{ 'common.support_phone'|_ }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    if (window.jQuery !== undefined) {
+        new window.RegistrationValidation();
+        jQuery(function($) {
+
+            $('#is_gov').on('click', function() {
+
+                $('#is_gov').val(1);
+
+                if($(this).is(':checked')) {
+                    $('#is_go').val(0);
+                    $('#is_go').prop("checked", false);
+                    $('#is_go').attr('disabled', 'disabled');
+                } else {
+                    $('#is_go').val(1);
+                    $('#is_go').removeAttr('disabled');
+                }
+            });
+
+            $('#is_go').on('click', function() {
+
+                $('#is_go').val(1);
+
+                if($(this).is(':checked')) {
+                    $('#is_gov').val(0);
+                    $('#is_gov').prop("checked", false);
+                    $('#is_gov').attr('disabled', 'disabled');
+                } else {
+                    $('#is_gov').val(1);
+                    $('#is_gov').removeAttr('disabled');
+                }
+            });
+        });
+    }
+</script>
+{% put scripts %}
+<script>
+    jQuery(function($) {
+
+        $('#is_gov').on('click', function() {
+
+            $('#is_gov').val(1);
+
+            if($(this).is(':checked')) {
+                $('#is_go').val(0);
+                $('#is_go').prop("checked", false);
+                $('#is_go').attr('disabled', 'disabled');
+            } else {
+                $('#is_go').val(1);
+                $('#is_go').removeAttr('disabled');
+            }
+        });
+
+        $('#is_go').on('click', function() {
+
+            $('#is_go').val(1);
+
+            if($(this).is(':checked')) {
+                $('#is_gov').val(0);
+                $('#is_gov').prop("checked", false);
+                $('#is_gov').attr('disabled', 'disabled');
+            } else {
+                $('#is_gov').val(1);
+                $('#is_gov').removeAttr('disabled');
+            }
+        });
+    });
+</script>
+{% endput %}

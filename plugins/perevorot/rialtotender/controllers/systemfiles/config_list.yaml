@@ -1,0 +1,11 @@
+list: $/perevorot/rialtotender/models/systemfile/columns.yaml
+modelClass: Perevorot\Rialtotender\Models\SystemFile
+title: SystemFiles
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: false
+showCheckboxes: false
+recordsPerPage: 25
+toolbar:
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: null

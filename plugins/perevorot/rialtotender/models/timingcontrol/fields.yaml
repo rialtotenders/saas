@@ -1,0 +1,21 @@
+fields:
+    price_from:
+        label: 'Цена от'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    price_to:
+        label: 'Цена до'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    enquire_days:
+        label: 'Минимальная длительность периода уточнений'
+        oc.commentPosition: ''
+        span: auto
+        type: number
+    tender_days:
+        label: 'Минимальная длительность периода периода подачи предложений'
+        oc.commentPosition: ''
+        span: auto
+        type: number

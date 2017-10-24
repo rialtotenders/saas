@@ -1,0 +1,304 @@
+{% if qualifications is not empty and item.procurementMethodType == "aboveThresholdTS" %}
+{% set table_columns = (user_tender and not user_tender.is_close_qualification and item.status != 'complete' ? 4 : 3) %}
+<h2>{{ 'tender.qualifications'|_ }}</h2>
+<div class="overflow-table">
+<div class="sb-table ">
+    <div class="table__table">
+
+        <div class="table__table-row table__table-row{{ table_columns }}">
+            <div class="table__table-cell table__table-cell--th">
+                {{ 'tender.qualification.participant'|_ }}
+            </div>
+            <div class="table__table-cell table__table-cell--th">
+                {{ 'tender.qualification.documents'|_ }}
+            </div>
+            <div class="table__table-cell table__table-cell--th">
+                {{ 'tender.qualification.status'|_ }}
+            </div>
+            {% if table_columns == 4 %}
+            <div class="table__table-cell table__table-cell--th">
+                {{ 'tender.qualification.buttons'|_ }}
+            </div>
+            {% endif %}
+        </div>
+
+        {% for qualification in qualifications %}
+            {% if qualification.status != 'cancelled' %}
+                <div class="table__table-row table__table-row{{ table_columns }}">
+                    <div class="table__table-cell">
+                        <div class="criteria-tender-block">
+                            <div class="item-criteria inline-layout ">
+                                <div class="value_criteria">
+                                    <div class="main_value_criteria">{{ qualification.__name|stripslashes }}</div>
+                                    <div class="list_value_criteria">
+                                        <div>
+                                            <div class="item-value">
+                                                <strong>{{ qualification.__tenderers.contactPoint.name }}</strong>
+                                            </div>
+                                            <div class="item-value">
+                                                {{ qualification.__tenderers.contactPoint.telephone }}
+                                            </div>
+                                            <div class="item-value">
+                                                <a href="mailto:{{ qualification.__tenderers.contactPoint.email }}">{{ qualification.__tenderers.contactPoint.email }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table__table-cell">
+                        {% if qualification.__bid_documents_public is not empty or (user_tender and qualification.__bid_documents_confident is not empty) %}
+                        <h4 class="overlay-title js-qualification-bid-documents">
+                            {{ 'tender.qualification.show_docs'|_ }}
+                        </h4>
+                        {% endif %}
+                    </div>
+                    <div class="table__table-cell">
+                        <p>
+                            {% if qualification.documents is not empty %}
+                            <h4 class="overlay-title js-qualification-documents">
+                            {% endif %}
+                            {% if qualifications_status[qualification.status] %}
+                                {{ qualifications_status[qualification.status] }}
+                            {% else %}
+                                {{ qualification.status }}
+                            {% endif %}
+                            {% if qualification.documents is not empty %}
+                            </h4>
+                            {% endif %}
+                        </p>
+                    </div>
+                    {% if not hide_qualifications_buttons and _qualifications[qualification.id].status == qualification.status and user_tender and item.status == 'active.pre-qualification' and qualification.status == 'pending' %}
+                    <div class="table__table-cell">
+                        <p>
+                            <a href="#" class="mr-10" data-type="1" data-qualification-id="{{ qualification.id }}">{{ 'tender.qualification.set_active_status'|_ }}</a>
+                            <a href="#" data-type="2" data-qualification-id="{{ qualification.id }}">{{ 'tender.qualification.set_unsuccessful_status'|_ }}</a>
+                        </p>
+                    </div>
+                    {% elseif not hide_qualifications_buttons and _qualifications[qualification.id].status == qualification.status and user_tender and item.status != 'complete' and qualification.status == 'active' %}
+                    <div class="table__table-cell">
+                        <p>
+                            <a href="#" data-type="3" data-qualification-id="{{ qualification.id }}">{{ 'tender.qualification.set_cancelled_status'|_ }}</a>
+                        </p>
+                    </div>
+                    {% elseif not hide_qualifications_buttons and _qualifications[qualification.id].status == qualification.status and user_tender and item.status != 'complete' and qualification.status == 'unsuccessful' %}
+                    <div class="table__table-cell">
+                        <p>
+                            <a href="#" data-type="4" data-qualification-id="{{ qualification.id }}">{{ 'tender.qualification.set_pending_status'|_ }}</a>
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+
+                {% if qualification.__bid_documents is not empty %}
+                    <div class="tender-document js-qualification-bid-documents">
+                        <div class="close"></div>
+
+                        {% if qualification.__bid_documents_public is not empty %}
+                            <h4>
+                                {{ 'tender.qualification.public_documents'|_ }}
+                            </h4>
+
+                            {% for document in qualification.__bid_documents_public %}
+                            <div class="document-info table__table-row table__table-row3">
+                                <div class="table__table-cell">
+                                    <a href="{{ document.url }}" target="_blank" class="document-name">{{ document.title }}</a>
+                                </div>
+
+                                <div class="document-date table__table-cell">{{ document.datePublished|date('d.m.Y H:i') }}</div>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if qualification.__bid_documents_confident is not empty %}
+                            <h4>
+                                {{ 'tender.qualification.confident_documents'|_ }}
+                            </h4>
+
+                            {% for document in qualification.__bid_documents_confident %}
+                            <div class="document-info table__table-row table__table-row3">
+                                <div class="table__table-cell">
+                                    {% if user_tender %}
+                                        <a href="{{ document.url }}" target="_blank" class="document-name">{{ document.title }}</a>
+                                    {% else %}
+                                        {{ document.title }}
+                                    {% endif %}
+                                </div>
+                                <div class="document-date table__table-cell">{{ document.datePublished|date('d.m.Y H:i') }}</div>
+                                {% if not user_tender %}
+                                <div class="table__table-cell">
+                                    <div class="question_text">
+                                        <div class="text-overflow q-text-overflow">
+                                            <span>{{ document.confidentialityRationale|stripslashes }} }}</span>
+                                        </div>
+                                        {% if document.confidentialityRationale|length > 25 %}
+                                        <div class="button-more">
+                                            <div class="more-open">{{ 'document.confidentialityRationale.show_text'|_ }}</div>
+                                            <div class="more-hide">{{ 'document.confidentialityRationale.hide_text'|_ }}</div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {% if qualification.documents is not empty %}
+                <div class="tender-document js-qualification-documents">
+                    <div class="close"></div>
+                    <h4>
+                        {{ 'tender.qualification_documents'|_ }}
+                    </h4>
+                    {% for document in qualification.documents %}
+                    <div class="document-info table__table-row table__table-row">
+                        <div class="table__table-cell">
+                            <a href="{{document.url}}" target="_blank" class="document-name"{{ document.stroked ? 'style="margin-left:10px;text-decoration: line-through;"':'' }}>{{document.title}}</a>
+                            <p>{{ 'tender.document_date'|_ ~ ' ' ~ document.dateModified|date('d.m.Y H:i')}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if not hide_qualifications_buttons and _qualifications[qualification.id].status == qualification.status and user_tender and item.status != 'complete' %}
+                <div class="show-qualification-success none" data-qualification-form="{{ qualification.id }}">
+                    <h2 class="qualification-success-title none">{{ 'tender.qualification_success_title'|_ }}</h2>
+                    <h2 class="qualification-cancel-title none">{{ 'tender.qualification_cancel_title'|_ }}</h2>
+                    <h2 class="qualification-cancel-active-title none">{{ 'tender.qualification_cancel_active_title'|_ }}</h2>
+                    <h2 class="qualification-cancel-unsuccessful-title none">{{ 'tender.qualification_cancel_unsuccessful_title'|_ }}</h2>
+                    <form method="post" data-request="onUpdateQualification" data-request-loading=".spinner" data-request-complete="$('.qualification-submit').removeClass('disabled');" data-request-success="SuccessfullyAdded(data)">
+                        <input type="hidden" value="{{ qualification.id }}" name="id" class="qualification_id">
+                        <input type="hidden" value="" name="type" class="qualification_type">
+                        <input type="hidden" name="document_type" value="qualification">
+                        <input type="hidden" name="tenderID" value="{{ item.tenderID }}">
+                        {{ session_key_field|raw }}
+
+                        {% if qualification.status in ['pending'] %}
+                        <div class="file-button">
+                            {% component 'fileUploader_qualifications_'~qualification.id %}
+                        </div>
+                        {% endif %}
+
+                        <div class="table__table-cell" id="for-spinner-{{ qualification.id }}">
+                            <button type="submit" class="qualification-submit"></button>
+                            <a href="#" class="qualification-cancel"></a>
+                        </div>
+                    </form>
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if qualification_next_status %}
+        <p id="for-spinner-next"><a href="#" id="qualification-next-status" data-request="onUpdateTender" data-request-loading=".spinner" data-request-complete="$('[data-qualification-id]').hide();$('#for-spinner-next').hide();">{{ 'tender.qualification.next_status'|_ }}</a></p>
+        {% endif %}
+        <p id="qualification_submit_msg" class="lead"></p>
+
+    </div>
+</div>
+</div>
+{% endif %}
+
+{% put scripts %}
+<script>
+
+    function SuccessfullyAdded(data)
+    {
+        if(data.q_success == '1') {
+            $("[data-qualification-id='"+data.id+"']").hide();
+            $("[data-qualification-form='"+data.id+"']").hide();
+        }
+    }
+
+    jQuery(function($) {
+
+        $('.c-tender').on('click', "#qualification-next-status", function() {
+            if(confirm('{{ 'tender.qualification.go_to_text_status'|_ }}')) {
+                var target = document.getElementById('for-spinner-next');
+                var spinner = new Spinner(opts).spin(target);
+                $('.spinner').hide();
+            }
+        });
+
+        $('.c-tender').on('click', ".qualification-submit", function() {
+            var target = document.getElementById($(this).parent().attr('id'));console.log(target);
+            var spinner = new Spinner(opts).spin(target);
+            $('.spinner').hide();
+
+            if($(this).hasClass('disabled'))
+            {
+                return false;
+            }
+
+            $(this).addClass('disabled');
+        });
+
+        $('.c-tender').on('click', '.qualification-cancel', function() {
+            $(this).parent().parent().parent().hide();
+            return false;
+        });
+
+        $('.c-tender').on( "click", "[data-qualification-id]", function() {
+
+            var data = $(this).data();
+            var type = data.type;
+            var form = $('.c-tender').find("[data-qualification-form='"+data.qualificationId+"']");
+
+            form.find('.qualification_type').val(type);
+            form.find('.qualification-success-title').hide();
+            form.find('.qualification-cancel-title').hide();
+            form.find('.qualification-cancel-active-title').hide();
+            form.find('.file-button').hide();
+
+            if(type == 1)
+            {
+                form.find('.file-button').show();
+                form.find('.qualification-success-title').show();
+                //$('#a-reason-title').attr('placeholder', '{{ 'tender.qualification_reason_title'|_ }}');
+                //$('#a-reason-text').attr('placeholder', '{{ 'tender.qualification_reason_text'|_ }}');
+                form.find('.qualification-submit').text('{{ 'tender.qualification_submit'|_ }}');
+                form.find('.qualification-cancel').text('{{ 'tender.qualification_cancel'|_ }}');
+            } else if(type == 2) {
+                form.find('.file-button').show();
+                form.find('.qualification-cancel-title').show();
+                //$('#a-reason-title').attr('placeholder', '{{ 'tender.qualification_cancel_reason_title'|_ }}');
+                //$('#a-reason-text').attr('placeholder', '{{ 'tender.qualification_cancel_reason_text'|_ }}');
+                form.find('.qualification-submit').text('{{ 'tender.qualification_submit_cancel'|_ }}');
+                form.find('.qualification-cancel').text('{{ 'tender.qualification_cancel_cancel'|_ }}');
+            } else if(type == 3) {
+                form.find('.qualification-cancel-active-title').show();
+                //$('#a-reason-title').attr('placeholder', '{{ 'tender.qualification_active_cancel_reason_title'|_ }}')
+                //$('#a-reason-text').attr('placeholder', '{{ 'tender.qualification_active_cancel_reason_text'|_ }}')
+                form.find('.qualification-submit').text('{{ 'tender.qualification_submit_cancel_active'|_ }}');
+                form.find('.qualification-cancel').text('{{ 'tender.qualification_cancel_cancel_active'|_ }}');
+            } else if(type == 4) {
+                form.find('.qualification-cancel-unsuccessful-title').show();
+                //$('#a-reason-title').attr('placeholder', '{{ 'tender.qualification_active_cancel_reason_title'|_ }}')
+                //$('#a-reason-text').attr('placeholder', '{{ 'tender.qualification_active_cancel_reason_text'|_ }}')
+                form.find('.qualification-submit').text('{{ 'tender.qualification_submit_cancel_unsuccessful'|_ }}');
+                form.find('.qualification-cancel').text('{{ 'tender.qualification_cancel_cancel_unsuccessful'|_ }}');
+            }
+
+            form.show();
+
+            return false;
+        });
+        
+        /*
+        $( ".c-tender").on( "click", ".qualification-submit", function() {
+            if(confirm('{{ 'tender.qualification.set_new_status'|_ }}')) {
+                var target = document.getElementById('for-spinner-' + $(this).attr('data-qualification-id'));
+                var spinner = new Spinner(opts).spin(target);
+                $('.spinner').hide();
+            } else {
+                return false;
+            }
+        });
+        */
+    });
+</script>
+{% endput %}

@@ -1,0 +1,14 @@
+list: $/perevorot/rialtotender/models/area/columns.yaml
+modelClass: Perevorot\Rialtotender\Models\Area
+title: Площадки
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+defaultSort:
+    column: sort_order
+    direction: asc
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'perevorot/rialtotender/areas/update/:id'

@@ -1,0 +1,20 @@
+{
+  "name": "rialtotender",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://lankoandrey@bitbucket.org/perevorot/rialtotender.com.git"
+  },
+  "author": "Andrey Lanko",
+  "dependencies": {
+    "es6-promise": "^3.3.0",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.4.0",
+    "laravel-elixir": "^6.0.0-10",
+    "social-likes": "^3.1.1"
+  }
+}

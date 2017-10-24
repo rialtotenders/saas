@@ -1,0 +1,10 @@
+name: Applications
+form: $/perevorot/rialtotender/models/application/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\Application
+defaultRedirect: perevorot/rialtotender/applications
+create:
+    redirect: 'perevorot/rialtotender/applications/update/:id'
+    redirectClose: perevorot/rialtotender/applications
+update:
+    redirect: perevorot/rialtotender/applications
+    redirectClose: perevorot/rialtotender/applications

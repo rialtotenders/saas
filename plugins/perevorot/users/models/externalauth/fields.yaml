@@ -1,0 +1,99 @@
+fields:
+
+    is_nologin:
+        label: Можно работать без обязательной авторизации
+        comment: Возможность работать с сайтом, без обязательной регистрации и авторизации на источнике
+        default: 1
+        type: switch
+
+    clientId:
+        label: Идентификатор площадки
+        type: text
+        span: left
+        trigger:
+            action: show
+            field: is_enabled
+            condition: checked
+
+    clientSecret:
+        label: Секретный ключ площадки
+        type: text
+        span: right
+        trigger:
+            action: show
+            field: is_enabled
+            condition: checked
+
+    urlRegister:
+        label: Ссылка на форму регистрации
+        comment: Например, http://login.partner.com/register
+        type: text
+        span: full
+        trigger:
+            action: show
+            field: is_enabled
+            condition: checked
+
+    urlAuthorize:
+        label: Ссылка на авторизацию
+        comment: Например, http://login.partner.com/authorize
+        type: text
+        span: full
+        trigger:
+            action: show
+            field: is_enabled
+            condition: checked
+
+    urlLogout:
+        label: Ссылка на выход
+        comment: Например, http://login.partner.com/logout
+        type: text
+        span: full
+        trigger:
+            action: show
+            field: is_enabled
+            condition: checked
+
+    urlProfile:
+        label: Ссылка на профайл пользователя
+        comment: Например, http://login.partner.com/profile
+        type: text
+        span: full
+        trigger:
+            action: show
+            field: is_enabled
+            condition: checked
+
+    urlAccessToken:
+        label: Ссылка на получение/обновление токена
+        comment: Например, http://login.partner.com/token
+        type: text
+        span: full
+        trigger:
+            action: show
+            field: is_enabled
+            condition: checked
+
+    urlResourceOwnerDetails:
+        label: Ссылка на получение данных о пользователе
+        comment: Например, http://login.partner.com/me
+        type: text
+        span: full
+        trigger:
+            action: show
+            field: is_enabled
+            condition: checked
+
+    hint:
+        type: hint
+        label: Поля пользователя
+        path: $/perevorot/users/models/externalauth/hint.htm
+        trigger:
+            action: show
+            field: is_enabled
+            condition: checked
+
+    is_enabled:
+        label: Внешнаяя авторизация
+        type: switch
+

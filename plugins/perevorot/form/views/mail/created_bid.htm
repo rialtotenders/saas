@@ -1,0 +1,38 @@
+subject = "when created bid"
+==
+
+Hello!
+
+created bid:
+
+dt - {{ dt }}
+
+{% if docs is not empty %}
+    Docs:
+    {% for doc in docs %}
+        {{ doc.filename }}
+    {% endfor %}
+{% endif %}
+
+Tender:
+{{ link }}
+
+==
+
+<p>Hello!</p>
+<p>created bid:</p>
+<p>dt - {{ dt }}</p>
+<p>
+    {% if docs is not empty %}
+        Docs:
+        <ul>
+            {% for doc in docs %}
+            <li>{{ doc.filename }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</p>
+<p>
+    Tender<br>
+    <a href="{{ link }}">{{ link }}</a>
+</p>

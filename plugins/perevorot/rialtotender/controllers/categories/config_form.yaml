@@ -1,0 +1,10 @@
+name: Categories
+form: $/perevorot/rialtotender/models/category/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\Category
+defaultRedirect: perevorot/rialtotender/categories
+create:
+    redirect: 'perevorot/rialtotender/categories/update/:id'
+    redirectClose: perevorot/rialtotender/categories
+update:
+    redirect: perevorot/rialtotender/categories
+    redirectClose: perevorot/rialtotender/categories

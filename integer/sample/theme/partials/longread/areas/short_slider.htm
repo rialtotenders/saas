@@ -1,0 +1,34 @@
+{% if areas|length %}
+    <div class="w {% if data.areas_up %} go-prev{% endif %}">
+        {% if data.areas_title %}
+            <div class="w c-part-header">
+                <div class="c">
+                    <div class="c-part-header__wrap">
+                        <div class="c-part-header__center">
+                            <h2>{{ data.areas_title }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="w c-part-slider">
+            <div class="c">
+                <div class="c-part-slider__wrap">
+                    <div class="c-part-slider__center">
+                        <div class="c-part-slider__slider js-partners-slider">
+                            {% for item in areas %}
+                                {% if item.url %}
+                                    <a href="{{ item.url }}" class="c-part-slider__slider-item">
+                                        <img src="{{ item.image.path }}">
+                                    </a>
+                                {% else %}
+                                    <img src="{{ item.image.path }}">
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

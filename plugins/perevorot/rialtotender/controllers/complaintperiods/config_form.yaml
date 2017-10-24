@@ -1,0 +1,10 @@
+name: ComplaintPeriods
+form: $/perevorot/rialtotender/models/complaintperiod/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\ComplaintPeriod
+defaultRedirect: perevorot/rialtotender/complaintperiods
+create:
+    redirect: 'perevorot/rialtotender/complaintperiods/update/:id'
+    redirectClose: perevorot/rialtotender/complaintperiods
+update:
+    redirect: perevorot/rialtotender/complaintperiods
+    redirectClose: perevorot/rialtotender/complaintperiods

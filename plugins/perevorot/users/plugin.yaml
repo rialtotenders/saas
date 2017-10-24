@@ -1,0 +1,13 @@
+plugin:
+    name: 'perevorot.users::lang.plugin.name'
+    description: 'perevorot.users::lang.plugin.description'
+    author: Perevorot
+    icon: oc-icon-adjust
+    homepage: ''
+permissions:
+    rialtotender.users.all_permissions:
+        tab: Пользователи
+        label: Изменение
+    rialtotender.users.read_permissions:
+        tab: Пользователи
+        label: Просмотр

@@ -1,0 +1,96 @@
+
+<form class="sb-search-input__center" action="{{ siteLocale }}{{ search_type }}/search{% if is_gov_tender %}/gov/{% endif %}" id="simple-form-filter" method="GET">
+    {% if default_params %}
+        <input class="default-params" type="hidden" name="status" value="active.enquiries">
+        <input class="default-params" type="hidden" name="status" value="active.tendering">
+        <input class="default-params" type="hidden" name="tab_type" value="1">
+    {% else %}
+        <input class="default-params" type="hidden" name="tab_type" value="{{ tab_type }}">
+    {% endif %}
+
+        <div class="w c-s tabs-3">
+            <div class="c">
+                <div class="inline-layout">
+
+                    {% if hide_tender_source %}
+                        {% if settings.is_gov %}
+                        <div class="{% if search_type=='tender' and is_gov and not tab_type %}active{% endif %} tab-item">
+                            <a href="{{ siteLocale ~ 'tender/search/gov?status=unsuccessful&status=cancelled&status=complete&status=active.auction&status=active.qualification&status=active.awarded&status=active.pre-qualification&status=active.enquiries&status=active.tendering'~(selected_group ? '&group='~selected_group : '') }}"><span>{{ 'form.tender-gov-switch'|_ }}</span></a>
+                        </div>
+                        <div class="{% if search_type=='tender' and is_gov and tab_type == 1 %}active{% endif %} tab-item">
+                            <a href="{{ siteLocale ~ 'tender/search/gov?tab_type=1&status=active.enquiries&status=active.tendering'~(selected_group ? '&group='~selected_group : '') }}"><span>{{ 'form.tender-gov-switch-active'|_ }}</span></a>
+                        </div>
+                        <div class="{% if search_type=='tender' and is_gov and tab_type == 2 %}active{% endif %} tab-item">
+                            <a href="{{ siteLocale ~ 'tender/search/gov?tab_type=2&status=active.auction&status=active.qualification&status=active.awarded&status=active.pre-qualification'~(selected_group ? '&group='~selected_group : '') }}"><span>{{ 'form.tender-gov-switch-qualif'|_ }}</span></a>
+                        </div>
+                        <div class="{% if search_type=='tender' and is_gov and tab_type == 3 %}active{% endif %} tab-item">
+                            <a href="{{ siteLocale ~ 'tender/search/gov?tab_type=3&status=complete'~(selected_group ? '&group='~selected_group : '') }}"><span>{{ 'form.tender-gov-switch-closed'|_ }}</span></a>
+                        </div>
+                        <div class="{% if search_type=='tender' and is_gov and tab_type == 4 %}active{% endif %} tab-item">
+                            <a href="{{ siteLocale ~ 'tender/search/gov?tab_type=4&status=unsuccessful&status=cancelled'~(selected_group ? '&group='~selected_group : '') }}"><span>{{ 'form.tender-gov-switch-cancelled'|_ }}</span></a>
+                        </div>
+                        {% endif %}
+                        {% if settings.is_gov_plan %}
+                        <div class="{% if search_type=='plan' and is_gov %}active{% endif %} tab-item">
+                            <a href="{{ siteLocale ~ 'plan/search/gov' }}"><span>{{ 'form.plan-gov-switch'|_ }}</span></a>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if not hide_tender_source %}
+                        {% if settings.is_tender %}
+                        <div class="{% if search_type=='tender' and is_gov is empty and not tab_type %}active{% endif %} tab-item">
+                            <a href="{{ siteLocale ~ 'tender/search?status=unsuccessful&status=cancelled&status=complete&status=active.auction&status=active.qualification&status=active.awarded&status=active.pre-qualification&status=active.enquiries&status=active.tendering'~(selected_group ? '&group='~selected_group : '') }}"><span>{{ 'form.tender-switch'|_ }}</span></a>
+                        </div>
+                        <div class="{% if search_type=='tender' and is_gov is empty and tab_type == 1 %}active{% endif %} tab-item">
+                            <a href="{{ siteLocale ~ 'tender/search?tab_type=1&status=active.enquiries&status=active.tendering'~(selected_group ? '&group='~selected_group : '') }}"><span>{{ 'form.tender-switch-active'|_ }}</span></a>
+                        </div>
+                        <div class="{% if search_type=='tender' and is_gov is empty and tab_type == 2 %}active{% endif %} tab-item">
+                            <a href="{{ siteLocale ~ 'tender/search?tab_type=2&status=active.auction&status=active.qualification&status=active.awarded&status=active.pre-qualification'~(selected_group ? '&group='~selected_group : '') }}"><span>{{ 'form.tender-switch-qualif'|_ }}</span></a>
+                        </div>
+                        <div class="{% if search_type=='tender' and is_gov is empty and tab_type == 3 %}active{% endif %} tab-item">
+                            <a href="{{ siteLocale ~ 'tender/search?tab_type=3&status=complete'~(selected_group ? '&group='~selected_group : '') }}"><span>{{ 'form.tender-switch-closed'|_ }}</span></a>
+                        </div>
+                        <div class="{% if search_type=='tender' and is_gov is empty and tab_type == 4 %}active{% endif %} tab-item">
+                            <a href="{{ siteLocale ~ 'tender/search?tab_type=4&status=unsuccessful&status=cancelled'~(selected_group ? '&group='~selected_group : '') }}"><span>{{ 'form.tender-switch-cancelled'|_ }}</span></a>
+                        </div>
+                        {% endif %}
+                        {% if settings.is_plan %}
+                        <div class="{% if search_type=='plan' and is_gov is empty %}active{% endif %} tab-item">
+                            <a href="{{ siteLocale ~ 'plan/search' }}"><span>{{ 'form.plan-switch'|_ }}</span></a>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+    {% if categories|length %}
+    <div class="inline-layout search-with-category">
+    {% endif %}
+        {% if categories|length %}
+        <div class="select-category">
+            <select name="group">
+                <option value="">{{ 'form.search_filter.all_categories'|_ }}</option>
+                {% for category in categories %}
+                <option value="{{ category.code }}" {% if selected_group == category.code %} selected {% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+        <div class="sb-search-input__bottom clearfix" id="blocks">
+            <div class="sb-search-input__input-wrap">
+                <input value="" id="query" type="text" name="query" class="query_input no_blocks sb-search-input__input-field filter-checkboxes" placeholder="{{ 'form.placeholder'|_ }}" autocomplete="off" data-js="form" data-type="{{ search_type }}" data-lang="{{ locale_href }}">
+            </div>
+            {#<div class="sb-search-input__cat">
+                <span class="sb-search-input__cat-span">{{ 'form.search_filter.category'|_}}</span>
+            </div>#}
+            <div class="sb-search-input__button">
+                <button type="submit" id="search_button_simple" class="search_button">{{ 'form.submit-button'|_ }}</button>
+            </div>
+        </div>
+    {% if categories|length %}
+        </div>
+    {% endif %}
+</form>

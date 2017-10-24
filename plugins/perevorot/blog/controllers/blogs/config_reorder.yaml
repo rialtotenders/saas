@@ -1,0 +1,4 @@
+title: Blogs
+modelClass: Perevorot\Blog\Models\Blog
+toolbar:
+    buttons: reorder_toolbar

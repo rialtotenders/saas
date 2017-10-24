@@ -1,0 +1,136 @@
+<script>
+    function stateDeleteButton()
+    {
+        if($('.new-lot-block .lot-block').length > 1) {
+            $('.new-lot-block .lot-block .remove-item-block').show();
+        }
+        else {
+            $('.new-lot-block .lot-block .remove-item-block').hide();
+        }
+    }
+
+    if (window.jQuery !== undefined) {
+        stateDeleteButton();
+    }
+
+</script>
+
+{% put scripts %}
+<script>
+    jQuery(function($) {
+
+        stateDeleteButton();
+
+        $("#tender-content").on('click', ".add-new-lot-block", function() {
+
+            var lot_block = $(this).parent().parent().children('.new-lot-block').children('.lot-block:last-child');
+
+            if(!lot_block.hasClass('hide-class')) {
+                lot_block.find('.slide-item-block.js-slide-item').trigger('click');
+                $('html, body').animate({scrollTop: $(this).parent().parent().children('.new-lot-block').offset().top}, 500);
+            }
+
+            //var is_empty = lot_block.find('.tender_create_is_empty_price:checked').val() !== undefined ? true : false;
+            var lot_index = parseInt(lot_block.attr('data-lot-index'));
+            var lot_data = {'lot_index': lot_index + 1, 'feature_index': 0, 'item_index': 0, 'title_key': lot_index + 2};
+            var tpl = $('#new-lot-tpl').tmpl(lot_data);
+
+            $(this).parent().parent().children('.new-lot-block').append(tpl);
+            lot_block = $(this).parent().parent().children('.new-lot-block').children('.lot-block:last-child');
+
+            /*
+            if(is_empty) {
+                lot_block.find('.tender_create_is_empty_price').trigger('click').trigger('click');
+            }
+            */
+
+            $('.input-group.date input').each(function () {
+                $(this).datetimepicker(dt_opts);
+            });
+
+            stateDeleteButton();
+            cpvInit(lot_block.find('.list_cpv'));
+
+            var doc_tpl = $('#tender-content').find('#forAjaxUploader').html();
+            doc_tpl = str_replace('_uploaderName_', 'fileUploader_lot_'+(lot_index+1), doc_tpl);
+            lot_block.find('.file-button').append(doc_tpl);
+            lot_block.find('.file-button').children('.responsiv-uploader-fileupload').show();
+            $('[data-control="fileupload"]').fileUploader();
+
+            return false;
+        });
+
+        $("#tender-content").on('click', '.add-new-lot-item', function() {
+
+            var lot_index = parseInt($(this).parent().parent().attr('data-lot-index'));
+            var item_index = parseInt($(this).parent().children('.new-lot-item-block').children('.lot-item-block:last-child').attr('data-lot-item-index'));
+            var lot_data = {'lot_index': lot_index, 'item_index': item_index + 1, 'title_index': lot_index};
+            var tpl = $('#new-lot-item-tpl').tmpl(lot_data);
+
+            $(this).parent().children('.new-lot-item-block').append(tpl);
+
+            $('.input-group.date input').each(function () {
+                $(this).datetimepicker(dt_opts);
+                $(this).bind("mousewheel", function () {
+
+                });
+            });
+
+            cpvInit($(this).parent().children('.new-lot-item-block').children('.lot-item-block:last-child').find('.list_cpv'));
+
+            return false;
+        });
+
+        $("#tender-content").on('click', ".new-lot-item-block .delete_lot_item", function() {
+            if (confirm("{{ 'tender.create.confirm_delete_item'|_ }}")) {
+                $(this).parent().remove();
+            }
+        });
+
+        $("#tender-content").on('click', ".new-lot-block .lot-block .remove-item-block", function() {
+            if (confirm("{{ 'tender.create.confirm_delete_item'|_ }}")) {
+                $(this).parent().parent().parent().remove();
+                stateDeleteButton();
+            }
+        });
+    });
+    function str_replace ( search, replace, subject ) {	// Replace all occurrences of the search string with the replacement string
+        //
+        // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+        // +   improved by: Gabriel Paderni
+
+        if(!(replace instanceof Array)){
+            replace=new Array(replace);
+            if(search instanceof Array){//If search	is an array and replace	is a string, then this replacement string is used for every value of search
+                while(search.length>replace.length){
+                    replace[replace.length]=replace[0];
+                }
+            }
+        }
+
+        if(!(search instanceof Array))search=new Array(search);
+        while(search.length>replace.length){//If replace	has fewer values than search , then an empty string is used for the rest of replacement values
+            replace[replace.length]='';
+        }
+
+        if(subject instanceof Array){//If subject is an array, then the search and replace is performed with every entry of subject , and the return value is an array as well.
+            for(k in subject){
+                subject[k]=str_replace(search,replace,subject[k]);
+            }
+            return subject;
+        }
+
+        for(var k=0; k<search.length; k++){
+            var i = subject.indexOf(search[k]);
+            while(i>-1){
+                subject = subject.replace(search[k], replace[k]);
+                i = subject.indexOf(search[k],i);
+            }
+        }
+
+        return subject;
+
+    }
+
+</script>
+{% endput %}

@@ -1,0 +1,5 @@
+<?php if ($formModel->payer==1): ?>
+    <input type="text" value="код: <?=$formModel->payer_code?>"  class="form-control" autocomplete="off" maxlength="255" readonly="readonly">
+<?php else: ?>
+    <input type="text" value="нет"  class="form-control" autocomplete="off" maxlength="255" readonly="readonly">
+<?php endif ?>

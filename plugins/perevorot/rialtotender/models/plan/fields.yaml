@@ -1,0 +1,17 @@
+fields:
+    plan_id:
+        label: 'plan id'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    plan_system_id:
+        label: 'plan system id'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    json:
+        label: json
+        size: ''
+        oc.commentPosition: ''
+        span: auto
+        type: partial

@@ -1,0 +1,383 @@
+{%if is_ajax %}
+    {% partial 'form/found.htm' %}
+{% else %}
+    <div id="search_result">
+        {% if user %}
+            <div class="c">
+                <div class="user_balance">
+                    {{ 'form.search_tabs.user_balance'|_ ~ ' ' ~ user.money() }}
+                </div>
+            </div>
+            <div class="w c-s main-tabs">
+                <div class="c">
+                    <div class="row">
+                        <div class="col-100">
+                            <div data-js="tabs" id="tabs" class="inline-layout">
+                                <div data-type="search" class="active" tab>{{ 'form.search_tabs.filter_search'|_}}</div>
+                                {% if user.checkGroup('customer') %}
+                                    {% if not user.is_gov and is_tender %}
+                                        <div data-type="tenders" tab>{{ 'form.search_tabs.user_tenders'|_}}</div>
+                                    {% endif %}
+                                    {% if not user.is_gov and is_plan %}
+                                        <div data-type="plans" tab>{{ 'form.search_tabs.user_plans'|_}}</div>
+                                    {% endif %}
+                                    {% if user.is_gov and is_gov_tender %}
+                                        <div data-type="gov-tenders" tab>{{ 'form.search_tabs.user_gov_tenders'|_}}</div>
+                                    {% endif %}
+                                    {% if user.is_gov and is_gov_plan %}
+                                        <div data-type="gov-plans" tab>{{ 'form.search_tabs.user_gov_plans'|_}}</div>
+                                    {% endif %}
+                                {% endif %}
+                                {% if user.checkGroup('supplier') %}
+                                    <div data-type="bids" tab>{{ 'form.search_tabs.my_tenders'|_}}</div>
+                                {% endif %}
+                                {% if show_contracts and (user.checkGroup('customer') or user.checkGroup('supplier')) %}
+                                    <div data-type="contracts" tab>{{ 'form.search_tabs.contracts'|_}}</div>
+                                {% endif %}
+                                {% if user.checkGroup('supplier') %}
+                                    <div data-type="payments" tab>{{ 'form.search_tabs.payments'|_}}</div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+       {% if not user or user.checkGroup('supplier') %}
+       <div class="w c-s tabs-2">
+            <div class="c">
+                <div class="inline-layout tab-wrap">
+                    {% if is_gov_tender and is_gov_plan %}
+                    <div data-type="" class="{% if is_gov %}active{% endif %} tab-item">
+                        <a {% if search_type=='tender' and is_gov %} class="active"{% endif %} href="{{ siteLocale ~ 'tender/search/gov?tab_type=1&status=active.enquiries&status=active.tendering' }}"><span>{{ 'form.tab.tender-gov-switch'|_ }}</span></a>
+                    </div>
+                    {% endif %}
+                    {% if is_tender and is_plan %}
+                    <div data-type="" class="{% if not is_gov %}active{% endif %} tab-item">
+                        <a {% if search_type=='tender' and is_gov is empty %} class="active"{% endif %} href="{{ siteLocale ~ 'tender/search?tab_type=1&status=active.enquiries&status=active.tendering' }}"><span>{{ 'form.tab.tender-switch'|_ }}</span></a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="w c-s search-content" data-js="search_result" tab-content data-filter>
+            <div class="c">
+                {#<div class="row">
+                    <div class="col-100">
+                        <h1>{{ 'form.search.header.tender'|_}}</h1>
+                    </div>
+                </div>#}
+                <br>
+                <div class="row">
+                    <div class="col-100">
+
+                        {% partial 'form/form.htm' show_suggest=true hide_tender_source=is_gov %}
+
+                        {#
+                        <div class="sb-top-search">
+                            <div class="sb-top-search__input-wrap">
+                                <input type="text" placeholder="{{ 'form.placeholder'|_ }}"
+                                       class="sb-top-search__main-input">
+                            </div>
+                            <div class="sb-top-search__left-button"><span>{{ 'form.filter_groups'|_ }}</span></div>
+                            <button></button>
+                        </div>
+                        #}
+                    </div>
+                </div>
+
+                <div class="row inline-layout">
+                    <div class="col-25">
+
+                        <div class="sb-f sb-f--right">
+
+                            <div class="sb-f__group hide" id="selected-values">
+                                <script id="selected-values-template" type="text/x-jquery-tmpl">
+                                    <li data-type='{type}' data-key='{key}'>
+                                        <span class="sb-f__checked-close"></span>
+                                        <span class="sb-f__checked-text">{value}</span>
+                                    </li>
+                                </script>
+                                <div class="sb-f__title-wrap">
+                                    <span class="sb-f__title">{{ 'form.search_filter.selected_filters'|_}}</span>
+                                </div>
+                                <div class="sb-f__content">
+                                    <div class="sb-f__clear-wrap" id="clear-filter">
+                                        <span class="sb-f__clear-button">{{ 'form.search_filter.clear'|_}}</span>
+                                    </div>
+                                    <div class="sb-f__checked-wrap">
+                                        <ul></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sb-f__group" id="categories-filter">
+                                <script id="categories-template" type="text/x-jquery-tmpl">
+                                    <div class="categories-wrapper">
+                                        <li data-key="{key}" class='categories-item categories-item-{key-class}' data-type='{type}'>
+                                            <span>{value}</span>
+                                        </li>
+
+                                        <input type="checkbox"  data-category-search='{key-search}'  value='{key-value}' class='filter-checkboxes categories-checkbox hide' />
+                                    </div>
+                                </script>
+
+                                <script id="empty-template" type="text/x-jquery-tmpl">
+                                    <div class="categories-wrapper">
+                                        <li class='categories-item'>
+                                            <span>{{ 'form.search_filter.please_refine_search'|_}}</span>
+                                        </li>
+                                    </div>
+                                </script>
+
+                                <div class="sb-f__title-wrap sb-f__title-wrap--can-show sb-f__title-wrap--is-active">
+                                    <span class="sb-f__title">{{ 'form.search_filter.categories'|_}}</span>
+                                </div>
+
+                                <div class="sb-f__content ">
+                                    <div class="sb-f__input-search-group ">
+                                        <div class="sb-f__input-search-wrap">
+                                            <input type="text" class="autocomplete">
+                                            <div class="sb-f__input-list-wrap-holder hide">
+                                                <div class="sb-f__input-list-wrap ">
+                                                    <ul></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sb-f__small-text-wrap">
+                                        <p class="sb-f__small-text">{{ 'form.search_filter.please_refine_category_name'|_ }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sb-f__group" id="buyers-filter">
+                                <script id="buyers-template" type="text/x-jquery-tmpl">
+                                    <div class="buyers-wrapper">
+                                        <li data-key="{key}" class='buyers-item buyers-item-{key-class}' data-type='{type}'>
+                                            <span>{value}</span>
+                                        </li>
+
+                                        <input type="checkbox"  data-buyer-search='{key-search}'  value='{key-value}' class='hide filter-checkboxes buyers-checkbox'  />
+                                    </div>
+                                </script>
+
+                                <div class="sb-f__title-wrap sb-f__title-wrap--can-show sb-f__title-wrap--is-active">
+                                    <span class="sb-f__title">{{ 'form.search_filter.procurement_name'|_ }}</span>
+                                </div>
+
+                                <div class="sb-f__content ">
+                                    <div class="sb-f__input-search-group ">
+                                        <div class="sb-f__input-search-wrap">
+                                            <input type="text" class="autocomplete">
+                                            <div class="sb-f__input-list-wrap-holder hide">
+                                                <div class="sb-f__input-list-wrap">
+                                                    <ul></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sb-f__small-text-wrap">
+                                        <p class="sb-f__small-text">{{ 'form.search_filter.please_refine_procurement_name'|_ }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% if search_type == 'plan' %}
+                            <div class="sb-f__group hide" id="dates-filter">
+                                <div class="sb-f__title-wrap sb-f__title-wrap--can-show sb-f__title-wrap--is-active">
+                                    <span class="sb-f__title">{{ 'form.search_filter.plan_dates'|_}}</span>
+                                </div>
+                                <div class="sb-f__content">
+                                    <div class="sb-f__input-search-group">
+                                        <div class="sb-f__input-search-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="sb-f__checkbox-wrap">
+                                        <div class="sb-f__ckeckbox-list dates">
+                                            <div class="sb-f__input-search-wrap input-group date ">
+                                                <input autocomplete="off" name="date_from" id="date_from" value="{{ selected_date_from }}" type="text" class="form-control">
+                                            </div>
+                                            <div class="sb-f__input-search-wrap input-group date">
+                                                <input autocomplete="off" name="date_to" id="date_to" value="{{ selected_date_to }}" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            {% if search_type == 'tender' %}
+                            <div class="sb-f__group" id="statuses-filter">
+                                <script id="statuses-template" type="text/x-jquery-tmpl">
+                                    <div class="sb-f__checkbox-item-wrap statuses-checkbox statuses-{key-class}">
+                                        <label>
+                                            <input type="checkbox" data-status-search='{key-search}' name='statuses[{key}]' value='{key-value}' class='filter-checkboxes'>
+                                            <span></span>
+                                            <p>{value}</p>
+                                        </label>
+                                    </div>
+                                </script>
+                                <div class="sb-f__title-wrap sb-f__title-wrap--can-show sb-f__title-wrap--is-active">
+                                    <span class="sb-f__title">{{ 'form.search_filter.tender_status'|_}}</span>
+                                </div>
+                                <div class="sb-f__content">
+                                    <div class="sb-f__input-search-group">
+                                        <div class="sb-f__input-search-wrap">
+                                            {#<input type="text" class="autocomplete">#}
+                                        </div>
+                                    </div>
+                                    <div class="sb-f__checkbox-wrap">
+                                        <div class="sb-f__ckeckbox-list status"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <div  class="sb-f__group hide" id="regions-filter">
+                                <script id="regions-template" type="text/x-jquery-tmpl">
+                                    <div class="sb-f__checkbox-item-wrap regions-checkbox regions-{key-class}">
+                                        <label><input type="checkbox" name="regions[{key}]" data-region-search='{key-search}' value='{key-value}' class='filter-checkboxes'><span></span><p>{value}</p></label>
+                                    </div>
+                                </script>
+                                <div class="sb-f__title-wrap sb-f__title-wrap--can-show sb-f__title-wrap--is-active">
+                                    <span class="sb-f__title">{{ 'form.search_filter.regions'|_}}</span>
+                                </div>
+                                <div class="sb-f__content">
+                                    <div class="sb-f__input-search-group">
+                                        <div class="sb-f__input-search-wrap">
+                                            <input type="text" class="autocomplete">
+                                        </div>
+                                    </div>
+                                    <div class="sb-f__checkbox-wrap">
+                                        <div class="sb-f__ckeckbox-list">
+                                        </div>
+
+                                        <a href="" class="show-all sb-f__small-text sb-f__small-orange"><span>{{ 'form.search_filter.show_all'|_}}</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-75 pl" id="filter-result">
+                        <div id="result">
+                            {% partial 'form/found.htm' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% if user %}
+            {% if user.checkGroup('customer') %}
+                {% if (not user.is_gov and is_tender) or (user.is_gov and is_gov_tender) %}
+                    {% partial('form/tabs/tenders') %}
+                {% endif %}
+                {% if (not user.is_gov and is_plan) or (user.is_gov and is_gov_plan) %}
+                    {% partial('form/tabs/plans') %}
+                {% endif %}
+            {% endif %}
+            {% if user.checkGroup('supplier') %}
+                {% partial('form/tabs/bids') %}
+            {% endif %}
+            {% if show_contracts and (user.checkGroup('customer') or user.checkGroup('supplier')) %}
+                {% partial('form/tabs/contracts') %}
+            {% endif %}
+            {% if user.checkGroup('supplier') %}
+                {% partial('form/tabs/payments') %}
+            {% endif %}
+        {% endif %}
+    </div>
+{% endif %}
+
+{% if not is_ajax and not user %}
+{% partial('registrationform/_form') %}
+{% endif %}
+
+{% if search_type == 'plan' %}
+{% put scripts %}
+<script>
+    jQuery(function($) {
+
+        var dt_opts = {
+            dayOfWeekStart: 1,
+            format:'d.m.Y',
+            showClose: true,
+            minDate: 0,
+            timepicker: false,
+            scrollMonth : false,
+            scrollInput : false
+        };
+
+        $('.input-group.date input').each(function () {
+            $(this).datetimepicker(dt_opts);
+            $(this).bind("mousewheel", function () {
+
+            });
+        });
+    });
+</script>
+{% endput %}
+{% endif %}
+
+{% put scripts %}
+<script>
+    jQuery(function($) {
+
+        if($('#banner_register').get(0)) {
+            var result = $('#search_result');
+            var register = $('#banner_register').tmpl();
+
+            if (result.find('.sb-table-list-item:first') !== undefined) {
+                result.find('.sb-table-list-item:first').after(register.clone());
+            }
+            if (result.find('.sb-table-list-item:eq(7)') !== undefined) {
+                result.find('.sb-table-list-item:eq(7)').after(register.clone());
+            }
+        }
+
+        var hash = window.location.hash.replace("#","");
+        var url = '{{ siteLocale }}tender/search';
+
+        $('.tabs-2').show();
+
+        if(hash != '')
+        {
+            $('[tab]').removeClass('active');
+            $('[tab-content]').addClass('none');
+
+            $('[data-type=' +  hash + ']').addClass('active');
+            $('.' + hash + '-content').removeClass('none');
+
+            $('.tabs-2').hide();
+        }
+
+        $("[tab]").click(function() {
+            if($(this).attr('data-type') == 'search') {
+                History.pushState({state: 1}, null, url + 1);
+                History.pushState({state: 1}, null, url);
+                $('.tabs-2').show();
+            } else {
+                History.pushState({state: 1}, null, url + '#' + $(this).attr('data-type'));
+                $('.tabs-2').hide();
+            }
+        });
+
+        $('.plan-month-name').each(function(  ) {
+
+            var months = locale_dates.i18n.{{ CurrentLocale }}.months;
+            var month = parseInt($( this ).text()) - 1;
+
+            if(months[month] != undefined)
+            {
+                $( this ).text(months[month]);
+            }
+        });
+    });
+</script>
+{% endput %}

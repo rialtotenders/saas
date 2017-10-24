@@ -1,0 +1,29 @@
+<div>
+<input style="width: 50%;" type="hidden" id="measureSource" name="source" value="http://standards.openprocurement.org/unit_codes/recommended/ru.json">
+
+<button type="submit" id="updateMeasure" class="btn btn-default">Обновить</button>
+<br>
+</div>
+
+<script>
+    jQuery(function($) {
+        $("#updateMeasure").click(function () {
+
+            var url = '/backend/perevorot/rialtotender/classifiers/updateMeasure';
+
+            $.ajax({
+                url: url,
+                data: {
+                    source: $('#measureSource').val()
+                },
+                method: 'post',
+                dataType: "html",
+                success: function(response){
+                    window.location.reload(true);
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

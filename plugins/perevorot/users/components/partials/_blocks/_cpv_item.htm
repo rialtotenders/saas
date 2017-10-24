@@ -1,0 +1,13 @@
+{% if type == 'single' and level == 1 %}
+<div data-value="{{ cpv['code'] }} - {{ cpv['name']|lower}}" class="item"><strong>{{ cpv['code'] }}</strong> - {{ cpv['name'] }}</div>
+{% elseif (type == 'any') or (type == 'single' and level >= 2) %}
+<div data-value="{{ cpv['code'] }} - {{ cpv['name']|lower }}"  class="item">
+    <input type="radio" name="{{ input_name }}" value="{{ cpv['code'] }}" id="item{{ id_prefix~'-'~cpv['code'] }}" {% if selected_item == cpv['code'] %} checked {% endif %} >
+    <label for="item{{ id_prefix~'-'~cpv['code'] }}"><strong>{{ cpv['code'] }}</strong> - {{ cpv['name'] }}</label>
+</div>
+{% elseif type == 'many' %}
+<div data-value="{{ cpv['code'] }} - {{ cpv['name']|lower }}" class="item">
+    <input type="checkbox" name="{{ input_name }}" value="{{ cpv['code'] }}" id="item{{ id_prefix~'-'~cpv['code'] }}" {% if selected_item == cpv['code'] %} checked {% endif %} >
+    <label for="item{{ id_prefix~'-'~cpv['code'] }}"><strong>{{ cpv['code'] }}</strong> - {{ cpv['name'] }}</label>
+</div>
+{% endif %}

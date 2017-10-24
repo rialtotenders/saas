@@ -1,0 +1,152 @@
+@import '../_vars';
+@import '_m';
+
+@mixin cols-33-and-66($x) {
+    .#{$x}-33 {
+	    width: 33.33333%;
+    }
+    .#{$x}-66 {
+	    width: 66.66666%;
+    }
+}
+.in-ok:after, .in-proc:after {
+  @if $see-process == 1 { content: ''; }
+  width: 10px;
+  height: 10px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  position: absolute;
+  top: 1px;
+  right: -7px;
+}
+.in-ok {
+  &:after {
+    background-image: url(../img/design/ok-icon.png);
+  }
+}
+.in-proc {
+  &:after {
+    background-image: url(../img/design/proc-icon.png);
+  }
+}
+.absolute {
+    position: absolute;
+}
+.z90 {
+    z-index: 90!important;
+}
+.z120 {
+    z-index: 120!important;
+}
+.hide {
+	display: none;
+}
+.w {
+	width: 100%;
+}
+.b-left {
+    text-align: left!important;
+}
+.b-center {
+    text-align: center!important;
+}
+.b-right {
+    text-align: right!important;
+}
+.mx-minus-5 {
+	margin-left: -5px;
+	margin-right: -5px;
+}
+.ml-minus-1 {
+	margin-left: -1px;
+}
+.pt {
+    padding-top:20px;
+}
+.pb {
+    padding-bottom:20px;
+}
+.gpl {
+  padding-left: 25px;
+}
+.gpr {
+  padding-right: 25px;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+.border-right {
+  border-right: 1px solid #e5e5e5;
+}
+.border-left {
+  border-left: 1px solid #e5e5e5;
+}
+.color-green {
+  color: #16a085;
+}
+.color-grey {
+  color: #9b9b9b;
+}
+
+.c {
+	margin: 0 auto;
+	width: 100%;
+	max-width: $max-width;
+	position: relative;
+	z-index: 20;
+}
+.row {
+	&:after {
+		@extend .clearfix;
+	}
+}
+[class*="col-"] {
+	float: left;
+}
+
+@each $a in $gridSystem {
+    .col-#{$a} {
+        width: #{$a + '%'};
+    }
+}
+@include cols-33-and-66(col);
+
+@include ad() {
+	@each $a in $gridSystem {
+    	.col-ad-#{$a} {
+        	width: #{$a + '%'};
+		}
+	}
+	@include cols-33-and-66(col-ad);
+}
+
+@include ac() {
+	@each $a in $gridSystem {
+    	.col-ac-#{$a} {
+        	width: #{$a + '%'};
+		}
+	}
+	@include cols-33-and-66(col-ac);
+}
+
+@include ab() {
+	@each $a in $gridSystem {
+    	.col-ab-#{$a} {
+        	width: #{$a + '%'};
+		}
+	}
+	@include cols-33-and-66(col-ab);
+}
+
+@include a1() {
+	@each $a in $gridSystem {
+    	.col-a1-#{$a} {
+        	width: #{$a + '%'};
+		}
+	}
+	@include cols-33-and-66(col-a1);
+}
+.none{
+	display: none;
+}

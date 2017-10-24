@@ -1,0 +1,37 @@
+<div class="w c-main" id="registration-form">
+    <div class="c ">
+        <div class="registered-step tender-create">
+
+            {% partial('@contracts/_steps') step=2 %}
+
+            <div class="inline-layout">
+                <div class="form-registration">
+                    <form data-request-loading=".spinner" data-request="onHandleForm" data-tender data-request-data="'step': '2'">
+                        <div class="file-button">
+                            {% component 'fileUploader' %}
+                        </div>
+
+                        <div class="block-button" id="for-spinner">
+                            <button data-request-loading=".spinner" data-request="onReturnBack" data-request-data="'step': '1'" class="prev_step">{{ 'contract.edit.prev_button'|_}}</button>
+                            <button type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'contract.edit.next_button'|_}}</button>
+                            <a href="{{ siteLocale }}contract/{{ contract.cid }}" class="prev_step save_step">{{ 'contract.edit.return_to_contract'|_}}</a>
+                        </div>
+
+                        {{ session_key_field|raw }}
+                        <input type="hidden" name="document_type" value="change">
+                        <input type="hidden" name="save" id="contract-save" value="0">
+                        <input type="hidden" name="tenderID" value="{{ contract.cid }}">
+                    </form>
+                </div>
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% partial '@contracts/_scripts' %}

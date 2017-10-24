@@ -1,0 +1,46 @@
+.c-block {
+  &.go-prev .c-block__wrap {
+    margin-top: -120px;
+  }
+  .c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__wrap {
+    @extend .padding-top;
+    padding-bottom: 70px;
+    @extend .padding-left;
+    @extend .padding-right;
+    background: white;
+  }
+  &__center {
+    @extend .max-width-inner;
+    margin: 0 auto;
+  }
+  h2 {
+	  margin-bottom: 20px;
+  }
+  .sb-card {
+	@include e-grid-desktop() {
+	  &:nth-child(4n + 1) {
+		clear: both;
+	  }
+    }
+    @include p-grid-third() {
+	    width: 33.33333%;
+	    &:nth-child(3n + 1) {
+			clear: both;
+		}
+    }
+    @include p-grid-second() {
+	    width: 50%;
+	    
+	    &:nth-child(2n + 1) {
+			clear: both;
+		}
+    }
+    @include a-grid-mobile() {
+	    width: 100%;
+    }
+  }
+}

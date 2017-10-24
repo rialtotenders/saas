@@ -1,0 +1,44 @@
+.c-customers {
+  &.go-prev .c-customers__wrap {
+    margin-top: -120px;
+  }
+  .c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__wrap {
+    @extend .padding-top;
+    @extend .padding-bottom;
+    @extend .padding-left;
+    @extend .padding-right;
+    background: white;
+  }
+  &__center {
+    @extend .max-width-inner;
+    margin: 0 auto;
+  }
+  &__customers-list {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-top: 10px;
+    & > div {
+      text-align: center;
+    }
+    img {
+      width: 80%;
+      margin: 0 auto;
+    }
+  }
+  .sb-h2 {
+	  padding-left: 10px;
+  }
+  @include ab() {
+	  .col-25 {
+		  width: 50%;
+		  padding-bottom: 10px;
+		  &:nth-child(2n + 1) {
+			  clear: both;
+		  }
+	  }
+  }
+}

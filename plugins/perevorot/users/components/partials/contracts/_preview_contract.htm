@@ -1,0 +1,43 @@
+<div class="block-text-tender">
+    <div class="item">
+        <h2>{{ contract.title }}</h2>
+        <p>{{ contract.description }}</p>
+    </div>
+
+    {% if contract.changeDocuments|length %}
+    <div class="item">
+        <h2>{{ 'contract.edit.preview_documents_for_contract'|_ }}</h2>
+        <ul>
+            {% for document in contract.changeDocuments %}
+            <li><a href="{{ document.getPath }}" target="_blank">{{ document.file_name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <div class="item">
+        <h2>{{ 'contract.edit.preview_information_about_contract'|_ }}</h2>
+        <ul>
+            <li>
+                <span>{{ 'contract.edit.preview_expected_price'|_}}</span> <span>{{ contract.amount ~ ' ' ~ contract_json.value.currency }}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="item">
+        <h2>{{ 'contract.edit.preview_nomenclature'|_}}</h2>
+        <ul>
+            {% for item in contract_json.items %}
+            <li>
+                <strong>{{ item.description }} </strong><span>{{ item.quantity ~ ' ' ~ item.unit.name }}</span><br>
+                <p>
+                    {{ 'contract.edit.preview_cpv'|_}}
+                    <span>{{ item.classification.id }}</span>
+                </p>
+                <p>
+                    {{ 'contract.edit.preview_delivery'|_}}
+                    <span>{{ item.deliveryAddress.locality ~ ', ' ~ item.deliveryAddress.streetAddress ~ ', ' ~ 'contract.edit.delivery_date_from'|_ ~ ' ' ~ item.deliveryDate.startDate ~ ', ' ~ 'contract.edit.delivery_date_to'|_ ~ ' ' ~ item.deliveryDate.endDate }}</span>
+                </p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

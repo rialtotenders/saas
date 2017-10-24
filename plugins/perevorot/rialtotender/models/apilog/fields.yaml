@@ -1,0 +1,59 @@
+fields:
+    action:
+        label: Действие
+        span: auto
+        type: text
+    user_name:
+        label: Пользователь
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    ip:
+        label: IP
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    tender_id:
+        label: 'ID тендера'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    format_tender_id:
+        label: 'Номер тендера'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    created_at:
+        label: Дата
+        oc.commentPosition: ''
+        mode: datetime
+        span: auto
+        type: datepicker
+    x_request_id:
+        label: x-request-id
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    error:
+        label: Ошибка
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    method:
+        label: 'Метод обращения'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    url:
+        label: URL
+        oc.commentPosition: ''
+        span: full
+        type: text
+    data:
+        label: 'Отсылаемые данные'
+        span: full
+        type: partial
+    response:
+        label: 'Полученный ответ'
+        span: full
+        type: partial

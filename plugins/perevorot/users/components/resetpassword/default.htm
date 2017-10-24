@@ -1,0 +1,23 @@
+<div class="c-main background-absolute"></div>
+<div class="w c-main" id="login-page">
+    <div class="c-main__table">
+        <div class="c-main__cell">
+            <div class="c">
+                <div class="form-login">
+                    <div id="partialUserResetForm">
+                        <div class="row" >
+                            <div>
+                                <h3>{{ 'remind.password_remind_title'|_ }}</h3>
+                                {% if __SELF__.code == null %}
+                                    {% partial 'resetpassword/restore' %}
+                                {% else %}
+                                    {% partial 'resetpassword/reset' %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+{% if last_articles %}
+    <div class="last-news">
+        <h4>
+            Последние статьи
+        </h4>
+        <div class="list_last_news">
+            {% for article in last_articles %}
+                <div class="last-news-item">
+                    <a href="{{ ('blog/'~article.slug)|url }}" class="name">{{ article.title }}</a>
+                    <div class="author">{{ article.author.full_name }}</div>        
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,25 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: rainlab.user::lang.user.label
+
+# Model Form Field configuration
+form: $/perevorot/users/models/user/fields_external.yaml
+
+# Model Class name
+modelClass: Perevorot\Users\Models\User
+
+# Default redirect location
+defaultRedirect: perevorot/users/users
+
+# Create page
+create:
+    redirect: perevorot/users/users/preview/:id
+    redirectClose: perevorot/users/users
+
+# Update page
+update:
+    redirect: perevorot/users/users/update/:id
+    redirectClose: perevorot/users/users/preview/:id

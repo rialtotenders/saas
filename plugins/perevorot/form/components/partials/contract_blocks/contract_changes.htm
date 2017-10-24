@@ -1,0 +1,107 @@
+{% if item.changes is not empty %}
+<h2>{{ 'contract.changes_title'|_ }}</h2>
+<div class="sb-table ">
+    <div class="table__table">
+
+        <div class="overflow-table">
+
+            <table class="contact-table">
+                <tbody>
+                <tr>
+                    <th width="20%">
+                        {{ 'contract.change.contractNumber'|_ }}
+                    </th>
+                    <th width="20%">
+                        {{ 'contract.change.signed'|_ }}
+                    </th>
+                    <th width="20%">
+                        {{ 'contract.change.status'|_ }}
+                    </th>
+                    <th width="20%">
+                        {{ 'contract.change.rationaleTypes'|_ }}
+                    </th>
+                    <th width="20%">
+                        {{ 'contract.change.documents'|_ }}
+                    </th>
+                </tr>
+        {% for change in item.changes  %}
+                <tr>
+                    <td>
+                        <p>{{ change.contractNumber }}</p>
+                    </td>
+                    <td>
+                        <p>{{ change.dateSigned|date('d.m.Y') }}</p>
+                    </td>
+                    <td>
+                        <p>
+                            {% if changes_status[change.status] %}
+                            {{ changes_status[change.status] }}
+                            {% else %}
+                            {{ change.status }}
+                            {% endif %}
+                            </p>
+                    </td>
+                    <td>
+                    {% if change.rationaleTypes is not empty %}
+                    <p>
+                        {{ 'contract.change.rationaleTypes_text'|_ }}<br>
+                        {% for type in change.rationaleTypes %}
+                            <span>
+                                {% if rationaletypes[type] %}
+                                    {{ '- ' ~ rationaletypes[type] }}
+                                {% else %}
+                                    {{ '- ' ~ type }}
+                                {% endif %}
+                            </span><br>
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+                    <p>
+                        {{ 'contract.change.rationale'|_ ~ ' ' ~ change.rationale }}
+                    </p>
+                    </td>
+
+                    <td>
+                    <h4 class="overlay-title js-change-document title_orange" data-change-id="{{ change.id }}">
+                        {% if changes_documents[change.id] is not empty %}
+                        <span>{{ 'contract.change.show_documents'|_ }}</span>
+                        {% else %}
+                        {{ 'contract.change.no_documents'|_ }}
+                        {% endif %}
+                    </h4>
+                    </td>
+                </tr>
+
+                    {% if changes_documents[change.id] is not empty %}
+                <tr class="border0">
+                    <td colspan="7">
+                    <div class="tender-document js-change-document change-{{ change.id }}">
+                        <div class="close"></div>
+                        <h4>
+                            {{ 'contract.change.documents'|_ }}
+                        </h4>
+                        {% for document in changes_documents[change.id] %}
+                            {% if document.stroked is empty %}
+                            <div class="document-info table__table-row table__table-row3">
+                                <div class="table__table-cell">
+                                    <a href="{{document.url}}" target="_blank" class="document-name">{{document.title}}</a>
+                                </div>
+                                <div class="document-date table__table-cell">{{ document.dateModified|date('d.m.Y H:i')}}</div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    </td>
+                </tr>
+                    {% endif %}
+
+        {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endif %}

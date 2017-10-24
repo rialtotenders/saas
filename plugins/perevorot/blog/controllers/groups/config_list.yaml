@@ -1,0 +1,13 @@
+list: $/perevorot/blog/models/group/columns.yaml
+modelClass: Perevorot\Blog\Models\Group
+title: Groups
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+defaultSort: sort_order ASC
+showSorting: false
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'perevorot/blog/groups/update/:id'

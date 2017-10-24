@@ -1,0 +1,80 @@
+<div class="c-main background-absolute background-eclips" ></div>
+
+<div class="w c-main" id="registration-form">
+    <div class="c ">
+        <div class="registered-step">
+            <div class="list-step inline-layout">
+                <div class="item"><span>{{ 'profile.register.step1'|_}}</span></div>
+                <div class="item"><span>{{ 'profile.register.step2'|_}}</span></div>
+                <div class="item active"><span>{{ 'profile.register.step3'|_}}</span></div>
+                {% if steps == 4 %}
+                <div class="item "><span>{{ 'profile.register.step4'|_}}</span></div>
+                {% endif %}
+            </div>
+
+            <h3>{{ header }}</h3>
+
+            <div class="inline-layout">
+                <div class="form-registration">
+
+                    <form data-request="onHandleForm" data-registration data-request-data="'step': '3'" data-request-complete="$(this).find('.error-holder:not(:empty)').show();">
+                        <div class="form-holder">
+
+                            <input type="text" name="contact_fio" value="{{ user.contact_fio }}" placeholder="{{ 'profile.contact_fio'|_}}"/>
+                            <div class="error-holder none" data-validation="contact_fio"></div>
+                        </div>
+
+                        <div class="form-holder">
+
+                            <input type="text" name="contact_position" value="{{ user.contact_position }}" placeholder="{{ 'profile.contact_position'|_}}"/>
+                            <div class="error-holder none" data-validation="contact_position"></div>
+                        </div>
+
+                        <div class="form-holder">
+
+                            <input type="text" name="contact_email" value="{{ user.contact_email }}" placeholder="{{ 'profile.contact_email'|_}}"/>
+
+                            <div class="error-holder none" data-validation="contact_email"></div>
+                        </div>
+
+                        <div class="form-holder">
+
+                            <input type="text" name="contact_office_phone" value="{{ user.contact_office_phone }}" placeholder="{{ 'profile.contact_office_phone'|_}}" />
+
+                            <div class="error-holder none" data-validation="contact_office_phone"></div>
+                        </div>
+
+                        <div class="form-holder">
+
+                            <input type="text" name="contact_mobile_phone" value="{{ user.contact_mobile_phone }}" placeholder="{{ 'profile.contact_mobile_phone'|_}}"/>
+                            <div class="error-holder none" data-validation="contact_mobile_phone"></div>
+                        </div>
+
+                        <div class="block-button">
+                            <button data-request="onReturnBack" data-request-data="'step': '2'" class="prev_step">{{ 'profile.register.prev_button'|_}}</button>
+                            <button type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'profile.register.register_button'|_}}</button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                    <div class="block-phone-desc">
+                        <span>{{ 'profile.register.phone_title'|_}}:</span>
+                        <a href="tel:{{ 'common.support_phone'|_ }}">{{ 'common.support_phone'|_ }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    if (window.jQuery !== undefined) {
+        new window.RegistrationValidation();
+    }
+</script>

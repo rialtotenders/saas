@@ -1,0 +1,105 @@
+<script>
+    var opts = {
+        lines: 13 // The number of lines to draw
+        , length: 28 // The length of each line
+        , width: 14 // The line thickness
+        , radius: 42 // The radius of the inner circle
+        , scale: 0.25 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
+    }
+
+    function init() {
+
+        $('.list_cpv').each(function (i) {
+            cpvInit($(this));
+        });
+
+        $('#plan-content').on('click', '.open_list', function () {
+            var container=$(this).closest('.list_cpv_button').parent();
+
+            container.children('.list_cpv').slideDown();
+
+            $(this).hide().next('.close_list').show();
+
+            container.children('[cpv-search-opened]').show();
+            container.children('[cpv-search-closed]').hide();
+        });
+
+        $('#plan-content').on('click', '.close_list', function () {
+            var container=$(this).closest('.list_cpv_button').parent();
+
+            container.children('.list_cpv').slideUp();
+
+            $(this).hide().prev('.open_list').show();
+
+            container.children('[cpv-search-opened]').hide();
+            container.children('[cpv-search-closed]').show();
+        });
+
+        new window.TenderValidation();
+
+        var target = document.getElementById('for-spinner');
+        var spinner = new Spinner(opts).spin(target);
+
+        $('#for-spinner .spinner').hide();
+
+        var select_month = parseInt('{{ plan.month }}');
+        var months = locale_dates.i18n.{{ CurrentLocale }}.months;
+        var options = '';
+
+        for (i = 0; i < months.length; i++) {
+            var i_month = i + 1;
+            options = options + '<option value="' + i_month + '" ' + (select_month == i_month ? 'selected' : '') + '>' + months[i] + '</option>';
+        };
+
+        $('#plan_create_month').html(options);
+
+        $('.input-group.date input').each(function () {
+            $(this).datetimepicker(dt_opts);
+            $(this).bind("mousewheel", function () {
+
+            });
+        });
+
+        $('.prev_step.add-items').click(function () {
+            $('#tender-step').val(1);
+        });
+
+        $('.next_step.without-add-items').click(function () {
+            $('#tender-step').val(3);
+        });
+
+        $('.next_step').click(function () {
+            if($(this).attr('data-save') != undefined) {
+                $('#tender-save').val($(this).attr('data-save'));
+            }
+        });
+    }
+
+    if (window.jQuery !== undefined) {
+        init()
+    }
+
+</script>
+
+{% put scripts %}
+<script>
+    jQuery(function($) {
+        init()
+    });
+</script>
+{% endput %}

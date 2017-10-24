@@ -1,0 +1,68 @@
+<h2>{{ 'contract.supplier_title'|_ }}</h2>
+<div class="mobile-table">
+
+    <div class="sb-table sb-table--td-py-small">
+        <div class="sb-table__table">
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'contract.supplier_name'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>
+                    {% if item.suppliers[0].identifier.legalName %}
+                        {{ item.suppliers[0].identifier.legalName }}
+                    {% else %}
+                        {{ item.suppliers[0].name }}
+                    {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'contract.supplier_id'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.suppliers[0].identifier.id }}</p>
+                </div>
+            </div>
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'contract.supplier_website'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    {% if item.suppliers[0].contactPoint.url %}
+                        <p>{{ item.suppliers[0].contactPoint.url }}</p>
+                    {% else %}
+                        <p>{{ 'tender.no_website'|_ }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'contract.supplier_address'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>
+                        {{ item.suppliers[0].address.countryName ~ ', ' ~ item.suppliers[0].address.postalCode ~ ', ' ~
+                         item.suppliers[0].address.region ~ ', ' ~ item.suppliers[0].address.locality ~ ', ' ~
+                        item.suppliers[0].address.streetAddress }}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

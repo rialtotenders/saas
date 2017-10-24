@@ -1,0 +1,50 @@
+<a
+    href="<?= Backend::url('perevorot/users/users') ?>"
+    class="btn btn-default oc-icon-chevron-left">
+    <?= e(trans('rainlab.user::lang.groups.return_to_users')) ?>
+</a>
+<?php if($this->user->is_superuser || $this->user->hasPermission('rialtotender.users.all_permissions')): ?>
+    <a
+        href="<?= Backend::url('perevorot/users/users/update/'.$formModel->id) ?>"
+        class="btn btn-primary oc-icon-pencil">
+        <?= e(trans('rainlab.user::lang.users.update_details')) ?>
+    </a>
+    <a
+        href="#"
+        class="btn btn-primary"
+        onclick="showCreatePayment()"
+    >
+        Ввести оплату
+    </a>
+<?php endif; ?>
+<?php
+/* @todo
+<div class="btn-group">
+    <a
+        href="<?= Backend::url('perevorot/users/users/update/'.$formModel->id) ?>"
+        class="btn btn-default oc-icon-pencil">
+        Deactivate
+    </a>
+    <a
+        href="<?= Backend::url('perevorot/users/users/update/'.$formModel->id) ?>"
+        class="btn btn-default oc-icon-pencil">
+        Ban user
+    </a>
+    <a
+        href="<?= Backend::url('perevorot/users/users/update/'.$formModel->id) ?>"
+        class="btn btn-default oc-icon-pencil">
+        Delete
+    </a>
+</div>
+*/
+?>
+<script>
+    function showCreatePayment()
+    {
+        $('.nav.nav-tabs li').removeClass('active');
+        $('.nav.nav-tabs li:last-child').addClass('active');
+        $('.tab-content .tab-pane').removeClass('active');
+        $('.tab-content .tab-pane:last-child').addClass('active');
+        $('#Users-preview-RelationController-payments-toolbar .toolbar-item.toolbar-primary a').trigger('click');
+    }
+</script>

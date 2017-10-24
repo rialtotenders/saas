@@ -1,0 +1,341 @@
+<script>
+
+    var opts = {
+        lines: 13 // The number of lines to draw
+        , length: 28 // The length of each line
+        , width: 14 // The line thickness
+        , radius: 42 // The radius of the inner circle
+        , scale: 0.25 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
+    }
+
+    var disabledDays = function( currentDateTime ) {
+        jQuery(this).find('.xdsoft_date.xdsoft_weekend')
+                .addClass('xdsoft_disabled');
+    };
+
+    var logic = function( currentDateTime ) {
+
+        if(currentDateTime !== null) {
+
+            if( currentDateTime.getDate() == {{ "now"|date('j') }}
+                && currentDateTime.getMonth() + 1 == {{ "now"|date('n') }}
+                && currentDateTime.getFullYear() == {{ "now"|date('Y') }}
+            ) {
+                this.setOptions({
+                    minTime:0
+                });
+            }
+            else
+            {
+                this.setOptions({
+                    minTime: '00:00'
+                });
+            }
+
+        }
+    };
+
+    var dt_opts = {
+        dayOfWeekStart: 1,
+        format:'d.m.Y H:i',
+        showClose: true,
+        minDate: 0,
+        minTime: 0,
+        step: 30,
+        scrollMonth : false,
+        scrollInput : false,
+        {% if disabled_weekends is defined %} disabledDates: ['{{ weekend_dates|raw }}'], {% endif %}
+        formatDate:'d.m.Y',
+        onChangeDateTime: logic,
+        onShow: logic,
+        {% if disabled_weekends is defined %} onGenerate: disabledDays, {% endif %}
+    };
+
+    var _active_inpute_name = [];
+    var _active_inpute = [];
+
+    function init()
+    {
+        $('html, body').animate({scrollTop: 0}, 500);
+
+        $('.list_cpv').each(function (i) {
+            cpvInit($(this));
+        });
+
+        /*
+        $('#plan-content, #tender-content').on('click', '.open_list', function () {
+            $(this).hide().next('.close_list').show();
+            $(this).closest('.list_cpv_button').parent().children('.list_cpv').slideDown();
+            
+            $('[cpv-search-opened]').show();
+            $('[cpv-search-closed]').hide();
+        });
+
+        $('#plan-content, #tender-content').on('click', '.close_list', function () {
+            var container=$(this).closest('.list_cpv_button').parent();
+
+            container.children('.list_cpv').slideUp();
+
+            $(this).hide().prev('.open_list').show();
+
+            container.children('[cpv-search-opened]').hide();
+            container.children('[cpv-search-closed]').hide();
+        });
+        */
+
+        new window.TenderValidation();
+
+        $.datetimepicker.setLocale('{{ CurrentLocale }}');
+
+        var target = document.getElementById('for-spinner');
+        var spinner = new Spinner(opts).spin(target);
+
+        $('#for-spinner .spinner').hide();
+
+        $('.input-group.date input').each(function () {
+            $(this).datetimepicker(dt_opts);
+            $(this).bind("mousewheel", function () {
+
+            });
+        });
+
+        $("#tender-content").on('click', '.tender_create_is_empty_price', function () {
+            if($(this).is(':checked')) {
+                //$('.tender_create_is_empty_price').prop('checked', true);
+                $(this).parent().prev().find('.tender_create_price').attr('disabled', 'disabled');
+            } else {
+                //$('.tender_create_is_empty_price').prop('checked', false);
+                $(this).parent().prev().find('.tender_create_price').removeAttr('disabled');
+            }
+        });
+
+        _active_inpute_name = [];
+        _active_inpute = [];
+    }
+
+    if (window.jQuery !== undefined) {
+        init();
+    }
+
+</script>
+
+{% put scripts %}
+<script>
+    jQuery(function($) {
+        init();
+
+        var fdata = {'feature_index': 0, 'lot_index': 0};
+        var edata = {'enum_index': 0, 'feature_index': 0, 'lot_index': 0};
+
+        $("#tender-content").on('change', '#criteria', function () {
+
+            var next_step = $("#tender-content").find('[data-next-step]');
+
+            if($(this).is(':checked')) {
+                next_step.attr('data-next-step', 8);
+            } else {
+                next_step.attr('data-next-step', 2);
+            }
+        });
+
+        $("#tender-content").on('click', '[data-next-step]', function () {
+            $('#tender-form').find('#tender-next-step').val($(this).attr('data-next-step'));
+            $('#tender-form').submit();
+        });
+
+        $("#tender-content").on('focus', 'input, textarea, select', function () {
+            var _name = $(this).attr('name');
+            if(_name !== '' && _name !== undefined && !(_name in _active_inpute_name)) {
+                _active_inpute.push($(this));
+                _active_inpute_name[_name] = _name;
+            }
+        });
+
+        $("#tender-content").on('blur', 'input, textarea, select', function () {
+
+            if(_active_inpute.length <= 0) {
+                return false;
+            }
+
+            $('.error-holder').hide().html('');
+
+            var _valid_name = [];
+
+            for (var i = 0; i < _active_inpute.length; i++) {
+                _valid_name.push(_active_inpute[i].next().attr('data-validation'));
+            }
+
+            var _form = $( "#tender-form" ).serialize();
+            var _step = $( "#tender-form" ).attr('data-step');
+            var _update = $( "#tender-form" ).attr('data-update');
+
+            if(!_update) {
+                var url = "{{ siteLocale }}tender/create/gov?_v=1";
+            } else {
+                var url = "{{ siteLocale }}tender/"+_update+"/edit?_v=1";
+            }
+
+            _form = _form + '&step='+_step+'&_validation=1&_validation_field=' + _valid_name;
+
+             $.post( url, _form)
+             .done(function( data ) {
+             })
+             .fail(function(data) {
+
+                 var json = JSON.parse(data.responseText);
+
+                 if(json !== 'string') {
+                     for (var field in json) {
+                         if(field != '' && json[field].length > 0) {
+                             $("#tender-form").find('[data-validation="' + field + '"]').text(json[field][0]);
+                             $("#tender-form").find('[data-validation="' + field + '"]').show();
+                         }
+                     }
+                 }
+             });
+        });
+
+        $("#tender-content").on('click', '.add-new-lot-block, .add-new-lot-item, .add-new-item-block', function () {
+            //$('.error-holder').hide().html('');
+            //$(this).submit();
+        });
+
+        $("#tender-content").on('click', '.list-step .item a', function () {
+            var step = $(this).attr('data-step');
+
+            if(step !== undefined && step !== '') {
+                $('.block-button .prev_step').attr('data-request-data', "'step': '" + step + "'");
+                $("#tender-content .block-button .prev_step").trigger('click');
+            }
+
+            return false;
+        });
+
+        $("#tender-content").on('click', '.next_step', function () {
+            if($(this).attr('data-save') != undefined) {
+                $('#tender-save').val($(this).attr('data-save'));
+            }
+        });
+
+        $('#tender-content').on( "click", "[data-auction-step]", function() {
+
+            var step = $(this).attr('data-auction-step');
+            var sum = $(this).parent().parent().parent().find('.tender_create_price').val();
+
+            if(sum > 0)
+            {
+                var step_price = (parseFloat(sum) / 100 ) * parseFloat(step);
+                $(this).parent().parent().find('input').val(step_price);
+            }
+
+            return false;
+        });
+
+        $('#tender-content').on('click', '.open_list', function () {
+            var container=$(this).closest('.list_cpv_button').parent();
+
+            container.children('.list_cpv').slideDown();
+
+            $(this).hide().next('.close_list').show();
+
+            container.children('[cpv-search-opened]').show();
+            container.children('[cpv-search-closed]').hide();
+        });
+
+        $('#tender-content').on('click', '.close_list', function () {
+            var container=$(this).closest('.list_cpv_button').parent();
+
+            container.children('.list_cpv').slideUp();
+
+            $(this).hide().prev('.open_list').show();
+
+            container.children('[cpv-search-opened]').hide();
+            container.children('[cpv-search-closed]').show();
+        });
+
+
+        $('#tender-content').on('click', ".add_field", function() {
+
+            var enum_index = parseInt($(this).parent().children('.feature-index').children('.feature-enums').children('.feature-enum:last-child').find('.feature-enum-index').attr('data-feature-enum-index'));
+            var lot_index = parseInt($(this).parent().parent().parent().parent().attr('data-lot-index'));
+            var feature_index = parseInt($(this).parent().children('.feature-index').attr('data-feature-index'));
+
+            if(isNaN(feature_index) || feature_index == undefined) {
+                feature_index = 0;
+            }
+
+            if(isNaN(enum_index) || enum_index == undefined) {
+                enum_index = 0;
+            } else {
+                enum_index = enum_index + 1
+            }
+
+            edata.enum_index = enum_index;
+            edata.lot_index = lot_index;
+            edata.feature_index = feature_index;
+
+            var new_data = $('#new-feature-enum-tpl').tmpl(edata);//.appendTo('[data-item-index="'+item_index+'"] [data-feature-index="'+feature_index+'"] .feature-enums');
+            $(this).parent().children('.feature-index').children('.feature-enums').append(new_data);
+
+            return false;
+        });
+
+        $('#tender-content').on('click', ".remove_field", function() {
+            if (confirm("{{ 'tender.create.confirm_delete_enum'|_ }}")) {
+                $(this).parent().children('.feature-index').children('.feature-enums').find('.feature-enum:last-child').remove();
+            }
+
+            return false;
+        });
+
+        $('#tender-content').on('click', ".add-price-category", function() {
+
+            var lot_index = parseInt($(this).parent().parent().attr('data-lot-index'));
+            var feature_index = parseInt($(this).parent().children('.features').children('.price_category:last-child').find('.feature-index').attr('data-feature-index'));
+
+            if(isNaN(feature_index) || feature_index == undefined) {
+                feature_index = 0;
+            } else {
+                feature_index = feature_index + 1;
+            }
+
+            fdata.feature_index = feature_index;
+            fdata.lot_index = lot_index;
+
+            var data = $('#new-feature-tpl').tmpl(fdata);//appendTo('[data-item-index="'+item_index+'"] .features');
+            $(this).parent().children('.features').append(data);
+
+            return false;
+        });
+
+        $('#tender-content').on('click', ".delete_price_category", function() {
+            if (confirm("{{ 'tender.create.confirm_delete_feature'|_ }}")) {
+                $(this).parent().remove();
+            }
+
+            return false;
+        });
+
+    });
+</script>
+{% endput %}
+
+
+    {% partial '@_tendercreate_scripts/_step5_without_lot' %}
+
+    {% partial '@_tendercreate_scripts/_step5_with_lot' %}

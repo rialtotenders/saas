@@ -1,0 +1,4 @@
+title: Tenders
+modelClass: Perevorot\Rialtotender\Models\Tender
+toolbar:
+    buttons: reorder_toolbar

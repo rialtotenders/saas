@@ -1,0 +1,20 @@
+{
+  "name": "rialtotender",
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "slick-carousel": "^1.6.0",
+    "jquery-sticky": "^1.0.3",
+    "datepair.js": "0.4.14",
+    "history.js": "~1.8.0",
+    "jquery-auto-grow-input": "*",
+    "jquery.inputmask": "~3.2.5",
+    "selectize": "~0.12.1",
+    "spin.js": "~2.3.2",
+    "jquery-highlight": "~3.3.0",
+    "select2": "^4.0.3",
+    "moment": "^2.17.1",
+    "datetimepicker": "^2.5.4",
+    "noty": "^2.4.0",
+    "ilyabirman-likely": "2.2.1"
+  }
+}

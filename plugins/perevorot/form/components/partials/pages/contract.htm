@@ -1,0 +1,29 @@
+<h1>{{ contract.title }}</h1>
+{% if contract.mode == 'test' %}<strong>{{ 'contract.page.test_mode'|_ }}</strong>{% endif %}
+
+<div class="sb-icon-and-text inline-layout">
+    <div class="sb-icon-and-text__item" >
+        <span >
+            {% if contract.procuringEntity.identifier.legalName %}
+                {{ contract.procuringEntity.identifier.legalName }}
+            {% else %}
+                {{ contract.procuringEntity.name }}
+            {% endif %}
+        </span>
+    </div>
+    <div class="sb-icon-and-text__item" >
+        <span >{{ contract.contractID }}</span>
+    </div>
+</div>
+
+<p class="mb-60">{{ contract.description }}</p>
+
+{% partial '@contract_blocks/procuring_entity' item=contract %}
+{% partial '@contract_blocks/suppliers' item=contract %}
+{% partial '@contract_blocks/other' item=contract %}
+{% partial '@contract_blocks/ids' item=contract %}
+{% partial '@contract_blocks/documents' item=contract contract_documents=contract_documents %}
+{% partial '@contract_blocks/items' items=contract.items %}
+{% partial '@contract_blocks/contract_changes' item=contract changes_documents=changes_documents %}
+{% partial '@contract_blocks/operations' item=contract %}
+

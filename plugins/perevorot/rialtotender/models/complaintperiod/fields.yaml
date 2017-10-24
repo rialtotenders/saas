@@ -1,0 +1,12 @@
+fields:
+    days:
+        label: 'Количество дней'
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: number
+    procurement:
+        label: 'Тип процедуры'
+        oc.commentPosition: ''
+        span: auto
+        type: dropdown

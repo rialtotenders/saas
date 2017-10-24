@@ -1,0 +1,71 @@
+.c-steps {
+  .c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__wrap {
+    padding-top: 57px;
+    padding-bottom: 76px;
+    @extend .padding-left;
+    @extend .padding-right;
+    background: white;
+  }
+  &__center {
+    @extend .max-width-inner;
+    margin: 0 auto;
+  }
+  &__items-row {
+    margin-top: 30px;
+  }
+  &__item {
+    padding-left: 33px;
+    padding-right: 59px;
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+  &__item-num {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 55px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: left;
+    color: #e05a00;
+    float: left;
+    &:before {
+      content: '';
+      display: block;
+      background-image: url(../img/design/arrow-gray.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      left: -57px;
+      width: 25px;
+      height: 38px;
+      color: transparent;
+      border: none;
+      background-color: transparent;
+      position: absolute;
+      top: 50%;
+      margin-top: -15px;
+    }
+    &--arrow-0 {
+      &:before {
+        display: none;
+      }
+    }
+  }
+  &__item-text {
+    font-size: 13px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.23;
+    color: #000000;
+    float: left;
+    padding-left: 10px;
+    margin-top: 23px;
+  }
+}

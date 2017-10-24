@@ -1,0 +1,26 @@
+subject = "Your participation url"
+==
+
+Hello!
+
+Your participation url:
+
+{{ link }}
+
+dt - {{ dt }}
+
+==
+
+<p>Hello!</p>
+<p>Your participation url:</p>
+{% if items|length %}
+    {% for item in items %}
+        {% if item.participationUrl %}
+        <p>
+            <a href="{{ item.participationUrl }}">{{ item.participationUrl }}</a>
+        </p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<p>dt - {{ dt }}</p>

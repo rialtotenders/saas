@@ -1,0 +1,8 @@
+<?php
+    if(json_decode($model->response))
+        dump(json_decode($model->response));
+    elseif(!empty($model->response))
+        echo '<span class="form-control">'.$model->response.'</span>';
+    else
+        echo '<span class="form-control">пустой ответ</span>';
+?>

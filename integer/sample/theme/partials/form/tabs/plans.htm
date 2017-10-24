@@ -1,0 +1,72 @@
+
+<div class="w c-s none {{ user.is_gov ? 'gov-' : ''}}plans-content" tab-content>
+    <div class="c">
+        <a href="{{ siteLocale }}plan/create{{ user.is_gov ? '/gov' : ''}}" class="sb-bigbutton sb-bigbutton--bg-color" style="margin-top: 0;">{{ 'user.plan.create'|_ }}</a>
+        <br><br>
+        <div class="overflow-table">
+            <table>
+                <tr>
+                    <th>
+                        {{ 'user.plans.name'|_ }}
+                    </th>
+                    <th>
+                        {{ 'user.plans.price'|_ }}
+                    </th>
+                    <th>
+                        {{ 'user.plans.cpv'|_ }}
+                    </th>
+                    <th>
+                        {{ 'user.plans.month'|_ }}
+                    </th>
+                    <th>
+                        {{ 'user.plans.year'|_ }}
+                    </th>
+                    <th>
+                        {{ 'user.plans.status'|_ }}
+                    </th>
+                </tr>
+                {% for plan in plans %}
+                <tr>
+                    <td>
+                        <p>
+                            {% if plan.is_complete %}
+                            <a href="{{ siteLocale }}plan/{{ plan.plan_id }}"><strong>{{ plan.title }}</strong></a>
+                            {% else %}
+                            <a href="{{ siteLocale }}plan/{{ plan.id }}/edit"><strong>{{ plan.title }}</strong></a>
+                            {% endif %}
+                        </p>
+                    </td>
+                    <td>
+                        {% if plan.currency %}
+                        <strong>{{ plan.value ~ ' ' ~ plan.currency }}</strong>
+                        {% else %}
+                        {{ 'user.plan.value_empty'|_ }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <p>{{ plan.json('cpv') }}</p>
+                    </td>
+                    <td>
+                        <p class="plan-month-name">{{ plan.json('month') }}</p>
+                    </td>
+                    <td>
+                        <p>{{ plan.json('year') }}</p>
+                    </td>
+                    <td>
+                        <p>
+                            {% if plan.is_complete %}
+                                {{ 'user.plans.complete_status'|_ }}
+                            {% else %}
+                                {{ 'user.plans.project_status'|_ }}
+                            {% endif %}
+                        </p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
+
+        </div>
+
+    </div>
+</div>

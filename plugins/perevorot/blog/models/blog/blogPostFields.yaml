@@ -1,0 +1,88 @@
+fields: {  }
+tabs:
+    fields:
+        title:
+            label: 'perevorot.blog::lang.plugin.blog.title'
+            oc.commentPosition: ''
+            span: auto
+            required: 1
+            type: text
+            tab: Общее
+        slug:
+            label: 'perevorot.blog::lang.plugin.blog.slug'
+            oc.commentPosition: ''
+            span: auto
+            required: 1
+            preset:
+                field: title
+                type: slug
+            type: text
+            tab: Общее
+        author_id:
+            label: 'perevorot.blog::lang.plugin.blog.author.full_name'
+            oc.commentPosition: ''
+            span: auto
+            required: 1
+            type: dropdown
+            tab: Общее
+        published_at:
+            label: 'perevorot.blog::lang.plugin.blog.published'
+            oc.commentPosition: ''
+            mode: datetime
+            span: auto
+            required: 1
+            type: datepicker
+            tab: Общее
+        short_description:
+            label: 'perevorot.blog::lang.plugin.blog.sdesc'
+            size: large
+            oc.commentPosition: ''
+            span: left
+            type: richeditor
+            tab: Общее
+        photo:
+            label: 'perevorot.blog::lang.plugin.blog.photo'
+            oc.commentPosition: ''
+            imageHeight: 200
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: right
+            type: fileupload
+            tab: Общее
+        tags:
+            label: 'perevorot.blog::lang.plugin.blog.tags'
+            type: taglist
+            separator: space
+            mode: relation
+            span: auto
+            tab: Общее
+        group:
+            label: Группа
+            span: auto
+            required: 1
+            type: relation
+            nameFrom: title
+            tab: Общее
+        section:
+            type: section
+            tab: Общее
+        is_enabled:
+            label: 'perevorot.blog::lang.plugin.blog.enabled'
+            span: auto
+            required: 0
+            type: switch
+            tab: Общее
+#         is_main:
+#             label: 'perevorot.blog::lang.plugin.blog.main'
+#             span: auto
+#             type: switch
+#             tab: Общее
+        body:
+            label: Статья
+            span: full
+            type: richeditor
+            size: huge
+            strech: true
+            tab: Статья

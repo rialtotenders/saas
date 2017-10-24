@@ -1,0 +1,21 @@
+{% if numbers_numerals|length %}
+    <div class="w c-steps{% if data.numbers_up %} go-prev{% endif %}">
+        <div class="c">
+            <div class="c-steps__wrap">
+                <div class="c-steps__center">
+                    {% if data.numbers_title %}
+                        <h2 class="sb-h2">{{ data.numbers_title }}</h2>
+                    {% endif %}
+                    <div class="row c-steps__items-row">
+                        {% for item in numbers_numerals %}
+                            <div class="col-{{ w }} c-steps__item">
+                                <span class="c-steps__item-num {% if loop.first %} c-steps__item-num--arrow-0 {% endif %}"><nobr>{{ item.repeater_number|number_format(0, '', ' ') }}</nobr></span>
+                                <p class="c-steps__item-text">{{ item.repeater_description|nl2br }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

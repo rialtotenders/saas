@@ -1,0 +1,10 @@
+name: Authors
+form: $/perevorot/blog/models/author/blogAuthorFields.yaml
+modelClass: Perevorot\Blog\Models\Author
+defaultRedirect: perevorot/blog/authors
+create:
+    redirect: 'perevorot/blog/authors/update/:id'
+    redirectClose: perevorot/blog/authors
+update:
+    redirect: perevorot/blog/authors
+    redirectClose: perevorot/blog/authors

@@ -1,0 +1,33 @@
+.sb-lang-selector {
+	//text-align: center;
+	display: inline-block;
+	vertical-align: middle;
+	//margin-left: 30px;
+	position: relative;
+	z-index: 201;
+	width: 20%;
+	//margin-right: 20px;
+
+	a{
+		/*display: block;*/
+		line-height: 35px;
+		color: #737373;
+		font-size: 16px;
+		text-decoration: none;
+		/*text-transform: uppercase;*/
+		font-family: $font-family-bold;
+		margin-right: 15px;
+		transition: all 0.35s;
+		font-weight: 600;
+		&:hover{
+			color: #ffffff;
+			transition: all 0.35s;
+		}
+		&.jsLangListItemActive{
+			color: #ffffff;
+		}
+		&:last-child{
+			margin-right: 0;
+		}
+	}
+}

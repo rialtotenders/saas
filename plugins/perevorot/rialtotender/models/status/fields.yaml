@@ -1,0 +1,68 @@
+fields: {  }
+tabs:
+    fields:
+        tender:
+            label: Статусы
+            span: auto
+            type: mltextarea
+            tab: Тендер
+        lot_status:
+            label: Статусы лотов
+            span: auto
+            type: mltextarea
+            tab: Лот
+        document:
+            label: Статусы
+            span: auto
+            type: mltextarea
+            tab: Документы
+        bid:
+            label: Статусы
+            span: auto
+            type: mltextarea
+            tab: Предложения
+        qualification:
+            label: Статусы
+            span: auto
+            type: mltextarea
+            tab: Квалификация
+        contract:
+            label: Статусы
+            span: auto
+            type: mltextarea
+            tab: Контракты
+        change:
+            label: Статусы
+            span: auto
+            type: mltextarea
+            tab: Изменения
+        section1:
+            label: Пояснение
+            span: full
+            type: section
+            comment: Вводить статусы в формате - active=Активный. Несколько статусов разделять переносом строки
+            tab: Тендер
+        section2:
+            label: Пояснение
+            span: full
+            type: section
+            comment: Вводить статусы в формате - active=Активный. Несколько статусов разделять переносом строки
+            tab: Документы
+        section3:
+            label: Пояснение
+            span: full
+            type: section
+            comment: Вводить статусы в формате - active=Активный. Несколько статусов разделять переносом строки
+            tab: Предложения
+        section4:
+            label: Пояснение
+            span: full
+            type: section
+            comment: Вводить статусы в формате - active=Активный. Несколько статусов разделять переносом строки
+            tab: Квалификация
+        section5:
+            label: Пояснение
+            span: full
+            type: section
+            comment: Вводить статусы в формате - active=Активный. Несколько статусов разделять переносом строки
+            tab: Контракты

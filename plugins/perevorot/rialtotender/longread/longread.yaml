@@ -1,0 +1,540 @@
+text_blocks:
+    name: Текстовые блоки
+    icon: icon-paragraph
+    blocks:
+        quote:
+          name: Цитата
+          fields:
+              section:
+                  type: section
+                  comment: Цитата
+              author:
+                  label: Автор
+                  span: left
+                  type: text
+              position:
+                  label: Должность
+                  span: right
+                  type: text
+              image:
+                  label: Картинка
+                  type: fileupload
+                  mode: image
+                  span: left
+              comment:
+                  label: Описание
+                  span: left
+                  type: textarea
+        text:
+            name: Текстовый блок
+            fields:
+                section:
+                    type: section
+                    comment: Текстовый блок
+                text_title:
+                    label: Заголовок
+                    span: full
+                    type: text
+                text_text:
+                    label: Текст
+                    span: full
+                    type: richeditor
+
+        twoColumn:
+            name: Текст в две колонки
+            fields:
+                section:
+                    type: section
+                    comment: Текст в две колонки
+                tcolumn_title:
+                    label: Заголовок блока
+                    span: full
+                    type: text
+                tcolumn_first:
+                    label: Левая колонка
+                    type: richeditor
+                    span: left
+                tcolumn_second:
+                    label: Правая колонка
+                    type: richeditor
+                    span: right
+                tcolumn_up:
+                    label: Поднимать блок на предыдущий
+                    span: left
+                    type: switch
+        description:
+            name: Блок описания
+            fields:
+                section:
+                    type: section
+                    comment: Блок описания
+                description_title:
+                    label: Заголовок
+                    span: left
+                    type: text
+                description_advantages:
+                    label: Преимущества
+                    span: right
+                    type: repeater
+                    form:
+                        fields:
+                            repeater_icon:
+                                label: Иконка
+                                span: left
+                                type: dropdown
+                            repeater_large_text:
+                                label: Крупный текст
+                                span: right
+                                type: text
+                            repeater_text:
+                                label: Текст
+                                span: left
+                                type: text
+                            repeater_url:
+                                label: Гиперссылка
+                                span: right
+                                type: text
+                description_description:
+                    label: Описание
+                    span: left
+                    type: richeditor
+                description_section:
+                    type: section
+                description_button_text:
+                    label: Текст на кнопке
+                    span: left
+                    type: text
+                description_advantages_position:
+                    label: Размещение блока
+                    span: right
+                    type: dropdown
+                    options:
+                        left: Слева описание — справа преимущества
+                        right: Слева преимущества — справа описание
+                description_button_url:
+                    label: Гиперссылка на кнопке
+                    span: left
+                    type: text
+                description_image:
+                    label: Фоновая картинка
+                    type: fileupload
+                    mode: image
+                    span: right
+                    imageHeight: 200
+                description_button_position:
+                    label: Положение кнопки
+                    span: left
+                    type: dropdown
+                    options:
+                        left: Слева
+                        center: По центру
+                        right: Справа
+                description_sectioncolor:
+                    type: section
+                description_colormain:
+                    label: Цвет под всем блоком
+                    type: colorpicker
+                    span: left
+                description_color:
+                    label: Цвет под описанием
+                    type: colorpicker
+                    span: right
+                description_up:
+                    label: Поднимать блок на предыдущий
+                    span: full
+                    type: switch
+        advantages:
+            name: Преимущества
+            fields:
+                section:
+                    type: section
+                    comment: Преимущества
+                advantages_title:
+                    label: Заголовок
+                    span: left
+                    type: text
+                advantages_inrow:
+                    label: Блоков в ряду
+                    span: right
+                    type: text
+                advantages_up:
+                    label: Поднимать блок на предыдущий
+                    span: left
+                    type: switch
+                advantages_advantages:
+                    label: Преимущества
+                    span: full
+                    type: repeater
+                    form:
+                        fields:
+                            repeater_title:
+                                label: Заголовок
+                                span: left
+                                type: text
+                            repeater_text:
+                                label: Текст
+                                span: right
+                                type: richeditor
+                                size: small
+                            repeater_icon:
+                                label: Иконка
+                                span: left
+                                type: dropdown
+                            repeater_url:
+                                label: Гиперссылка
+                                span: left
+                                type: text
+
+button_blocks:
+    name: Кнопки
+    icon: icon-laptop
+    blocks:
+        button:
+            name: Кнопка
+            fields:
+                section:
+                    type: section
+                    comment: Кнопка
+                button_text:
+                    label: Текст на кнопке
+                    span: left
+                    type: text
+                button_url:
+                    label: Гиперссылка
+                    span: right
+                    type: text
+                button_position:
+                    label: Положение
+                    span: left
+                    type: dropdown
+                    options:
+                        left: Слева
+                        center: По центру
+                        right: Справа
+                button_up:
+                    label: Поднимать блок на предыдущий
+                    span: right
+                    type: switch
+                button_bgcolor:
+                    label: Цвет фона
+                    span: full
+                    type: dropdown
+                    options:
+                        transparent: Прозрачный
+                        white: Белый
+                        grey: Серый
+
+number_blocks:
+    name: Перечисления
+    icon: icon-sort-numeric-asc
+    blocks:
+        table:
+          name: Таблица
+          fields:
+              section:
+                  type: section
+                  comment: Таблица
+              table_title:
+                  label: Заголовок
+                  span: auto
+                  type: text
+              table_name:
+                    label: Название таблицы
+                    span: auto
+                    type: text
+                    required: 1
+              table_sql:
+                    label: Условие
+                    span: full
+                    type: text
+              table_fields:
+                  label: Поля
+                  span: full
+                  type: repeater
+                  form:
+                      fields:
+                          field_title:
+                              label: "Заголовок поля"
+                              span: auto
+                              type: text
+                          field_name:
+                              label: "Название поля"
+                              span: auto
+                              type: text
+                          #table_size:
+                          #    label: Ширина
+                          #    span: left
+                          #    type: number
+
+        numerals:
+            name: Цифры
+            fields:
+                section:
+                    type: section
+                    comment: Цифры
+                numerals_up:
+                    label: Поднимать блок на предыдущий
+                    span: full
+                    type: switch
+                numerals_numerals:
+                    label: Цифры
+                    span: full
+                    type: repeater
+                    form:
+                        fields:
+                            repeater_number:
+                                label: Число
+                                span: left
+                                type: text
+                                comment: 'Для заполнения значения "Количество тендеров": {tender}, {buyers}'
+                            repeater_description:
+                                label: Описание
+                                span: right
+                                type: textarea
+                                size: tiny
+                            repeater_url:
+                                label: Гиперссылка
+                                span: left
+                                type: text
+                            repeater_blank:
+                                label: Открывать гиперссылку в новом окне
+                                span: left
+                                type: checkbox
+
+        numbers:
+            name: 1234
+            fields:
+                section:
+                    type: section
+                    comment: 1234
+                numbers_title:
+                    label: Заголовок
+                    span: left
+                    type: text
+                numbers_numerals:
+                    label: Цифры
+                    span: right
+                    type: repeater
+                    form:
+                        fields:
+                            repeater_number:
+                                label: Число
+                                span: left
+                                type: text
+                            repeater_description:
+                                label: Описание
+                                span: right
+                                type: textarea
+                                size: tiny
+                numbers_up:
+                    label: Поднимать блок на предыдущий
+                    span: left
+                    type: switch
+ready_blocks:
+    name: Готовые блоки
+    icon: icon-th-large
+    blocks:
+        tenders:
+            name: Тендеры
+            fields:
+                section:
+                    type: section
+                    comment: Тендеры
+                edrpou:
+                    type: textarea
+                    label: ЕДРПОУ через запятую
+        registrationAndSearch:
+            name: Поиск с формой регистрации
+            fields:
+                section:
+                    type: section
+                    comment: Поиск с формой регистрации
+                search_header:
+                    type: text
+                    label: Заголовок к поиску
+                search_text:
+                    type: textarea
+                    label: Комментарий к поиску
+                search_image:
+                    label: Фоновая картинка
+                    type: fileupload
+                    mode: image
+                    span: full
+
+        registration:
+            name: Форма регистрции
+            fields:
+                section:
+                    type: section
+                    comment: Форма регистрации
+                header:
+                    type: text
+                    label: Заголовок к регистрации
+                text:
+                    type: textarea
+                    label: Комментарий к регистрации
+                image:
+                    label: Фоновая картинка
+                    type: fileupload
+                    mode: image
+                    span: full
+
+        customers:
+            name: Заказчики
+            fields:
+                section:
+                    type: section
+                    comment: Заказчики
+                customers_title:
+                    label: Заголовок
+                    span: full
+                    type: text
+                customers_up:
+                    label: Поднимать блок на предыдущий
+                    span: left
+                    type: switch
+                customers_is_index:
+                    label: Только на главной
+                    span: right
+                    type: switch
+
+        areas:
+            name: Площадки
+            fields:
+                section:
+                    type: section
+                    comment: Площадки
+                areas_title:
+                    label: Заголовок
+                    span: left
+                    type: text
+                areas_appearance:
+                    label: Внешний вид
+                    span: right
+                    type: dropdown
+                    options:
+                        short_slider: Краткий слайдер
+                        full_slider: Полный слайдер
+                        full: Полный
+                areas_up:
+                    label: Поднимать блок на предыдущий
+                    span: left
+                    type: switch
+                areas_is_index:
+                    label: Только на главной
+                    span: right
+                    type: switch
+
+        searchForm:
+            name: Форма поиска
+            fields:
+                section:
+                    type: section
+                    comment: Форма поиска
+                search_form_title:
+                    label: Заголовок
+                    span: full
+                    type: text
+                search_form_image:
+                    label: Фоновая картинка
+                    type: fileupload
+                    mode: image
+                    span: full
+                show_suggest:
+                    label: Расширенный поиск
+                    type: switch
+
+image_blocks:
+    name: Картинки
+    icon: icon-picture-o
+    blocks:
+        logo:
+            name: Лого
+            fields:
+                section:
+                    type: section
+                    comment: Лого
+                weight:
+                    label: Ширина
+                    span: left
+                    type: text
+                height:
+                    label: Высота
+                    span: right
+                    type: text
+                image:
+                    label: Картинка
+                    type: fileupload
+                    mode: image
+                    span: auto
+        backgroundImage:
+            name: Блок с картинкой на фоне
+            fields:
+                section:
+                    type: section
+                    comment: Блок с картинкой на фоне
+                background_image_title:
+                    label: Заголовок
+                    span: left
+                    type: text
+                background_image_image:
+                    label: Фоновая картинка
+                    type: fileupload
+                    mode: image
+                    span: right
+                    imageHeight: 200
+                background_image_title2:
+                    label: Второй заголовок
+                    span: left
+                    type: textarea
+                    size: small
+                background_image_button_text:
+                    label: Текст на кнопке
+                    span: left
+                    type: text
+                background_image_button_url:
+                    label: Гиперссылка на кнопке
+                    span: left
+                    type: text
+                background_image_bgcolor:
+                    label: Цвет под всем блоком
+                    type: colorpicker
+                    span: right
+embed:
+    name: Embed сервисы
+    icon: icon-file-code-o
+    blocks:
+        disqus:
+            name: Комментарии Disqus
+            icon: icon-comment
+            fields:
+                section:
+                    type: section
+                    comment: Комментарии Disqus
+        embed:
+            name: Embed
+            icon: icon-file-code-o
+            fields:
+                section:
+                    type: section
+                    comment: Embed
+                embed_title:
+                    label: Заголовок
+                    span: left
+                    type: text
+                embed_code:
+                    label: Embed-код
+                    span: right
+                    type: textarea
+                embed_height:
+                    label: Высота
+                    span: left
+                    type: number
+                embed_width:
+                    label: Ширина
+                    span: left
+                    type: number
+                embed_up:
+                    label: Поднимать блок на предыдущий
+                    span: left
+                    type: switch

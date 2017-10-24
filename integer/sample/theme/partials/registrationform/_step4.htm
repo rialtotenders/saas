@@ -1,0 +1,81 @@
+<div class="c-main background-absolute background-eclips" ></div>
+
+<div class="w c-main" id="registration-form">
+    <div class="c ">
+        <div class="registered-step">
+            <div class="list-step inline-layout">
+                <div class="item"><span>{{ 'profile.register.step1'|_}}</span></div>
+                <div class="item"><span>{{ 'profile.register.step2'|_}}</span></div>
+                <div class="item"><span>{{ 'profile.register.step3'|_}}</span></div>
+                {% if steps == 4 %}
+                <div class="item active"><span>{{ 'profile.register.step4'|_}}</span></div>
+                {% endif %}
+            </div>
+
+            <h3>{{ header }}</h3>
+
+            <div class="inline-layout">
+                <div class="form-registration">
+                    <form data-request="onHandleForm" data-registration data-request-data="'step': '4'" data-request-complete="$(this).find('.error-holder:not(:empty)').show();">
+
+                        <div class="form-holder ">
+                            <div class="checkbox">
+                                <input type="checkbox" name="is_do" id="is_do" value="1" required />
+                                <label for="is_do">{{ 'profile.is_do'|_}}</label>
+                            </div>
+                        </div>
+
+                        {% if offerta_link %}
+                        <div class="form-holder">
+                            <div class="checkbox">
+                            <a href="{{ offerta_link }}" target="_blank">{{ 'profile.offerta_link_text'|_ }}</a>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="block-button">
+                            <button data-request="onReturnBack" data-request-data="'step': '3'" class="prev_step">{{ 'profile.register.prev_button'|_}}</button>
+                            <button type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'profile.register.register_button'|_}}</button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                    <div class="block-phone-desc">
+                        <span>{{ 'profile.register.phone_title'|_}}:</span>
+                        <a href="tel:{{ 'common.support_phone'|_ }}">{{ 'common.support_phone'|_ }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    if (window.jQuery !== undefined) {
+        new window.RegistrationValidation();
+        jQuery(function($) {
+            $('.next_step').on('click', function() {
+                if(!$('#is_do').is(':checked')) {
+                    alert('{{'profile.must_check_offerta'|_}}');
+                }
+            });
+        });
+    }
+</script>
+{% put scripts %}
+<script>
+    jQuery(function($) {
+        $('.next_step').on('click', function() {
+            if(!$('#is_do').is(':checked')) {
+                alert('{{'profile.must_check_offerta'|_}}');
+            }
+        });
+    });
+</script>
+{% endput %}

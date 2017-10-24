@@ -1,0 +1,56 @@
+<div class="w c-twoc{% if data.description_up %} go-prev{% endif %}">
+    <div class="c">
+        <div class="c-twoc__wrap"  style="background-image: url({{ data.description_image.path }});">
+            <div class="c-twoc__table">
+                <div class="c-twoc__cell c-twoc__cell--description"{% if data.description_color %} style="background-color: {{ data.description_color }};"{% endif %}>
+                    {% if data.description_title %}
+                        <h2>{{ data.description_title }}</h2>
+                    {% endif %}
+
+                    {{ data.description_description|raw }}
+
+                    {% if data.description_button_text %}
+                        <a href="{{ data.description_button_url }}" class="c-twoc__main-link {{ data.description_button_position }}">{{ data.description_button_text }}</a>
+                    {% endif %}
+                </div>
+                <div class="c-twoc__cell c-twoc__cell--icons">
+                    <div class="c-twoc__table-inner">
+                        {% for item in description_advantages %}
+                            <div class="c-twoc__table-row">
+                                <div class="c-twoc__table-cell">
+                                    {% if item.repeater_icon %}
+                                        {% if item.repeater_url %}
+                                            <a href="{{ item.repeater_url }}">
+                                                <img src="{{ item.repeater_icon }}">
+                                            </a>
+                                        {% else %}
+                                            <img src="{{ item.repeater_icon }}">
+                                        {% endif %}
+                                    {% else %}
+                                        <div class="c-twoc__table-cell">
+                                            {% if item.repeater_url %}
+                                                <a href="{{ item.repeater_url }}">
+                                                    <h3 class="c-twoc__number">{{ item.repeater_large_text }}</h3>
+                                                </a>
+                                            {% else %}
+                                                <h3 class="c-twoc__number">{{ item.repeater_large_text }}</h3>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="c-twoc__table-cell c-twoc__table-cell--text">
+                                    {% if item.repeater_url %}
+                                        <a href="{{ item.repeater_url }}">{{ item.repeater_text }}</a>
+                                    {% else %}
+                                        {{ item.repeater_text }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

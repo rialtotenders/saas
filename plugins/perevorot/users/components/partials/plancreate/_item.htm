@@ -1,0 +1,71 @@
+<div class="item-block">
+    <div class="inline-layout">
+        <h4>{{ 'plan.create.item_position'|_ }} {{ key + 1 }}</h4>
+        <div class="item-button inline-layout">
+            <div class="remove-item-block"></div>
+            <div class="slide-item-block js-slide-item"></div>
+        </div>
+    </div>
+
+    <div class="form-item">
+        <input type="hidden" name="items[{{ key }}][id]" value="{{ item.id }}"/>
+        <div class="form-holder">
+            <label for="plan_create_nomenclature_description-{{ key }}">{{ 'plan.create.nomenclature_description'|_}}</label>
+            <div class="form-holder">
+                <textarea id="plan_create_nomenclature_description-{{ key }}" placeholder="" name="items[{{ key }}][description]">{{ item.description }}</textarea>
+                <div class="error-holder none" data-validation="items.{{ key }}.description"></div>
+            </div>
+        </div>
+
+        <div class="form-holder">
+            <label for="plan_create_choose_cpv-{{ key }}">{{ 'plan.create.please_choose_cpv'|_}}</label>
+            <div class="form-holder">
+                <input id="plan_create_choose_cpv-{{ key }}" class="search_cpv" placeholder="{{ 'plan.create.search_cpv'|_ }}" type="text" cpv-search-closed />
+                <input class="search_cpv none" type="text" placeholder="{{ 'plan.create.search_cpv'|_ }}" cpv-search-opened />
+                <div class="loader"></div>
+                {% partial '@_blocks/_cpv'
+                    class='normal_list_cpv'
+                    parent_item=plan.classification.id
+                    input_name='items['~key~'][classification][id]'
+                    selected_item=item.classification.id
+                    type='any'
+                    id_prefix=key
+                    auto_height=true
+                %}
+                <div сlass="error-holder none" data-validation="items.{{ key }}.classification.id"></div>
+            </div>
+        </div>
+
+        <div class="form-holder">
+            <label for="plan_create_quantity-{{ key }}">{{ 'plan.create.quantity'|_ }}</label>
+            <input id="plan_create_quantity-{{ key }}" placeholder="" type="text" name="items[{{ key }}][quantity]" value="{{ item.quantity }}"/>
+            <div class="error-holder none" data-validation="items.{{ key }}.quantity"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="plan_units-{{ key }}">{{ 'plan.create.units'|_}}</label>
+            <select id="plan_units-{{ key }}" name="items[{{ key }}][unit][code]" data-unit-select>
+                {% for key, unit in measurers %}
+                <option value="{{ key }}" {% if key == item.unit.code %} selected {% endif %}>{{ unit }}</option>
+                {% endfor %}
+            </select>
+            <div class="error-holder none" data-validation="items.{{ key }}.unit.code"></div>
+        </div>
+
+        <div class="form-holder">
+            <label for="plan_create_deliveryDate_startDate-{{ key }}">{{ 'plan.create.deliveryDate_startDate'|_}}</label>
+            <div class="input-group date">
+                <input autocomplete="off" id="plan_create_deliveryDate_startDate-{{ key }}" placeholder="" name="items[{{ key }}][deliveryDate][startDate]" value="{{ item.deliveryDate.startDate }}" type="text" class="form-control">
+            </div>
+            <div class="error-holder none" data-validation="items.{{ key }}.deliveryDate.startDate"></div>
+        </div>
+        <div class="form-holder">
+            <label for="plan_create_deliveryDate_endDate-{{ key }}">{{ 'plan.create.deliveryDate_endDate'|_}}</label>
+            <div class="input-group date">
+                <input autocomplete="off" id="plan_create_deliveryDate_endDate-{{ key }}" placeholder="" name="items[{{ key }}][deliveryDate][endDate]" value="{{ item.deliveryDate.endDate }}" type="text" class="form-control">
+            </div>
+            <div class="error-holder none" data-validation="items.{{ key }}.deliveryDate.endDate"></div>
+        </div>
+
+    </div>
+</div>

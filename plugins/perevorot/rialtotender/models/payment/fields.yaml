@@ -1,0 +1,25 @@
+fields:
+    number:
+        label: 'Номер платежного поручения'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    date:
+        label: Дата
+        oc.commentPosition: ''
+        mode: datetime
+        span: auto
+        required: 1
+        type: datepicker
+    sum:
+        label: Сумма
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: number
+    currency_id:
+        label: Валюта
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: dropdown

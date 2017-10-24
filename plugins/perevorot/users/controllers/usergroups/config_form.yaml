@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: rainlab.user::lang.group.label
+
+# Model Form Field configuration
+form: $/perevorot/users/models/usergroup/fields.yaml
+
+# Model Class name
+modelClass: Perevorot\Users\Models\UserGroup
+
+# Default redirect location
+defaultRedirect: perevorot/users/usergroups
+
+# Create page
+create:
+    title: rainlab.user::lang.groups.create_title
+    redirect: perevorot/users/usergroups/update/:id
+    redirectClose: perevorot/users/usergroups
+
+# Update page
+update:
+    title: rainlab.user::lang.groups.update_title
+    redirect: perevorot/users/usergroups
+    redirectClose: perevorot/users/usergroups
+
+# Preview page
+preview:
+    title: rainlab.user::lang.groups.update_title

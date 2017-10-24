@@ -1,0 +1,105 @@
+<div class="w c-main" id="registration-form">
+    <div class="c ">
+        <div class="registered-step tender-create">
+
+            {% partial('@_blocks/_steps') step=4 next=5 %}
+
+            <div class="inline-layout">
+                <div class="form-registration">
+
+                    <form id="tender-form" data-update="{{ _update }}" data-request-loading=".spinner" data-request="onHandleForm" data-step="4" data-tender data-step="4" data-request-data="'step': '4'" data-request-complete="validation(this)">
+                        <input type="hidden" name="document_type" value="tender">
+                        <input type="hidden" name="save" id="tender-save" value="0">
+                        <input type="hidden" name="next_step" id="tender-next-step" value="">
+                        <input type="hidden" name="tenderID" value="{{ _tender.tender_id }}">
+
+                        {% if not tender.lot %}
+                        <div class="new-item-block">
+                            {% if tender.items|length %}
+                                {% for key, item in tender.items %}
+                                    {% partial('@_blocks/_item') title_key=(key+1) key=key item=item input_name_prefix='items['~key~']' %}
+                                {% endfor %}
+                            {% else %}
+                                {% partial('@_blocks/_item') title_key=1 key=0 input_name_prefix='items[0]' %}
+                            {% endif %}
+                        </div>
+
+                        <div class="new-item-links inline-layout">
+                            <a href="#" class="add-new-item-block"><span>{{ 'tender.create.add_new_item'|_ }}</span></a>
+                        </div>
+                        {% else %}
+                        <div class="new-lot-block">
+                            {% if tender.lots|length %}
+                                {% for lot_key, lot in tender.lots %}
+                                    {% partial('@_blocks/_lot') title_key=(lot_key+1) lot_key=lot_key lot=lot not_delete_lot=tender_is_complete %}
+                                {% endfor %}
+                            {% else %}
+                                {% partial('@_blocks/_lot') title_key=1 lot_key=0 item_key=0 not_delete_lot=false %}
+                            {% endif %}
+                        </div>
+
+                        <div class="new-item-links inline-layout">
+                            <a href="#" class="add-new-lot-block">
+                                <span>{{ 'tender.create.add_new_lot'|_ }}</span>
+                            </a>
+                        </div>
+                        {% endif %}
+
+                        <div class="block-button" id="for-spinner">
+                            <button data-request-loading=".spinner" data-request="onReturnBack" data-request-data="'step': '3'" class="prev_step">{{ 'tender.create.prev_button'|_}}</button>
+                            <button data-save="0" type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'tender.create.next_button'|_}}</button>
+                            <button data-save="1" type="submit" class="next_step save_step" onClick="$('.error-holder').hide().html('');">{{ 'tender.create.save'|_}}</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                    {% if tender.features is not empty %}
+                    <div class="block-desc min-width">
+                        <h4>{{ 'tender.create.preview_tender_features'|_ }}</h4>
+
+                        <div class="criteria-tender-block">
+                        {% for feature in tender.features %}
+                            <div class="item-criteria inline-layout col-2">
+                                <div class="title_criteria">{{ feature.title }}</div>
+                                <div class="value_criteria">
+
+                                    {% set max_enum = 0 %}
+                                    {% for enum in feature.enum %}
+                                        {% if max_enum < enum.value %}
+                                            {% set max_enum = enum.value %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    <div class="main_value_criteria">{{ max_enum }}%</div>
+                                    <div class="list_value_criteria">
+                                        <div>
+                                            {% for enum in feature.enum %}
+                                            <div class="item-value">
+                                                {{ enum.title ~ ' - ' ~ enum.value~'%' }}
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% partial '@_tendercreate_scripts/_step5_script_tpls' %}
+{% partial '@_blocks/_cpv_item_tpl' type='single' %}
+{% partial '@_tendercreate_scripts/_file_uploader_tpl' %}
+{% partial '@_tendercreate_scripts/_scripts' %}

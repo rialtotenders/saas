@@ -1,0 +1,71 @@
+{% if item.__contracts_changes is not empty %}
+<br>
+<div class="sb-table ">
+    <div class="table__table">
+
+        <div class="table__table-row table__table-row3">
+            <div class="table__table-cell table__table-cell--th">
+                {{ 'tender.contract.changes'|_ }}
+            </div>
+            <div class="table__table-cell table__table-cell--th">
+                {{ 'tender.contract.causes_changes'|_ }}
+            </div>
+            <div class="table__table-cell table__table-cell--th">
+                {{ 'tender.contract.signed'|_ }}
+            </div>
+        </div>
+
+        {% for change in item.__contracts_changes  %}
+            <div class="table__table-row table__table-row3">
+                <div class="table__table-cell">
+                    <h4 class="overlay-title js-tender-document title_orange">
+                        {% if change.contract is not empty %}
+                        <span>{{ 'tender.contract.show_documents'|_ }}</span>
+                        {% else %}
+                        {{ 'tender.contract.no_documents'|_ }}
+                        {% endif %}
+                    </h4>
+                </div>
+                <div class="table__table-cell">
+                    {% if change.rationaleTypes is not empty %}
+                    <p>
+                        {{ 'tender.contract.causes'|_ }}<br>
+                        {% for type in change.rationaleTypes %}
+                            <span>{{ '- ' ~ type|stripslashes }}</span><br>
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+                    <p>
+                        {{ 'tender.contract.description'|_ ~ ' ' ~ change.rationale|stripslashes }}
+                    </p>
+                </div>
+                <div class="table__table-cell">
+                    <p>
+                        {{ change.dateSigned|date('d.m.Y H:i') }}
+                    </p>
+                </div>
+            </div>
+
+            {% if change.contract is not empty %}
+            <div class="tender-document js-tender-document">
+                <div class="close"></div>
+                <h4>
+                    {{ 'tender.contract.documents'|_ }}
+                </h4>
+                {% for document in change.contract %}
+                    <div class="document-info table__table-row table__table-row3">
+                        <div class="table__table-cell">
+                            <a href="{{document.url}}" target="_blank" class="document-name">{{document.title|stripslashes}}</a>
+                        </div>
+                        <div class="document-date table__table-cell">{{ document.dateModified|date('d.m.Y H:i')}}</div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endfor %}
+
+
+    </div>
+</div>
+
+{% endif %}

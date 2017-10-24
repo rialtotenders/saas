@@ -1,0 +1,13 @@
+<div class="c-footmenu__wrap">
+    <div class="c-footmenu__center">
+        <div class="row">
+            {% for item in menu %}
+                <div class="col-25 c-footmenu__col">
+                    <ul class="c-footmenu__list">
+                        {% partial 'bottom-menu/second-level' menu=item.children %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

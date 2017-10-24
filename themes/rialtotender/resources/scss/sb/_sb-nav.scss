@@ -1,0 +1,146 @@
+$sb-nav-width: 300px;
+.sb-nav {
+  padding-left: 150px;
+  padding-right: 150px;
+  text-align: center;
+  @extend .transition;
+  @include a-header-1() {
+	  position: fixed;
+	  top: 0;
+	  right: -$sb-nav-width;
+	  width: $sb-nav-width;
+	  bottom: -2px;
+	  background-color: $bg-main;
+	  padding-left: 0;
+	  padding-right: 0;
+	  z-index: 10;
+  }
+  &__center {
+    margin: 0 auto;
+    width: auto;
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 0.9em;
+    @include a-header-1() {
+    	width: $sb-nav-width;
+    	top: $height-header;
+    	position: absolute;
+    	bottom: 0;
+    	overflow-y: auto;
+		left: 0;
+    }
+    &:after {
+      @extend .clearfix;
+    }
+    & > .sb-nav__item {
+      padding-left: 15px;
+      padding-right: 15px;
+      height: $height-header;
+      @include a-header-1() {
+      	width: 100%;
+    	display: block;
+    	height: auto;
+    	text-align: left;
+    	padding-left: 40px;
+    	&:after {
+	    	content: '';
+	    	display: block;
+	    	clear: both;
+    	}
+      }
+    }
+  }
+  &__first {
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    @include a-header-1() {
+    	float: left;
+    }
+    &--active {
+	    & > .sb-nav__text {
+		    color: $text-color-nav-active;
+	    }
+    }
+  }
+  .sb-nav__item {
+    &--has-sub .sb-nav__first:after {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-right: 2px solid $border-color-nav-arrow;
+      border-bottom: 2px solid $border-color-nav-arrow;
+      position: absolute;
+      top: 50%;
+      margin-top: -5px;
+      right: -16px;
+      transform: rotate(45deg);
+    }
+    &--has-sub {
+      padding-right: 25px;
+    }
+  }
+  &__item {
+    display: inline-block;
+    @include a-header-1() {
+    	
+    }
+    &:hover {
+      & .sb-nav__sub-wrap {
+        display: block;
+      }
+    }
+  }
+  &__sub-wrap {
+    display: none;
+    background: $bg-main-opacity-09;
+    position: absolute;
+    top: $height-header;
+    left: -3px;
+    text-align: left;
+    padding: 0 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    font-weight: 500;
+    min-width: 150px;
+  }
+  &__sub-item {
+    padding: 8px 0;
+  }
+  &__second {
+    display: inline-block;
+    &--active {
+      color: $text-color-nav-active;
+    }
+  }
+  &__text {
+    white-space: nowrap;
+    z-index: 10;
+    @extend .transition-down;
+  }
+  &__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 11;
+
+    &:hover + div {
+      color: $text-color-nav-hover;
+      @extend .transition;
+    }
+  }
+  &__nav-item {
+    color: red;
+  }
+}
+body.is-active {
+	.sb-nav {
+		right: 0;
+	}
+    .c-header{
+      overflow: visible;
+    }
+}

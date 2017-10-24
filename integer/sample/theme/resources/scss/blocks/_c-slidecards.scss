@@ -1,0 +1,136 @@
+.c-slidecards {
+  .c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__wrap {
+    padding-top: 77px;
+    padding-bottom: 89px;
+    padding-left: 120px;
+    padding-right: 120px;
+    overflow: hidden;
+  }
+  &__center {
+    @extend .max-width-inner;
+    margin: 0 auto;
+  }
+  &__slider {
+    margin-top: 35px;
+    max-height: 400px;
+    .slick-slide {
+      min-height: 325px;
+    }
+    .slick-arrow {
+      width: 27px;
+      height: 42px;
+      color: transparent;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      margin-top: -21px;
+    }
+    .slick-prev {
+      background-image: url('/themes/rialtotender/assets/img/design/group-7.svg');
+      left: -70px;
+    }
+    .slick-next {
+      background-image: url('/themes/rialtotender/assets/img/design/group-8.svg');
+      right: -70px;
+    }
+  }
+  $c-slider-padding-left-right: 30px;
+  &__item-wrap {
+    margin-right: 1px;
+    background: white;
+    padding-top: 10px;
+    padding-left: $c-slider-padding-left-right;
+    padding-right: $c-slider-padding-left-right;
+    max-width: 250px;
+    float: left;
+    &--soon {
+      .c-slidecards__soon-wrap {
+        display: block;
+      }
+      .c-slidecards__content img {
+        filter: grayscale(100%);
+        opacity: 0.3;
+      }
+      .c-slidecards__item-link {
+        color: #cecece;
+        pointer-events: none;
+      }
+    }
+  }
+  &__content {
+    img {
+      width: 100%;
+    }
+  }
+  p {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.46;
+    color: #1a1a1a;
+    margin-top: 10px;
+  }
+  &__item-link {
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: center;
+    color: #1a1a1a;
+    border-radius: 2px;
+    border: solid 1px #dedede;
+    padding: 10px 10px;
+    position: absolute;
+    bottom: 30px;
+    left: $c-slider-padding-left-right;
+    right: $c-slider-padding-left-right;
+  }
+  &__main-link-wrap {
+    text-align: center;
+    margin-top: 70px;
+  }
+  &__main-link {
+    font-size: 13px;
+    text-align: center;
+    line-height: 50px;
+    min-width: 230px;
+    height: 50px;
+    border-radius: 2px;
+    background-color: #e05a00;
+    display: inline-block;
+    color: #ffffff;
+  }
+  &__soon-wrap {
+    text-align: center;
+    z-index: 20;
+    position: absolute;
+    top: -1px;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    display: none;
+    div {
+      text-align: center;
+      background-color: #16a085;
+      font-size: 11px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      text-align: center;
+      color: #ffffff;
+      text-transform: uppercase;
+      position: relative;
+      top: 0;
+      margin: 0 auto;
+      padding: 4px 15px;
+      display: inline-block;
+    }
+  }
+}

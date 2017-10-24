@@ -1,0 +1,12 @@
+list: $/perevorot/rialtotender/models/tender/columns.yaml
+modelClass: Perevorot\Rialtotender\Models\Tender
+title: Tenders
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+recordsPerPage: 30
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'perevorot/rialtotender/tenders/preview/:id'

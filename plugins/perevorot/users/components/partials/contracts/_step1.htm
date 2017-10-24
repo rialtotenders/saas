@@ -1,0 +1,109 @@
+<div class="w c-main" id="registration-form">
+    <div class="c">
+        <div class="registered-step contract-create">
+
+            {% partial('@contracts/_steps') step=1 %}
+
+            <div class="inline-layout ">
+                <div class="form-registration">
+                    <form id="tender-form" data-request-loading=".spinner" data-request="onHandleForm" data-tender data-request-data="'step': '1'" data-request-complete="validation(this)">
+                        <div class="form-holder">
+                            <label for="contract_edit_title">{{ 'contract.edit.title'|_}}</label>
+                            <input id="contract_edit_title" type="text" name="title" value="{{ contract.title }}"/>
+                            <div class="error-holder none" data-validation="title"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="contract_edit_description">{{ 'contract.edit.description'|_}}</label>
+                            <textarea id="contract_edit_description" name="description">{{ contract_json.description }}</textarea>
+                            <div class="error-holder none" data-validation="description"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="contract_edit_Change_contractNumber">{{ 'contract.edit.change.contractNumber'|_}}</label>
+                            <input id="contract_edit_Change_contractNumber" type="text" name="change[contractNumber]" value="{{ contract_json.change.contractNumber }}"/>
+                            <div class="error-holder none" data-validation="change.contractNumber"></div>
+                        </div>
+
+                        <div class="form-holder input-group date">
+                            <label for="contract_edit_Change_dateSigned">{{ 'contract.edit.change.dateSigned'|_}}</label>
+                            <input autocomplete="off" id="contract_edit_Change_dateSigned" type="text" name="change[dateSigned]" value="{{ contract_json.change.dateSigned }}"/>
+                            <div class="error-holder none" data-validation="change.dateSigned"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="contract_edit_Change_rationaleTypes">{{ 'contract.edit.change.rationaleTypes'|_ }}</label>
+                            <select id="contract_edit_Change_rationaleTypes" name="change[rationaleTypes]">
+                                {% for code, name in rationaletypes %}
+                                <option value="{{ code }}" {% if code == contract_json.change.rationaleTypes %} selected {% endif %}>{{ name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="error-holder none" data-validation="change.rationaleTypes"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="contract_edit_rationale">{{ 'contract.edit.change.rationale'|_}}</label>
+                            <input id="contract_edit_rationale" type="text" name="change[rationale]" value="{{ contract_json.change.rationale }}"/>
+                            <div class="error-holder none" data-validation="change.rationale"></div>
+                        </div>
+
+                        <div class="form-holder input-group date">
+                            <label for="contract_edit_Period_StartDate">{{ 'contract.edit.Period_StartDate'|_}}</label>
+                            <input autocomplete="off" id="contract_edit_Period_StartDate" type="text" name="period[startDate]" value="{{ contract_json.period.startDate|date('d.m.Y') }}"/>
+                            <div class="error-holder none" data-validation="period.startDate"></div>
+                        </div>
+
+                        <div class="form-holder input-group date">
+                            <label for="contract_edit_Period_EndDate">{{ 'contract.edit.Period_EndDate'|_}}</label>
+                            <input id="contract_edit_Period_EndDate" type="text" name="period[endDate]" value="{{ contract_json.period.endDate|date('d.m.Y') }}"/>
+                            <div class="error-holder none" data-validation="period.endDate"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="contract_edit_value_amount">{{ 'contract.edit.value_amount'|_}}</label>
+                            <input id="contract_edit_value_amount" type="text" name="value[amount]" value="{{ contract_json.value.amount }}"/>
+                            <div class="error-holder none" data-validation="value.amount"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label>{{ 'contract.edit.chose_currency'|_ }}</label>
+                            <select name="value[currency]" disabled>
+                                {% for currency in currencies %}
+                                <option value="{{ currency.code }}" {% if currency.code == contract_json.value.currency %} selected {% endif %}>{{ currency.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="error-holder none" data-validation="value.currency"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label>{{ 'contract.edit.chose_tax'|_ }}</label>
+                            <select name="value[valueAddedTaxIncluded]" disabled>
+                                <option value="false" {% if contract_json.value.valueAddedTaxIncluded == false %} selected {% endif %}>{{ 'contract.edit.without_tax'|_ }}</option>
+                                <option value="true" {% if contract_json.value.valueAddedTaxIncluded == true %} selected {% endif %}>{{ 'contract.edit.with_tax'|_ }}</option>
+                            </select>
+                            <div class="error-holder none" data-validation="value.valueAddedTaxIncluded"></div>
+                        </div>
+
+                        <div class="block-button" id="for-spinner">
+                            <button type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'contract.edit.next_button'|_}}</button>
+                            <a href="{{ siteLocale }}contract/{{ contract.cid }}" class="prev_step">{{ 'contract.edit.return_to_contract'|_}}</a>
+                        </div>
+
+                        <input type="hidden" name="last_change[dateSigned]" value="{% if contract.last_change_signed %}{{ contract.last_change_signed }}{% else %}{{ contract.date_signed }}{% endif %}">
+                        <input type="hidden" name="save" id="contract-save" value="0">
+                    </form>
+                </div>
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% partial '@contracts/_scripts' %}

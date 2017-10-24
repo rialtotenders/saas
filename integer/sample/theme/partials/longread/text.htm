@@ -1,0 +1,16 @@
+<div class="w c-text">
+    <div class="c">
+        <div class="c-text__wrap">
+            <div class="c-text__center">
+                <div class="row">
+                    <div class="col-100">
+                        {% if data.text_title %}
+                            <h2>{{ data.text_title }}</h2>
+                        {% endif %}
+                        {{ data.text_text|raw }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

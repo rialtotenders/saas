@@ -1,0 +1,66 @@
+<tr>
+    <td>
+        <p>
+            {% if tender.status and tender.is_complete %}
+            <a href="{{ siteLocale }}tender/{{ tender.tender_id }}"><strong>{{ tender.title }}</strong></a>
+            {% elseif not tender.status and not tender.is_complete %}
+            <a href="{{ siteLocale }}tender/{{ tender.id }}/edit"><strong>{{ tender.title }}</strong></a>
+            {% else %}
+            <strong>{{ tender.title }}</strong>
+            {% endif %}
+        </p>
+        <p>{{ tender.tender_id }}</p>
+    </td>
+    <td>
+        <p>
+            {% if tender.is_empty_price %}
+                <strong>{{ 'user.tender.is_empty_price'|_ }}</strong>
+            {% else %}
+                {% if tender.currency %}
+                    <strong>{{ tender.value ~ ' ' ~ tender.currency }}</strong>
+                {% else %}
+                    {{ 'user.tender.value_empty'|_ }}
+                {% endif %}
+            {% endif %}
+        </p>
+    </td>
+    <td>
+        <p>
+            {% if tender.is_complete %}
+                {% if tender.status %}
+                    {% if dataStatus[tender.status] %}
+                        {{ dataStatus[tender.status] }}
+                    {% else %}
+                        {{ tender.status }}
+                    {% endif %}
+                {% else %}
+                    {{ 'user.tenders.wait_publication'|_ }}
+                {% endif %}
+            {% else %}
+                {{ 'user.tender.project_status'|_ }}
+            {% endif %}
+        </p>
+    </td>
+    <td>
+        <p>
+            {% if tender.status %}
+                {% if tender.status in ['active.enquiries', 'active.tendering'] %}
+                    {{ 'user.tender.status_until'|_ ~ ' ' ~ tender.date|date('d.m.Y H:i') }}
+                {% elseif tender.status == 'active.auction' %}
+                    {{ 'user.tender.start_auction'|_ ~ ' ' ~ tender.date|date('d.m.Y H:i') }}
+                {% else %}
+                    {{ 'user.tender.date_empty'|_ }}
+                {% endif %}
+            {% endif %}
+        </p>
+    </td>
+    <td>
+        <p>
+            {% if tender.empty_questions %}
+            <a class="questions_yes" href="{{ siteLocale }}tender/{{ tender.tender_id }}/#questions">{{ tender.empty_questions }}</a>
+            {% else %}
+            <span class="questions_no">{{ tender.empty_questions }}</span>
+            {% endif %}
+        </p>
+    </td>
+</tr>

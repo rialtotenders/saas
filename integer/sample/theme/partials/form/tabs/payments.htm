@@ -1,0 +1,30 @@
+
+<div class="w c-s none payments-content" tab-content>
+    <div class="c">
+        <a href="{{ siteLocale~'invoices' }}" class="sb-bigbutton sb-bigbutton--bg-color" style="margin-top: 0;">{{ 'profile.invoices_title'|_}}</a>
+        <br><br>
+        <div class="overflow-table">
+            <table>
+                <tr>
+                    <th>{{ 'user.payments.operation'|_ }}</th>
+                    <th>{{ 'user.payments.number'|_ }}</th>
+                    <th>{{ 'user.payments.sum'|_ }}</th>
+                </tr>
+                {% for item in user.payments %}
+                <tr>
+                    <td>
+                        <p><span class="date_payments">{{ item.date|date('d.m.Y H:i') }}</span> {{ item.type }}</p>
+                    </td>
+                    <td>
+                        <p>{{ item.number }}</p>
+                    </td>
+                    <td>
+                        <p>{{ item.sum ~ ' ' ~ item.currency.name }}</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+</div>

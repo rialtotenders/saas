@@ -1,0 +1,4 @@
+title: Tariffs
+modelClass: Perevorot\Rialtotender\Models\Tariff
+toolbar:
+    buttons: reorder_toolbar

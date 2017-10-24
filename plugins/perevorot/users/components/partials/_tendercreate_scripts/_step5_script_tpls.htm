@@ -1,0 +1,21 @@
+{% if show_features and tender.lot and tender.criteria %}
+    <script id="new-feature-tpl" type="text/x-jquery-tmpl">
+    {% partial '@_blocks/_feature' feature_type='lot' key='${item_index}' fkey='${feature_index}' input_name_prefix='lots[${lot_index}][features]' %}
+    </script>
+    <script id="new-feature-enum-tpl" type="text/x-jquery-tmpl">
+    {% partial '@_blocks/_feature_enum' key='${item_index}' fkey='${feature_index}' ekey='${enum_index}' input_name_prefix='lots[${lot_index}][features]' reinit_input_name_prefix=true %}
+    </script>
+{% endif %}
+
+{% if tender.lot %}
+    <script id="new-lot-item-tpl" type="text/x-jquery-tmpl">
+    {% partial '@_blocks/_lot_item' new_item=true item_key='${item_index}' lot_key='${lot_index}' input_name_prefix='lots[${lot_index}][items][${item_index}]' %}
+    </script>
+    <script id="new-lot-tpl" type="text/x-jquery-tmpl">
+    {% partial '@_blocks/_lot' hide_tpl=true new_item=true title_key='${title_key}' lot_key='${lot_index}' item_key='${item_index}' %}
+    </script>
+{% else %}
+    <script id="new-item-tpl" type="text/x-jquery-tmpl">
+    {% partial '@_blocks/_item' new_item=true title_key='${title_key}' key='${item_index}' input_name_prefix='items[${item_index}]' %}
+    </script>
+{% endif %}

@@ -1,0 +1,14 @@
+name: Icons
+form: $/perevorot/rialtotender/models/icon/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\Icon
+defaultRedirect: perevorot/rialtotender/icons
+create:
+    title: Создание иконки
+    redirect: 'perevorot/rialtotender/icons/update/:id'
+    redirectClose: perevorot/rialtotender/icons
+update:
+    title: Редактирование иконки
+    redirect: perevorot/rialtotender/icons
+    redirectClose: perevorot/rialtotender/icons
+preview:
+    title: Предпросмотр иконки

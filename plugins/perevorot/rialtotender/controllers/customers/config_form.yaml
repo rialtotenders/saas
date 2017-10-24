@@ -1,0 +1,14 @@
+name: Customers
+form: $/perevorot/rialtotender/models/customer/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\Customer
+defaultRedirect: perevorot/rialtotender/customers
+create:
+    title: Создание заказчика
+    redirect: 'perevorot/rialtotender/customers/update/:id'
+    redirectClose: perevorot/rialtotender/customers
+update:
+    title: Редактирование заказчика
+    redirect: perevorot/rialtotender/customers
+    redirectClose: perevorot/rialtotender/customers
+preview:
+    title: Предпросмотр заказчика

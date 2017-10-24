@@ -1,0 +1,89 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table perevorot_blog_posts'
+    - builder_table_create_perevorot_blog_posts.php
+1.0.3:
+    - 'Created table perevorot_blog_authors'
+    - builder_table_create_perevorot_blog_authors.php
+1.0.4:
+    - 'Created table perevorot_blog_tags'
+    - builder_table_create_perevorot_blog_tags.php
+1.0.5:
+    - 'Created table perevorot_blog_tags_to_posts'
+    - builder_table_create_perevorot_blog_tags_to_posts.php
+1.0.6:
+    - 'Add some foreign keys to blog'
+    - migration106.php
+1.0.7:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts.php
+1.0.8:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts_2.php
+1.0.9:
+    - 'Re-create pivot table'
+    - migration109.php
+1.0.11:
+    - 'Add foreign keys to pivot table'
+    - migration1011.php
+1.0.12:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts3fix.php
+1.0.13:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts_3.php
+1.0.14:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts_4.php
+1.0.15:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts5fix.php
+1.0.16:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts_5.php
+1.0.17:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts_6.php
+1.0.18:
+    - 'Updated table perevorot_blog_authors'
+    - builder_table_update_perevorot_blog_authors.php
+1.0.19:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts_7.php
+1.0.20:
+    - 'Created table perevorot_blog_tenders_statistic'
+    - builder_table_create_perevorot_blog_tenders_statistic.php
+1.0.21:
+    - 'Drop table perevorot_blog_tenders_statistic'
+    - builder_table_delete_perevorot_blog_tenders_statistic.php
+1.0.22:
+    - 'change column type'
+    - migration1022.php
+1.0.23:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts_8.php
+1.0.24:
+    - 'Created table perevorot_blog_group'
+    - builder_table_create_perevorot_blog_group.php
+1.0.25:
+    - 'Updated table perevorot_blog_group'
+    - builder_table_update_perevorot_blog_group.php
+1.0.26:
+    - 'Updated table perevorot_blog_group'
+    - builder_table_update_perevorot_blog_groups.php
+1.0.27:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts_9.php
+1.0.28:
+    - 'Updated table perevorot_blog_groups'
+    - builder_table_update_perevorot_blog_groups_2.php
+1.0.29:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts_10.php
+1.0.30:
+    - 'Updated table perevorot_blog_posts'
+    - builder_table_update_perevorot_blog_posts_11.php
+1.0.31:
+    - 'change text->mediumtext'
+    - migration1031.php

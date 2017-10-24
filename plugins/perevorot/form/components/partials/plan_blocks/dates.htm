@@ -1,0 +1,32 @@
+{% if item.dateModified or item.datePublished %}
+<h2>{{ 'plan.dates_title'|_ }}</h2>
+
+<div class="sb-table sb-table--td-py-small">
+    <div class="sb-table__table">
+        {% if item.datePublished %}
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'plan.datePublished'|_ }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.datePublished|date('d.m.Y H:i') }}<p>
+                </div>
+            </div>
+        {% endif %}
+        {% if item.dateModified %}
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'plan.dateModified'|_ }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.dateModified|date('d.m.Y H:i') }}<p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}

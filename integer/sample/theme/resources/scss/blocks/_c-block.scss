@@ -1,0 +1,23 @@
+.c-block {
+  &.go-prev .c-block__wrap {
+    margin-top: -120px;
+  }
+  .c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__wrap {
+    @extend .padding-top;
+    padding-bottom: 70px;
+    @extend .padding-left;
+    @extend .padding-right;
+    background: white;
+  }
+  &__center {
+    @extend .max-width-inner;
+    margin: 0 auto;
+  }
+  h2 {
+	  margin-bottom: 20px;
+  }
+}

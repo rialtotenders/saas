@@ -1,0 +1,48 @@
+{% if items|length %}
+    <h2>{{ 'contract.items_title'|_ }}</h2>
+    <div class="overflow-table">
+
+        <div class="sb-table sb-table__table-row--50-30-20">
+            <div class="sb-table__table">
+
+                <div class="sb-table__table-row sb-table__table-row--border-bottom">
+                    <div class="sb-table__table-cell sb-table__table-cell--th">
+                        {{ 'contract.items_title'|_ }}
+                    </div>
+                    <div class="sb-table__table-cell sb-table__table-cell--th">
+                        {{ 'contract.items_delivery'|_ }}
+                    </div>
+                    <div class="sb-table__table-cell sb-table__table-cell--th">
+                        {{ 'contract.items_quantity'|_ }}
+                    </div>
+                </div>
+                {% for one in items %}
+                    <div class="sb-table__table-row sb-table__table-row--pb0">
+                        <div class="sb-table__table-cell">
+                            <p>{{ one.description }}</p>
+                            {% if one.classification %}
+                            <p class="sb-table__text sb-table__text--small">{{ one.classification.scheme }}<br> {{ one.classification.id }}<br>{{ one.classification.description }} </p>
+                            {% else %}
+                            <p class="sb-table__text sb-table__text--small">{{ 'contract.no_dkpp'|_ }}</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="sb-table__table-cell">
+                                <p>
+                                    {{ one.deliveryAddress.countryName }},
+                                    {{ one.deliveryAddress.postalCode }},
+                                    {{ one.deliveryAddress.region }},
+                                    {{ one.deliveryAddress.locality }},
+                                    {{ one.deliveryAddress.streetAddress }},
+                                </p>
+                        </div>
+
+                        <div class="sb-table__table-cell">
+                            <p>{{ one.quantity }} {{ one.unit.name }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}

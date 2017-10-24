@@ -1,0 +1,9 @@
+columns:
+    price_from:
+        label: 'Цена от'
+        type: number
+        sortable: true
+    price_to:
+        label: 'Цена до'
+        type: number
+        sortable: true

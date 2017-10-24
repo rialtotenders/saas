@@ -1,0 +1,46 @@
+fields:
+    price:
+        label: Цена
+        oc.commentPosition: ''
+        span: auto
+        type: number
+    tender_id:
+        label: 'Идентификатор тендера'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    created_at:
+        label: 'Дата добавления'
+        oc.commentPosition: ''
+        mode: datetime
+        span: auto
+        type: datepicker
+    user_id:
+        label: 'Автор заявки'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+#     documents:
+#         label: Документы
+#         type: fileupload
+#         mode: file
+    bidDocuments:
+        label: Документы в ЦБД
+        type: partial
+        nameFrom: filename
+    lot_id:
+        label: 'ID лота'
+        span: auto
+        type: text
+    bid_id:
+        label: 'ID предложения'
+        span: auto
+        type: text
+    token_id:
+        label: 'ID token'
+        span: auto
+        type: text
+    transfer_id:
+        label: 'ID transfer'
+        span: auto
+        type: text

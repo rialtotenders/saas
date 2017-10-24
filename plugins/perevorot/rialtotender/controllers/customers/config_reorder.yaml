@@ -1,0 +1,5 @@
+title: Сортировка записей
+modelClass: Perevorot\Rialtotender\Models\Customer
+nameFrom: title
+toolbar:
+    buttons: reorder_toolbar

@@ -1,0 +1,123 @@
+.block_banner_search{
+  margin: 20px 0;
+  color: #fff;
+  width: 100%;
+  background: url("/themes/rialtotender/assets/img/design/bg_banner_block.jpg") no-repeat;
+  background-size: cover;
+  padding: 30px;
+  position: relative;
+  font-size: 14px;
+  a{
+    color: #fff;
+  }
+  h3{
+    font-size: 24px;
+
+
+  }
+  .open_more_link{
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    border-radius: 27px;
+    background: url("/themes/rialtotender/assets/img/design/icon-down_w.png") no-repeat center #8b8b8b;
+    top: 25px;
+    right: 20px;
+    transform: rotate(0deg);
+    cursor: pointer;
+    &.open{
+      transform: rotate(180deg);
+    }
+  }
+  .banner-content{
+    display: none;
+    padding-top: 40px;
+    position: relative;
+    &:after{
+      width: 1px;
+      height: calc(100% - 40px);
+      position: absolute;
+      left: 55%;
+      top: 40px;
+      content: "";
+      background: #717171;
+    }
+  }
+  .info_tender_banner{
+    width: 55%;
+    box-sizing: border-box;
+    padding-right: 40px;
+
+    .price_banner{
+      font-size: 30px;
+      font-weight: 600;
+      span{
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+    .banner_link_more{
+      transition: all 0.35s;
+      display: inline-block;
+      padding: 12px 20px;
+      border: 1px solid #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      &:hover{
+        background: #fff;
+        color: #000;
+        transition: all 0.35s;
+      }
+
+    }
+  }
+
+  .link_banner{
+    width: 45%;
+    box-sizing: border-box;
+    padding-left: 40px;
+    h4{
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+    ul{
+      li{
+        padding-left: 15px;
+        position: relative;
+        margin-bottom: 10px;
+        &:before{
+          content: "";
+          position: absolute;
+          background: #fff;
+          width: 4px;
+          height: 2px;
+          left: 0;
+          top: 6px;
+        }
+        a{
+          text-decoration: underline;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px){
+  .block_banner_search{
+    .banner-content{
+      &:after{
+        display: none;
+      }
+    }
+    .link_banner, .info_tender_banner{
+      width: 100%;
+      padding: 0;
+    }
+    .info_tender_banner{
+      margin-bottom: 20px;
+    }
+  }
+}

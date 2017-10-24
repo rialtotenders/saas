@@ -1,0 +1,32 @@
+<?php namespace Perevorot\Rialtotender\Models;
+
+use Model;
+
+/**
+ * Model
+ */
+class ComplaintPeriod extends Model
+{
+    use \October\Rain\Database\Traits\Validation;
+    
+    /*
+     * Disable timestamps by default.
+     * Remove this line if timestamps are defined in the database table.
+     */
+    public $timestamps = false;
+
+    /*
+     * Validation
+     */
+    public $rules = [
+    ];
+
+    /**
+     * @var string The database table used by the model.
+     */
+    public $table = 'perevorot_rialtotender_complaint_periods';
+
+    public function getProcurementOptions() {
+        return Procurement::getData('_method_type');
+    }
+}

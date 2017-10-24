@@ -1,0 +1,64 @@
+<h2>{{ 'tender.dates_title'|_ }}</h2>
+<div class="mobile-table">
+    <div class="sb-table sb-table--td-py-small">
+        <div class="sb-table__table">
+            {% if __item.enquiryPeriod.endDate %}
+                <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                    <div class="sb-table__table-cell">
+                        <div class="sb-table__dashed-wrap">
+                            <p>{{ 'tender.start_enquiry_period'|_ }}:</p>
+                        </div>
+                    </div>
+                    <div class="sb-table__table-cell">
+                        <p>{{ __item.enquiryPeriod.startDate|date('d.m.Y H:i') }}<p>
+                    </div>
+                </div>
+                <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                    <div class="sb-table__table-cell">
+                        <div class="sb-table__dashed-wrap">
+                            <p>{{ 'tender.period1'|_ }}:</p>
+                        </div>
+                    </div>
+                    <div class="sb-table__table-cell">
+                        <p>{{ __item.enquiryPeriod.endDate|date('d.m.Y H:i') }}<p>
+                    </div>
+                </div>
+            {% endif %}
+            {% if __item.tenderPeriod.endDate %}
+                <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                    <div class="sb-table__table-cell">
+                        <div class="sb-table__dashed-wrap">
+                            <p>{{ 'tender.period2'|_ }}:</p>
+                        </div>
+                    </div>
+                    <div class="sb-table__table-cell">
+                        <p>{{ __tem.tenderPeriod.startDate|date('d.m.Y H:i') }}<p>
+                    </div>
+                </div>
+                <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                    <div class="sb-table__table-cell">
+                        <div class="sb-table__dashed-wrap">
+                            <p>{{ 'tender.period3'|_ }}:</p>
+                        </div>
+                    </div>
+                    <div class="sb-table__table-cell">
+                        <p>{{ __item.tenderPeriod.endDate|date('d.m.Y H:i') }}<p>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if item.auctionPeriod.startDate %}
+                <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                    <div class="sb-table__table-cell">
+                        <div class="sb-table__dashed-wrap">
+                            <p>{{ 'tender.period4'|_ }}:</p>
+                        </div>
+                    </div>
+                    <div class="sb-table__table-cell">
+                        <p>{{ item.auctionPeriod.startDate|date('d.m.Y H:i') }}<p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

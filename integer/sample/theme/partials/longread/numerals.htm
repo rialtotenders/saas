@@ -1,0 +1,24 @@
+<div class="w c-facts{% if data.numerals_up %} go-prev{% endif %}">
+    <div class="c">
+        <div class="c-facts__wrap">
+            <div class="c-facts__center">
+                <div class="c-facts__bottom-wrap">
+                    <div class="c-facts__table">
+                        <div class="c-facts__cell">
+                            <div class="row">
+                                {% for item in numerals_numerals %}
+                                    <div class="col-{{ w }}">
+                                        <div class="c-facts__statistics">
+                                            <h2>{{ item.repeater_number }}</h2>
+                                            <h3>{{ item.repeater_description|nl2br }}</h3>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

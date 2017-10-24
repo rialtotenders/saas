@@ -1,0 +1,30 @@
+fields: {  }
+tabs:
+    fields:
+        cpv:
+            label: CPV
+            span: auto
+            type: mltextarea
+            tab: CPV
+        measure:
+            label: "Единицы измерения"
+            span: auto
+            type: mltextarea
+            tab: "Единицы измерения"
+        section1:
+            label: Пояснение
+            span: full
+            type: section
+            comment: "Вводить CPV в формате - 01111100-0=Название. Несколько значений разделять переносом строки"
+            tab: CPV
+        update:
+            span: full
+            type: partial
+            path: ~/plugins/perevorot/rialtotender/models/classifier/_field_update.htm
+            tab: "Единицы измерения"
+        section2:
+            label: Пояснение
+            span: full
+            type: section
+            comment: "Вводить в формате: КОД=Название длинное|Название короткое. Несколько значений разделять переносом строки."
+            tab: "Единицы измерения"

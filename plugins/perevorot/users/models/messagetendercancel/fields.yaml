@@ -1,0 +1,24 @@
+tabs:
+    fields:
+        header:
+            label: Заголовок
+            tab: Тендер
+            type: mltext
+            span: full
+        step:
+            label: Подсказка
+            tab: Тендер
+            type: mlricheditor
+            span: full
+            size: giant
+        header-lot:
+            label: Заголовок
+            tab: Лот
+            type: mltext
+            span: full
+        step-lot:
+            label: Подсказка
+            tab: Лот
+            type: mlricheditor
+            span: full
+            size: giant

@@ -1,0 +1,11 @@
+list: $/perevorot/rialtotender/models/currency/columns.yaml
+modelClass: Perevorot\Rialtotender\Models\Currency
+title: Currencies
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'perevorot/rialtotender/currencies/update/:id'

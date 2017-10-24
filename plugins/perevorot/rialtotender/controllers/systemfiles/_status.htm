@@ -1,0 +1,10 @@
+<?php
+    try {
+        if($class = $record->attachment_type) {
+            $model = new $class;
+            $model = $model->find($record->attachment_id);
+            echo isset($model->status) ? $model->status : '';
+        }
+    } catch(\Exception $e) {
+    }
+?>

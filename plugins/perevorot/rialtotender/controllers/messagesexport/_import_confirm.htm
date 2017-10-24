@@ -1,0 +1,75 @@
+<div class="form-group radio-field span-left">
+    <div class="control-list">
+        <table class="table data">
+            <thead>
+                <tr>
+                    <th class="list-checkbox">
+                        <div class="checkbox custom-checkbox nolabel">
+                            <input type="checkbox" id="checkboxAll" />
+                            <label for="checkboxAll"></label>
+                        </div>
+                    </th>
+                    <th width="33%"><span>Метка</span></th>
+                    <th width="33%"><span>Старое значение</span></th>
+                    <th width="33%"><span>Новое значение</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($this->importMessages as $code=>$message):?>
+                    <?php $cnt=(!isset($cnt) ? 0 : $cnt+1); ?>
+                    <tr>
+                        <td class="list-checkbox nolink">
+                            <?php if(!in_array($code, $this->messages_exclude)): ?>
+                                <div class="checkbox custom-checkbox nolabel">
+                                    <input id="checkbox_<?=$cnt?>" type="checkbox" name="checked[]" checked="checked" value="<?=$code?>"/>
+                                    <label for="checkbox_<?=$cnt?>">Check</label>
+                                </div>
+                            <?php endif; ?>
+                        </td>
+                        <td><?=$code?></td>
+                        <td>
+                            <?php if(!empty($this->importMessagesExists[$code])): ?>
+                                <?php if($message == $this->importMessagesExists[$code]): ?>
+                                    <span style="color:#CCC"><?=$message?></span>
+                                <?php elseif(!empty($message)): ?>
+                                    <span style="text-decoration: line-through;"><?=$this->importMessagesExists[$code]?></span><br>
+                                <?php else: ?>
+                                    <?=$this->importMessagesExists[$code]?>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                &nbsp;
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if(!empty($this->importMessagesExists[$code])): ?>
+                                <?php if($message == $this->importMessagesExists[$code]): ?>
+                                    <span style="color:#CCC"><?=$message?></span>
+                                <?php elseif(!empty($message) && !empty($this->importMessagesExists[$code])): ?>
+                                    <span style="color:red"><?=$message?></span>
+                                <?php elseif(empty($this->importMessagesExists[$code]) && !empty($message)): ?>
+                                    <span style="color:green"><?=$message?></span>
+                                <?php else: ?>
+                                    <span style="color:green"><?=$this->importMessagesExists[$code]?></span>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <span style="color:green"><?=$message?></span>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="loading-indicator-container">
+        <button
+            type="button"
+            class="btn btn-default"
+            data-request="onImportConfirm"
+            data-request-update="import_success: '#import-confirm'"
+            data-request-confirm="Вы действительно хотите обновить сообщения для языка: «<?=$this->importLocale?>»?"
+            data-request-flash
+            data-load-indicator="Импортирую сообщения...">
+            Подтвердить импорт
+        </button>
+    </div>
+</div>

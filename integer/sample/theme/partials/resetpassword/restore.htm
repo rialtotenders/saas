@@ -1,0 +1,14 @@
+<form data-request="{{ __SELF__ }}::onRestorePassword" data-request-update="'resetpassword/reset': '#partialUserResetForm'">
+    <div class="form-group">
+        <input
+            name="username"
+            type="text"
+            class="form-control"
+            id="userSigninLogin"
+            placeholder="{{ 'remind.enter_login'|_ }}" />
+    </div>
+    <button type="submit" class="btn btn-default">{{ 'remind.submit'|_ }}</button>
+</form>
+<div class="link_login">
+    <a href="{{ siteLocale ~ 'login' }}" >{{ 'remind.cancel'|_ }}</a>
+</div>

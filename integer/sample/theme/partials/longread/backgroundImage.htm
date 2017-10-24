@@ -1,0 +1,21 @@
+<div class="w c-itop" style="{% if data.background_image_bgcolor %}background-color: {{ data.background_image_bgcolor }};{% endif %}{% if data.background_image_image.path %}background-image: url({{ data.background_image_image.thumb(1440, 540) }});{% endif %}"{% if data.background_image_up %} go-prev{% endif %}>
+    <div class="c">
+        <div class="c-itop__wrap">
+            <div class="c-itop__center">
+                <div class="c-itop__absolute">
+                    <div class="c-itop__table">
+                        <div class="c-itop__cell">
+                            {% if data.background_image_title %}
+                                <h2 class="c-itop__header">{{ data.background_image_title }}</h2>
+                            {% endif %}
+                            <p>{{ data.background_image_title2|nl2br }}</p>
+                            {% if data.background_image_button_url %}
+                                <a href="{{ data.background_image_button_url }}" class="sb-bigbutton sb-bigbutton--bg-color">{{ data.background_image_button_text }}</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

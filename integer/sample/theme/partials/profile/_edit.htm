@@ -1,0 +1,309 @@
+<div class="c-main background-absolute" ></div>
+
+<div class="w c-main" id="edit-profile-form">
+    <div class="c ">
+        <div class=" registered-step">
+            <h3>{{ 'profile.edit_title'|_}}</h3>
+
+            <form id="profile-edit" data-request="onSave" data-registration data-request-complete="$(this).find('.error-holder:not(:empty)').show();">
+                <div class="inline-layout">
+                    <div class="block-form-edit">
+                        <div class="form-holder">
+                            <input class="not-edit" type="text" disabled value="{{ user.username }}" placeholder="{{ 'profile.username'|_}}"/>
+                            <div class="error-holder none" data-validation="username"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="email" name="email" value="{{ user.email }}"  placeholder="{{ 'profile.email'|_}}"/>
+                            <div class="error-holder none" data-validation="email"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="password" name="password" value=""  placeholder="{{ 'profile.user_password'|_}}"/>
+                            <div class="error-holder none" data-validation="password"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="password" name="password_confirmation" value=""  placeholder="{{ 'profile.user_password_confirmation'|_}}"/>
+                            <div class="error-holder none" data-validation="password_confirmation"></div>
+                        </div>
+
+                        <!--
+                        <div class="form-holder ">
+                            <div class="checkbox">
+                                <input type="checkbox" name="is_accelerator" id="is_accelerator" {% if user.is_accelerator %} checked {% endif %} value="1" />
+                                <label for="is_accelerator">{{ 'profile.is_accelerator'|_}}</label>
+                            </div>
+                        </div>
+                        -->
+
+                        <div class="form-holder ">
+                            <div class="checkbox">
+                                <input type="checkbox" name="is_test" id="is_test" {% if user.is_test %} checked {% endif %} value="1" />
+                                <label for="is_test">{{ 'profile.is_test'|_}}</label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="desc-registration">
+                        <div class="block-desc">
+                            <div class="block-overflow">
+                                {% if not show_offerta %}
+                                <a href="{{ siteLocale~'contract' }}" class="contract_generation">{{ 'profile.contact_title'|_}}</a>
+                                <br><br>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if messages.header1 %}
+                    <br>
+                    <h3>{{ messages.header1 }}</h3>
+                {% endif %}
+                <div class="inline-layout">
+                    <div class="block-form-edit">
+                        <div class="form-holder">
+                            <input type="text" name="company_name" value="{{ user.company_name }}" placeholder="{{ 'profile.company_name'|_}}"/>
+                            <div class="error-holder none" data-validation="company_name"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="company_address" value="{{ user.company_address }}" placeholder="{{ 'profile.company_address'|_}}" />
+                            <div class="error-holder none" data-validation="company_address"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="company_index" value="{{ user.company_index }}" placeholder="{{ 'profile.company_index'|_}}" />
+                            <div class="error-holder none" data-validation="company_index"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="company_region" value="{{ user.company_region }}" placeholder="{{ 'profile.company_region'|_}}"/>
+                            <div class="error-holder none" data-validation="company_region"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="company_city" value="{{ user.company_city }}" placeholder="{{ 'profile.company_city'|_}}"/>
+                            <div class="error-holder none" data-validation="company_city"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="company_country" value="{{ user.company_country }}" placeholder="{{ 'profile.company_country'|_}}" />
+                            <div class="error-holder none" data-validation="company_country"></div>
+                        </div>
+                        <div class="form-holder">
+                            <select name="payer" data-payer-select>
+                                <option value="" checked>{{ 'profile.please_choose_is_VAT'|_}}</option>
+                                <option value="1" {% if user.payer == 1 %} selected {% endif %}>{{ 'profile.VAT_payer'|_}}</option>
+                                <option value="2" {% if user.payer == 2 %} selected {% endif %}>{{ 'profile.not_VAT_payer'|_}}</option>
+                            </select>
+                            <div class="error-holder none" data-validation="payer"></div>
+                        </div>
+                        <div class="form-holder{% if user.payer != 1 %} hide{% endif %}" id="payer-code">
+                            <input type="text" name="payer_code" value="{{ user.payer_code }}" placeholder="{{ 'profile.VAT_code'|_}}" />
+                            <div class="error-holder none" data-validation="payer_code"></div>
+                        </div>
+                        <div class="form-holder ">
+                            <div class="checkbox">
+                                <input {% if edit_group %} class="not-edit" disabled {% endif %} type="checkbox" name="roles[]" id="supplier" {% if ('supplier' in user.groupCodes()) %} checked {% endif %} value="supplier" />
+                                <label for="supplier">{{ 'profile.supplier'|_}}</label>
+                            </div>
+                            <div class="checkbox">
+                                <input {% if edit_group %} class="not-edit" disabled {% endif %} type="checkbox" name="roles[]" id="customer" {% if ('customer' in user.groupCodes()) %} checked {% endif %} value="customer"/>
+                                <label for="customer">{{ 'profile.customer'|_}}</label>
+                            </div>
+                            <div class="error-holder none" data-validation="roles"></div>
+                        </div>
+                        <div class="form-holder ">
+                            <div class="checkbox">
+                                <input {% if edit_gov %} class="not-edit" disabled {% endif %} type="checkbox" name="is_gov" id="is_gov" {% if user.is_gov %} checked {% endif %} value="1" />
+                                <label for="is_gov">{{ 'profile.is_gov'|_}}</label>
+                            </div>
+                        </div>
+                        {% if showUserIsGo %}
+                        <div class="form-holder ">
+                            <div class="checkbox">
+                                <input type="checkbox" name="is_go" id="is_go" {% if user.is_go %} checked {% endif %} value="1" />
+                                <label for="is_go">{{ 'profile.is_go'|_}}</label>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="desc-registration">
+                        <div class="block-desc">
+                            <div class="block-overflow">
+                                {{ messages.step1|raw }}
+                            </div>
+                        </div>
+                        <div class="form-holder">
+                            <textarea name="activity" placeholder="{{ 'profile.activity'|_ }}" style="height: 109px;width: 410px;">{{user.activity}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                {% if messages.header2 %}
+                    <br>
+                    <h3>{{ messages.header2 }}</h3>
+                {% endif %}
+                <div class="inline-layout">
+                    <div class="block-form-edit">
+                        <div class="form-holder">
+                            <input type="text" name="director_position" value="{{ user.director_position }}" placeholder="{{ 'profile.director_position'|_}}" />
+                            <div class="error-holder none" data-validation="director_position"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="director_fio" value="{{ user.director_fio }}" placeholder="{{ 'profile.director_fio'|_}}"/>
+                            <div class="error-holder none" data-validation="director_fio"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="director_document" value="{{ user.director_document }}"  placeholder="{{ 'profile.director_document'|_}}" />
+                            <div class="error-holder none" data-validation="director_document"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="bic" value="{{ user.bic }}"  placeholder="{{ 'profile.bic'|_}}" />
+                            <div class="error-holder none" data-validation="bic"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="bc" value="{{ user.bc }}"  placeholder="{{ 'profile.bc'|_}}" />
+                            <div class="error-holder none" data-validation="bc"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="iban" value="{{ user.iban }}"  placeholder="{{ 'profile.iban'|_}}" />
+                            <div class="error-holder none" data-validation="iban"></div>
+                        </div>
+                    </div>
+                    <div class="desc-registration">
+                        <div class="block-desc">
+                            <div class="block-overflow">
+                                {{ messages.step2|raw }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% if messages.header3 %}
+                    <br>
+                    <h3>{{ messages.header3 }}</h3>
+                {% endif %}
+                <div class="inline-layout">
+                    <div class="block-form-edit">
+                        <div class="form-holder">
+                            <input type="text" name="contact_fio" value="{{ user.contact_fio }}" placeholder="{{ 'profile.contact_fio'|_}}" />
+                            <div class="error-holder none" data-validation="contact_fio"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="contact_position" value="{{ user.contact_position }}" placeholder="{{ 'profile.contact_position'|_}}" />
+                            <div class="error-holder none" data-validation="contact_position"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="contact_email" value="{{ user.contact_email }}" placeholder="{{ 'profile.contact_email'|_}}"  />
+                            <div class="error-holder none" data-validation="contact_email"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="contact_office_phone" value="{{ user.contact_office_phone }}" placeholder="{{ 'profile.contact_office_phone'|_}}" />
+                            <div class="error-holder none" data-validation="contact_office_phone"></div>
+                        </div>
+                        <div class="form-holder">
+                            <input type="text" name="contact_mobile_phone" value="{{ user.contact_mobile_phone }}" placeholder="{{ 'profile.contact_mobile_phone'|_}}" />
+                            <div class="error-holder none" data-validation="contact_mobile_phone"></div>
+                        </div>
+                        <div class="block-button">
+                            <button type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'profile.save_button'|_}}</button>
+                            <button class="show-edit-button save_step not-edit">{{ 'profile.edit.show_edit'|_ }}</button>
+                        </div>
+                    </div>
+                    <div class="desc-registration">
+                        <div class="block-desc">
+                            <div class="block-overflow">
+                                {{ messages.step3|raw }}
+                            </div>
+                        </div>
+                        <div class="form-holder ">
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="is_do" id="is_do" {% if user.is_do %} checked disabled class="not-edit" {% endif %} value="1" />
+                                <label for="is_do">{{ 'profile.is_do'|_}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div id="profile-change-status"></div>
+        </div>
+    </div>
+</div>
+
+{% put scripts %}
+<script>
+    jQuery(function($) {
+
+        var is_test = $('input[name="is_test"]');
+        var is_accelerator = $('input[name="is_accelerator"]');
+
+        if(!is_test.is(':checked')) {
+            is_accelerator.attr('disabled', 'disabled');
+        }
+
+        is_test.on('click', function() {
+
+            $(this).val(1);
+
+            if(!$(this).is(':checked')) {
+                is_accelerator.val(0);
+                is_accelerator.prop("checked", false);
+                is_accelerator.attr('disabled', 'disabled');
+            } else {
+                is_accelerator.val(1);
+                is_accelerator.removeAttr('disabled');
+            }
+        });
+
+        $('[data-payer-select]').on('change', function() {
+            if($(this).val() == 1) {
+                $('#payer-code').removeClass('hide');
+            } else {
+                $('#payer-code').addClass('hide');
+            }
+        });
+
+        $('#is_gov').on('click', function() {
+
+            $(this).val(1);
+
+            if($(this).is(':checked')) {
+                $('#is_go').val(0);
+                $('#is_go').prop("checked", false);
+                $('#is_go').attr('disabled', 'disabled');
+            } else {
+                $('#is_go').val(1);
+                $('#is_go').removeAttr('disabled');
+            }
+        });
+
+        $('#is_go').on('click', function() {
+
+            $(this).val(1);
+
+            if($(this).is(':checked')) {
+                $('#is_gov').val(0);
+                $('#is_gov').prop("checked", false);
+                $('#is_gov').attr('disabled', 'disabled');
+            } else {
+                $('#is_gov').val(1);
+                $('#is_gov').removeAttr('disabled');
+            }
+        });
+
+        var _inputs = $('#profile-edit').find('input, button, select, textarea');
+
+        _inputs.each(function(_index, _element) {
+            if(!$(_element).hasClass('not-edit')) {
+                $(_element).attr('disabled', 'disabled');
+            }
+        });
+
+        $( ".show-edit-button").on( "click", function() {
+
+            _inputs.each(function(_index, _element) {
+                if(!$(_element).hasClass('not-edit')) {
+                    $(_element).removeAttr('disabled');
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
+{% endput %}

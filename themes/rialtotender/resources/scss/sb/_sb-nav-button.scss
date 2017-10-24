@@ -1,0 +1,22 @@
+.sb-nav-button {
+	display: none;
+	position: absolute;
+	top: 16px;
+	right: 20px;
+	width: 29px;
+	height: 30px;
+	background-image: url('/themes/rialtotender/assets/img/design/nav-icon-white.svg');
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	@include a-header-1() {
+		display: block;
+		z-index: 12;
+	}
+}
+body.is-active {
+	.sb-nav-button {
+		position: fixed;
+	}
+}

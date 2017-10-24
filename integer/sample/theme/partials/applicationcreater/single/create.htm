@@ -1,0 +1,91 @@
+{% if is_auth %}
+    <div class="control-popup modal fade" id="application">
+        <h1>{{ item.title }}</h1>
+        <div class="inline-layout">
+            <div class="form-application">
+
+                {% partial 'applicationcreater/_steps' step='first' simple=true %}
+
+                <form id="application-form" data-application class="create_application" data-request-loading=".spinner" {% if edit %}data-request="onSave"{% else %}data-request="onSubmitSingleLotApplication"{% endif %} data-request-complete="$(this).find('.error-holder:not(:empty)').show();$('#application-submit button').removeClass('disabled');">
+                    {{ session_key_field|raw }}
+                    {% if item.__features is empty %}
+                    <div class="single-aplication">
+                        <div class="form-holder">
+                            <input type="text" placeholder="{{ 'bids.your_bid_value'|_}}" name="price" value="{{ app.price }}"/>
+                            <input type="hidden" name="tender_id" value="{{ item.id }}" />
+                            <div class="error-holder none" data-validation="price"></div>
+                        </div>
+                    </div>
+                    {% else %}
+
+                    <div class="overflow-table">
+                        <table>
+                            <tr>
+                                {% if item.__features is not empty %}
+                                <th>{{ 'tender.bid.features'|_ }}</th>
+                                <th>{{ 'tender.bid.koeficient'|_ }}</th>
+                                {% endif %}
+                                <th width="170px">{{ 'tender.bid.your_price'|_ }}</th>
+                            </tr>
+                            <tr data-number="1" class="lot-data tr-tender-features features-block" data-title="{{ item.title }}" data-currency="{{ item.value.currency }}">
+                                {% if item.__features is not empty %}
+                                <td>
+                                    {% for feature in item.__features %}
+                                    <div class="form-holder">
+                                        <select data-features data-tender-features data-max="{{ feature.max }}" required name="features[{{ feature.code }}]">
+                                            {% for enum in feature.enum %}
+                                                {% set enum_value = enum.value * 100 %}
+                                                {% set _selected = (app.tender_features[feature.code] * 100) == enum_value ? 1 : 0 %}
+                                                <option data-enum="{{ enum.value }}" value="{{ enum.value }}" {% if _selected == 1 %} selected="selected" {% endif %}>{{ enum.title ~ ' ' ~ enum_value }}%</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label>{{ feature.title }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    <div id="tender-features">
+                                        <p class="ladel-koeficient"> <span>{{ 'tender.bid.vash_kojefficient'|_ }} </span><strong class="vash-kojefficient"></strong></p>
+                                        <p class="ladel-koeficient"> <span>{{ 'tender.bid.maksimalno_vozmozhnyj'|_ }} </span><strong class="max-kojefficient"></strong></p>
+                                    </div>
+                                </td>
+                                {% endif %}
+
+                                <td>
+                                    <div class="form-holder">
+                                        <input class="bid-price" id="bid-1" type="text" placeholder="{{ 'bids.your_bid_value'|_}}" name="price" value="{{ app.price }}" />
+                                        <label>{{ item.value.currency }}</label>
+                                        <div class="error-holder none" data-validation="price"></div>
+                                        <input type="hidden" name="tender_id" value="{{ item.id }}" />
+                                        <input class="feature-bid-price" id="new-bid-1" type="text" style="border:none;" readonly name="feature_price" value="">
+                                        <div class="error-holder none" data-validation="feature_price"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    {% endif %}
+                    <div class="inline-layout button_application block-button" id="application-submit">
+                        <a href="{{ siteLocale }}tender/{{ tender_id }}/" class="prev_step">{{ 'bids.back_at_tender_page'|_}}</a>
+                        <button class="next_step" type="submit">{{ 'bids.add_bid_button'|_}}</button>
+                    </div>
+                </form>
+
+                <div id="application-access-error"></div>
+            </div>
+
+            <div class="desc-application">
+                {% if(messages.header1 is not empty) %}
+                    <h2>{{ messages.header1 }}</h2>
+                {% endif %}
+
+                {% if(messages.step1 is not empty)%}
+                    <br>
+                    {{ messages.step1|raw }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% partial 'handlers/application' %}

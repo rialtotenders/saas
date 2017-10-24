@@ -1,0 +1,12 @@
+columns:
+    name:
+        label: Название
+        type: text
+        searchable: true
+    image:
+        label: Изображение
+        type: partial
+        sortable: false
+    is_enabled:
+        label: 'На сайте'
+        type: switch

@@ -1,0 +1,64 @@
+<div class="w c-main" id="registration-form">
+    <div class="c ">
+        <div class="registered-step tender-create">
+
+            <h3>{{ header }}</h3>
+            <div class="inline-layout">
+                <div class="form-registration create_tender">
+
+
+                        <div class="block-text-tender">
+                            <div class="item">
+                                <h2>{{ tender.budget.title }}</h2>
+                                <p>{{ tender.budget.description }}</p>
+                            </div>
+                            <div class="item">
+                                <h2>{{ 'plan.create.preview_information_about_tender'|_ }}</h2>
+                                <ul>
+                                    <li>
+                                        <span>{{ 'plan.create.preview_year'|_}}</span> <span>{{ tender.budget.year }}</span>
+                                    </li>
+                                    <li>
+                                        <span>{{ 'plan.create.preview_expected_price'|_}}</span> <span>{{ tender.budget.amount ~ ' ' ~ tender.budget.currency }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="item">
+                                <h2>{{ 'plan.create.preview_nomenclature'|_}}</h2>
+                                <ul>
+                                    {% for item in tender.items %}
+                                    <li>
+                                        <strong>{{ item.description }} </strong><span>{{ item.quantity ~ ' ' ~ item.unit.name }}</span><br>
+                                        <p>
+                                            {{ 'plan.create.preview_cpv'|_}}
+                                            <span>{{ item.classification.id }}</span>
+                                        </p>
+                                        <p>
+                                            {{ 'plan.create.preview_delivery'|_}}
+                                            <span>{{ item.deliveryAddress.locality ~ ', ' ~ item.deliveryAddress.streetAddress ~ ', ' ~ 'plan.create.delivery_date_from'|_ ~ ' ' ~ item.deliveryDate.startDate ~ ', ' ~ 'plan.create.delivery_date_to'|_ ~ ' ' ~ item.deliveryDate.endDate }}</span>
+                                        </p>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                    {% if user.id == user_plan.user_id %}
+                    <div class="block-button" id="for-spinner">
+                        <a href="{{ siteLocale }}plan/{{ user_plan.id }}/edit" class="prev_step">{{ 'plan.project.back_to_plan'|_}}</a>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

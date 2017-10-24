@@ -1,0 +1,19 @@
+.sb-bigbutton {
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  text-align: center;
+  line-height: 23px;
+  padding: 15px;
+  color: #1f1f1f;
+  min-width: 230px;
+  border-radius: 2px;
+  background-color: #ffffff;
+  display: inline-block;
+  &--bg-color {
+    background-color: $bg-main-color;
+    color: white;
+  }
+}

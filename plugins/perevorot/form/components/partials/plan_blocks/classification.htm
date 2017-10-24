@@ -1,0 +1,37 @@
+<h2>{{ 'plan.classification_title'|_ }}</h2>
+
+<div class="sb-table sb-table--td-py-small">
+    <div class="sb-table__table">
+
+        <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+            <div class="sb-table__table-cell">
+                <div class="sb-table__dashed-wrap">
+                    <p>{{ 'plan.classification_description'|_ }}:</p>
+                </div>
+            </div>
+            <div class="sb-table__table-cell">
+                {% if item.classification.description %}
+                    <p>{{ item.classification.description }}<p>
+                {% else %}
+                    <p>{{ 'plan.classification_description'|_ }}<p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+            <div class="sb-table__table-cell">
+                <div class="sb-table__dashed-wrap">
+                    <p>{{ 'plan.classification_id'|_ }}:</p>
+                </div>
+            </div>
+            <div class="sb-table__table-cell">
+                {% if item.classification.id %}
+                    <p>{{ item.classification.id }}<p>
+                {% else %}
+                    <p>{{ 'plan.classification_id'|_ }}<p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</div>

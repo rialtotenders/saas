@@ -1,0 +1,23 @@
+fields:
+    full_name:
+        label: 'perevorot.blog::lang.plugin.blog.author.full_name'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    slug:
+        label: 'perevorot.blog::lang.plugin.blog.author.slug'
+        oc.commentPosition: ''
+        span: auto
+        preset:
+            field: full_name
+            type: slug
+        type: text
+    photo:
+        label: 'perevorot.blog::lang.plugin.blog.author.photo'
+        span: auto
+        oc.commentPosition: ''
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        type: fileupload

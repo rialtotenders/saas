@@ -1,0 +1,262 @@
+<h1>{{ item.title|stripslashes }}</h1>
+{% if item.mode == 'test' %}<strong>{{ 'tender.page.test_mode'|_ }}</strong>{% endif %}
+
+<div class="sb-icon-and-text inline-layout">
+    <div class="sb-icon-and-text__item" >
+        <span >
+            {% if item.procuringEntity.identifier.legalName %}
+                {{ item.procuringEntity.identifier.legalName|stripslashes }}
+            {% else %}
+                {{ item.procuringEntity.name|stripslashes }}
+            {% endif %}
+        </span>
+    </div>
+    <div class="sb-icon-and-text__item" >
+        <span >{{ item.tenderID }}</span>
+    </div>
+</div>
+<p class="mb-60">{{ item.description|stripslashes }}</p>
+
+{% partial('@blocks/procuring_entity') %}
+
+{% partial('@blocks/procuring_entity_contact') %}
+
+{% partial('@blocks/dates') %}
+
+{% partial('@blocks/ids') %}
+
+{% partial('@blocks/documents') %}
+
+{% partial('@blocks/cancellations') %}
+
+{% partial '@blocks/criteria' features=item.__tender_features show_criteria_price=false %}
+
+<br><br><div id="lots"></div>
+<div id="lot-container-rezult">
+    <div id="lot-container">
+
+        <div data-js="tabs" id="tabs" class="inline-layout {% if lot %} col-3 {% else %} col-2 {% endif %}">
+            <div class="general-tab {{ lot is empty ? 'active':'' }}" tab>{{ 'tender.tabs.lots'|_ }}</div>
+            {% if lot %}
+                <div class="lot-tab {{ lot ? 'active':'' }}" tab >{{ 'tender.tabs.lot'|_ }}</div>
+            {% endif %}
+            <div class="question-tab" tab>{{ 'tender.tabs.questions'|_}}</div>
+        </div>
+
+        <div class="{{ lot ? 'none':'' }}" tab-content>
+            {% if is_multilot %}
+                <h2>{{ 'tender.lots_total'|_}}, <span>{{ item.lots|length }}</span></h2>
+                <div class="sb-table">
+                    <div class="sb-table__table">
+                        <div class="sb-table__table-row sb-table__table-row--border-bottom">
+                            <div class="sb-table__table-cell sb-table__table-cell--th">
+                                {{ 'tender.purchase_item'|_ }}
+                            </div>
+                            <div class="sb-table__table-cell sb-table__table-cell--th">
+                                {{ 'tender.expected_value'|_ }}
+                            </div>
+                            <div class="sb-table__table-cell sb-table__table-cell--th">
+                                {{ 'tender.lot_status'|_ }}
+                            </div>
+                            {% if user_tender %}
+                            <div class="sb-table__table-cell sb-table__table-cell--th">
+                                {{ 'tender.lot.q_without_answer'|_ }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% for lot in item.lots %}
+                            <div class="sb-table__table-row sb-table__table-row--border-bottom">
+                                <div class="sb-table__table-cell">
+                                    <a class="lot-submit" href="{{ siteLocale }}tender/{{ tender_id }}/lots/{{ lot.id }}#lots">
+                                        {{ lot.title }}
+                                    </a>
+                                    {% if lot.title|length> 200 %}
+                                    <div class="button-more">
+                                        <div class="more-open">{{ 'document.filename.show_text'|_ }}</div>
+                                        <div class="more-hide">{{ 'document.filename.hide_text'|_ }}</div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="sb-table__table-cell">
+                                    <p>
+                                        {% if lot.value.amount >= 999999999 %}
+                                            {{ 'tender.lot.is_empty_price'|_ }}
+                                        {% else %}
+                                            {{ lot.value.amount }} {{ lot.value.currency }}
+                                        {% endif %}
+                                        {% if item.value.valueAddedTaxIncluded %}
+                                            {{ 'tender.with_VAT'|_ }}
+                                        {% else %}
+                                            {{ 'tender.without_VAT'|_ }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                <div class="sb-table__table-cell">
+                                    <p>
+                                        {{ lot.__status_name }}
+                                    </p>
+                                </div>
+                                {% if user_tender %}
+                                <div class="sb-table__table-cell">
+                                    <p>
+                                        {% if lot_q[lot.id] %}
+                                            <span class="questions_yes">{{ lot_q[lot.id] }}</span>
+                                        {% else %}
+                                            <span class="questions_no">0</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% partial '@_tender_page_blocks/_access_to_bid' bid_url=true %}
+
+            {% endif %}
+        </div>
+
+        {% if lot %}
+            <div class="{{ lot is empty ? 'none':'tender-lots' }}" tab-content>
+                <h2>{{ lot.title }}</h2>
+
+                {% if lot.description %}
+                    <p class="mb-60">{{ lot.description|stripslashes }}</p>
+                {% endif %}
+
+                {% if lot.auctionUrl and not user_bid %}
+                <div class="sb-table sb-table--td-py-small">
+                    <div class="sb-table__table">
+                        <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                            <div class="sb-table__table-cell">
+                                <div class="sb-table__dashed-wrap">
+                                    <p>{{ 'tender.page.auction_href'|_ }}:</p>
+                                    </div>
+                                </div>
+                                <div class="sb-table__table-cell">
+                                    <p><a href="{{ lot.auctionUrl }}" target="_blank">{{ 'tender.page.auction_href_open'|_ }}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 {% endif %}
+
+                {% if participationUrl %}
+                    <div class="sb-table sb-table--td-py-small">
+                        <div class="sb-table__table">
+                            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                                <div class="sb-table__table-cell">
+                                    <div class="sb-table__dashed-wrap">
+                                        <p>{{ 'tender.page.participationUrl'|_ }}</p>
+                                    </div>
+                                </div>
+                                <div class="sb-table__table-cell">
+                                    <p><a href="{{ participationUrl }}" target="_blank">{{ 'tender.page.participationUrl_open'|_ }}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if item.__isMultiLot %}
+                    {% partial '@blocks/dates_lot' item=lot __item=item %}
+                    {% partial '@blocks/documents' item=lot %}
+                    {% partial '@blocks/cancellations' item=lot %}
+                    {% partial '@blocks/criteria' item=lot features=lot.__lot_features show_criteria_price=true %}
+                    {% partial '@blocks/procedure' item=lot __item=item %}
+                    {% partial '@blocks/items' items=lot.__items %}
+                    {% partial '@blocks/bids' item=lot %}
+                    {% partial '@blocks/qualifications' qualifications=lot.__qualifications %}
+                    {% partial '@blocks/awards' awards=lot.awards %}
+                    {% partial '@blocks/contracts' item=lot __item=item %}
+                    {% partial '@blocks/contract_changes' item=lot %}
+                    {# partial '@blocks/signed_contracts' item=lot #}
+                    {% partial '@blocks/questions' questions=lot_questions show_qform=false %}
+                {% endif %}
+
+            </div>
+        {% endif %}
+
+        <div class="none" tab-content>
+            {% partial '@blocks/questions' questions=tender_questions show_qform=true %}
+        </div>
+    </div>
+
+    {% if user_tender and lot and lot.status == 'active' and item.status not in ['unsuccessful', 'cancelled', 'complete'] %}
+    <div class="fixed-button">
+        <a href="{{ siteLocale }}tender/{{ tender_id ~ '/lot/'~lot.id }}/cancel" class="button-tender">{{ 'user.tender.cancel-lot'|_ }}</a>
+    </div>
+    {% endif %}
+
+</div>
+
+{% put scripts %}
+<script>
+
+    jQuery(function($) {
+
+        var hash = window.location.hash.replace("#","");
+        var url = '{{ siteLocale }}tender/{{ item.tenderID }}';
+        var url2 = url + '/lots/{{ lot.id }}';
+
+        if(hash == 'questions')
+        {
+            $('[tab]').removeClass('active');
+            $('[tab-content]').addClass('none');
+            $('[tab]:last-child').addClass('active');
+            $('[tab-content]:last-child').removeClass('none');
+        }
+
+        $( ".c-tender").on('click', '.question-tab', function() {
+            History.pushState({state: 1}, null, url + '#questions');
+            $('#lot-container-rezult .fixed-button').hide();
+        });
+
+        $( ".c-tender").on('click' , ".general-tab", function() {
+            History.pushState({state: 1}, null, url + '1');
+            History.pushState({state: 1}, null, url);
+            $('#lot-container-rezult .fixed-button').hide();
+        });
+
+        $( ".c-tender").on('click', ".lot-tab", function() {
+            History.pushState({state: 1}, null, url2 + '1');
+            History.pushState({state: 1}, null, url2);
+            $('#lot-container-rezult .fixed-button').show();
+        });
+
+$( ".c-tender").on( "click", ".lot-submit", function() {
+    return true;
+    var url = $(this).attr('href');
+
+    $("#lot-container-rezult").load(url + " #lot-container", function( response, status, xhr ) {
+
+        var State = History.getState();
+
+        if(State.title == '')
+        {
+            History.pushState({state: 1}, 'lot', '1');
+        }
+
+        History.replaceState({state: 1}, 'lot', url);
+
+        var tabs= $('#tabs').find('[tab]'),
+                content=$('[tab-content]');
+
+        tabs.click(function(){
+            var self=$(this);
+
+            tabs.removeClass('active');
+            content.removeClass('active');
+            self.addClass('active');
+
+            content.addClass('none');
+            content.eq(self.index()).removeClass('none');
+        });
+    });
+
+    return false;
+    });
+});
+</script>
+{% endput %}

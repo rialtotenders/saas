@@ -1,0 +1,131 @@
+.c-header{
+  .sb-nav{
+    .button-user{
+      background:  #2e2e2e;
+      color: $text-color-nav-active;
+      display: inline-block;
+      //vertical-align: middle;
+      //padding: 7px;
+      //padding: 0 25px;
+      position: relative;
+      margin-top: 20px;
+      /*margin-left: 20px;*/
+
+      height: 35px;
+      box-sizing: border-box;
+      .sb-nav__item{
+        border-left: 1px solid #242424;
+        padding-left: 20px;
+      }
+      .sb-nav__first{
+        margin: 0 auto;
+
+
+        border-bottom: 0;
+        padding-bottom: 0;
+        /*padding: 0 10px;*/
+        a.sb-nav__link{
+          background: url('/integer/yptender.md/theme/assets/img/design/icon-user3.png')  no-repeat left center;
+          padding-left: 30px;
+          span{
+            border-bottom: 1px dashed #828282;
+            padding-bottom: 2px;
+            display: inline-block;
+          }
+        }
+      }
+      &:after{
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-top: 35px solid #2e2e2e;
+        border-left: 10px solid transparent;
+        left: -10px;
+        top:0 ;
+
+      }
+      &:before{
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-bottom: 35px solid #2e2e2e;
+        border-right: 10px solid transparent;
+        right: -10px;
+        top: 0;
+
+      }
+
+      .user-profile{
+        a, button{
+          display: inline-block;
+          vertical-align: middle;
+          background: none;
+          border: 0;
+          text-decoration: none;
+          padding: 0 10px;
+        }
+        .link-user{
+          padding-left: 25px;
+          color: #fff;
+          font-family: $font-family;
+          background: url("/integer/yptender.md/theme/assets/img/design/icon-user.png") no-repeat;
+
+        }
+        .link-profile{
+          color: $text-color-nav-hover;
+
+        }
+        .button-logout{
+          color: #fff;
+          font-family: $font-family;
+          //text-transform: uppercase;
+          font-size: 14px;
+          cursor: pointer;
+
+        }
+      }
+
+
+    }
+
+    .sb-nav__item--has-sub:hover{
+        .sb-nav__sub-wrap {
+          display: block;
+        }
+    }
+    .sb-nav__sub-wrap:hover {
+      display: block;
+    }
+
+
+    .menu-icon{
+      cursor: pointer;
+      width: 28px;
+      height: 20px;
+      float: right;
+      display: none;
+      .icon-bar{
+        background: #fff;
+        display: block;
+        width: 28px;
+        height: 3px;
+        margin-bottom: 5px;
+        &:last-child{
+          margin-bottom: 0;
+        }
+
+      }
+    }
+
+    .menu-holder{
+      clear: both;
+    }
+
+
+
+  }
+}
+
+

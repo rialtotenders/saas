@@ -1,0 +1,55 @@
+<script>
+
+    if (window.jQuery !== undefined) {
+        stateDeleteButton();
+    }
+
+    function stateDeleteButton()
+    {
+        if($('.item-block .remove-item-block').length > 1) {
+            $('.item-block .remove-item-block').show();
+        }
+        else {
+            $('.item-block .remove-item-block').hide();
+        }
+    }
+</script>
+
+{% put scripts %}
+<script>
+    jQuery(function($) {
+
+        stateDeleteButton();
+
+        $("#tender-content").on('click', ".add-new-item-block", function() {
+
+            var item_index = parseInt($(this).parent().parent().children('.new-item-block').children('.item-block:last-child').attr('data-item-index'));
+            var data = {'item_index': item_index + 1, 'title_key': item_index + 2};
+
+            $('#new-item-tpl').tmpl(data).appendTo('.new-item-block');
+
+            $('.input-group.date input').each(function () {
+                $(this).datetimepicker(dt_opts);
+                $(this).bind("mousewheel", function () {
+
+                });
+            });
+
+            data.item_index = data.item_index + 1;
+            data.title_index = data.item_index + 1;
+
+            stateDeleteButton();
+            cpvInit($(this).parent().parent().children('.new-item-block').children('.item-block:last-child').find('.list_cpv'));
+
+            return false;
+        });
+
+        $("#tender-content").on( "click", ".new-item-block .item-block .remove-item-block", function() {
+            if (confirm("{{ 'tender.create.confirm_delete_item'|_ }}")) {
+                $(this).parent().parent().parent().remove();
+                stateDeleteButton();
+            }
+        });
+    });
+</script>
+{% endput %}

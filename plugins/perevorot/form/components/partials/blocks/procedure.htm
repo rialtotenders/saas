@@ -1,0 +1,114 @@
+<h2>{{ 'tender.about_procedure_title'|_ }}</h2>
+
+<div class="sb-table sb-table--td-py-small">
+    <div class="sb-table__table">
+        {% if __item %}
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'tender.about_procedure_status'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ lot_status[item.status] is not empty ? lot_status[item.status] : item.status }}<p>
+                </div>
+            </div>
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'tender.lot_sum'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>
+                        {% if lot.value.amount >= 999999999 %}
+                            {{ 'tender.is_empty_price'|_ }}
+                        {% else %}
+                            {{ lot.value.amount|number_format(2, '.', ' ')|replace({'.00': ''}) }} {{ lot.value.currency }}
+                        {% endif %}
+                        {% if item.value.valueAddedTaxIncluded %}
+                            {{ 'tender.with_VAT'|_ }}
+                        {% else %}
+                            {{ 'tender.without_VAT'|_ }}
+                        {% endif %}
+                    <p>
+                </div>
+            </div>
+            {% if lot.value.amount >= 999999999 %}
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'tender.lot_currency'|_ }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ lot.value.currency }}
+                    <p>
+                </div>
+            </div>
+            {% endif %}
+        {% else %}
+            {% if item.value.amount >= 999999999 %}
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'tender.tender_currency'|_ }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.value.currency }}
+                    <p>
+                </div>
+            </div>
+            {% endif %}
+        {% endif %}
+
+        {% if item.minimalStep.amount %}
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'tender.about_procedure_minimal_step'|_ }}:</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.minimalStep.amount|number_format(2, '.', ' ')|replace({'.00': ''}) }} {{ item.minimalStep.currency }}<p>
+                </div>
+            </div>
+        {% endif %}
+        {% if show_guarantee %}
+            {% if item.guarantee and item.guarantee.amount>0 %}
+                <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                    <div class="sb-table__table-cell">
+                        <div class="sb-table__dashed-wrap">
+                            <p>{{ 'tender.about_procedure_proposition'|_ }}:</p>
+                        </div>
+                    </div>
+                    <div class="sb-table__table-cell">
+                        <p>{{ 'tender.about_procedure_bank_guarantee'|_ }}<p>
+                    </div>
+                </div>
+                <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                    <div class="sb-table__table-cell">
+                        <div class="sb-table__dashed-wrap">
+                            <p>{{ 'tender.about_procedure_sum'|_ }}:</p>
+                        </div>
+                    </div>
+                    <div class="sb-table__table-cell">
+                        <p>{{ item.guarantee.amount|number_format(2, '.', ' ')|replace({'.00': ''}) }} {{ item.guarantee.currency }}<p>
+                    </div>
+                </div>
+            {% else %}
+                <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                    <div class="sb-table__table-cell">
+                        <div class="sb-table__dashed-wrap">
+                            <p>{{ 'tender.about_procedure_proposition'|_ }}:</p>
+                        </div>
+                    </div>
+                    <div class="sb-table__table-cell">
+                        <p>{{ 'tender.about_procedure_proposition_not_found'|_ }}<p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

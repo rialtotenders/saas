@@ -1,0 +1,22 @@
+.c-part-text {
+  .c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__wrap {
+    padding-left: 20px;
+    padding-right: 20px;
+    background: white;
+  }
+  &__center {
+    @extend .max-width-inner;
+    margin: 0 auto;
+    &:after {
+      @extend .clearfix;
+    }
+  }
+  p {
+    margin: 10px 0;
+    float: left;
+  }
+}

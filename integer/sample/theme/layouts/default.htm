@@ -1,0 +1,150 @@
+description = "Default layout"
+
+[mainMenu topMenu]
+menu = 1
+partial = "top-menu.htm"
+
+[mainMenu bottomMenu]
+menu = 2
+partial = "bottom-menu.htm"
+
+[Perevorot\Page\Components\LocalePicker localePicker]
+type = "inline"
+is_switch_same_url = "current"
+
+[SeoMeta]
+
+[RegistrationForm]
+
+[session]
+security = "all"
+
+[googleTracker]
+
+[PageSetting]
+==
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% component 'SeoMeta' %}
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="{{ 'app/css/styles.css'|elixir }}">
+    <link rel="stylesheet" href="{{ 'yptender.md/css/styles.css'|elixir }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/img/design/favicons/apple-touch-icon.png'|theme }}">
+    <link rel="icon" type="image/png" href="{{ '/assets/img/design/favicons/favicon-32x32.png'|theme }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ '/assets/img/design/favicons/favicon-16x16.png'|theme }}" sizes="16x16">
+    <link rel="manifest" href="{{ '/assets/img/design/favicons/manifest.json'|theme }}">
+    <link rel="mask-icon" href="{{ '/assets/img/design/favicons/safari-pinned-tab.svg'|theme }}" color="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    {% styles %}
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+{% component 'session' %}
+<body>
+    {% component 'googleTracker' %}
+    <div class="position-top ">
+        <div class="c inline-layout">
+            {% component 'localePicker' %}
+
+            <div class="button-user">
+                {% if user %}
+                    <div class="sb-nav__item" >
+                        <div class="sb-nav__first user-profile">
+                            <a href="{{ user.getProfileUrl }}" class="link-user">{{ user.username }}</a>
+                            <a href="{{ user.getProfileUrl }}" class="link-profile">{{ 'user.profile_header'|_}}</a>
+
+                            {% if user.getLogoutUrl %}
+                                <a href="{{ user.getLogoutUrl }}" class="button-logout">{{ 'user.logout_header'|_}}</a>
+                            {% else %}
+                                <button class="button-logout" data-request="onLogout" data-request-data="redirect: '{{ siteLocale }}'" >{{ 'user.logout_header'|_}}</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="sb-nav__item" >
+                        <div class="sb-nav__first">
+                            <a href="{{ siteLocale }}login" class="sb-nav__link"><span>{{ 'user.login_header'|_}}</span></a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+
+    </div>
+    <div class="w c-header">
+        <div class="c">
+
+            {% if logo_url %}
+                <a href="{{ logo_url }}" class="c-header__logo">
+            {% else %}
+                <a href="{{ siteLocale }}tender/search/gov?tab_type=1&status=active.enquiries&status=active.tendering" class="c-header__logo">
+            {% endif %}
+
+                <img src="{{ 'assets/img/design/logo.png'|theme }}">
+            </a>
+            <div class="phone-header">
+                <span>{{ 'common.support_text'|_ }}</span>
+                <a href="tel:{{ 'common.support_phone'|_ }}">{{ 'common.support_phone'|_ }}</a>
+            </div>
+
+            {% component 'topMenu' %}
+
+        </div>
+    </div>
+
+    <main>
+        {% if user.is_test %}
+            <h2 class="text-red">{{ 'common.test_mode'|_ }}</h2>
+        {% endif %}
+        {% page %}
+    </main>
+
+    <div class="w c-footmenu">
+        <div class="c">
+            {% component 'bottomMenu' %}
+        </div>
+    </div>
+
+    <div class="w c-footer">
+        <div class="c">
+            <p class="c-footer__copy">© 2016 yptender</p>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+
+    <div id="overlay2" class="overlay2"></div>
+
+    <div class="modal_div welcome-modal" id="welcome-modal">
+        <div class="modal_close"></div>
+        <div class="content-holder" id="curl-error-3" style="display:none;">
+            <h3>{{'modal_window.curl_error_3_title'|_}}</h3>
+            <div class="desc-modal">
+                {{'modal_window.curl_error_3_description'|_}}
+            </div>
+        </div>
+        <div class="content-holder" id="curl-error-18" style="display:none;">
+            <h3>{{'modal_window.curl_error_18_title'|_}}</h3>
+            <div class="desc-modal">
+                {{'modal_window.curl_error_18_description'|_}}
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ 'app/js/app.js'|elixir }}"></script>
+    <script src="{{ 'yptender.md/js/app.js'|elixir }}"></script>
+
+    {% scripts %}
+</body>
+</html>

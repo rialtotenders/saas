@@ -1,0 +1,72 @@
+<main>
+    <div class="c">
+        <div class="control-popup modal fade" id="application">
+            <h1><span>{{ 'tender.bid.page_title'|_ }}</span> {{ item.tenderID }}</h1>
+
+            <div class="inline-layout">
+                <div class="form-application">
+
+                    {% partial 'applicationcreater/_steps' %}
+
+                    <form id="application-form" data-request="onSubmitMultiLotApplication" class="create_application" data-request-loading=".spinner">
+                        <input type="hidden" name="document_type" value="application">
+                        <input type="hidden" name="tenderID" value="{{ item.tenderID }}">
+                        {{ session_key_field|raw }}
+
+                        <div class="wrap_doc">
+                            <h3>{{ 'tender.bid.tender_documents'|_ }}</h3>
+                            <div class="list_doc">
+                                {% for _item in item.items %}
+                                <div class="item">
+                                    <h4>{{ _item.description }}</h4>
+                                    <p class="desc_doc">{{ 'tender.bid.delivery_to'|_ }} {{ _item.deliveryAddress.region }}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        {% if document_types|length %}
+                        <div data-js="tabs" id="tabs" class="tab-application inline-layout  col-2 ">
+                            <div class="general-tab active" tab="">{{ 'tender.bid.docs_before_auction'|_ }}</div>
+                            <div class="question-tab" tab="">{{ 'tender.bid.docs_after_auction'|_ }}</div>
+                        </div>
+                        <div class="" tab-content>
+                            <div class="file-button">
+                                {% component 'fileUploader' %}
+                            </div>
+                        </div>
+                        <div class="none" tab-content>
+                            <div class="file-button">
+                                {% component 'fileUploader_financial' %}
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="file-button">
+                            {% component 'fileUploader' %}
+                        </div>
+                        {% endif %}
+
+                        <div class="inline-layout button_application block-button" id="application-submit">
+                            <button class="prev_step" type="button" data-request="onReturnBack">{{ 'tender.bid.back_to_step'|_ }}</button>
+                            <button class="next_step" type="submit">{{ 'tender.bid.next_step'|_ }}</button>
+                            <a href="{{ siteLocale }}tender/{{ tender_id }}" class="back_tender mt-20">{{ 'tender.bid.back_to_tender'|_ }}</a>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="desc-application">
+                    {% if(messages.header2 is not empty) %}
+                    <h2>{{ messages.header2 }}</h2>
+                    {% endif %}
+
+                    {% if(messages.step2 is not empty)%}
+                    <br>
+                    {{ messages.step2|raw }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% partial 'handlers/_application_docs' %}

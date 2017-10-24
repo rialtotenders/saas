@@ -1,0 +1,21 @@
+payments:
+    label: Платежи
+    tab: 'Финансы'
+    view:
+        list: $/perevorot/rialtotender/models/payment/columns.yaml
+        toolbarButtons: create|delete
+        recordOnClick: 'return false;'
+    manage:
+        form: $/perevorot/rialtotender/models/payment/fields.yaml
+        list: $/perevorot/rialtotender/models/payment/columns.yaml
+        recordsPerPage: 10
+read_payments:
+    label: Платежи
+    tab: 'Финансы'
+    view:
+        list: $/perevorot/rialtotender/models/payment/columns.yaml
+        toolbarButtons: false
+        recordOnClick: 'return false;'
+    manage:
+        list: $/perevorot/rialtotender/models/payment/columns.yaml
+        recordsPerPage: 10

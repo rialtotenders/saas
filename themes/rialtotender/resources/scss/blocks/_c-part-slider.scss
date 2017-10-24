@@ -1,0 +1,68 @@
+.c-part-slider {
+  min-height: 130px;
+  .c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__wrap {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 120px;
+    padding-right: 120px;
+    background: white;
+    @include a3() {
+	    padding-left: 70px;
+	    padding-right: 70px;
+    }
+  }
+  &__center {
+    @extend .max-width-inner;
+    margin: 0 auto;
+  }
+  &__slider {
+    .slick-arrow {
+      width: 27px;
+      height: 42px;
+      color: transparent;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      margin-top: -21px;
+    }
+    .slick-prev {
+      background-image: url('/themes/rialtotender/assets/img/design/group-7.svg');
+      left: -70px;
+      @include a3() {
+	    left: -49px;
+      }
+    }
+    .slick-next {
+      background-image: url('/themes/rialtotender/assets/img/design/group-8.svg');
+      right: -70px;
+      @include a3() {
+	    right: -49px;
+      }
+    }
+  }
+  &__slider-item {
+    img {
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 100%;
+    }
+  }
+  .slick-slide.item{
+
+    height: 130px;
+    padding: 0 10px;
+    .image-holder{
+      display: block;
+      height: 130px;
+    }
+
+
+  }
+}

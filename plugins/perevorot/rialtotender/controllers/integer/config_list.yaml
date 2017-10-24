@@ -1,0 +1,12 @@
+title: Площадки
+modelClass: Perevorot\Rialtotender\Models\Integer
+list: $/perevorot/rialtotender/models/integer/columns.yaml
+recordUrl: 'perevorot/rialtotender/integer/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+defaultSort:
+    column: sort_order
+    direction: asc
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

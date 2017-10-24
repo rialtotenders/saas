@@ -1,0 +1,14 @@
+name: Areas
+form: $/perevorot/rialtotender/models/area/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\Area
+defaultRedirect: perevorot/rialtotender/areas
+create:
+    title: Создание площадки
+    redirect: 'perevorot/rialtotender/areas/update/:id'
+    redirectClose: perevorot/rialtotender/areas
+update:
+    title: Редактирование площадки
+    redirect: perevorot/rialtotender/areas
+    redirectClose: perevorot/rialtotender/areas
+preview:
+    title: Предпросмотр площадки

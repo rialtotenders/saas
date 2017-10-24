@@ -1,0 +1,22 @@
+.sb-icon-and-text {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  &__item {
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 17px;
+    padding-left: 25px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.85;
+    color: #1a1a1a;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 25px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{% for item in menu %}
+    <div class="sb-nav__item {% if item.children|length > 0 %}sb-nav__item--has-sub{% endif %}">
+        <div class="sb-nav__first {% if item.active %} sb-nav__first--active {% endif %}">
+            <a href="{{ item.href }}" {{item.is_target_blank ? ' target="_blank"'}} class="sb-nav__link"></a>
+            <div class="sb-nav__text">{{ item.title }}</div>
+        </div>
+
+        {% if item.children|length > 0 %}
+            {% partial 'top-menu/second-level' menu=item.children %}
+        {% endif %}
+    </div>
+{% endfor %}

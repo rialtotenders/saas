@@ -1,0 +1,13 @@
+fields:
+    name:
+        label: Название
+        oc.commentPosition: ''
+        span: auto
+        type: mltext
+        required: 1
+    code:
+        label: Код
+        oc.commentPosition: ''
+        span: auto
+        required: 1
+        type: text

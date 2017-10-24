@@ -1,0 +1,73 @@
+{% if show_qform %}
+<div id="questions-container-rezult">
+    <div id="questions-container">
+{% endif %}
+{% if questions|length  %}
+    <div class="questions-list">
+        {% for question in questions %}
+            {% partial('@blocks/_question') question=question %}
+        {% endfor %}
+    </div>
+{% else %}
+    <h2 id="no-questions">{{ 'tender.no_questions'|_ }}</h2>
+{% endif %}
+{% if show_qform %}
+    </div>
+</div>
+{% endif %}
+
+{% if access_to_questions and show_qform %}
+    <form data-request-loading=".spinner" id="form-q" class="block-form-edit cf" data-request="onQuestion" data-request-success="questionSuccessfullyAdded(data)" data-request-complete="$('#question-submit button').removeClass('disabled');">
+        <div class="block-form-edit " >
+            <h4>{{ 'tender.question_title'|_ }}</h4>
+            <div class="date-form-q">
+                <time>{{ item.enquiryPeriod.endDate|date('H:i, d.m.Y') }}</time>
+                <span>{{ 'tender.question_time_desc'|_ }}</span>
+            </div>
+            <input type="hidden" value="{{ item.id }}" name="tender_id">
+            <input type="hidden" value="{{ user.id }}" name="user_id">
+
+            {% if item.__isMultiLot %}
+            <div class="for-question form-holder list_checkbox inline-layout">
+                <div class="checkbox">
+                    <input id="add-q-to-tender" type="radio" name="q_type" value="tender" checked>
+                    <label for="add-q-to-tender">{{ 'tender.question_to_tender'|_ }}</label>
+                </div>
+                <div class="checkbox">
+                    <input id="add-q-to-lot" type="radio" name="q_type" value="lot">
+                    <label for="add-q-to-lot">{{ 'tender.question_to_lot'|_ }}</label>
+                </div>
+            </div>
+            <div class="for-question form-holder none">
+                <label for="q-lot">{{ 'tender.lots_for_questions'|_ }}</label>
+                <select id="q-lot" name="q_lot">
+                    {% for lot in item.lots %}
+                    <option value="{{ lot.id }}">{{ lot.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% endif %}
+
+            <div class="for-question form-holder">
+                <input required type="text" value="" name="title" id="q-title" placeholder="{{ 'tender.enter_question_title'|_ }}">
+            </div>
+            <div class="for-question form-holder">
+                <textarea required name="question" id="q-question" style="width: 100%;height: 100px;" placeholder="{{ 'tender.enter_question_text'|_ }}"></textarea>
+            </div>
+            <div class="block-button" id="question-submit">
+                <button type="submit" class="next_step">{{ 'tender.submit_question'|_ }}</button>
+            </div>
+        </div>
+
+    </form>
+    <p id="question_submit" class="lead none"></p>
+{% endif %}
+
+{% if show_enquire_period_end %}
+<div id="form-q" class="block-form-edit cf">
+    <div class="date-form-q" style="position: relative;">
+        <h4>{{ 'tender.question_period_end'|_ }}</h4>
+        <time><strong>{{ item.enquiryPeriod.endDate|date('H:i, d.m.Y') }}</strong></time>
+    </div>
+</div>
+{% endif %}

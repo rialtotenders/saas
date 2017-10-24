@@ -1,0 +1,7 @@
+fields:
+    settings:
+        label: Настройки
+        span: full
+        type: partial
+        tab: Настйроки
+        path: ~/plugins/perevorot/rialtotender/controllers/envsettings/_settings.htm

@@ -1,0 +1,43 @@
+<div class="w c-s wrapper block_table">
+    <div class="c ">
+        <div class="c-s__wrap ">
+
+
+
+                <div class="overflow-table c-text__center inline-layout">
+
+                    <table class="mobile">
+                        <tr>
+                            <th>{{ (data['table_fields'] |first).field_title }}</th>
+                        </tr>
+                        {% for row in results %}
+                        <tr>
+                            {% set item = data['table_fields']|first %}
+                            {% if row[item.field_name] is not empty %}
+                                <td>{{ row[item.field_name]|raw }}</td>
+                            {% endif %}
+
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <table>
+                        <tr>
+                            {% for item in data['table_fields'] %}
+                            <th>{{ item.field_title|raw }}</th>
+                            {% endfor %}
+                        </tr>
+                        {% for row in results %}
+                        <tr>
+                            {% for item in data['table_fields'] %}
+                                {% if row[item.field_name] is not empty %}
+                                    <td>{{ row[item.field_name]|raw }}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+        </div>
+    </div>
+</div>

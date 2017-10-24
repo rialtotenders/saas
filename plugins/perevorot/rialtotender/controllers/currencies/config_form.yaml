@@ -1,0 +1,10 @@
+name: Currencies
+form: $/perevorot/rialtotender/models/currency/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\Currency
+defaultRedirect: perevorot/rialtotender/currencies
+create:
+    redirect: 'perevorot/rialtotender/currencies/update/:id'
+    redirectClose: perevorot/rialtotender/currencies
+update:
+    redirect: perevorot/rialtotender/currencies
+    redirectClose: perevorot/rialtotender/currencies

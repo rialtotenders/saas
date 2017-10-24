@@ -1,0 +1,10 @@
+columns:
+    procurement:
+        label: 'Тип процедуры'
+        type: text
+        searchable: true
+        sortable: true
+    days:
+        label: 'Количество дней'
+        type: number
+        sortable: true

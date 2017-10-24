@@ -1,0 +1,132 @@
+<div class="w c-main" id="registration-form">
+    <div class="c">
+        <div class="registered-step tender-create">
+
+            <h3>{{ header }}</h3>
+
+            {% if plan_id %}
+            <p class="mb-20" ><a href="{{ siteLocale }}plan/{{ plan_id }}/project" class="next_step">{{ 'plan.create.link_to_project'|_ }}</a></p>
+            {% endif %}
+
+            <div class="inline-layout ">
+
+                <div class="form-registration">
+                    <form id="plan-create-form" data-request-loading=".spinner" data-request="onHandleForm" data-tender data-request-complete="validation(this)">
+
+                        <input name="step" value="3" id="tender-step" type="hidden">
+                        <input type="hidden" name="save" id="tender-save" value="0">
+
+                        <div class="form-holder">
+                            <label>{{ 'plan.create.please_choose_year'|_}}</label>
+                            <select name="budget[year]">
+                                {% for year in years %}
+                                <option value="{{ year }}" {% if year == plan.budget.year %} selected {% endif %}>{{ year }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="error-holder none" data-validation="budget.year"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="plan_create_month">{{ 'plan.create.month'|_}}</label>
+                            <select id="plan_create_month" name="month">
+                            </select>
+                            <div class="error-holder none" data-validation="month"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="plan_title">{{ 'plan.create.title'|_}}</label>
+                            <input id="plan_title" type="text" name="budget[description]" value="{{ plan.budget.description }}"/>
+                            <div class="error-holder none" data-validation="budget.description"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="plan_budget_description">{{ 'plan.create.description'|_}}</label>
+                            <div class="form-holder">
+                                <textarea id="plan_budget_description" name="budget[notes]">{{ plan.budget.notes }}</textarea>
+                                <div class="error-holder none" data-validation="budget.notes"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="plan_create_price">{{ 'plan.create.price'|_ }}</label>
+                            <input id="plan_create_price" type="text" name="budget[amount]" value="{{ plan.budget.amount }}"/>
+                            <div class="error-holder none" data-validation="budget.amount"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label>{{ 'plan.create.choose_currency'|_}}</label>
+                            <select name="budget[currency]">
+                                {% for currency in currencies %}
+                                <option value="{{ currency.code }}" {% if currency.code == plan.budget.currency %} selected {% endif %}>{{ currency.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="error-holder none" data-validation="budget.currency"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="plan_create_choose_cpv">{{ 'plan.create.please_choose_cpv'|_}}</label>
+                            <div class="form-holder">
+
+                                <input id="plan_create_choose_cpv" class="search_cpv" placeholder="{{ 'plan.create.search_cpv'|_ }}" type="text" cpv-search-opened />
+                                <input class="search_cpv none" type="text" placeholder="{{ 'plan.create.search_cpv'|_ }}" cpv-search-closed />
+                                <div class="loader"></div>
+                                {% partial '@_blocks/_cpv'
+                                    class='normal_list_cpv'
+                                    input_name='classification[id]'
+                                    selected_item=plan.classification.id
+                                    type='any'
+                                    level_select_not='0'
+                                %}
+                                <div class="error-holder none" data-validation="classification.id"></div>
+                            </div>
+
+                        </div>
+
+                        {% if show_p_types %}
+                        <div class="form-holder">
+                            <label>{{ 'plan.create.choose_procurement_type'|_}}</label>
+                            <select name="tender[procurementMethod]">
+                                {% for code, name in procurement_types %}
+                                <option value="{{ code }}" {% if code == plan.tender.procurementMethod %} selected {% endif %}>{{ name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="error-holder none" data-validation="tender.procurementMethod"></div>
+                        </div>
+                        {% endif %}
+
+                        {% if show_p_method_types %}
+                        <div class="form-holder">
+                            <label>{{ 'plan.create.choose_procurement_method_type'|_}}</label>
+                            <select name="tender[procurementMethodType]">
+                                {% for code, name in procurement_method_types %}
+                                <option value="{{ code }}" {% if code == plan.tender.procurementMethodType %} selected {% endif %}>{{ name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="error-holder none" data-validation="tender.procurementMethodType"></div>
+                        </div>
+                        {% endif %}
+
+                        <div class="block-button" id="for-spinner">
+                            <button data-save="0" type="submit" class="prev_step add-items" onClick="$('.error-holder').hide().html('');">{{ 'plan.create.add_items'|_}}</button>
+                            <button data-save="0" type="submit" class="next_step without-add-items" onClick="$('.error-holder').hide().html('');">{{ 'plan.create.finish_button'|_}}</button>
+                            <button data-save="1" type="submit" class="next_step save_step" onClick="$('.error-holder').hide().html('');">{{ 'plan.create.save'|_}}</button>
+                        </div>
+                        <div id="tender-access-error"></div>
+                    </form>
+                </div>
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% partial '@_blocks/_cpv_item_tpl' type='single' %}
+{% partial '@plancreate/_scripts' month=plan.tender.tenderPeriod.startDate %}

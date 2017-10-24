@@ -1,0 +1,107 @@
+{% set tender_step = tender_step == 8 ? 2 : tender_step %}
+
+<div class="list-step inline-layout col-7">
+    <div class="item {% if step == 1 %}active{% endif %}">
+        <span>
+            {% if step == 1 %}
+                {{ 'tender.create.step1'|_ }}
+            {% elseif step > 1 %}
+                <a href="#" data-step="1">{{ 'tender.create.step1'|_ }}</a>
+            {% endif %}
+        </span>
+    </div>
+    {% if show_features and tender.criteria %}
+    <div class="item {% if step == 8 %}active{% endif %}">
+        <span>
+            {% if step == 8 %}
+                {{ 'tender.create.step1a'|_ }}
+            {% elseif step > 1 and step < 8 %}
+                <a href="#" data-step="8">{{ 'tender.create.step1a'|_ }}</a>
+            {% elseif next == 8 or tender_step >= 2 %}
+                <a href="#" data-next-step="8">{{ 'tender.create.step1a'|_ }}</a>
+            {% else %}
+                {{ 'tender.create.step1a'|_ }}
+            {% endif %}
+        </span>
+    </div>
+    {% endif %}
+    <div class="item {% if step == 2 %}active{% endif %}">
+        <span>
+            {% if step == 2 %}
+                {{ 'tender.create.step2'|_ }}
+            {% elseif step > 2 and step < 8 %}
+                <a href="#" data-step="2">{{ 'tender.create.step2'|_ }}</a>
+            {% elseif next == 2 or tender_step >= 2 %}
+                <a href="#" data-next-step="2">{{ 'tender.create.step2'|_ }}</a>
+            {% else %}
+                {{ 'tender.create.step2'|_ }}
+            {% endif %}
+        </span>
+    </div>
+    <div class="item {% if step == 3 %}active{% endif %}">
+        <span>
+            {% if step == 3 %}
+                {{ 'tender.create.step3'|_ }}
+            {% elseif step > 3 and step < 8 %}
+                <a href="#" data-step="3">{{ 'tender.create.step3'|_ }}</a>
+            {% elseif next == 3 or tender_step >= 3 %}
+                <a href="#" data-next-step="3">{{ 'tender.create.step3'|_ }}</a>
+            {% else %}
+                {{ 'tender.create.step3'|_ }}
+            {% endif %}
+        </span>
+    </div>
+    <div class="item {% if step == 4 %}active{% endif %}">
+        <span>
+            {% if step == 4 %}
+                {{ 'tender.create.step4'|_ }}
+            {% elseif step > 4 and step < 8 %}
+                <a href="#" data-step="4">{{ 'tender.create.step4'|_ }}</a>
+            {% elseif next == 4 or tender_step >= 4 %}
+                <a href="#" data-next-step="4">{{ 'tender.create.step4'|_ }}</a>
+            {% else %}
+                {{ 'tender.create.step4'|_ }}
+            {% endif %}
+        </span>
+    </div>
+    <div class="item {% if step == 5 %}active{% endif %}">
+        <span>
+            {% if step == 5 %}
+                {{ 'tender.create.step5'|_ }}
+            {% elseif step > 5 and step < 8 %}
+                <a href="#" data-step="5">{{ 'tender.create.step5'|_ }}</a>
+            {% elseif next == 5 or tender_step >= 5 %}
+                <a href="#" data-next-step="5">{{ 'tender.create.step5'|_ }}</a>
+            {% else %}
+                {{ 'tender.create.step5'|_ }}
+            {% endif %}
+        </span>
+    </div>
+    <div class="item {% if step == 6 %}active{% endif %}">
+        <span>
+            {% if step == 6 %}
+                {{ 'tender.create.step6'|_ }}
+            {% elseif step > 6 and step < 8 %}
+                <a href="#" data-step="6">{{ 'tender.create.step6'|_ }}</a>
+            {% elseif next == 6 or tender_step >= 6 %}
+                <a href="#" data-next-step="6">{{ 'tender.create.step6'|_ }}</a>
+            {% else %}
+                {{ 'tender.create.step6'|_ }}
+            {% endif %}
+        </span>
+    </div>
+    <div class="item {% if step == 7 %}active{% endif %}">
+        <span>
+            {% if step == 7 %}
+                {{ 'tender.create.step7'|_ }}
+            {% elseif next == 7 or tender_step >= 7 %}
+                <a href="#" data-next-step="7">{{ 'tender.create.step7'|_ }}</a>
+            {% else %}
+                {{ 'tender.create.step7'|_ }}
+            {% endif %}
+        </span>
+    </div>
+
+</div>
+
+<h3>{{ header }}</h3>

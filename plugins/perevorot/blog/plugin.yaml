@@ -1,0 +1,34 @@
+plugin:
+    name: Blog
+    description: Blog
+    author: Perevorot
+    icon: oc-icon-newspaper-o
+    homepage: ''
+permissions:
+    perevorot.blog.manage_blogs:
+        tab: 'perevorot.blog::lang.plugin.name'
+        label: 'perevorot.blog::lang.plugin.blog.manage_posts'
+navigation:
+    main-menu-item:
+        label: 'perevorot.blog::lang.plugin.name'
+        url: perevorot/blog/blogs
+        icon: icon-newspaper-o
+        permissions:
+            - perevorot.blog.manage_blogs
+        sideMenu:
+            side-menu-item:
+                label: 'perevorot.blog::lang.plugin.blog.posts'
+                url: perevorot/blog/blogs
+                icon: icon-file
+            side-menu-item2:
+                label: 'perevorot.blog::lang.plugin.blog.authors'
+                url: perevorot/blog/authors
+                icon: icon-github-alt
+            side-menu-item3:
+                label: 'perevorot.blog::lang.plugin.blog.tags'
+                url: perevorot/blog/tags
+                icon: icon-tags
+            side-menu-item4:
+                label: Группы
+                url: perevorot/blog/groups
+                icon: icon-list

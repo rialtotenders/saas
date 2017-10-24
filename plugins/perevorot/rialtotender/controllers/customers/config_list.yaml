@@ -1,0 +1,15 @@
+list: $/perevorot/rialtotender/models/customer/columns.yaml
+modelClass: Perevorot\Rialtotender\Models\Customer
+title: Заказчики
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 30
+showSetup: true
+showCheckboxes: true
+defaultSort:
+    column: sort_order
+    direction: asc
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'perevorot/rialtotender/customers/update/:id'

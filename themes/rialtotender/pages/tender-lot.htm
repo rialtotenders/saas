@@ -1,0 +1,8 @@
+url = '/tender/:tenderID/lots/:lotID'
+layout = 'default'
+
+[SingleLot]
+tender_id = '{{ :tenderID }}'
+lot_id = '{{ :lotID }}'
+==
+{% component 'SingleLot' %}

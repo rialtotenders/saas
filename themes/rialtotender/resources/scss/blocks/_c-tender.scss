@@ -1,0 +1,747 @@
+.c-tender {
+    .document-info {
+        a {
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 100%;
+            margin-right: 10px;
+            text-overflow: ellipsis;
+            display: inline-block;
+        }
+    }
+    .criteria-tender-block {
+        color: #5a5959;
+        font-size: 14px;
+        .item-criteria {
+            margin-bottom: 15px;
+            line-height: 1em;
+
+            .value_criteria {
+                position: relative;
+                &:hover {
+                    .list_value_criteria {
+                        display: block;
+                    }
+                }
+                .main_value_criteria {
+                    position: relative;
+                    padding-right: 15px;
+                    background-size: 9px 6px;
+                    display: inline-block;
+                    cursor: pointer;
+                }
+                .list_value_criteria {
+                    position: absolute;
+                    display: none;
+                    width: auto;
+                    top: 100%;
+                    left: 0;
+                    z-index: 2;
+                    padding-top: 8px;
+                    > div {
+                        padding: 15px;
+                        border: 1px solid #9f9ea1;
+                        background: #fff;
+                    }
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        width: 16px;
+                        height: 10px;
+                        background: url('/integer/agro/theme/assets/img/design/link_file_drop.png') no-repeat center;
+                        background-size: 100%;
+                        left: 22px;
+                        z-index: 2;
+                    }
+                    .item-value {
+                        margin-bottom: 10px;
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+
+                }
+
+            }
+        }
+    }
+
+  .question_text {
+            font-size: 12px;
+            color: #595959;
+            margin-top: 0;
+            margin-bottom: 0;
+            &.hide {
+                display: none;
+            }
+            &.open {
+                .q-text-overflow {
+                    max-height: inherit;
+                    overflow: visible;
+                }
+                .award-text-overflow {
+                    max-height: inherit;
+
+                }
+            }
+        }
+
+    @extend .clearfix;
+    #questions-container-rezult {
+        padding: 20px;
+    }
+
+    .tender-date{
+        span{
+            padding-left: 5px;
+        }
+    }
+    .c {
+        @extend .padding-left;
+        @extend .padding-right;
+    }
+
+    .q-text-overflow {
+      max-height: 27px;
+      overflow: hidden;
+    }
+
+
+    &__wrap {
+        padding-top: 50px;
+        padding-bottom: 60px;
+        @extend .padding-left;
+        @extend .padding-right;
+        background: white;
+    }
+    &__center {
+        @extend .max-width-inner;
+        margin: 0 auto;
+    }
+
+    .question_text{
+        font-size: 12px;
+        color: #595959;
+        margin-top: 0;
+        margin-bottom: 0;
+        &.hide{
+            display: none;
+        }
+        &.open{
+            .award-text-overflow{
+                max-height: inherit;
+
+            }
+            .button-more{
+                .more-hide{
+                    display: inline-block;
+                }
+                .more-open{
+                    display: none;
+                }
+            }
+        }
+        .award-text-overflow{
+            max-height: 1px;
+            overflow: hidden;
+        }
+
+    }
+
+    .button-more{
+        margin-top: 10px;
+        .more-open,.more-hide{
+            padding: 5px 20px 5px 5px;
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            background: #edefee;
+            color: $bg-main-color;
+
+            &:after{
+                content: "";
+                position: absolute;
+                background: url("/themes/rialtotender/assets/img/design/icon-slide.png") no-repeat ;
+                width: 16px;
+                height: 16px;
+                background-size: 100%;
+                right: 3px;
+                top: 50%;
+                margin-top: -8px;
+
+            }
+
+        }
+        .more-open{
+            &:after{
+                transform: rotate(180deg);
+            }
+
+        }
+        .more-hide{
+            display: none;
+        }
+    }
+
+    a {
+        color: #ec5e24;
+        @extend .transition-down;
+        border-bottom: 1px dashed transparent;
+        &:hover {
+            border-bottom: 1px dashed #ec5e24 !important;
+            @extend .transition;
+        }
+    }
+    .sb-table__dashed-link {
+        border-bottom: 1px dashed;
+        &:hover {
+            border-bottom: 1px dashed #9cbeef !important;
+        }
+    }
+    h1 {
+        margin-bottom: 10px;
+    }
+    h2 {
+        margin-top: 40px;
+        margin-bottom: 15px;
+    }
+    .title_orange{
+
+        span{
+            color: #ec5e24;
+            border-bottom: 1px dashed #ec5e24;
+        }
+    }
+    .sb-icon-and-text {
+        padding-bottom: 15px;
+    }
+    p {
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+    &__right-block {
+        text-align: center;
+
+        .sb-more-button button {
+            max-width: 100%;
+            width: 100%;
+            min-width: 100%;
+        }
+    }
+    &__text-small {
+        font-size: 11px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        text-align: center;
+        color: #9b9b9b;
+    }
+    &__price {
+        margin: 0 !important;
+        font-size: 24px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.33;
+        text-align: center;
+        color: #ec5e24;
+        margin-top: 20px !important;
+        @include a1() {
+            font-size: 20px;
+        }
+        @include a2() {
+            font-size: 18px;
+        }
+    }
+    &__price-description {
+        margin: 0 !important;
+        font-size: 13px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.85;
+        text-align: center;
+        color: #1a1a1a;
+        margin-bottom: 20px !important;
+    }
+    &__grey-line {
+        width: 100%;
+        display: block;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    #tabs {
+        margin-top: 40px;
+        & > div {
+            font-size: 17px;
+            color: #ec5e24;
+            &.active {
+                color: black;
+            }
+        }
+    }
+
+    .sb-table__doc-link{
+        position: relative;
+        min-height: 30px;
+
+        &:before{
+            content: '';
+            display: block;
+            width: 25px;
+            height: 30px;
+            margin-top: -14px;
+            top: 50%;
+            left: -40px;
+            position: absolute;
+            background: url('/themes/rialtotender/assets/img/design/icon-doc.png') no-repeat center;
+        }
+    }
+
+
+
+    .table__table-row{
+        position: relative;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        > .table__table-cell{
+            border-bottom: 1px solid #e5e5e5;
+            font-size: 14px;
+            color: #424242;
+            padding: 15px 20px;
+            &.table__table-cell--th{
+                border-right: 2px solid #fff;
+                background: rgba(244, 244, 244, 0.5);
+                vertical-align: middle;
+                border-bottom: 0;
+            }
+        }
+
+        &.table__table-row2{
+            > .table__table-cell{
+                width: 50%;
+            }
+        }
+        &.table__table-row3{
+            > .table__table-cell{
+                width: 33%;
+            }
+        }
+        &.table__table-row4{
+            > .table__table-cell{
+                width: 25%;
+            }
+        }
+
+        h4{
+            cursor: pointer;
+        }
+
+    }
+
+
+    [class^="tender-document"]{
+        background: rgba(244, 244, 244, 0.5);
+        padding: 20px;
+        position: relative;
+        display: none;
+        .close{
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            top: 5px;
+            right: 5px;
+            background: url('/themes/rialtotender/assets/img/design/close.png') no-repeat center;
+            background-size: 100%;
+            cursor: pointer;
+
+        }
+        h4{
+            color: #424242;
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+        .table__table-row > .table__table-cell{
+            border: 0;
+            padding: 5px 0;
+            color: #000;
+            padding-right: 5px;
+        }
+    }
+
+    .c-slidecards__item-link{
+        border: solid 1px #dedede!important;
+        &:hover,&:focus{
+            border: solid 1px #ec5e24!important;
+        }
+
+    }
+    .c-slidecards__wrap{
+        padding: 70px 0;
+        h2{
+            margin-top: 0;
+        }
+
+        .c-slidecards__center{
+            max-width: 100%;
+            width: 100%;
+            .c-slidecards__slider{
+                padding: 0 120px;
+                .slick-slide{
+                    max-width: 100%;
+                }
+            }
+
+            .slick-prev{
+                left: 0;
+            }
+            .slick-next{
+                right: 0;
+            }
+        }
+
+    }
+
+    .sb-icon-and-text__item{
+
+    }
+    .sb-icon-and-text__item{
+
+        //width: 50%;
+        //padding: 0 50px;
+        box-sizing: border-box;
+        margin: 0;
+        //text-align: center;
+        //color:  #5a5959;
+        //font-size: 14px;
+
+        min-height: 30px;
+        //border-right: 1px solid #e3e3e3;
+        &:first-child{
+            padding-left: 0;
+        }
+        &:last-child{
+            border-right: 0;
+        }
+        span{
+            background-repeat: no-repeat;
+            display: block;
+            min-height: 30px;
+            background-size: 25px auto;
+            padding-left: 40px;
+            background-position: left center;
+
+        }
+        &:first-child{
+            span{
+                background: url("/themes/rialtotender/assets/img/design/group-2-orange.svg") no-repeat;
+                background-size: 25px auto;
+            }
+
+        }
+        &:last-child{
+            span{
+                background: url("/themes/rialtotender/assets/img/design/group-orange.svg") no-repeat;
+                background-size: 25px auto;
+            }
+
+        }
+    }
+
+    .block-text-tender{
+        padding-right: 25px;
+        border-right: 1px solid #e5e5e5;
+        width: calc(100% - 300px);
+    }
+
+    .block-button-tender{
+        padding-left: 25px;
+        width: 300px;
+        .c-tender__right-block{
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 30px;
+
+        }
+    }
+
+    .contact-table{
+
+        th{
+            font-size: 14px;
+            color: #424242;
+            padding: 10px 5px;
+            background: rgba(244, 244, 244, 0.5);
+            vertical-align: middle;
+            border-right: 2px solid #fff;
+            text-align: left;
+            word-break: break-all;
+
+            &:last-child{
+                border-right: 0;
+            }
+        }
+        td{
+            font-size: 14px;
+            color: #424242;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 10px 5px;
+
+
+            p{
+                font-size: 14px;
+                color: #424242;
+                margin-top: 0;
+                &:last-child{
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        .border0{
+            td{
+                border-bottom: 0;
+            }
+        }
+    }
+
+    table{
+        width: 100%;
+        tr{
+            vertical-align: top;
+            &:first-child{
+                border-bottom: 1px solid #e5e5e5;
+            }
+            &.border_top{
+                border-top: 1px solid #e5e5e5;
+            }
+        }
+        th{
+            font-size: 11px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            color: #9b9b9b;
+            vertical-align: middle;
+            line-height: 1.3em;
+            padding-top: 3px;
+            padding-bottom: 6px;
+            text-align: left;
+
+        }
+        td{
+            font-size: 13px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.45;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            color: #1a1a1a;
+            padding-left: 20px;
+            padding-right: 20px;
+            p{
+                font-size: 13px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width: 1200px){
+  .c-tender .overflow-table{
+    overflow-x: scroll;
+    max-width: calc(100vw - 80px);
+
+  }
+}
+@media screen and (max-width: 959px){
+  .c-tender #tabs > div{
+    display: inline-block;
+    width: 50%;
+    line-height: 2em;
+  }
+}
+
+@include ac() {
+
+	.c-tender {
+		.sb-icon-and-text {
+			.sb-icon-and-text__item {
+				width: 100%;
+				float: left;
+			}
+			&:after {
+				content: '';
+				display: block;
+				clear: both;
+			}
+		}
+		.col-25 {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 40%;
+			.c-tender__right-block {
+				background: rgba(239, 239, 239, 0.5);
+				padding-top: 10px;
+				padding-left: 20px;
+                padding-right: 20px;
+                text-align: center;
+                box-sizing: border-box;
+				.border-bottom {
+					border-bottom: 1px solid transparent;
+				}
+			}
+		}
+		.col-75 {
+			width: 100%;
+			padding-right: 0;
+			border-right: none;
+			& > p,
+			& > h1{
+              width: 100%;
+            }
+			& > .sb-icon-and-text {
+				width: 60%;
+			}
+		}
+	}
+}
+@include a4() {
+    body {
+        div.c-tender {
+        	div.sb-table {
+                .sb-table__table-row{
+                  padding: 5px 0;
+                  display: block;
+                  border-bottom: 1px dashed #bfbfbf;
+                }
+            	&__table-cell {
+                    display: inline-block;
+                    width: auto!important;
+                    padding-left: 0;
+                    padding-right: 0;
+                    padding-top: 0px !important;
+                    padding-bottom: 0px !important;
+                    p{
+                      margin-top: 0;
+                      margin-bottom: 0;
+                    }
+                	&--th {
+                    	//display: none;
+                	}
+            	}
+        	}
+        	& #tabs > div {
+            	font-size: 15px;
+        	}
+        	.table__table-cell {
+            	//display: inline-block;
+            	//width: auto!important;
+
+            	&--th {
+                	//display: none !important;
+            	}
+        	}
+        	.table__table-row {
+            	//display: block !important;
+        	}
+        	.col-25 {
+            	padding-left: 0;
+        	}
+
+            .sb-table__doc-link{
+              float: none;
+              display: inline-block;
+            }
+            .sb-table__dashed-wrap:before{
+              display: none;
+            }
+    	}
+    }
+}
+@include a1() {
+    .c-tender {
+        &__center {
+            .col-75 {
+                h1 {
+                    width: 100%;
+                    margin: 0;
+                }
+                .sb-icon-and-text {
+                    width: 100%;
+                }
+            }
+            .col-25 {
+                width: 100%;
+                position: relative;
+                top: inherit;
+                right: inherit;
+                margin-top: 30px;
+            }
+        }
+        #tabs {
+          padding: 10px 10px 0;
+          > div{
+            width: 50%;
+            line-height: 1.8em;
+          }
+
+        }
+    }
+}
+
+
+@media screen and (max-width: 1260px){
+  .c-tender .c-slidecards__wrap .c-slidecards__center .c-slidecards__slider{
+    padding: 0 50px;
+  }
+  .c-tender .c-slidecards__wrap .c-slidecards__center{
+    max-width: calc(100vw - 40px);
+  }
+
+}
+
+
+@media screen and (max-width: 959px){
+  .c-tender{
+    .block-text-tender{
+      padding-right: 0;
+      border-right: 0;
+      width: 100%;
+    }
+
+    .block-button-tender{
+      padding-left: 0;
+      width: 100%;
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top: 1px solid #e5e5e5;
+      .c-tender__right-block{
+        border-bottom: 0;
+        padding-bottom: 0;
+
+      }
+    }
+  }
+
+}
+
+
+@media screen and (max-width: 850px){
+  .c-tender .sb-icon-and-text .sb-icon-and-text__item{
+    padding-left: 0;
+  }
+}

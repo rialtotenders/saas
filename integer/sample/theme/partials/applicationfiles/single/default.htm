@@ -1,0 +1,90 @@
+{% if is_auth %}
+    <div class="control-popup modal fade" id="application">
+        <h1>{{ item.title }}</h1>
+        <div class="inline-layout">
+            <div class="form-application">
+                <ul class="application-info">
+                    <li class="application-time">
+                        {{ 'bids.date_till'|_}}
+                        <strong>
+                            {{ item.tenderPeriod.endDate|date('d.m.Y H:i') }}
+                        </strong>
+                    </li>
+                    <li class="application-price">
+                        {{ 'bids.value'|_}}
+                        <strong>
+                            {% if item.value.amount >= 999999999 %}
+                                {{ 'tender.is_empty_price'|_ }}
+                            {% else %}
+                                {{ item.value.amount|number_format(0, '', ' ') }} {{ item.value.currency }}
+                            {% endif %}
+                        </strong>
+                    </li>
+                </ul>
+
+                <form class="create_application" data-request-loading=".spinner" data-application data-request="onSave" id="application-form">
+                    <input type="hidden" name="document_type" value="application">
+                    <input type="hidden" name="tenderID" value="{{ item.tenderID }}">
+                    <input type="hidden" name="tender_id" value="{{ item.id }}" />
+
+                    <div >
+                        {#<div class="form-holder">
+                            <input type="text" disabeled="true" placeholder="{{ 'bids.your_bid_value'|_}}" value="{{ app.attributes.price }}" />
+                        </div>#}
+                        
+                        {% if documents|length %}
+                            <h2>{{ 'bids_documents'|_}}</h2>
+
+                            <div class="list_doc_qualification">
+
+                                        {% for document in documents %}
+                                            <div class="inline-layout item">
+
+                                                <div class="icon-container">
+
+                                                        <img src="/plugins/responsiv/uploader/assets/images/upload.png" alt="" width="20">
+
+                                                </div>
+                                                <div class="info-doc">
+                                                    <strong data-dz-name="">{{ document.file_name}}</strong>
+
+                                                    {{ document.sizeToString }}
+                                                </div>
+
+                                            </div>
+                                        {% endfor %}
+                            </div>
+
+                        {% endif %}
+
+                        <h2>{{ 'bids_qualification_documents'|_}}</h2>
+
+                        <div class="file-button">
+                            {% component 'fileUploader' applications=applications document_types=document_types %}
+                        </div>
+                    </div>
+
+                    <div id="application-submit" class="block-button inline-layout button_application">
+                        <a class="prev_step" href="{{ siteLocale }}tender/{{ tender_id }}/">{{ 'bids.back_at_tender_page'|_}}</a>
+                        <button class="next_step long_link" type="submit">{{ 'bids.update_bid_button'|_}}</button>
+                    </div>
+                </form>
+
+                <div id="application-access-error"></div>
+            </div>
+
+            <div class="desc-application">
+                {% if(messages.header1 is not empty) %}
+                    <h2>{{ messages.header1 }}</h2>
+                {% endif %}
+
+                {% if(messages.step1 is not empty)%}
+                    <br>
+                    {{ messages.step1|raw }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% partial 'handlers/application' %}

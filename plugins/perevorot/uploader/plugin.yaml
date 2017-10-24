@@ -1,0 +1,6 @@
+plugin:
+    name: 'perevorot.uploader::lang.plugin.name'
+    description: 'perevorot.uploader::lang.plugin.description'
+    author: Perevorot
+    icon: oc-icon-adjust
+    homepage: ''

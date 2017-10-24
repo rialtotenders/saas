@@ -1,0 +1,4 @@
+title: Currencies
+modelClass: Perevorot\Rialtotender\Models\Currency
+toolbar:
+    buttons: reorder_toolbar

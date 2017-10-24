@@ -1,0 +1,21 @@
+{% if reinit_input_name_prefix %}
+    {% set validator_name_prefix = input_name_prefix|replace({'[': '.', ']': '.'})|replace({'..': '.'}) %}
+    {% set input_name_prefix = input_name_prefix|replace({'.': ''}) %}
+{% endif %}
+
+<div class="feature-enum">
+    <div class="feature-enum-index" data-feature-enum-index="{{ ekey }}">
+        <div class="inline-layout">
+            <div class="form-holder">
+                <label for="options_category-{{ validator_name_prefix ~ fkey }}.enum.{{ ekey }}">{{ 'tender.feature.enum_title'|_ }}</label>
+                <input id="options_category-{{ validator_name_prefix ~ fkey }}.enum.{{ ekey }}" type="text" name="{{ input_name_prefix }}[{{ fkey }}][enum][{{ ekey }}][title]" value="{{ enum.title }}"/>
+                <div class="error-holder none" data-validation="{{ validator_name_prefix ~ fkey }}.enum.{{ ekey }}.title"></div>
+            </div>
+            <div class="form-holder">
+                <label for="option_price_category-{{ validator_name_prefix ~ fkey }}.enum.{{ ekey }}">{{ 'tender.feature.enum_value'|_ }}</label>
+                <input id="option_price_category-{{ validator_name_prefix ~ fkey }}.enum.{{ ekey }}" type="text" name="{{ input_name_prefix }}[{{ fkey }}][enum][{{ ekey }}][value]" value="{{ enum.value }}"/>
+                <div class="error-holder none" data-validation="{{ validator_name_prefix ~ fkey }}.enum.{{ ekey }}.value"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,156 @@
+fields: {  }
+tabs:
+    fields:
+        username:
+            label: 'rainlab.user::lang.user.username'
+            tab: 'rainlab.user::lang.user.account'
+            span: full
+            type: text
+            readOnly: true
+        email:
+            label: 'rainlab.user::lang.user.email'
+            tab: 'rainlab.user::lang.user.account'
+            span: full
+            type: text
+            readOnly: true
+        username:
+            label: 'Код ЕДРПОУ'
+            tab: 'rainlab.user::lang.user.account'
+            hidden: true
+            span: left
+            type: text
+            readOnly: true
+        is_overdraft:
+            label: 'Разрешить овердрафт'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+            readOnly: true
+        is_gov:
+            label: 'Разрешить работу с государственными тендерами'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+            readOnly: true
+        is_go:
+            label: 'Гражданская компания'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+            readOnly: true
+        is_test:
+            label: 'Работа в тестовом режиме'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+            readOnly: true
+        is_accelerator:
+            label: 'Работа в режиме акселерации'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+            readOnly: true
+        is_test_user:
+            label: 'Тестовый юзер'
+            span: auto
+            type: switch
+            tab: 'rainlab.user::lang.user.account'
+            readOnly: true
+        company_name:
+            label: 'Название компании'
+            tab: 'Информация о предприятии'
+            type: text
+            readOnly: true
+        company_address:
+            label: 'Адрес компании'
+            tab: 'Информация о предприятии'
+            type: text
+            span: full
+            readOnly: true
+        company_index:
+            label: 'Индекс компании'
+            tab: 'Информация о предприятии'
+            type: text
+            readOnly: true
+        company_region:
+            label: 'Регион компании'
+            tab: 'Информация о предприятии'
+            type: text
+            readOnly: true
+        company_city:
+            label: 'Город компании'
+            tab: 'Информация о предприятии'
+            type: text
+            readOnly: true
+        company_country:
+            label: 'Страна компании'
+            tab: 'Информация о предприятии'
+            type: text
+            readOnly: true
+        payer:
+            label: 'Плательщик НДС'
+            tab: 'Информация о предприятии'
+            type: partial
+            path: $/perevorot/users/controllers/users/_payer_external.htm
+            readOnly: true
+        director_position:
+            label: 'Должность руководителя'
+            tab: 'Информация для подписания договора'
+            type: text
+            readOnly: true
+        director_fio:
+            label: 'ФИО руководителя'
+            tab: 'Информация для подписания договора'
+            type: text
+            readOnly: true
+        director_document:
+            label: 'Документ (полномочия)'
+            tab: 'Информация для подписания договора'
+            type: text
+            readOnly: true
+        contact_fio:
+            label: ФИО
+            tab: 'Контактное лицо'
+            type: text
+            readOnly: true
+        contact_position:
+            label: Должность
+            tab: 'Контактное лицо'
+            type: text
+            readOnly: true
+        contact_email:
+            label: Email
+            tab: 'Контактное лицо'
+            type: text
+            readOnly: true
+        contact_office_phone:
+            label: 'Контактный телефон (офис)'
+            tab: 'Контактное лицо'
+            type: text
+            readOnly: true
+        contact_mobile_phone:
+            label: 'Контактный телефон (моб)'
+            tab: 'Контактное лицо'
+            type: text
+            readOnly: true
+        is_formed:
+            label: 'Акты сформировано'
+            span: auto
+            type: switch
+            tab: 'Финансы'
+            readOnly: true
+        payments:
+            label: 'Payments'
+            tab: 'Финансы'
+            type: partial
+            path: field_payments
+            readOnly: true
+secondaryTabs:
+    fields:
+        avatar:
+            label: 'rainlab.user::lang.user.avatar'
+            type: fileupload
+            mode: image
+            imageHeight: 260
+            imageWidth: 260
+            tab: Разное

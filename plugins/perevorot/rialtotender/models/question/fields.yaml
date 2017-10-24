@@ -1,0 +1,22 @@
+fields:
+    title:
+        label: Заголовок
+        type: text
+        span: auto
+    question:
+        label: Вопрос
+        size: large
+        span: auto
+        type: textarea
+    tender_id:
+        label: ID тендера
+        type: text
+        span: auto
+    user_id:
+        label: Номер пользователя
+        type: text
+        span: auto
+    qid:
+        label: question_id
+        type: text
+        span: auto

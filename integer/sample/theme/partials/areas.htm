@@ -1,0 +1,38 @@
+{% if areas|length %}
+<div class="w c-slidecards {% if data.areas_up %} go-prev{% endif %}">
+    <div class="c">
+        <div class="c-slidecards__wrap">
+            <h2 class="sb-h2">{{ 'platform.choose_platform'|_ }}</h2>
+            <div class="c-slidecards__center">
+                {% if data.areas_title %}
+                    <h2 class="sb-h2">{{ data.areas_title }}</h2>
+                {% endif %}
+                <div class="c-slidecards__slider js-slidecards-slider">
+                    {% for area in areas %}
+                    <div class="c-slidecards__item-wrap{{ area.url is empty ? ' c-slidecards__item-wrap--soon':'' }}">
+                        <div class="c-slidecards__soon-wrap">
+                            <div>{{ 'platform.soon'|_ }}</div>
+                        </div>
+                        <div class="c-slidecards__content">
+                            {% if area.image.path %}
+                            <img src="{{ area.image.path }}">
+                            {% endif %}
+                            <p>{{ area.description }}</p>
+                        </div>
+                        {% if area.url %}
+                            <a href="{{ area.url }}" class="c-slidecards__item-link">
+                                {{ 'platform.register'|_ }}
+                            </a>
+                        {% else %}
+                        <span class="c-slidecards__item-link">
+                            {{ 'platform.register'|_ }}
+                        </span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

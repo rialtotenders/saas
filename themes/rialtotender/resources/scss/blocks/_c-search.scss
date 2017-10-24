@@ -1,0 +1,126 @@
+$padding-left-input: 130px;
+$padding-right-input: 194px;
+$height-search-bottom: 70px;
+.c-search {
+  color: white;
+  height: 100px;
+  text-align: center;
+  &__center {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  &__top {
+    text-align: left;
+    padding-bottom: 15px;
+    span {
+      &:nth-child(1) {
+        font-size: 13px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        text-align: center;
+      }
+      &:nth-child(2) {
+        font-size: 13px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        text-align: center;
+        color: #ec5e24;
+        margin-left: 20px;
+        cursor: pointer;
+        position: relative;
+        &:after {
+          content: '';
+          display: block;
+          position: absolute;
+          bottom: -3px;
+          width: 100%;
+          height: 1px;
+          border-bottom: 1px dashed #ec5e24;
+          left: 0;
+        }
+      }
+    }
+  }
+  &__bottom {
+    height: $height-search-bottom;
+  }
+  &__cat {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: $padding-left-input;
+    background: white;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    line-height: $height-search-bottom;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: center;
+    color: #000000;
+    border-right: solid 1px #f2f2f2;
+  }
+  &__cat-span {
+    margin-right: 10px;
+    &:after {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      border-right: 2px solid #000000;
+      border-bottom: 2px solid #000000;
+      position: absolute;
+      top: 50%;
+      margin-top: -4px;
+      right: -13px;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+  &__button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: $bg-main-color;
+    width: $padding-right-input;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    line-height: $height-search-bottom;
+    cursor: pointer;
+  }
+  &__input-wrap {
+    padding-left: $padding-left-input;
+    padding-right: $padding-right-input;
+  }
+  &__input-field {
+    background: white;
+    width: 100%;
+    box-sizing: border-box;
+    height: $height-search-bottom;
+    border: none;
+    box-sizing: border-box;
+    padding: 0 20px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: left;
+    color: #9b9b9b;
+  }
+}
+
+
+
+#result{
+  h3{
+    margin: 20px 0;
+    font-size: 18px;
+  }
+}

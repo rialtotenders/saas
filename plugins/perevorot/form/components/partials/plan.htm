@@ -1,0 +1,85 @@
+{% if back_url %}
+<div class="w c-goback">
+    <div class="c">
+        <div class="c-goback__wrap border-bottom">
+            <div class="c-goback__center">
+                <div class="sb-go-back-button">
+                    <a href="{{ back_url }}">{{ 'plan.back_to_search_results'|_ }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="w c-tender">
+    <div class="c">
+        <div class="c-tender__wrap">
+
+            <div class="row inline-layout">
+                <div class="block-text-tender">
+
+                    <h1>{{ item.budget.description }}</h1>
+                    {% if item.mode == 'test' %}<strong>{{ 'plan.page.test_mode'|_ }}</strong>{% endif %}
+
+                    <div class="sb-icon-and-text inline-layout">
+                        <div class="sb-icon-and-text__item" >
+                            <span >{{ item.procuringEntity.name }}</span>
+                        </div>
+                        <div class="sb-icon-and-text__item" >
+                            <span >{{ item.planID }}</span>
+
+                        </div>
+                    </div>
+
+                    <p>{{ item.budget.notes }}</p>
+
+                    <div>
+                        {% partial '@plan_blocks/items' items=item.items %}
+                        {% partial('@plan_blocks/ids') %}
+                        {% partial('@plan_blocks/dates') %}
+                        {% partial('@plan_blocks/procuring_entity') %}
+                        {% partial('@plan_blocks/purchase_date') %}
+                        {% partial('@plan_blocks/procurement') %}
+                        {% partial('@plan_blocks/classification') %}
+                    </div>
+
+                </div>
+
+                <div class="block-button-tender">
+                    <div class="c-tender__right-block">
+                        <p class="c-tender__price">{{ item.budget.amount|number_format(2, '.', ' ')|replace({'.00': ''}) }} {{ item.budget.currency}}</p>
+                        <p class="tender-date">
+                            {{ 'plan.purchase_date_header_title'|_ }}
+                            <div class="plan-month-name2" style="display: inline-block;">{{ item.tender.tenderPeriod.startDate|date('n') }}</div>
+                            {{ item.budget.year }}
+                        </p>
+                        {% if user_tender %}
+                        <p>
+                            <a href="{{ siteLocale }}plan/{{ item.planID }}/edit" class="button-tender">{{ 'user.plan.edit'|_ }}</a>
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% put scripts %}
+<script>
+    jQuery(function($) {
+        $('.plan-month-name p, .plan-month-name2').each(function(  ) {
+
+            var months = locale_dates.i18n.{{ CurrentLocale }}.months;
+            var month = parseInt($( this ).text()) - 1;
+
+            if(months[month] != undefined)
+            {
+                $( this ).text(months[month]);
+            }
+        });
+    });
+</script>
+{% endput %}

@@ -1,0 +1,10 @@
+name: TimingControls
+form: $/perevorot/rialtotender/models/timingcontrol/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\TimingControl
+defaultRedirect: perevorot/rialtotender/timingcontrols
+create:
+    redirect: 'perevorot/rialtotender/timingcontrols/update/:id'
+    redirectClose: perevorot/rialtotender/timingcontrols
+update:
+    redirect: perevorot/rialtotender/timingcontrols
+    redirectClose: perevorot/rialtotender/timingcontrols

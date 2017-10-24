@@ -1,0 +1,76 @@
+<div class="w c-s none bids-content" tab-content>
+    <div class="c">
+        <br>
+        {% if my_items is empty %}
+            <p>{{ 'form.search_filter.no_my_tender_found'|_}}</p>
+        {% else %}
+            <div class="overflow-table">
+                <table>
+                    <tr>
+                        <th>{{ 'form.search.tender_title'|_ }}</th>
+                        <th>{{ 'form.search.customer'|_ }}</th>
+                        <th>{{ 'form.search.tender_price'|_ }}</th>
+                        <th>{{ 'tenders.bid.my_price'|_ }}</th>
+                        <th>{{ 'tenders.bid.tender_status'|_ }}</th>
+                        <th>{{ 'tenders.bid.tender_status_date'|_ }}</th>
+                    </tr>
+                    {% for item in my_items %}
+                    <tr>
+                        <td>
+                            <p><a href="{{ siteLocale }}tender/{{ item.tenderID }}/">{{ item.title }}</a></p>
+                            <p>{{ item.tenderID }}</p>
+                        </td>
+                        <td>
+                            {% if item.procuringEntity.name is not empty %}
+                            <p>{{ item.procuringEntity.name }}</p>
+                            {#<p><a href="{{ siteLocale }}tender/search/?edrpou={{ item.procuringEntity.identifier.id}}" class="sb-table-list-item__link sb-table-list-item__link--fw-normal">{{ 'form.all_company_tenders'|_}}</a></p>#}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <p>
+                                {% if item.value.amount >= 999999999 %}
+                                    {{ 'user.tender.is_empty_price'|_ }}
+                                {% else %}
+                                    {{ item.value.amount|number_format(0, '', ' ') }} {{ item.value.currency }}
+                                {% endif %}
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                {% if item.__my_bid is not empty %}
+                                    {% if item.__my_bid.feature_price %}
+                                        {{ item.__my_bid.feature_price|number_format(0, '', ' ') }} {{ item.value.currency }}
+                                    {% else %}
+                                        {{ item.__my_bid.price|number_format(0, '', ' ') }} {{ item.value.currency }}
+                                    {% endif %}
+                                {% endif %}
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                {% if dataStatus[item.status] %}
+                                    {{ dataStatus[item.status] }}
+                                {% else %}
+                                    {{ item.status }}
+                                {% endif %}
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                {% if item.status == 'active.enquiries' %}
+                                    {{ 'tenders.bid.status_until'|_ ~ ' ' ~ item.enquiryPeriod.endDate|date('d.m.Y H:i') }}
+                                {% elseif item.status == 'active.tendering' %}
+                                    {{ 'tenders.bid.status_until'|_ ~ ' ' ~ item.tenderPeriod.endDate|date('d.m.Y H:i') }}
+                                {% elseif item.status == 'active.auction' %}
+                                    {{ 'tenders.bid.start_auction'|_ ~ ' ' ~ item.auctionPeriod.startDate|date('d.m.Y H:i') }}
+                                {% endif %}
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+
+    </div>
+</div>

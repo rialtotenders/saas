@@ -1,0 +1,24 @@
+<?php
+    try {
+        if($class = $record->attachment_type) {
+            $model = new $class;
+            $model = $model->find($record->attachment_id);
+            echo isset($model->cid) ? $model->cid : '';
+
+            if(!isset($model->cid) && isset($model->tender_id)) {
+
+                if(strpos($class, 'Application') || strpos($class, 'Qualification')) {
+                    $tender = new Perevorot\Rialtotender\Models\Tender ();
+                    if($tender = $tender->where('tender_system_id', $model->tender_id)->first()) {
+                        echo $tender->tender_id;
+                    } else {
+                        echo $model->tender_id;
+                    }
+                } else {
+                    echo $model->tender_id;
+                }
+            }
+        }
+    } catch(\Exception $e) {
+    }
+?>

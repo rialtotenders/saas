@@ -1,0 +1,125 @@
+{% if item.__bids is not empty and item.procurementMethod=='open' %}
+<h2 id="bids">{{ 'tender.participants_proposals'|_ }}</h2>
+<div class="overflow-table">
+    <div class="sb-table ">
+        <div class="table__table">
+
+            {% if item.auctionPeriod.endDate is not empty %}
+            <p class="table-date">{{ 'tender.bids_open_time'|_ }}: {{ item.auctionPeriod.endDate|date('d.m.Y H:i') }}</p>
+            {% elseif item.tenderPeriod.endDate is not empty %}
+            <p class="table-date">{{ 'tender.bids_open_time'|_ }}: {{ item.tenderPeriod.endDate|date('d.m.Y H:i') }}</p>
+            {% endif %}
+
+            <div class="table__table-row table__table-row3">
+                <div class="table__table-cell table__table-cell--th">
+                    {{ 'tender.bids_participant'|_ }}
+                </div>
+                <div class="table__table-cell table__table-cell--th">
+                    {{ 'tender.bid_price'|_ }}
+                </div>
+                <div class="table__table-cell table__table-cell--th">
+                    {{ 'tender.bids_documents'|_ }}
+                </div>
+            </div>
+
+            {% for key, bid in item.__bids %}
+                <div class="table__table-row table__table-row3">
+
+                    <div class="table__table-cell">
+                        <p>
+                            {% if bid.tenderers is not empty %}
+                                {% if bid.tenderers[0].identifier.legalName %}
+                                    {{ bid.tenderers[0].identifier.legalName|stripslashes }}
+                                {% else %}
+                                    {{ bid.tenderers[0].name|stripslashes }}
+                                {% endif %}
+                            {% else %}
+                                {{ 'tender.participant'|_ }}
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    <div class="table__table-cell">
+                        {% if bid.value is not empty %}
+                            {{ bid.value.amount|number_format(2, '.', ' ')|replace({'.00': ''}) }} {{ bid.value.currency }}
+                        {% endif %}
+                    </div>
+
+                    <div class="table__table-cell">
+                        {% if bid.documents is not empty %}
+                            <h4 class="overlay-title js-bid-documents">
+                                {{ 'tender.show_documents'|_ }}
+                            </h4>
+                        {% else %}
+                            {{'tender.no_documents'|_}}
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            {% if bid.documents is not empty %}
+            <div class="tender-document js-bid-documents">
+                <div class="close"></div>
+
+                {% if bid.__documents_public is not empty %}
+                <h4>
+                    {{ 'tender.bid.public_documents'|_ }}
+                </h4>
+
+                {% for document in bid.__documents_public %}
+                <div class="document-info table__table-row table__table-row3">
+                    <div class="table__table-cell">
+                        <a href="{{ document.url }}" target="_blank" class="document-name" title="{{ document.title }}">{{ document.title }}</a>
+                    </div>
+
+                    <div class="document-date table__table-cell">{{ document.datePublished|date('d.m.Y H:i') }}</div>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% if bid.__documents_confident is not empty %}
+                <h4>
+                    {{ 'tender.bid.confident_documents'|_ }}
+                </h4>
+
+                {% for document in bid.__documents_confident %}
+                <div class="document-info table__table-row table__table-row3">
+                    <div class="table__table-cell">
+                        {% if user_tender %}
+                        <a href="{{ document.url }}" target="_blank" class="document-name" title="{{ document.title }}">{{ document.title }}</a>
+                        <!--<form>
+                            <button type="submit" data-request="onGetDocument" data-request-data="'doc_url':'{{document.url}}','bid_id':'{{bid.id}}'">get doc</button>
+                        </form>-->
+                        {% else %}
+                        {{ document.title }}
+                        {% endif %}
+                    </div>
+                    <div class="document-date table__table-cell">{{ document.datePublished|date('d.m.Y H:i') }}</div>
+                    {% if not user_tender %}
+                    <div class="table__table-cell">
+                        <div class="question_text">
+                            <div class="text-overflow q-text-overflow">
+                                <span>{{ document.confidentialityRationale|stripslashes }}</span>
+                            </div>
+                            {% if document.confidentialityRationale|length > 25 %}
+                            <div class="button-more">
+                                <div class="more-open">{{ 'document.confidentialityRationale.show_text'|_ }}</div>
+                                <div class="more-hide">{{ 'document.confidentialityRationale.hide_text'|_ }}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                {% endif %}
+
+            </div>
+            {% endif %}
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}

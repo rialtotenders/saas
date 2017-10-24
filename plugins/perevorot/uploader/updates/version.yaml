@@ -1,0 +1,17 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'add user_id field'
+    - migration102.php
+1.0.3:
+    - 'set up user id field'
+    - migration103.php
+1.0.4:
+    - 'add some fields'
+    - migration104.php
+1.0.5:
+    - 'add tender type fields'
+    - migration105.php
+1.0.6:
+    - 'add new fields for two stage docs'
+    - migration106.php

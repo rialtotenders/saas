@@ -1,0 +1,35 @@
+{% if item.status == 'active.enquiries' and not user_tender and access_to_bid and tariff and item.value.amount < 999999999 and user.checkGroup('supplier') %}
+<p style="margin:10px 0px 10px 0px">{{ 'tender.tariff'|_ }} {{ tariff.sum ~ ' ' ~ tariff.currency.name }}</p>
+{% elseif item.status == 'active.tendering' and not user_tender and access_to_bid %}
+<div class="tariff-for-application">
+    {% if (tariff or item.value.amount >= 999999999) and user.checkGroup('supplier') %}
+        {% if ((tariff.sum <= user.money() or (tariff.sum > user.money() and user.is_overdraft)) or item.value.amount >= 999999999) %}
+            {% if not user.is_test or (user.is_test and item.mode == 'test') %}
+                {% if item.__isMultiLot %}
+                    {% if bid_url %}
+                        {% if tender_app|length > 0 and item.status in ['active.tendering'] %}
+                            <a href="{{ siteLocale }}tender/{{ tender_id }}/application/update" class="button-tender">{{ 'profile.edit_bid'|_}}</a>
+                        {% else %}
+                            <a href="{{ siteLocale }}tender/{{ tender_id }}/application" class="sb-bigbutton sb-bigbutton--bg-color color-white" >{{ 'profile.add_bid'|_}}</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{{ siteLocale }}tender/{{ tender_id }}/application" class="button-tender">{{ 'profile.add_bid'|_}}</a><br>
+                    {% endif %}
+                {% else %}
+                    <a href="{{ siteLocale }}tender/{{ tender_id }}/application" class="button-tender">{{ 'profile.add_bid'|_}}</a>
+                {% endif %}
+            {% else %}
+                <strong>{{ 'tender.not_test_mode'|_ }}</strong>
+            {% endif %}
+        {% elseif not user.money() %}
+            <a href="javascript:;" class="button-tender button-edit">{{ 'profile.add_bid'|_}}</a>
+        {% endif %}
+        {% if tender_app|length <= 0 and item.value.amount < 999999999 %}
+            <p style="margin:10px 0px 10px 0px">{{ 'tender.tariff'|_ }} {{ tariff.sum ~ ' ' ~ tariff.currency.name }}</p>
+        {% endif %}
+        {%if tariff.sum > user.money() and not user.is_overdraft %}
+            <p class="tender_info" style="margin:10px 0px 10px 0px">{{ 'tender.refill_your_account'|_ }}</p>
+        {% endif %}
+    {% endif %}
+</div>
+{% endif %}

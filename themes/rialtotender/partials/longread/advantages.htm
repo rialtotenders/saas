@@ -1,0 +1,27 @@
+{% if advantages_advantages|length %}
+    <div class="w c-ben{% if data.advantages_up %} go-prev{% endif %}">
+        <div class="c">
+            <div class="c-ben__wrap">
+                <div class="c-ben__center">
+                    {% if data.advantages_title %}
+                        <h2 class="sb-h2">{{ data.advantages_title }}</h2>
+                    {% endif %}
+                    <div class="row">
+                        {% for item in advantages_advantages %}
+                            <div class="col-{{ w }} c-ben__item">
+                                {% if item.repeater_url %}
+                                    <a href="{{ item.repeater_url }}"></a>
+                                {% endif %}
+                                <div class="c-ben__icon"{% if item.repeater_icon %} style="background-image: url({{ item.repeater_icon }});"{% endif %}></div>
+                                {% if item.repeater_title %}
+                                    <h3>{{ item.repeater_title }}</h3>
+                                {% endif %}
+                                <p>{{ item.repeater_text|raw }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

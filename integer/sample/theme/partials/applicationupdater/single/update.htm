@@ -1,0 +1,60 @@
+{% if is_auth %}
+    <div class="control-popup modal fade" id="application">
+        <h1>{{ item.title }}</h1>
+        <div class="inline-layout">
+            <div class="form-application">
+
+                {% partial 'applicationcreater/_steps' step='second' simple=true %}
+                
+                <form class="create_application" data-request-loading=".spinner" data-application data-request="onSave" id="application-form" data-request-complete="$(this).find('.error-holder:not(:empty)').show();$('#application-submit button').removeClass('disabled');">
+                    <input type="hidden" name="document_type" value="application">
+                    <input type="hidden" name="tender_id" value="{{ item.id }}" />
+                    <input type="hidden" name="tenderID" value="{{ item.tenderID }}">
+                    {% if document_types|length %}
+                        <div data-js="tabs" id="tabs" class="tab-application inline-layout col-2">
+                            <div class="general-tab active" tab="">{{ 'tender.bid.docs_before_auction'|_ }}</div>
+                            <div class="question-tab" tab="">{{ 'tender.bid.docs_after_auction'|_ }}</div>
+                        </div>
+                        <div class="" tab-content>
+                            <div class="file-button">
+                                {% component 'fileUploader' %}
+                            </div>
+                        </div>
+                        <div class="none" tab-content>
+                            <div class="file-button">
+                                {% component 'fileUploader_financial' %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="inline-layout">
+                            <div class="file-button">
+                                {% component 'fileUploader' %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {{ session_key_field|raw }}
+                    <div class="inline-layout button_application block-button" id="application-submit">
+                        <a class="prev_step" href="{{ siteLocale }}tender/{{ tender_id }}/">{{ 'bids.back_at_tender_page'|_}}</a>
+                        <button type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'bids.update_bid_button'|_}}</button>
+                    </div>
+                </form>
+
+                <div id="application-access-error"></div>
+            </div>
+
+            <div class="desc-application">
+                {% if(messages.header1 is not empty) %}
+                    <h2>{{ messages.header1 }}</h2>
+                {% endif %}
+
+                {% if(messages.step1 is not empty) %}
+                    <br>
+                    {{ messages.step1|raw }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% partial 'handlers/_application_docs' %}

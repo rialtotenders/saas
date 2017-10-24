@@ -1,0 +1,14 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Drop unique email index'
+    - update_users_table.php
+1.0.3:
+    - 'new columns'
+    - migration103.php
+1.0.4:
+    - 'add is_do'
+    - migration104.php
+1.0.5:
+    - 'add users activity'
+    - migration105.php

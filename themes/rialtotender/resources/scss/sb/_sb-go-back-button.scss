@@ -1,0 +1,23 @@
+.sb-go-back-button {
+  a {
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    color: #6090d3;
+    padding-left: 20px;
+    &:before {
+      $sb-go-back-button-height: 5px;
+      $sb-go-back-button-border: 2px solid #ec5e24;
+      content: '';
+      width: $sb-go-back-button-height;
+      height: $sb-go-back-button-height;
+      border-bottom: $sb-go-back-button-border;
+      border-right: $sb-go-back-button-border;
+      transform: rotate(135deg);
+      position: absolute;
+      top: 3px;
+      left: 0;
+    }
+  }
+}

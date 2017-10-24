@@ -1,0 +1,26 @@
+<tr>
+    <td>
+        <p>
+            <strong><a href="{{ siteLocale }}tender/{{ tender.id }}/edit">{{ tender.title }}</a></strong>
+        </p>
+    </td>
+    <td>
+        <p>
+            {% if tender.currency %}
+            <strong>{{ tender.value ~ ' ' ~ tender.currency }}</strong>
+            {% else %}
+            {{ 'user.tender.value_empty'|_ }}
+            {% endif %}
+        </p>
+    </td>
+    <td>
+        <p>
+            {{ 'user.tender.project_status'|_ }}
+        </p>
+    </td>
+    <td>
+        <p>
+            <a href="{{ siteLocale }}tender/{{ tender.id }}/project"><strong>{{ 'user.tenders.project_link_text'|_ }}</strong></a>
+        </p>
+    </td>
+</tr>

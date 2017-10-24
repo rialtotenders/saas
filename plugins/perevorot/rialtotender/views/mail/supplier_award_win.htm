@@ -1,0 +1,25 @@
+subject = "award win after auction"
+==
+
+Hello!
+
+award win after auction:
+
+Tender: {{ link }}
+
+Supplier name: { award.suppliers[0].contactPoint.name }}
+
+Supplier value: {{ award.value ~ ' ' ~ award.currency }}
+==
+
+<p>Hello!</p>
+<p>award win after auction:</p>
+<p>
+   Tender: <a href="{{ link }}">{{ link }}</a>
+</p>
+<p>
+    Supplier name: {{ award.suppliers[0].contactPoint.name }}
+</p>
+<p>
+    Supplier value: {{ award.value.amount ~ ' ' ~ award.value.currency }}
+</p>

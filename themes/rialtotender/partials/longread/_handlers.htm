@@ -1,0 +1,14 @@
+{% put scripts %}
+<script>
+    jQuery(function($) {
+        $( "#simple-form-filter").on('submit', function() {
+            var _form = $(this);
+            if(_form.find('#query').val() != '') {
+                _form.find('.default-params').attr('disabled', 'disabled');
+            } else {
+                _form.find('.default-params').removeAttr('disabled');
+            }
+        });
+    });
+</script>
+{% endput %}

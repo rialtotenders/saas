@@ -1,0 +1,64 @@
+{% if item.__cancellations is not empty  %}
+
+{% if item.__cancellations[0].cancellationOf == 'lot' %}
+<h2>{{ 'tender.cancellations_lot_title'|_ }}</h2>
+{% else %}
+<h2>{{ 'tender.cancellations_title'|_ }}</h2>
+{% endif %}
+
+<div class="overflow-table">
+    <table class="contact-table">
+        <tbody>
+        <tr>
+            <th width="30%">
+                {{ 'tender.cancellation.reason'|_ }}
+            </th>
+            <th width="30%">
+                {{ 'tender.cancellation.date'|_ }}
+            </th>
+            <th width="30%">
+                {{ 'tender.cancellation.docs'|_ }}
+            </th>
+        </tr>
+        {% for ckey, cancel in item.__cancellations %}
+            <tr>
+                <td>
+                    {{ cancel.reason|stripslashes }}
+                </td>
+                <td>
+                    {{ cancel.date|date('d.m.Y H:i') }}
+                </td>
+                <td>
+                    {% if cancel.documents is not empty %}
+                        <h4 class="overlay-title js-show-cancel-documents">{{ 'tender.cancellation.show_docs'|_ }}</h4>
+                    {% else %}
+                        {{ 'tender.cancellation.empty_docs'|_ }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% if cancel.documents is not empty %}
+            <tr class="border0">
+                <td colspan="3">
+                    <div class="tender-document js-cancel-documents">
+                        <div class="close"></div>
+                        <h4>
+                            {{ 'tender.cancel_documents'|_ }}
+                        </h4>
+                        {% for document in cancel.documents %}
+                        <div class="document-info table__table-row table__table-row3">
+                            <div class="table__table-cell">
+                                <a href="{{document.url}}" target="_blank" class="document-name"{{ document.stroked ? 'style="margin-left:10px;text-decoration: line-through;"':'' }}>{{document.title}}</a>
+                            </div>
+                            <div class="document-date table__table-cell">{{ document.dateModified|date('d.m.Y H:i')}}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endif %}

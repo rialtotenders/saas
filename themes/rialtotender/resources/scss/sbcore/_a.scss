@@ -1,0 +1,119 @@
+@import '../_vars';
+@import '_m';
+
+.max-width-inner {
+	max-width: 960px;
+}
+.absolute-left {
+	left: 20px;
+}
+.absolute-right {
+	right: 20px;
+}
+.padding-left {
+	padding-left: 20px;
+}
+.padding-right {
+	padding-right: 20px;
+}
+.padding-top {
+	padding-top: 50px;
+}
+.padding-bottom {
+	padding-bottom: 50px;
+}
+.clearfix {
+	content: '';
+	display: table;
+	clear: both;
+}
+.go-prev {
+	margin-top: -120px;
+	z-index: 99;
+}
+.transition {
+	transition: all 0.3s;
+}
+.transition-down {
+	transition: all 0.1s;
+}
+.v-bottom {
+	vertical-align: bottom;
+}
+.v-middle {
+	vertical-align: middle;
+}
+.v-top {
+	vertical-align: top;
+}
+.border {
+	border: 1px solid red;
+}
+.border-blue {
+	border: 1px solid blue;
+}
+.nowrap {
+	white-space: nowrap;
+}
+
+.max-width-inside {
+	max-width: $max-width-inside;
+}
+.gpt {
+	padding-top: $spacer*6;
+	@include a1() {
+		padding-top: $spacer*3;
+	}
+}
+.gpb {
+	padding-bottom: $spacer*6;
+	@include a1() {
+		padding-bottom: $spacer*3;
+	}
+}
+.gpt-cards {
+	padding-top: $spacer*5;
+	@include a1() {
+		padding-top: $spacer*3;
+	}
+}
+.gpb-cards {
+	padding-bottom: $spacer*5;
+	@include a1() {
+		padding-bottom: $spacer*3;
+	}
+}
+
+.gpl-cards {
+	padding-left: $spacer*4;
+	@include ad() {
+		padding-left: $spacer*3;
+	}
+	@include ac() {
+		padding-left: $spacer;
+	}
+	@include a1() {
+		padding-left: $spacer;
+	}
+}
+.gpr-cards {
+	padding-right: $spacer*4;
+	@include ad() {
+		padding-right: $spacer*3;
+	}
+	@include ac() {
+		padding-right: $spacer;
+	}
+	@include a1() {
+		padding-right: $spacer;
+	}
+}
+.gpl-text-cards {
+	padding-left: $spacer;
+}
+.gpr-text-cards {
+	padding-right: $spacer;
+}
+.h100 {
+	height: 100%;
+}

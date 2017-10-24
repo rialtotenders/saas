@@ -1,0 +1,90 @@
+<div class="c-main background-absolute" {% if data.search_image %} style="background-image: url({{ data.search_image.thumb(1440, 540) }});"{% endif %}></div>
+    <div class="w c-main">
+        <div class="c-main__table">
+            <div class="c-main__cell ">
+
+                <div class="c ">
+                    {% if data.search_header or data.search_text %}
+                        <div class="header-text">
+                            {% if data.search_header %}
+                                <h2 class="c-main__header">
+                                    {{ data.search_header }}
+                                </h2>
+                            {% endif %}
+                            {% if data.search_text %}
+                                <div class="description-register-search">
+                                    {{ data.search_text | raw}}
+
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    <div class="forms-register-search {% if user%}user-login{% endif %}">
+                        <div class="sb-search-input">
+                            <form id="simple-form-filter"{% if access_to_search %} method="GET" action="{{ siteLocale }}tender/search{% if is_gov_tender %}/gov/{% endif %}"{% endif %}>
+                                <input class="default-params" type="hidden" name="status" value="active.enquiries">
+                                <input class="default-params" type="hidden" name="status" value="active.tendering">
+                                <input class="default-params" type="hidden" name="tab_type" value="1">
+                                <div class="sb-search-input__top">
+                                    {% if is_gov_tender %}
+                                    <a class="active" href="{{ siteLocale ~ 'tender/search/gov?tab_type=1&status=active.enquiries&status=active.tendering' }}"><span>{{ 'register_and_search.form.tender-gov-switch'|_ }}</span></a>
+                                    {% endif %}
+                                    {% if is_gov_plan %}
+                                    <a href="{{ siteLocale ~ 'plan/search/gov' }}"><span>{{ 'register_and_search.form.plan-gov-switch'|_ }}</span></a>
+                                    {% endif %}
+
+                                    {% if is_tender %}
+                                    <a {% if not is_gov_tender %} class="active"{% endif %} href="{{ siteLocale ~ 'tender/search?tab_type=1&status=active.enquiries&status=active.tendering' }}"><span>{{ 'register_and_search.form.tender-switch'|_ }}</span></a>
+                                    {% endif %}
+                                    {% if is_plan %}
+                                    <a href="{{ siteLocale ~ 'plan/search' }}"><span>{{ 'register_and_search.form.plan-switch'|_ }}</span></a>
+                                    {% endif %}
+                                </div>
+                                <div class=" clearfix inline-layout" id="blocks" >
+                                    <div class="sb-search-input__input-wrap">
+                                        <input id="query" type="text" name="query" class="query_input no_blocks sb-search-input__input-field filter-checkboxes" placeholder="{{ 'form.placeholder'|_ }}" autocomplete="off">
+                                    </div>
+
+                                    <div class="sb-search-input__button">
+                                        <button type="{% if access_to_search %}submit{% else %}button{% endif %}" id="search_button_simple" class="search_button">{{ 'form.registration_and_search.button_action'|_}}</button>
+                                    </div>
+                                    <a class="advanced_search" href="{{ siteLocale }}tender/search{% if is_gov_tender %}/gov/{% endif %}?tab_type=1&status=active.enquiries&status=active.tendering">{{ 'form.registration_and_search.advanced_search'|_}}</a>
+                                    <div class="form-example">
+                                        {{ 'form.registration_and_search.example'|_}}: <span>{{ 'form.registration_and_search.example_value'|_}}</span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        {% if not user %}
+                            <!--<div class="text-or">
+                                <span>{{ 'form.registration_and_search.or'|_}}</span>
+                            </div>-->
+
+                            <div class="form-registration-home">
+                                <h3>{{ 'form.registration_and_search.register_title'|_}}</h3>
+                                <!--<p>{{ 'form.registration_and_search.register_info'|_}}</p>-->
+                                <form data-request="onHandleForm" class="inline-layout" data-request-data="'step': '0'" data-registration  data-request-complete="$(this).find('.error-holder:not(:empty)').show();">
+                                    <div class="form-holder-input input-holder-user">
+                                        <input type="text" name="username" placeholder="{{ 'profile.username'|_}}" />
+                                        <div class="error-holder none" data-validation="username"></div>
+                                    </div>
+                                    <div class="form-holder-input input-holder-email">
+                                        <input type="text" name="email" id="email" placeholder="{{ 'profile.email'|_}}"/>
+                                        <span class="error-holder none" data-validation="email"></span>
+                                    </div>
+                                    <div class="form-holder">
+                                        <button type="submit" value="зарегистрироваться" data-attach-loading onClick="$('.error-holder').hide().html('');">{{ 'form.registration_and_search.register_action'|_}}</button>
+                                    </div>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% partial 'longread/_handlers.htm' %}
+

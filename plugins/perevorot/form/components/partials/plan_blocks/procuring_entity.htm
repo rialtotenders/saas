@@ -1,0 +1,33 @@
+<h2>{{ 'plan.procuring_Entity_title'|_ }}</h2>
+
+<div class="sb-table sb-table--td-py-small">
+    <div class="sb-table__table">
+
+        <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+            <div class="sb-table__table-cell">
+                <div class="sb-table__dashed-wrap">
+                    <p>{{ 'plan.procuring_Entity_name'|_ }}:</p>
+                </div>
+            </div>
+            <div class="sb-table__table-cell">
+                {% if item.procuringEntity.identifier.legalName %}
+                    <p>{{ item.procuringEntity.identifier.legalName }}<p>
+                {% else %}
+                    <p>{{ item.procuringEntity.name }}<p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+            <div class="sb-table__table-cell">
+                <div class="sb-table__dashed-wrap">
+                    <p>{{ 'plan.procuring_Entity_id'|_ }}:</p>
+                </div>
+            </div>
+            <div class="sb-table__table-cell">
+                <p>{{ item.procuringEntity.identifier.id }}<p>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="c-main background-absolute" {% if data.search_form_image %} style="background-image: url({{ data.search_form_image.thumb(1440, 540) }});"{% endif %}></div>
+
+<div class="w c-main absolute z120">
+    <div class="c">
+        <div class="c-main__top-wrap">
+            <div class="c-main__table">
+                <div class="c-main__cell">
+                    <h2 class="c-main__header">{{ data.search_form_title }}</h2>
+                    <div class="w sb-search-input form-search-home-simple">
+                        {% partial 'form/form.htm' show_suggest=data.show_suggest default_params=true %}
+                        <a class="advanced_search" href="{{ siteLocale }}tender/search{% if is_gov_tender %}/gov/{% endif %}?status=active.enquiries&status=active.tendering">{{ 'form.registration_and_search.advanced_search'|_}}</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="w c-s none go-prev c-s--if-display-remove-margin c-s--min-height" data-js="search_result" id="result_container">
+    <div class="c">
+        <div class="c-s__wrap">
+            <div class="c-s__center">
+                <div class="row">
+                    <div class="col-100" id="result" class="result">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% partial 'longread/_handlers.htm' %}

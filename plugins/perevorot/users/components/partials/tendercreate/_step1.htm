@@ -1,0 +1,111 @@
+<div class="w c-main" id="registration-form">
+    <div class="c">
+        <div class="registered-step tender-create">
+
+            {% partial('@_blocks/_steps') step=1 next=(show_features and tender.criteria ? 8 : 2) %}
+
+            <div class="inline-layout ">
+                <div class="form-registration">
+                    <form id="tender-form" data-update="{{ _update }}" data-request-loading=".spinner" data-request="onHandleForm" data-tender data-step="1" data-request-data="'step': '1'" data-request-complete="validation(this)">
+                        <input type="hidden" name="save" id="tender-save" value="0">
+                        <input type="hidden" name="next_step" id="tender-next-step" value="">
+
+                        <div class="form-holder">
+                            <label for="tender_create_title">{{ 'tender.create.title'|_}}</label>
+                            <input id="tender_create_title" type="text" name="title" value="{{ tender.title }}"/>
+                            <div class="error-holder none" data-validation="title"></div>
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="tender_create_description">{{ 'tender.create.description'|_}}</label>
+                            <div class="form-holder">
+                                <textarea id="tender_create_description" name="description">{{ tender.description }}</textarea>
+                                <div class="error-holder none" data-validation="description"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-holder">
+                            <label for="tender_create_choose_cpv">{{ 'tender.create.please_choose_cpv'|_ }}</label>
+                            <div class="form-holder">
+                                <input id="tender_create_choose_cpv" class="search_cpv" placeholder="{{ 'tender.create.search_cpv'|_ }}" type="text" cpv-search-opened />
+                                <input class="search_cpv none" type="text" placeholder="{{ 'tender.create.search_cpv'|_ }}" cpv-search-closed />
+                                <div class="loader"></div>
+                                {% partial '@_blocks/_cpv'
+                                    class='normal_list_cpv'
+                                    input_name='cpv'
+                                    selected_item=tender.cpv
+                                    type='single'
+                                    level_json=2
+                                    level_select=2
+                                %}
+                                <div class="error-holder none" data-validation="cpv"></div>
+                            </div>
+
+                        </div>
+
+                        {#
+                        {% if show_p_types %}
+                        <div class="form-holder">
+                            <label>{{ 'plan.create.choose_procurement_type'|_}}</label>
+                            <select name="procurementMethod">
+                                {% for code, name in procurement_types %}
+                                <option value="{{ code }}" {% if code == tender.procurementMethod %} selected {% endif %}>{{ name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="error-holder none" data-validation="procurementMethod"></div>
+                        </div>
+                        {% endif %}
+                        #}
+
+                        {% if show_p_method_types %}
+                        <div class="form-holder">
+                            <label>{{ 'plan.create.choose_procurement_method_type'|_}}</label>
+                            <select name="procurementMethodType">
+                                {% if not show_p_method_types_default %}
+                                    {% for code, name in procurement_method_types %}
+                                    <option value="{{ code }}" {% if code == tender.procurementMethodType %} selected {% endif %}>{{ name }}</option>
+                                    {% endfor %}
+                                {% else %}
+                                    <option value="belowThreshold">{{ 'tender.create.belowThreshold'|_ }}</option>
+                                {% endif %}
+                            </select>
+                            <div class="error-holder none" data-validation="procurementMethodType"></div>
+                        </div>
+                        {% endif %}
+                        <div class="form-holder list_checkbox inline-layout">
+                            {% if show_lots %}
+                            <div class="checkbox">
+                                <input type="checkbox" name="lot" id="lotu" value="1" {% if tender.lot %} checked {% endif %}>
+                                <label for="lotu">{{ 'tender.create.lots'|_ }}</label>
+                            </div>
+                            {% endif %}
+                            {% if show_features %}
+                            <div class="checkbox">
+                                <input type="checkbox" name="criteria" id="criteria" value="1" {% if tender.criteria %} checked {% endif %}>
+                                <label for="criteria">{{ 'tender.create.criteria'|_ }}</label>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="block-button" id="for-spinner">
+                            <button data-save="0" type="submit" class="next_step" onClick="$('.error-holder').hide().html('');">{{ 'tender.create.next_button'|_}}</button>
+                            <button data-save="1" type="submit" class="next_step save_step" onClick="$('.error-holder').hide().html('');">{{ 'tender.create.save'|_}}</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {{ text|raw }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% partial '@_blocks/_cpv_item_tpl' type='single' %}
+{% partial '@_tendercreate_scripts/_scripts' %}

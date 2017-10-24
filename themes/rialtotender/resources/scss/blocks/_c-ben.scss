@@ -1,0 +1,82 @@
+.c-ben {
+  .c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__wrap {
+    padding-top: 75px;
+    padding-bottom: 75px;
+    @extend .padding-left;
+    @extend .padding-right;
+    background: white;
+  }
+  &__center {
+    @extend .max-width-inner;
+    margin: 0 auto;
+  }
+  &__item {
+    padding-right: 32px;
+    padding-top: 40px;
+    @include e-grid-desktop() {
+	  &:nth-child(4n + 1) {
+		clear: both;
+	  }
+    }
+    @include p-grid-third() {
+	    width: 33.33333%;
+	    &:nth-child(3n + 1) {
+			clear: both;
+		}
+    }
+    @include p-grid-second() {
+	    width: 50%;
+	    
+	    &:nth-child(2n + 1) {
+			clear: both;
+		}
+    }
+    @include a-grid-mobile() {
+	    width: 100%;
+    }
+    a {
+      display: inline-block;
+      position: absolute;
+      top: 40px;
+      right: 32px;
+      bottom: 0;
+      left: 0;
+      z-index: 200;
+      & + div + h3 {
+        @extend .transition-down;
+      }
+      &:hover + div + h3 {
+        color: $text-color-main;
+        @extend .transition;
+      }
+    }
+  }
+  &__icon {
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-positin: center bottom;
+    margin-bottom: 5px;
+  }
+  h3 {
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    color: #1f1f1f;
+    margin: 20px 0;
+  }
+  p {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    color: #1a1a1a;
+    line-height: 19px;
+  }
+}

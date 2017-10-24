@@ -1,0 +1,117 @@
+<div class="blog-content">
+    <article>
+        <h1>Як працює відкрита система комерційних закупівель Rialto?</h1>
+        <div class="block_author inline-layout">
+            {% if article.author.photo %}
+                <div class="image-holder">
+                    <img src="{{ article.author.photo.getThumb(100, 100, 'crop') }}" alt="name" class="fake-img">
+                    <div style="background: url('{{ article.author.photo.getThumb(100, 100, 'crop') }}') no-repeat center ;background-size: cover;" class="img"></div>
+                </div>
+            {% endif %}
+            <div class="info_author">
+                <div class="author">{{ article.author.full_name }}</div>
+                <div class="social_link inline-layout">
+                    <a class="twitter" href="#" target="_blank"></a>
+                    <a class="facebook" href="#" target="_blank"></a>
+                    <a class="linkedin" href="#" target="_blank"></a>
+                </div>
+            </div>
+        </div>
+
+        {{ article.body|raw }}
+
+        {#
+        <div class="overflow-table">
+
+            <table>
+                <tr>
+                    <th>Критерий</th>
+                    <th>Опция</th>
+                    <th>Удельный вес критерия</th>
+                </tr>
+                <tr>
+                    <td>Поиск тендеров</td>
+                    <td></td>
+                    <td>цена 100%</td>
+                </tr>
+                <tr>
+                    <td>Подача предложения</td>
+                    <td>25</td>
+                    <td>цена 10%</td>
+                </tr>
+                <tr>
+                    <td>Поиск тендеров</td>
+                    <td></td>
+                    <td>цена 25%</td>
+                </tr>
+            </table>
+        </div>
+        <a class="link_source" href="#">Посмотреть источник</a>
+        #}
+        <div class="likely likely-big">
+            <div class="facebook">Поделиться</div>
+            <div class="twitter">Twitter</div>
+            <div class="linkedin">Поделиться</div>
+        </div>
+    </article>
+    {% if random_articles %}
+        <div class="list_article inline-layout">
+            {% for article in random_articles%}
+                <div class="item">
+                    <div class="block-img">
+                        <a href="{{ ('blog/'~article.slug)|url }}">
+                            <div class="image-holder">
+                                <img src="{{ article.photo.thumb(679, 380, 'crop') }}" alt="name" class="fake-img">
+                                <div style="background: url('{{ article.photo.thumb(679, 380, 'crop') }}') no-repeat center ;background-size: cover;" class="img"></div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="block_text">
+                        <a href="{{ ('blog/'~article.slug)|url }}" class="name">{{ article.title }}</a>
+                        <div class="info-article-item inline-layout">
+                            <time>{{ article.published_at|date('d.m.Y') }}</time>
+                            <div class="author">{{ article.author.full_name }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{#
+<div class="w c-s wrapper">
+    <div class="c ">
+        <div class="c-s__wrap">
+
+            <div class="block_table">
+
+                <div class="overflow-table">
+
+                    <table>
+                        <tr>
+                            <th>Критерий</th>
+                            <th>Опция</th>
+                            <th>Удельный вес критерия</th>
+                        </tr>
+                        <tr>
+                            <td>Поиск тендеров</td>
+                            <td></td>
+                            <td>цена 100%</td>
+                        </tr>
+                        <tr>
+                            <td>Подача предложения</td>
+                            <td>25</td>
+                            <td>цена 10%</td>
+                        </tr>
+                        <tr>
+                            <td>Поиск тендеров</td>
+                            <td></td>
+                            <td>цена 25%</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#}

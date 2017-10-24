@@ -1,0 +1,11 @@
+name: ApiLogs
+modelClass: Perevorot\Rialtotender\Models\ApiLog
+form: $/perevorot/rialtotender/models/apilog/fields.yaml
+defaultRedirect: perevorot/rialtotender/apilogs
+create:
+    redirect: 'perevorot/rialtotender/apilogs/update/:id'
+    redirectClose: perevorot/rialtotender/apilogs
+update:
+    redirect: perevorot/rialtotender/apilogs
+    redirectClose: perevorot/rialtotender/apilogs
+preview: {  }

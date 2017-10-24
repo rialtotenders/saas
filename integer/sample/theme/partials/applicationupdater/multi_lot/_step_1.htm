@@ -1,0 +1,149 @@
+<main>
+    <div class="c">
+        <div class="control-popup modal fade" id="application">
+            <h1><span>{{ 'tender.bid.page_title'|_ }}</span> {{ item.tenderID }}</h1>
+
+            <div class="inline-layout">
+                <div class="form-application">
+                    {% partial 'applicationcreater/_steps' %}
+                    <form data-application id="application-form" data-request="onSubmitMultiLotApplication" class="create_application" data-request-loading=".spinner" data-request-complete="$(this).find('.error-holder:not(:empty)').show();$('#application-submit button').removeClass('disabled');">
+                        <div class="overflow-table">
+                            <table class="col-{% if item.__features is not empty %}4{% else %}3{% endif %}">
+                                <tr>
+                                    <th>{{ 'tender.bid.lot_title'|_ }}</th>
+                                    <th>{{ 'tender.bid.lot_price'|_ }}</th>
+                                    {% if item.__features is not empty %}
+                                    <th>{{ 'tender.bid.features'|_ }}</th>
+                                    {% endif %}
+                                    <th>{{ 'tender.bid.your_price'|_ }}</th>
+                                </tr>
+                                {% for lot_key, lot in item.lots %}
+                                <tr data-number="{{ lot_key }}" class="lot-data features-block" data-title="{{ lot.title }}" data-currency="{{ lot.value.currency }}">
+                                    <td>
+                                        <div class="question_text">
+                                            <div class="text-overflow">
+                                                <a href="{{ siteLocale }}tender/{{ tender_id }}/lots/{{ lot.id }}">{{ lot.title }}</a>
+                                            </div>
+                                            {% if lot.title|length > 70 %}
+                                            <div class="button-more">
+                                                <div class="more-open">{{ 'bid.lot_title.show_text'|_ }}</div>
+                                                <div class="more-hide">{{ 'bid.lot_title.hide_text'|_ }}</div>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            <strong>
+                                                {% if lot.value.amount >= 999999999 %}
+                                                {{ 'tender.lot.is_empty_price'|_ }}
+                                                {% else %}
+                                                {{ lot.value.amount }} {{ lot.value.currency }}
+                                                {% endif %}
+                                            </strong>
+                                            <span>
+                                                {% if lot.value.valueAddedTaxIncluded %}
+                                                    {{ 'tender.bid.lot_with_tax'|_ }}
+                                                {% else %}
+                                                    {{ 'tender.bid.lot_without_tax'|_ }}
+                                                {% endif %}
+                                            </span>
+                                        </p>
+                                    </td>
+                                    {% if lot.__lot_features is not empty %}
+                                    <td>
+
+                                            {% for feature in lot.__lot_features %}
+                                            <div class="form-holder">
+                                                <select data-features data-lot-features data-max="{{ feature.max }}" required name="lots[{{ lot_key }}][features][{{ feature.code }}]">
+                                                    {% for enum in feature.enum %}
+                                                        {% set enum_value = enum.value * 100 %}
+                                                        {% set _selected = (applications[lot.id].lot_features[feature.code] * 100) == enum_value ? 1 : 0 %}
+                                                        <option value="{{ enum.value }}" {% if _selected == 1 %} selected="selected" {% endif %}>{{ enum.title ~ ' ' ~ enum_value }}%</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <label>{{ feature.title }}</label>
+                                            </div>
+                                            {% endfor %}
+                                            <div id="lot-feature-{{ lot_key }}">
+                                                <p class="ladel-koeficient"> <span>{{ 'tender.bid.vash_kojefficient'|_ }} </span><strong class="vash-kojefficient"></strong></p>
+                                                <p class="ladel-koeficient"> <span>{{ 'tender.bid.maksimalno_vozmozhnyj'|_ }} </span><strong class="max-kojefficient"></strong></p>
+                                            </div>
+
+                                    </td>
+                                    {% endif %}
+                                    <td>
+                                        {% if lot.status == 'cancelled' %}
+                                        <p>{{ 'tender.bid.lot_cancelled'|_ }}</p>
+                                        {% else %}
+                                        <div class="form-holder">
+
+                                            <input class="bid-price" id="bid-{{ lot_key }}" type="text" name="lots[{{ lot_key }}][price]" value="{{ applications[lot.id].price }}">
+                                            <label>{{ lot.value.currency }}</label>
+                                            <div class="error-holder none" data-validation="lots.{{ lot_key }}.price"></div>
+                                            <input type="hidden" name="lots[{{ lot_key }}][lot_id]" value="{{ lot.id }}">
+                                            <input type="hidden" name="lots[{{ lot_key }}][lot_price]" value="{{ lot.value.amount }}">
+                                            <p>{{ lot.title.feature-bid-price }}:</p>
+                                            <input class="feature-bid-price" id="new-bid-{{ lot_key }}" type="text" style="border:none;" readonly name="lots[{{ lot_key }}][feature_price]" value="">
+                                            <label>{{ lot.value.currency }}</label>
+                                            <div class="error-holder none" data-validation="lots.{{ lot_key }}.feature_price"></div>
+                                        </div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                                {% if item.__tender_features is not empty %}
+                                <tr class="tr-tender-features features-block">
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        {% for feature in item.__tender_features %}
+                                        <div class="form-holder">
+                                            <select data-features data-tender-features data-max="{{ feature.max }}" required name="features[{{ feature.code }}]">
+                                                {% for enum in feature.enum %}
+                                                    {% set enum_value = enum.value * 100 %}
+                                                    {% set _selected = (applications[item.lots[0].id].tender_features[feature.code] * 100) == enum_value ? 1 : 0 %}
+                                                    <option value="{{ enum.value }}" {% if _selected == 1 %} selected="selected" {% endif %}>{{ enum.title ~ ' ' ~ enum_value }}%</option>
+                                                {% endfor %}
+                                            </select>
+                                            <label>{{ feature.title }}</label>
+                                        </div>
+                                        {% endfor %}
+                                        <div id="tender-features">
+                                            <p class="ladel-koeficient"> <span>{{ 'tender.bid.vash_kojefficient'|_ }} </span><strong class="vash-kojefficient"></strong></p>
+                                            <p class="ladel-koeficient"> <span>{{ 'tender.bid.maksimalno_vozmozhnyj'|_ }} </span><strong class="max-kojefficient"></strong></p>
+                                        </div>
+                                    </td>
+                                    {% if item.__lot_features is not empty %}
+                                    <td>
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                                {% endif %}
+                            </table>
+                        </div>
+                        <div class="block-button inline-layout button_application" id="application-submit">
+                            <a href="{{ siteLocale }}tender/{{ tender_id }}" class="back_tender prev_step">{{ 'tender.bid.back_to_tender'|_ }}</a>
+                            <button class="next_step" type="submit">{{ 'tender.bid.next_step'|_ }}</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="desc-application">
+                    {% if(messages.header2 is not empty) %}
+                    <h2>{{ messages.header2 }}</h2>
+                    {% endif %}
+
+                    {% if(messages.step2 is not empty)%}
+                    <br>
+                    {{ messages.step2|raw }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% partial 'handlers/application' %}

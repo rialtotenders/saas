@@ -1,0 +1,78 @@
+
+<form class="sb-search-input__center">
+    <div class="sb-search-input__top">
+        <a {% if search_type=='tender' %} class="active"{% endif %} href="{{ 'tender/search'|url }}"><span>{{ 'form.tender-switch'|_ }}</span></a>
+        <a {% if search_type=='plan' %} class="active"{% endif %} href="{{ 'plan/search'|url }}"><span>{{ 'form.plan-switch'|_ }}</span></a>
+    </div>
+    <div class="sb-search-input__bottom clearfix" id="blocks">
+        <div class="sb-search-input__input-wrap">
+            <input id="query" type="text" class="query_input no_blocks sb-search-input__input-field" placeholder="{{ 'form.placeholder'|_ }}" autocomplete="off" data-type="{{ search_type }}" data-lang="{{ locale_href }}" data-buttons="{{ buttons }}" data-placeholder="{{ 'form.placeholder'|_ }}"{% if preselected_values is not empty %} data-preselected='{{ preselected_values }}'{% endif %}>
+        </div>
+        {#<div class="sb-search-input__cat">
+        <span class="sb-search-input__cat-span">Категория</span>
+    </div>#}
+        <div class="sb-search-input__button">
+            <button id="search_button" class="search_button" disabled>{{ 'form.submit-button'|_ }}</button>
+        </div>
+    </div>
+
+    <div id="suggest" class="suggest"></div>
+    <div id="buttons" class="buttons"></div>
+
+    <script id="helper-suggest" type="text/x-jquery-tmpl">
+    <div class="none"><a href>{name}: <span class="highlight">{value}</span></a></div>
+    </script>
+
+    <script id="helper-button" type="text/x-jquery-tmpl">
+    <button>{name}</button>
+    </script>
+
+    <script id="block-query" type="text/x-jquery-tmpl" data-suggest-name="{{ 'form.keyword'|_ }}" data-button-name="{{ 'form.keyword_short'|_ }}">
+    <div class="block block-query"><span class="block-key">{{ 'form.keyword_short'|_ }}</span><input type="text" value="{value}"></div>
+    </script>
+
+    <script id="block-cpv" type="text/x-jquery-tmpl" data-suggest-name="{{ 'form.cpv'|_ }}" data-button-name="{{ 'form.cpv'|_ }}">
+    <div class="block block-cpv"><button class="none">{{ 'form.choose'|_ }}&nbsp;(<span></span>)</button><span class="block-key">{{ 'form.cpv'|_ }}</span><select /></div>
+    </script>
+
+    <script id="block-dkpp" type="text/x-jquery-tmpl" data-suggest-name="{{ 'form.dkpp'|_ }}" data-button-name="{{ 'form.dkpp'|_ }}">
+    <div class="block block-dkpp"><button class="none">{{ 'form.choose'|_ }}&nbsp;(<span></span>)</button><span class="block-key">{{ 'form.dkpp'|_ }}</span><select /></div>
+    </script>
+
+    <script id="block-date" type="text/x-jquery-tmpl" data-types='{{ 'form.date_types'|_ }}' data-button-name="{{ 'form.date'|_ }}">
+    <div class="block block-date dateselect"><a href class="block-date-arrow"></a><div class="block-date-tooltip"></div><span class="block-key"></span><div class="block-date-picker"><input class="date start" type="text">—<input class="date end" class="text"></div></div>
+    </script>
+
+        <script id="block-dateplan" type="text/x-jquery-tmpl" data-types='{{ 'form.date_types_plan'|_ }}' data-button-name="{{ 'form.date'|_ }}">
+        <div class="block block-date dateselect"><a href class="block-date-arrow"></a><div class="block-date-tooltip"></div><span class="block-key"></span><div class="block-date-picker"><input class="date start" type="text">—<input class="date end" class="text"></div></div>
+    </script>
+
+            <script id="block-edrpou" type="text/x-jquery-tmpl" data-suggest-name="{{ 'form.customer'|_ }}" data-button-name="{{ 'form.customer'|_ }}">
+    <div class="block block-edrpou"><span class="block-key">{{ 'form.customer'|_ }}</span><select /></div>
+    </script>
+
+            <script id="block-region" type="text/x-jquery-tmpl" data-suggest-name="{{ 'form.region'|_ }}" data-button-name="{{ 'form.region'|_ }}">
+    <div class="block block-region"><span class="block-key">{{ 'form.region'|_ }}</span><select /></div>
+    </script>
+
+            <script id="block-procedure_p" type="text/x-jquery-tmpl" data-suggest-name="{{ 'form.procedure_p'|_ }}" data-button-name="{{ 'form.type'|_ }}">
+    <div class="block block-procedure_p"><span class="block-key">{{ 'form.procedure_p'|_ }}</span><select /></div>
+    </script>
+
+            <script id="block-procedure_t" type="text/x-jquery-tmpl" data-suggest-name="{{ 'form.procedure_t'|_ }}" data-button-name="{{ 'form.type'|_ }}">
+    <div class="block block-procedure_t"><span class="block-key">{{ 'form.procedure_t'|_ }}</span><select /></div>
+    </script>
+
+            <script id="block-status" type="text/x-jquery-tmpl" data-suggest-name="{{ 'form.status'|_ }}" data-button-name="{{ 'form.status'|_ }}">
+    <div class="block block-status"><span class="block-key">{{ 'form.status'|_ }}</span><select /></div>
+    </script>
+
+            <script id="block-tid" type="text/x-jquery-tmpl" data-suggest-name="{{ 'form.tenderid'|_ }}" data-button-name="{{ 'form.tenderid'|_ }}">
+    <div class="block block-tid"><span class="block-key">{{ 'form.tenderid'|_ }}</span><input type="text" value="{value}"></div>
+    </script>
+
+            <script id="block-pid" type="text/x-jquery-tmpl" data-suggest-name="{{ 'form.planid'|_ }}" data-button-name="{{ 'form.planid'|_ }}">
+    <div class="block block-tid"><span class="block-key">{{ 'form.planid'|_ }}</span><input type="text" value="{value}"></div>
+    </script>
+
+</form>

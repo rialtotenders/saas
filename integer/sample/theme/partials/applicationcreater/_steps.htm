@@ -1,0 +1,46 @@
+<div class="application-info">
+    <ul class="inline-layout">
+        <li class="application-time">
+            {{ 'tender.bid.end_of_bid'|_ }}
+            <strong>{{ item.tenderPeriod.endDate|date('d.m.Y - H:i') }}</strong>
+        </li>
+        <li class="application-price">
+            {{ 'tender.bid.tender_price'|_ }}
+            <strong>
+                {% if item.value.amount >= 999999999 %}
+                    {{ 'tender.is_empty_price'|_ }}
+                {% else %}
+                    {{ item.__amount }} {{ item.value.currency}}
+                {% endif %}
+                {% if item.value.valueAddedTaxIncluded %}
+                {{ 'tender.with_VAT'|_ }}
+                {% else %}
+                {{ 'tender.without_VAT'|_ }}
+                {% endif %}
+            </strong>
+        </li>
+    </ul>
+</div>
+
+<div class="step_application col-3">
+    <div class="item_step {% if step == 'first' %}active{% endif %}">
+        {{ 'tender.bid.step1'|_ }}
+    </div>
+    <div class="line"></div>
+    <div class="item_step {% if step == 'second' or step == 'lot' %}active{% endif %}">
+        {{ 'tender.bid.step2'|_ }}
+    </div>
+    {% if not simple %}
+    <div class="line"></div>
+    <div class="item_step {% if step == 'last' %}active{% endif %}">
+        {{ 'tender.bid.step3'|_ }}
+    </div>
+    {% endif %}
+</div>
+<p>
+    {% flash %}
+        {% if type == 'error' %}
+        <strong style="color:red;font-size:20px;">{{ 'tender.bid.empty_prices'|_ }}</strong><br>
+        {% endif %}
+    {% endflash %}
+</p>

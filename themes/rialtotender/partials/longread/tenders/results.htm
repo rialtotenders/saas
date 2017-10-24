@@ -1,0 +1,32 @@
+{%if is_ajax %}
+    <div id="result">
+        {% partial 'form/found.htm' %}
+    </div>
+{% else %}
+    <div class="w c-s" id="search_result" data-js="search_result" data-filter>
+        <div class="c">
+            <div class="c-s__wrap">
+                <div class="c-s__center">
+                    <div class="row">
+                        <div class="col-100">
+                            <form class="sb-search-input__center" action="{{ siteLocale }}{{ search_type }}/search" id="simple-form-filter" method="GET" style="display:none;">
+                                <div class="sb-search-input__bottom clearfix" id="blocks">
+                                    <div class="sb-search-input__input-wrap">
+                                        <input id="query" type="text" name="query" class="query_input no_blocks sb-search-input__input-field filter-checkboxes" placeholder="{{ 'form.placeholder'|_ }}" autocomplete="off" data-js="form" data-type="{{ search_type }}" data-lang="{{ locale_href }}" data-edrpou="{{ edrpou }}" data-limit="3">
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row inline-layout">
+                                <div class="col-100 pl" id="filter-result">
+                                    <div id="result">
+                                        {% partial 'form/found.htm' start=3 %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,7 @@
+<?php if(!$model->bidDocuments->isEmpty()):?>
+    <?php foreach($model->bidDocuments as $document): ?>
+        <div><a href="<?=$document->json['data']['url'] ?>" target="_blank"><?=$document->json['data']['title'] ?></a></div>
+    <?php endforeach;?>
+<?php else: ?>
+    <div>без документов</div>
+<?php endif; ?>

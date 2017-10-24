@@ -1,0 +1,27 @@
+tabs:
+    fields:
+        header1:
+            label: Заголовок
+            tab: Шаг 1
+            type: mltext
+            span: full
+
+        step1:
+            label: Подсказка
+            tab: Шаг 1
+            type: mlricheditor
+            span: full
+            size: giant
+
+        header2:
+            label: Заголовок
+            tab: Шаг 2
+            type: mltext
+            span: full
+
+        step2:
+            label: Подсказка
+            tab: Шаг 2
+            type: mlricheditor
+            span: full
+            size: giant

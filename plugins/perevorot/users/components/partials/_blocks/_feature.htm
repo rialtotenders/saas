@@ -1,0 +1,27 @@
+{% set validator_name_prefix = input_name_prefix|replace({'[': '.', ']': '.'})|replace({'..': '.'}) %}
+{% set input_name_prefix = input_name_prefix|replace({'.': ''}) %}
+
+<div class="price_category">
+    <div class="delete_price_category">{{ 'tender.feature.delete'|_ }}</div>
+
+<div class="feature-index" data-feature-index="{{ fkey }}">
+    <div class="form-holder">
+        <label for="feature_title-{{ validator_name_prefix ~ fkey }}">{{ 'tender.feature.title'|_ }}</label>
+        <input id="feature_title-{{ validator_name_prefix ~ fkey }}" type="text" name="{{ input_name_prefix }}[{{ fkey }}][title]" value="{{ feature.title }}"/>
+        <div class="error-holder none" data-validation="{{ validator_name_prefix ~ fkey }}.title"></div>
+        <input type="hidden" name="{{ input_name_prefix }}[{{ fkey }}][featureOf]" value="{{ feature_type }}"/>
+    </div>
+    <div class="feature-enums">
+        {% if feature.enum is not empty %}
+            {% for ekey, enum in feature.enum %}
+                {% partial '@_blocks/_feature_enum' ekey=ekey enum=enum input_name_prefix=input_name_prefix validator_name_prefix=validator_name_prefix %}
+            {% endfor %}
+        {% else %}
+            {% partial '@_blocks/_feature_enum' ekey=0 input_name_prefix=input_name_prefix validator_name_prefix=validator_name_prefix %}
+        {% endif %}
+    </div>
+</div>
+
+    <a href="#" class="add_field">{{ 'tender.feature.add_enum'|_ }}</a>
+    <a href="#" class="remove_field">{{ 'tender.feature.remove_enum'|_ }}</a>
+</div>

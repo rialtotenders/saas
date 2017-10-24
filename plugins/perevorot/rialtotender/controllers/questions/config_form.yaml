@@ -1,0 +1,10 @@
+name: Questions
+form: $/perevorot/rialtotender/models/question/fields.yaml
+modelClass: Perevorot\Rialtotender\Models\Question
+defaultRedirect: perevorot/rialtotender/questions
+create:
+    redirect: 'perevorot/rialtotender/questions/update/:id'
+    redirectClose: perevorot/rialtotender/questions
+update:
+    redirect: perevorot/rialtotender/questions
+    redirectClose: perevorot/rialtotender/questions

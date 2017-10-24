@@ -1,0 +1,60 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+
+scopes:
+
+    groups:
+        # Filter name
+        label: rainlab.user::lang.group.label
+        # Model Class name
+        modelClass: RainLab\User\Models\UserGroup
+        # Model attribute to display for the name
+        nameFrom: name
+        # Filter scope
+        scope: filterByGroup
+
+    created_date:
+        label: rainlab.user::lang.user.created_at
+        type: daterange
+        conditions: created_at >= ':after' AND created_at <= ':before'
+
+    activated:
+        # Filter name
+        label: rainlab.user::lang.user.status_activated
+        # Filter type
+        type: switch
+        # SQL conditions
+        conditions:
+            - is_activated = '0'
+            - is_activated = '1'
+
+    is_test_user:
+        # Filter name
+        label: 'Тестовый юзер'
+        # Filter type
+        type: switch
+        # SQL conditions
+        conditions:
+            - is_test_user = '0'
+            - is_test_user = '1'
+
+    is_formed:
+        # Filter name
+        label: 'Акты сформировано'
+        # Filter type
+        type: switch
+        # SQL conditions
+        conditions:
+            - is_formed = '0'
+            - is_formed = '1'
+
+    is_do:
+        # Filter name
+        label: 'Согласие с ПО'
+        # Filter type
+        type: switch
+        # SQL conditions
+        conditions:
+            - is_do = '0'
+            - is_do = '1'

@@ -1,0 +1,44 @@
+<div class="w c-main absolute z120">
+    <div class="c">
+        <div class="c-main__top-wrap">
+            <div class="c-main__table">
+                <div class="c-main__cell">
+                    <h2 class="c-main__header">{{ data.search_form_title }}</h2>
+                    <div class="w sb-search-input">
+                        {% partial 'form/form.htm' show_suggest=data.show_suggest default_params=true %}
+                        <div class="sb-search-input__center">
+                            <a class="advanced_search" href="{{ siteLocale }}tender/search?status=active.enquiries&status=active.tendering">{{ 'form.registration_and_search.advanced_search'|_}}</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w c-main z90"{% if data.search_form_image %} style="background-image: url({{ data.search_form_image.thumb(1440, 540) }});"{% endif %}>
+    <div class="c">
+        <div class="c-main__top-wrap">
+            <div class="c-main__table">
+                <div class="c-main__cell">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w c-s none go-prev c-s--if-display-remove-margin c-s--min-height" id="result_container">
+    <div class="c">
+        <div class="c-s__wrap">
+            <div class="c-s__center">
+                <div class="row">
+                    <div class="col-100" id="result" class="result">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% partial 'longread/_handlers.htm' %}

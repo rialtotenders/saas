@@ -1,0 +1,131 @@
+<div class="block-text-tender">
+    <div class="item">
+        <h2>{{ tender.title }}</h2>
+        <p>{{ tender.description }}</p>
+    </div>
+
+    {% if documents|length %}
+    <div class="item">
+        <h2>{{ 'tender.create.preview_documents_for_tenders'|_ }}</h2>
+        <ul>
+            {% for document in documents %}
+            <li><a href="{{ document.getPath }}" target="_blank">{{ document.file_name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <div class="item">
+        <h2>{{ 'tender.create.preview_information_about_tender'|_ }}</h2>
+        <ul>
+            <li>
+                <span>{{ 'tender.create.preview_enquiryPeriod_to'|_}}</span> <span>{{ tender.enquiryPeriod.endDate }}</span>
+            </li>
+            <li>
+                <span>{{ 'tender.create.preview_tenderPeriod_from'|_}}</span> <span>{{ tender.tenderPeriod.startDate }}</span>
+            </li>
+            <li>
+                <span>{{ 'tender.create.preview_tenderPeriod_to'|_}}</span> <span>{{ tender.tenderPeriod.endDate }}</span>
+            </li>
+            {% if not tender.lot %}
+            <li>
+                <span>{{ 'tender.create.preview_expected_price'|_}}</span>
+                <span>
+                    {% if tender.is_empty_price %}
+                        {{ 'tender.create.is_empty_price'|_ }}
+                    {% else %}
+                        {{ tender.value.amount ~ ' ' ~ tender.value.currency }}
+                    {% endif %}
+                </span>
+            </li>
+            <li>
+                <span>{{ 'tender.create.preview_auction_step'|_}}</span> <span>{{ tender.minimalStep.amount ~ ' ' ~ tender.minimalStep.currency }}</span>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="item">
+        <h2>{{ 'tender.create.preview_ContactPoint'|_ }}</h2>
+        <ul>
+            <li>
+                <span>{{ 'tender.create.preview_contactPoint_name'|_}}</span> <span>{{ tender.procuringEntity.contactPoint.name }}</span>
+            </li>
+            <li>
+                <span>{{ 'tender.create.preview_contactPoint_position'|_}}</span> <span>{{ tender.procuringEntity.contactPoint.position }}</span>
+            </li>
+            <li>
+                <span>{{ 'tender.create.preview_contactPoint_email'|_}}</span> <span>{{ tender.procuringEntity.contactPoint.email }}</span>
+            </li>
+            <li>
+                <span>{{ 'tender.create.preview_contactPoint_telephone'|_}}</span> <span>{{ tender.procuringEntity.contactPoint.telephone }}</span>
+            </li>
+            <li>
+                <span>{{ 'tender.create.preview_contactPoint_fax'|_}}</span> <span>{{ tender.procuringEntity.contactPoint.faxNumber }}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="item">
+        {% if not tender.lot %}
+            <h2>{{ 'tender.create.preview_nomenclature'|_}}</h2>
+            <ul>
+                {% for item in tender.items %}
+                <li>
+                    <strong>{{ item.description }} </strong>
+                    <p>
+                        <span>{{ 'tender.create.item_quantity'|_ ~ ' ' ~ item.quantity ~ ' ' ~ item.unit.name }}</span>
+                    </p>
+                    <p>
+                        {{ 'tender.create.preview_cpv'|_}}
+                        <span>{{ item.classification.id }}</span>
+                    </p>
+                    <p>
+                        {{ 'tender.create.preview_delivery'|_}}
+                        <span>{{ item.deliveryAddress.locality ~ ', ' ~ item.deliveryAddress.streetAddress ~ ', ' ~ 'tender.create.delivery_date_from'|_ ~ ' ' ~ item.deliveryDate.startDate ~ ', ' ~ 'tender.create.delivery_date_to'|_ ~ ' ' ~ item.deliveryDate.endDate }}</span>
+                    </p>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h2>{{ 'tender.create.preview_lots'|_}}</h2>
+            {% for lot in tender.lots %}
+                <br><h3>{{ lot.title }}</h3>
+                <ul>
+                    <li>
+                        <strong>{{ 'tender.create.preview_lot_desc'|_ }} {{ lot.description }} </strong>
+                    </li>
+                    <li>
+                        <span>{{ 'tender.create.preview_expected_price'|_}}</span>
+                        <span>
+                            {% if lot.is_empty_price %}
+                                {{ 'tender.create.lot.is_empty_price'|_ }}
+                            {% else %}
+                                {{ lot.value.amount ~ ' ' ~ tender.value.currency }}
+                            {% endif %}
+                        </span>
+                    </li>
+                    <li>
+                        <span>{{ 'tender.create.preview_auction_step'|_}}</span> <span>{{ lot.minimalStep.amount ~ ' ' ~ tender.value.currency }}</span>
+                    </li>
+                </ul>
+                <br><h4>{{ 'tender.create.preview_lot_items'|_}}</h4><br>
+                {% for item in lot.items %}
+                <ul>
+                    <li>
+                        <strong>{{ 'tender.create.preview_item_desc'|_ }} {{ item.description }} </strong>
+                        <p>
+                            <span>{{ 'tender.create.item_quantity'|_ ~ ' ' ~ item.quantity ~ ' ' ~ item.unit.name }}</span>
+                        </p>
+                        <p>
+                            {{ 'tender.create.preview_cpv'|_}}
+                            <span>{{ item.classification.id }}</span>
+                        </p>
+                        <p>
+                            {{ 'tender.create.preview_delivery'|_}}
+                            <span>{{ item.deliveryAddress.locality ~ ', ' ~ item.deliveryAddress.streetAddress ~ ', ' ~ 'tender.create.delivery_date_from'|_ ~ ' ' ~ item.deliveryDate.startDate ~ ', ' ~ 'tender.create.delivery_date_to'|_ ~ ' ' ~ item.deliveryDate.endDate }}</span>
+                        </p>
+                    </li>
+                </ul>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

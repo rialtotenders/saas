@@ -1,0 +1,26 @@
+{% if customers|length %}
+    <div class="w c-customers{% if data.customers_up %} go-prev{% endif %}">
+        <div class="c">
+            <div class="c-customers__wrap">
+                <div class="c-customers__center">
+                    {% if data.customers_title %}
+                        <h2 class="sb-h2">{{ data.customers_title }}</h2>
+                    {% endif %}
+                    <div class="row c-customers__customers-list">
+                        {% for item in customers %}
+                            <div class="col-25">
+                                {% if item.url %}
+                                    <a href="{{ item.url }}">
+                                        <img src="{{ item.image.path }}">
+                                    </a>
+                                {% else %}
+                                    <img src="{{ item.image.path }}">
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

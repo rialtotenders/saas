@@ -1,0 +1,86 @@
+.c-twoc {
+  .c {
+    @extend .padding-left;
+    @extend .padding-right;
+  }
+  &__wrap {
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: cover;
+  }
+  &__table {
+    display: table;
+    width: 100%;
+    height: 100%;
+    height: 519px;
+  }
+  &__cell {
+    display: table-cell;
+    width: 50%;
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+    padding: 60px 100px;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: cover;
+    &--description {
+      text-align: left;
+      color: white;
+      p {
+        margin: 10px 0;
+      }
+    }
+    &--icons {
+
+    }
+  }
+  &__main-link {
+    color: inherit;
+    border: 2px solid white;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: center;
+    border-radius: 2px;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 25px;
+    box-sizing: border-box;
+  }
+  &__table-inner {
+    display: table;
+    margin: 0 auto;
+  }
+  &__table-row {
+    display: table-row;
+  }
+  &__table-cell {
+    display: table-cell;
+    vertical-align: middle;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    &--text {
+      padding-left: 20px;
+      text-align: left;
+      color: white;
+      font-size: 17px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.12;
+      a {
+        color: white;
+      }
+    }
+  }
+  &__number {
+    font-size: 31px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: left;
+    color: #ffffff;
+  }
+}

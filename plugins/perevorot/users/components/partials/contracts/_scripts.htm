@@ -1,0 +1,107 @@
+<script>
+
+    var opts = {
+        lines: 13 // The number of lines to draw
+        , length: 28 // The length of each line
+        , width: 14 // The line thickness
+        , radius: 42 // The radius of the inner circle
+        , scale: 0.25 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
+    }
+
+    var dt_opts = {
+        dayOfWeekStart: 1,
+        format:'d.m.Y',
+        showClose: true,
+        minDate: 0,
+        minTime: 0,
+        formatDate:'d.m.Y',
+        timepicker: false,
+        //onChangeDateTime: logic,
+        //onShow: logic,
+        scrollMonth : false,
+        scrollInput : false
+    };
+
+    function init()
+    {
+
+        new window.TenderValidation();
+
+        $.datetimepicker.setLocale('{{ CurrentLocale }}');
+
+        var target = document.getElementById('for-spinner');
+        var spinner = new Spinner(opts).spin(target);
+
+        $('#for-spinner .spinner').hide();
+
+        $('.input-group.date input').each(function () {
+            $(this).datetimepicker(dt_opts);
+            $(this).bind("mousewheel", function () {
+
+            });
+        });
+    }
+
+    if (window.jQuery !== undefined) {
+        init();
+    }
+
+</script>
+
+{% put scripts %}
+<script>
+    jQuery(function($) {
+        init();
+
+        $("#contract-edit").on('change', '#contract_edit_Change_rationaleTypes', function () {
+            return false;
+            $('#contract_edit_value_amount').attr('disabled', 'disabled');
+            $('#contract_edit_Period_EndDate').attr('disabled', 'disabled');
+            $('#contract_edit_Period_StartDate').attr('disabled', 'disabled');
+
+            $(this).children(":selected").each(function( index ) {
+                if($(this).attr('class') == 'edit-amount') {
+                    $('#contract_edit_value_amount').removeAttr('disabled');
+                }
+                else if($(this).attr('class') == 'edit-period') {
+                    $('#contract_edit_Period_EndDate').removeAttr('disabled');
+                    $('#contract_edit_Period_StartDate').removeAttr('disabled');
+                }
+            });
+        });
+
+        $("#contract-edit").on('click', '.list-step .item a', function () {
+            var step = $(this).attr('data-step');
+
+            if(step !== undefined && step !== '') {
+                $('.block-button .prev_step').attr('data-request-data', "'step': '" + step + "'");
+                $("#contract-edit .block-button .prev_step").trigger('click');
+            }
+
+            return false;
+        });
+
+        $("#contract-edit").on('click', '.next_step', function () {
+            if($(this).attr('data-save') != undefined) {
+                $('#contract-save').val($(this).attr('data-save'));
+            }
+        });
+
+    });
+</script>
+{% endput %}

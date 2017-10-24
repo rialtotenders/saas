@@ -1,0 +1,14 @@
+fields:
+    name:
+        label: 'perevorot.blog::lang.plugin.blog.tag.name'
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    slug:
+        label: 'perevorot.blog::lang.plugin.blog.tag.slug'
+        oc.commentPosition: ''
+        span: auto
+        preset:
+            field: name
+            type: slug
+        type: text

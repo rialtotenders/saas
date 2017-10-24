@@ -1,0 +1,12 @@
+<script type="text/x-jquery-tmpl" cpv-tree-template>
+    <div data-level="{level}" style="margin-left:{margin}px" cpv-tree-item class="list_item">
+        <div cpv-tree-control class="cpv-tree-control">
+            <span class="plus"> + </span>
+            <span class="minus"> - </span>
+        </div>
+        <div class="item">
+            <input value="{code}" {checked} type="{% if type == 'single' %}radio{% else %}checkbox{% endif %}" name="{input_name}" id="{id}">
+            <label for="{id}">{code}: {name}</label>
+        </div>
+    </div>
+</script>

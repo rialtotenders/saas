@@ -1,0 +1,16 @@
+columns:
+    sum:
+        label: Тариф
+        type: text
+        searchable: false
+        sortable: true
+    currency_id:
+        label: Валюта
+        type: text
+        sortable: true
+        select: name
+        relation: currency
+    is_gov:
+        label: 'ГОС?'
+        type: switch
+        invisible: false

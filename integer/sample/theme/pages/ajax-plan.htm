@@ -1,0 +1,11 @@
+title = "Ajax поиск по планам"
+url = "/plan/form/search/:source?"
+layout = "ajax"
+is_hidden = 0
+
+[viewBag]
+localeUrl[en] = "/plan/form/search"
+
+[searchresult]
+==
+{% component 'searchresult' %}

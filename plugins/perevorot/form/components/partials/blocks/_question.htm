@@ -1,0 +1,101 @@
+<div class="item-question">
+    <div class="question_text">
+        <div class="text-overflow">
+            <h2>{{ question.title|e }}</h2>
+        </div>
+        {% if question.title|length > 80 %}
+        <div class="button-more">
+            <div class="more-open">{{ 'tender.questions.show_text'|_ }}</div>
+            <div class="more-hide">{{ 'tender.questions.hide_text'|_ }}</div>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if not question.qid %}
+        <div class="question_info">
+            <div class="three-bounce">
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
+            </div>
+            {{ 'tender.question_waiting_for_publication'|_ }}
+        </div>
+    {% endif %}
+    
+    <div class="">
+        <div class="item-question-text">
+            <br>
+            <p class="question_data">
+                {{ question.date|date("d.m.Y") }} <span class="date-time">{{ question.date|date("H:i") }}</span>
+                {% if question.author %}
+                    <strong>{{ question.author.identifier.legalName ? question.author.identifier.legalName : question.author.name }} <span>({{ question.author.identifier.id }})</span></strong>
+                {% endif %}
+            </p>
+            {% if question.lot_title %}
+            <div class="question_text">
+                <div class="text-overflow">
+                    <strong style="background-color: yellow;padding: 0px 5px;">{{ 'tender.question.for_lot'|_ }}</strong>
+                    <strong>{{ question.lot_title|e }}</strong>
+                </div>
+                {% if question.lot_title|length > 80 %}
+                <div class="button-more">
+                    <div class="more-open">{{ 'tender.questions.show_text'|_ }}</div>
+                    <div class="more-hide">{{ 'tender.questions.hide_text'|_ }}</div>
+                </div>
+                {% endif %}
+            </div>
+            {% if question.item_title %}
+            <p>{{ 'tender.question.to_item'|_ ~ ' ' ~ question.item_title|e }}</p>
+            {% endif %}
+            <br>
+            {% endif %}
+            <div class="question_text">
+                <div class="text-overflow">{{ question.description|nl2br }}</div>
+                {% if question.description|length > 100 %}
+                    <div class="button-more">
+                        <div class="more-open">{{ 'tender.questions.show_text'|_ }}</div>
+                        <div class="more-hide">{{ 'tender.questions.hide_text'|_ }}</div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if question.answer %}
+            <div class="item-answer">
+                <p class="question_data">{{ 'tender.answer_the_question_text'|_ ~ ' ' ~ question.dateAnswered|date("d.m.Y") }} <span class="date-time">{{ question.dateAnswered|date("H:i") }}</span></p>
+                <div class="question_text">
+                    <div class="text-overflow">
+                        {{ question.answer }}
+                    </div>
+                    {% if question.answer|length > 100 %}
+                        <div class="button-more">
+                            <div class="more-open">{{ 'tender.questions.show_text'|_ }}</div>
+                            <div class="more-hide">{{ 'tender.questions.hide_text'|_ }}</div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% elseif not question.answer and question.is_answered %}
+            <div class="question_info">{{ 'tender.answer_waiting_for_publication'|_ }}</div>
+        {% endif %}
+    </div>
+
+    {% if access_to_answers and question.qid and not question.is_answered %}
+        <div class="form-question-title button-tender">{{ 'tender.answer_question'|_ }}</div>
+        <div class="form-question-wrap">
+            <form class="block-form-edit answer-form" data-qid="{{ question.qid }}" data-request-loading=".spinner" data-request-success="answerSuccessfullyAdded(data)" method="post" data-request="onAnswering" data-request-complete="$('.answer-submit button').removeClass('disabled');">
+                <input type="hidden" name="qid" value="{{ question.qid }}">
+                <input type="hidden" name="lot_id" value="{{ question.lot_id }}">
+                <div class="block-form-edit" style="width:100%">
+                    <div class="for-question form-holder">
+                        <textarea name="answer" style="width: 100%;height: 100px;" required placeholder="{{ 'tender.enter_answer_text'|_ }}"></textarea>
+                    </div>
+                    <div class="answer-submit block-button" id="answer-submit-{{ question.qid }}" style="z-index: 999;">
+                        <button type="submit" class="next_step" data-qid="{{ question.qid }}">{{ 'tender.submit_answer'|_ }}</button>
+                    </div>
+                </div>
+            </form>
+            <p class="answer_submit" class="lead none"></p>
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,16 @@
+title = "Авторизация"
+url = "/login"
+layout = "default"
+is_hidden = 0
+
+[session]
+security = "all"
+
+[account]
+paramCode = "code"
+==
+{% if user %}
+     <div class="padding20" >Вы успешно авторизированы</div>
+{% else %}
+   {% component 'account' %}
+{% endif %}

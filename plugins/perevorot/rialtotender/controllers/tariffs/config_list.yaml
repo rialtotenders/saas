@@ -1,0 +1,11 @@
+list: $/perevorot/rialtotender/models/tariff/columns.yaml
+modelClass: Perevorot\Rialtotender\Models\Tariff
+title: Tariffs
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'perevorot/rialtotender/tariffs/update/:id/?is_gov=:is_gov'

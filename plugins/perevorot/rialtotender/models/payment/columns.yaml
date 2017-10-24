@@ -1,0 +1,23 @@
+columns:
+    type:
+        label: Операция
+        type: text
+    number:
+        label: Номер
+        type: text
+        searchable: true
+        sortable: true
+    sum:
+        label: Сумма
+        type: text
+        sortable: true
+    currency:
+        label: Валюта
+        type: text
+        sortable: true
+        select: name
+        relation: currency
+    date:
+        label: Дата
+        type: datetime
+        sortable: true

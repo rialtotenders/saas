@@ -1,0 +1,255 @@
+<div id="contract-container-rezult2">
+
+        <h2>{{ 'contract.contract_finishing'|_ }}</h2>
+
+            <div class="overflow-table">
+
+            <table class="contact-table" id="complete">
+                <tbody>
+                    <tr>
+                        <th width="13%">
+                            {{ 'contract.documents'|_ }}
+                        </th>
+                        <th width="13%">
+                            {{ 'contract.amountPaid'|_ }}
+                        </th>
+                        <th width="13%">
+                            {{ 'contract.terminationDetails'|_ }}
+                        </th>
+                        <th width="13%">
+                            {{ 'contract.status'|_ }}
+                        </th>
+                        {% if user_contract and user_contract.status == 'active' %}
+                        <th width="13%">
+                            {{ 'contract.buttons'|_ }}
+                        </th>
+                        {% endif %}
+                    </tr>
+                    <div id="contract-container-rezult">
+                        <div id="contract-container">
+                    <tr>
+                        <td>
+
+                            {% if contract.documents is not empty %}
+                            <h4 class="overlay-title js-contract-document">
+                                {{ 'contract.show_documents'|_ }}
+                            </h4>
+                            {% else %}
+                            <p> {{'contract.no_documents'|_}} </p>
+                            {% endif %}
+
+                        </td>
+                            <td>
+                                {{ item.amountPaid.amount }}
+                            </td>
+                            <td>
+                                <p>
+                                    {% if item.amountPaid.amount %}
+                                        {% if not item.terminationDetails %}
+                                            {{ 'contract.completed_successfully'|_ }}
+                                        {% else %}
+                                            {{ item.terminationDetails  }}
+                                        {% endif %}
+                                    {% endif %}
+                                </p>
+                            </td>
+                        <td>
+                            {% if item.amountPaid.amount %}
+                                {% if item.terminationDetails is not empty %}
+                                    {{ 'contract.torn'|_ }}
+                                {% else %}
+                                    {{ 'contract.completed_successfully'|_ }}
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                            {% if user_contract.position == 0 and user_contract.status == 'active' %}
+                            <td>
+                                <p>
+                                    <a href="#" class="show-contract-form" data-type="1">{{ 'contract.show_form_Execute'|_ }}</a>
+                                    <a href="#" class="show-contract-form" data-type="2">{{ 'contract.show_form_Dissolve'|_ }}</a>
+                                </p>
+                            </td>
+                            {% elseif user_contract.position == 1 and user_contract.status == 'active' %}
+                            <td>
+                                <p>
+                                    <a href="#" class="show-contract-form" data-type="3">{{ 'contract.show_form_terminated'|_ }}</a>
+                                </p>
+                            </td>
+                            {% endif %}
+                    </tr>
+                            {% if contract.__tender_documents is not empty %}
+                            <tr class="border0">
+                                <td colspan="7">
+                                    <div class="tender-document js-contract-document">
+                                        <div class="close"></div>
+                                        <h4>
+                                            {{ 'contract.documents_list'|_ }}
+                                        </h4>
+                                        {% for document in contract.__tender_documents %}
+                                        <div class="document-info table__table-row table__table-row3">
+                                            <div class="table__table-cell">
+                                                <a href="{{document.url}}" target="_blank" class="document-name"{{ document.stroked ? 'style="margin-left:10px;text-decoration: line-through;"':'' }}>{{document.title}}</a>
+                                            </div>
+
+                                            <div class="document-date table__table-cell">{{ document.dateModified|date('d.m.Y H:i')}}</div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    {% if user_contract and user_contract.status == 'active' %}
+                    <tr class="border0">
+                        <td colspan="7">
+                            <div class="show-contract-success" style="display:none;">
+                                {% if user_contract.position == 0 %}
+                                <h2 class="contract-reason-block">{{ 'contract.contract_form_title'|_ }}</h2>
+                                {% elseif user_contract.position == 1 %}
+                                <h2 class="contract-reason-block">{{ 'contract.contract_active_form_title'|_ }}</h2>
+                                {% endif %}
+                                <form id="contract-success-form" data-tender data-request-complete="validation(this)" data-request-success="contractSuccessfullyAdded(data)" method="post" data-request="onContractSubmit" data-request-loading=".spinner">
+                                    <input type="hidden" value="" name="type" id="contract_type">
+                                    <input type="hidden" name="document_type" value="contract">
+                                    <input type="hidden" name="tenderID" value="{{ user_contract.cid }}">
+                                    {{ session_key_field|raw }}
+
+                                    <div class="contract-reason-block">
+                                        <input type="text" name="amountPaid[amount]" placeholder="{{ 'contract.amountPaid'|_ }}" value="{{ contract.amountPaid.amount }}">
+                                        <div class="error-holder none" data-validation="amountPaid.amount"></div>
+                                    </div>
+
+                                    <div class="contract-reason-block contract-reason-block-2">
+                                        <input type="text" name="terminationDetails" placeholder="{{ 'contract.terminationDetails'|_ }}" value="">
+                                        <div class="error-holder none" data-validation="terminationDetails"></div>
+                                    </div>
+
+                                    <div class="file-button">
+                                        {% component 'fileUploader_contracts' %}
+                                    </div>
+
+                                    <div id="for-spinner1">
+                                        {% if user_contract.position == 0 and user_contract.status != 'terminated' %}
+                                        <button type="submit" onClick="$('.error-holder').hide().html('');">{{ 'contract.form_submit'|_ }}</button>
+                                        {% elseif user_contract.position == 1 and user_contract.status != 'terminated' %}
+                                        <button type="submit" onClick="$('.error-holder').hide().html('');">{{ 'contract.form_submit_terminated'|_ }}</button>
+                                        {% endif %}
+                                        <a href="#" class="contract-cancel">{{ 'contract.form_cancel'|_ }}</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endif %}
+
+                </tbody>
+            </table>
+    </div>
+
+    <div id="contract-error"></div>
+    <div id="contract-success" style="display:none;"><p>{{ 'contract.contract.submit_is_success'|_ }}</p></div>
+</div>
+
+{% if user_contract and user_contract.status == 'active' %}
+{% put scripts %}
+<script>
+
+    var dt_opts = {
+        format:'d.m.Y',
+        showClose: true,
+        //minDate: 0,
+        //minTime: 0,
+        //step: 30,
+        formatDate:'d.m.Y',
+        //onChangeDateTime: logic,
+       // onShow: logic,
+        timepicker: false
+    };
+
+    $.datetimepicker.setLocale('{{ CurrentLocale }}');
+
+    function contractSuccessfullyAdded(data)
+    {
+        $('#contract-success').hide();
+
+        if(data.length == 0) {
+            $("#contract-container-rezult").load(window.location.pathname + " #contract-container");
+            $('#contract-container-rezult2 .show-contract-success').hide();
+            $('#contract-container-rezult2 #contract-error').html('');
+            $('#contract-container-rezult2 #contract-success').show();
+            $('#contract-container-rezult2 .show-contract-form').parent().parent().hide();
+        }
+    }
+
+    jQuery(function($) {
+        var opts = {
+            lines: 13 // The number of lines to draw
+            , length: 28 // The length of each line
+            , width: 14 // The line thickness
+            , radius: 42 // The radius of the inner circle
+            , scale: 0.25 // Scales overall size of the spinner
+            , corners: 1 // Corner roundness (0..1)
+            , color: '#000' // #rgb or #rrggbb or array of colors
+            , opacity: 0.25 // Opacity of the lines
+            , rotate: 0 // The rotation offset
+            , direction: 1 // 1: clockwise, -1: counterclockwise
+            , speed: 1 // Rounds per second
+            , trail: 60 // Afterglow percentage
+            , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+            , zIndex: 2e9 // The z-index (defaults to 2000000000)
+            , className: 'spinner' // The CSS class to assign to the spinner
+            , top: '50%' // Top position relative to parent
+            , left: '50%' // Left position relative to parent
+            , shadow: false // Whether to render a shadow
+            , hwaccel: false // Whether to use hardware acceleration
+            , position: 'absolute' // Element positioning
+        };
+
+        var target = document.getElementById('for-spinner1');
+        var spinner = new Spinner(opts).spin(target);
+
+        $('#for-spinner1 .spinner').hide();
+
+        $('.input-group.date input').each(function () {
+            $(this).datetimepicker(dt_opts);
+        });
+
+        $('#contract-container-rezult2').on('click', '.contract-cancel, .contract-cancel-active, .contract-cancel', function() {
+            $('.show-contract-success').hide();
+            return false;
+        });
+
+        $('#contract-container-rezult2').on( "click", ".show-contract-form", function(e) {
+            e.preventDefault();
+            var type = $(this).attr('data-type');
+
+            $('#contract-container-rezult2 #contract_type').val(type);
+
+            if(type == 3)
+            {
+                $('#contract-container-rezult2 .contract-reason-block').hide();
+                $('#contract-container-rezult2 .contract-reason-block-2').hide();
+                $('#contract-container-rezult2 .file-button').hide();
+            }
+            else if(type == 2)
+            {
+                $('#contract-container-rezult2 .contract-reason-block-2').show();
+                $('#contract-container-rezult2 .file-button').show();
+            }
+            else
+            {
+                $('#contract-container-rezult2 .contract-reason-block-2').hide();
+                $('#contract-container-rezult2 .file-button').show();
+            }
+
+            $('#contract-container-rezult2 .show-contract-success').show();
+
+            return false;
+        });
+    });
+
+</script>
+{% endput %}
+{% endif %}

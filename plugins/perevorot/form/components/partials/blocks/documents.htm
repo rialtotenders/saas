@@ -1,0 +1,27 @@
+
+    {% if waiting_documents %}
+        <h2>{{ 'tender.documents_title'|_ }}</h2>
+        <div class="sb-table sb-table--td-py-small">
+            <div class="sb-table__table">
+                {{ 'tender.waiting_documents'|_ }}
+            </div>
+        </div>
+    {% elseif item.__tender_documents|length %}
+        <h2>{{ 'tender.documents_title'|_ }}</h2>
+        <div class="sb-table sb-table--td-py-small">
+            <div class="sb-table__table">
+                {% for document in item.__tender_documents %}
+                    {% if document.stroked is empty %}
+                        <div class="sb-table__table-row sb-table__table-row--v-middle sb-table__table-row--50-50">
+                            <div class="sb-table__table-cell">
+                                <a href="{{ document.url }}" class="sb-table__doc-link sb-table__doc-link--doc">{% if document.title == 'sign.p7s' %}Електронний цифровий підпис{% else %}{{ document.title }}{% endif %}</a>
+                            </div>
+                            <div class="sb-table__table-cell">
+                                <p>{{ document.dateModified|date('d.m.Y в H:i') }}<p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}

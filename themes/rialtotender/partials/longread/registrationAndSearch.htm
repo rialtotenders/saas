@@ -1,0 +1,79 @@
+
+<div class="w c-main absolute z120">
+    <div class="c">
+        <div class="c-main__top-wrap">
+            <div class="c-main__table">
+                <div class="c-main__cell">
+                    <h2 class="c-main__header">
+                        {{ data.search_header }}
+                        <div class="data_search_text">{{ data.search_text }}</div>
+                    </h2>
+                    
+                    <div class="w sb-search-input">
+                        <form class="sb-search-input__center" action="{{ siteLocale }}{{ search_type }}/search" id="simple-form-filter" method="GET">
+                            <input class="default-params" type="hidden" name="status" value="active.enquiries">
+                            <input class="default-params" type="hidden" name="status" value="active.tendering">
+                            <div class="sb-search-input__bottom clearfix" id="blocks">
+                                <div class="sb-search-input__input-wrap">
+                                    <input id="query" type="text" name="query" class="query_input no_blocks sb-search-input__input-field filter-checkboxes" placeholder="{{ 'form.placeholder'|_ }}" autocomplete="off" >
+                                </div>
+                                <div class="sb-search-input__button">
+                                    <button type="submit" id="search_button_simple" class="search_button">{{ 'form.submit-button'|_ }}</button>
+                                </div>
+                            </div>
+                            <a class="advanced_search" href="{{ siteLocale }}tender/search?status=active.enquiries&status=active.tendering">{{ 'form.registration_and_search.advanced_search'|_}}</a>
+                        </form>
+
+                    </div>
+                    {% if not user%}
+                        <form data-request="onHandleForm" data-request-data="'step': '0'"  data-registration class="width300">
+                            <div>
+                                <label class="color_white" >Код ЕДРПОУ</label><br>
+                                <input type="text" name="username" class="registration_and_search_input" /><br>
+                                <div data-validation="username"></div>
+                            </div>
+                            <br>
+                            <div>
+                                <label class="color_white">Электронный адрес</label><br>
+                                <input type="text" name="email" id="email" class="registration_and_search_input" /><br>
+                                <span data-validation="email"></span>
+                            </div>
+                            <div>
+                                <button type="submit" class="registration_and_search_button" data-attach-loading >Зарегистрироваться</button>
+                            </div>
+                            <div class="alert alert-danger" data-validate-error>
+                                <p data-message></p>
+                            </div>
+                        </form> 
+                    {% endif %}                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w c-main z90"{% if data.search_image %} style="background-image: url({{ data.search_image.thumb(1440, 540) }});"{% endif %}>
+    <div class="c">
+        <div class="c-main__top-wrap">
+            <div class="c-main__table">
+                <div class="c-main__cell">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w c-s none go-prev c-s--if-display-remove-margin c-s--min-height" data-js="search_result" id="result_container">
+    <div class="c">
+        <div class="c-s__wrap">
+            <div class="c-s__center">
+                <div class="row">
+                    <div class="col-100" id="result" class="result">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% partial 'longread/_handlers.htm' %}

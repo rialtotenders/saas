@@ -1,0 +1,69 @@
+fields: {  }
+tabs:
+  fields:
+    _type:
+        label: "Типы тендеров"
+        span: auto
+        type: mltextarea
+        tab: "Типы тендеров"
+    _method_type:
+        label: "Типы процедур"
+        span: auto
+        type: mltextarea
+        tab: "Типы процедур"
+    rationaletypes:
+        label: "Типы причин"
+        span: auto
+        type: mltextarea
+        tab: "Типы причин"
+    document_types:
+        label: "Типы документов у конракта"
+        span: auto
+        type: mltextarea
+        tab: "Типы документов у конракта"
+    bid_document_types:
+        label: "Типы документов у предложения"
+        span: auto
+        type: mltextarea
+        tab: "Типы документов у предложения"
+    tender_document_types:
+        label: "Типы документов у тендера"
+        span: auto
+        type: mltextarea
+        tab: "Типы документов у тендера"
+    section1:
+        label: Пояснение
+        span: full
+        type: section
+        comment: Вводить в формате - open=Открытый. Несколько типов разделять переносом строки.
+        tab: "Типы тендеров"
+    section2:
+        label: Пояснение
+        span: full
+        type: section
+        comment: Вводить в формате - open=Открытый. Несколько типов разделять переносом строки.
+        tab: "Типы процедур"
+    section3:
+        label: Пояснение
+        span: full
+        type: section
+        comment: Вводить в формате - open=Открытый. Несколько типов разделять переносом строки.
+        tab: "Типы причин"
+    section4:
+        label: Пояснение
+        span: full
+        type: section
+        comment: Вводить в формате - open=Открытый. Несколько типов разделять переносом строки.
+        tab: "Типы документов у конракта"
+    section5:
+        label: Пояснение
+        span: full
+        type: section
+        comment: Вводить в формате - open=Открытый. Несколько типов разделять переносом строки.
+        tab: "Типы документов у предложения"
+    section6:
+        label: Пояснение
+        span: full
+        type: section
+        comment: Вводить в формате - open=Открытый. Несколько типов разделять переносом строки.
+        tab: "Типы документов у тендера"

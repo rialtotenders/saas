@@ -1,0 +1,246 @@
+{%if is_ajax %}
+    <div id="result">
+        {% partial 'form/found.htm' %}
+    </div>
+{% else %}
+    <div class="w c-s" id="search_result" data-js="search_result" data-filter>
+        <div class="c">
+            <div class="c-s__wrap">
+                <div class="c-s__center">
+                    <!--<div class="row">
+                        <div class="col-100">
+                            <h1>{{ 'form.search.header.tender'|_}}</h1>
+                        </div>
+                    </div>-->
+                    <div class="row">
+                        <div class="col-100">
+
+                            {% partial 'form/form.htm' show_suggest=true %}
+
+                            {#
+                            <div class="sb-top-search ">
+                                <div class="sb-top-search__input-wrap">
+                                    <input type="text" placeholder="{{ 'form.placeholder'|_ }}" class="sb-top-search__main-input">
+                                </div>
+                                <div class="sb-top-search__left-button"><span>{{ 'form.filter_groups'|_ }}</span></div>
+                                <button></button>
+                            </div>
+                            #}
+
+                            <div class="row inline-layout">
+                                <div class="col-25 ">
+
+                                    <div class="sb-f sb-f--right">
+
+                                        <div class="sb-f__group hide" id="selected-values">
+                                            <script id="selected-values-template" type="text/x-jquery-tmpl">
+                                                <li data-type='{type}' data-key='{key}'>
+                                                    <span class="sb-f__checked-close"></span>
+                                                    <span class="sb-f__checked-text">{value}</span>
+                                                </li>
+                                            </script>
+                                            <div class="sb-f__title-wrap">
+                                                <span class="sb-f__title">{{ 'form.search_filter.selected_filters'|_}}</span>
+                                            </div>
+                                            <div class="sb-f__content">
+                                                <div class="sb-f__clear-wrap" id="clear-filter">
+                                                    <span class="sb-f__clear-button">{{ 'form.search_filter.clear'|_}}</span>
+                                                </div>
+                                                <div class="sb-f__checked-wrap">
+                                                    <ul></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mobile-hide">
+
+                                            <div class="sb-f__group" id="categories-filter">
+                                                <script id="categories-template" type="text/x-jquery-tmpl">
+                                                    <div class="categories-wrapper">
+                                                        <li data-key="{key}" class='categories-item categories-item-{key-class}' data-type='{type}'>
+                                                            <span>{value}</span>
+                                                        </li>
+
+                                                        <input type="checkbox"  data-category-search='{key-search}'  value='{key-value}' class='filter-checkboxes categories-checkbox hide'  />
+                                                    </div>
+                                                </script>
+
+                                                <script id="empty-template" type="text/x-jquery-tmpl">
+                                                    <div class="categories-wrapper">
+                                                        <li class='categories-item'>
+                                                            <span>{{ 'form.search_filter.please_refine_search'|_}}</span>
+                                                        </li>
+                                                    </div>
+                                                </script>
+
+                                                <div class="sb-f__title-wrap sb-f__title-wrap--can-show sb-f__title-wrap--is-active">
+                                                    <span class="sb-f__title">{{ 'form.search_filter.categories'|_}}</span>
+                                                </div>
+
+                                                <div class="sb-f__content ">
+                                                    <div class="sb-f__input-search-group ">
+                                                        <div class="sb-f__input-search-wrap">
+                                                            <input type="text" class="autocomplete">
+                                                            <div class="sb-f__input-list-wrap-holder hide">
+                                                                <div class="sb-f__input-list-wrap ">
+                                                                    <ul></ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sb-f__small-text-wrap">
+                                                        <p class="sb-f__small-text">{{ 'form.search_filter.please_refine_category_name'|_}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="sb-f__group" id="buyers-filter">
+                                                <script id="buyers-template" type="text/x-jquery-tmpl">
+                                                    <div class="buyers-wrapper">
+                                                        <li data-key="{key}" class='buyers-item buyers-item-{key-class}' data-type='{type}'>
+                                                            <span>{value}</span>
+                                                        </li>
+
+                                                        <input type="checkbox"  data-buyer-search='{key-search}'  value='{key-value}' class='filter-checkboxes buyers-checkbox hide' />
+                                                    </div>
+                                                </script>
+
+                                                <div class="sb-f__title-wrap sb-f__title-wrap--can-show sb-f__title-wrap--is-active">
+                                                    <span class="sb-f__title">{{ 'form.search_filter.procurement_name'|_}}</span>
+                                                </div>
+
+                                                <div class="sb-f__content ">
+                                                    <div class="sb-f__input-search-group ">
+                                                        <div class="sb-f__input-search-wrap">
+                                                            <input type="text" class="autocomplete">
+                                                            <div class="sb-f__input-list-wrap-holder hide">
+                                                                <div class="sb-f__input-list-wrap">
+                                                                    <ul></ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sb-f__small-text-wrap">
+                                                        <p class="sb-f__small-text">{{ 'form.search_filter.please_refine_procurement_name'|_}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {% if search_type == 'plan' %}
+                                            <div class="sb-f__group hide" id="dates-filter" >
+                                                <div class="sb-f__title-wrap sb-f__title-wrap--can-show sb-f__title-wrap--is-active">
+                                                    <span class="sb-f__title">{{ 'form.search_filter.plan_dates'|_}}</span>
+                                                </div>
+                                                <div class="sb-f__content">
+                                                    <div class="sb-f__input-search-group">
+                                                        <div class="sb-f__input-search-wrap">
+                                                        </div>
+                                                    </div>
+                                                    <div class="sb-f__checkbox-wrap">
+                                                        <div class="sb-f__ckeckbox-list dates">
+                                                            <div class="input-group date">
+                                                                <input name="date_from" id="date_from" value="" type="text" class="form-control">
+                                                            </div>
+                                                            <div class="input-group date">
+                                                                <input name="date_to" id="date_to" value="" type="text" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+
+                                            {% if search_type == 'tender' %}
+                                            <div class="sb-f__group" id="statuses-filter">
+                                                <script id="statuses-template" type="text/x-jquery-tmpl">
+                                                    <div class="sb-f__checkbox-item-wrap statuses-checkbox statuses-{key-class}">
+                                                        <label>
+                                                            <input type="checkbox" data-status-search='{key-search}' name='statuses[{key}]' value='{key-value}' class='filter-checkboxes'>
+                                                            <span></span>
+                                                            <p>{value}</p>
+                                                        </label>
+                                                    </div>
+                                                </script>
+                                                <div class="sb-f__title-wrap sb-f__title-wrap--can-show sb-f__title-wrap--is-active">
+                                                    <span class="sb-f__title">{{ 'form.search_filter.tender_status'|_}}</span>
+                                                </div>
+                                                <div class="sb-f__content">
+                                                    <div class="sb-f__input-search-group">
+                                                        <div class="sb-f__input-search-wrap">
+                                                            {#<input type="text" class="autocomplete">#}
+                                                        </div>
+                                                    </div>
+                                                    <div class="sb-f__checkbox-wrap">
+                                                        <div class="sb-f__ckeckbox-list status"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            <div class="sb-f__group hide" id="regions-filter">
+                                                <script id="regions-template" type="text/x-jquery-tmpl">
+                                                    <div class="sb-f__checkbox-item-wrap regions-checkbox regions-{key-class}">
+                                                        <label><input type="checkbox" name="regions[{key}]" data-region-search='{key-search}' value='{key-value}' class='filter-checkboxes'><span></span><p>{value}</p></label>
+                                                    </div>
+                                                </script>
+                                                <div class="sb-f__title-wrap sb-f__title-wrap--can-show sb-f__title-wrap--is-active">
+                                                    <span class="sb-f__title">{{ 'form.search_filter.regions'|_}}</span>
+                                                </div>
+                                                <div class="sb-f__content">
+                                                    <div class="sb-f__input-search-group">
+                                                        <div class="sb-f__input-search-wrap">
+                                                            <input type="text" class="autocomplete">
+                                                        </div>
+                                                    </div>
+                                                    <div class="sb-f__checkbox-wrap">
+                                                        <div class="sb-f__ckeckbox-list">
+                                                        </div>
+
+                                                        <a href="" class="show-all sb-f__small-text sb-f__small-orange"><span>{{ 'form.search_filter.show_all'|_}}</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="mobile-filter-more">
+                                    <div class="mobile-filter-more-open js-mobile-filter-more-open show-button">{{ 'form.filter_more_open'|_ }}</div>
+                                    <div class="mobile-filter-more-hide js-mobile-filter-more-hide">{{ 'form.filter_more_hide'|_ }}</div>
+                                </div>
+                                <div class="col-75 pl" id="filter-result">
+                                    <div id="result">
+                                        {% partial 'form/found.htm' %}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+{% if search_type == 'plan' %}
+{% put scripts %}
+<script>
+    jQuery(function($) {
+
+        var dt_opts = {
+            format:'d.m.Y',
+            showClose: true,
+            minDate: 0,
+            timepicker: false
+        };
+
+        $('.input-group.date input').each(function () {
+            $(this).datetimepicker(dt_opts);
+        });
+    });
+</script>
+{% endput %}
+{% endif %}

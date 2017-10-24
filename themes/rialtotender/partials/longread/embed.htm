@@ -1,0 +1,14 @@
+<div class="w c-video{% if data.embed_up %} go-prev{% endif %}">
+    <div class="c">
+        <div class="c-video__wrap">
+            <div class="c-video__center">
+                {% if data.embed_title %}
+                    <h2 class="sb-h2">{{ data.embed_title }}</h2>
+                {% endif %}
+                <div class="c-video__box">
+                    {{ data.embed_code|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

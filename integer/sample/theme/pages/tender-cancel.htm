@@ -1,0 +1,11 @@
+title = "tender cancel"
+url = "/tender/:tenderID/cancel"
+layout = "default"
+is_hidden = 0
+
+[TenderCancelling]
+tender_id = "{{ :tenderID }}"
+==
+<div id="tender-content">
+{% component 'TenderCancelling' %}
+</div>

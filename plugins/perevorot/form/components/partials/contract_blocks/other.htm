@@ -1,0 +1,103 @@
+<h2>{{ 'contract.other_title'|_ }}</h2>
+<div class="mobile-table">
+    <div class="sb-table sb-table--td-py-small">
+        <div class="sb-table__table">
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'contract.contractNumber'|_ }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.contractNumber }}<p>
+                </div>
+            </div>
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'contract.dateSigned'|_ }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.dateSigned|date('d.m.Y') }}<p>
+                </div>
+            </div>
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'contract.Period_StartDate'|_ }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.period.startDate|date('d.m.Y') }}<p>
+                </div>
+            </div>
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'contract.Period_EndDate'|_ }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.period.endDate|date('d.m.Y') }}<p>
+                </div>
+            </div>
+
+        </div>
+        <div class="sb-table__table">
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'contract.value_amount'|_ }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.value.amount|number_format(2, '.', ' ')|replace({'.00': ''}) }}<p>
+                </div>
+            </div>
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'contract.value_currency'|_ }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.value.currency }}<p>
+                </div>
+            </div>
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'contract.value_valueAddedTaxIncluded'|_ }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>
+                        {% if item.value.valueAddedTaxIncluded %}
+                            {{ 'contract.with_VAT'|_ }}
+                        {% else %}
+                            {{ 'contract.without_VAT'|_ }}
+                        {% endif %}
+                    <p>
+                </div>
+            </div>
+
+        </div>
+        <div class="sb-table__table">
+
+            <div class="sb-table__table-row sb-table__table-row--v-bottom sb-table__table-row--50-50">
+                <div class="sb-table__table-cell">
+                    <div class="sb-table__dashed-wrap">
+                        <p>{{ 'contract.amountPaid_amount'|_ }}</p>
+                    </div>
+                </div>
+                <div class="sb-table__table-cell">
+                    <p>{{ item.amountPaid.amount|number_format(2, '.', ' ')|replace({'.00': ''}) }}<p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

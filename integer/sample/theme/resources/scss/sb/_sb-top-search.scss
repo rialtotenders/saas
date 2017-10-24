@@ -1,0 +1,82 @@
+$sb-top-search-left-button-width: 120px;
+$sb-top-search-right-button-width: 70px;
+$sb-top-search-height: 50px;
+$sb-top-search-border-color: #e5e5e5;
+$sb-top-search-border-radius: 2px;
+$sb-top-search-bg-color: #e05a00;
+
+.sb-top-search {
+  border-color: $sb-top-search-border-color;
+  &__input-wrap {
+    padding-left: $sb-top-search-left-button-width;
+    padding-right: $sb-top-search-right-button-width;
+  }
+  &__main-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    height: $sb-top-search-height;
+    border-top: 1px solid $sb-top-search-border-color;
+    border-bottom: 1px solid $sb-top-search-border-color;
+    padding: 0 20px;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: left;
+    color: #9b9b9b;
+  }
+  &__left-button {
+
+    width: $sb-top-search-left-button-width;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    cursor: pointer;
+    text-align: center;
+    line-height: $sb-top-search-height;
+    border: 1px solid $sb-top-search-border-color;
+    border-top-left-radius: $sb-top-search-border-radius;
+    border-bottom-left-radius: $sb-top-search-border-radius;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    color: #1a1a1a;
+    span {
+      position: relative;
+      margin-right: 10px;
+      &:after {
+        content: '';
+        display: block;
+        width: 4px;
+        height: 4px;
+        border-right: 2px solid #d2d2d2;
+        border-bottom: 2px solid #d2d2d2;
+        position: absolute;
+        top: 50%;
+        margin-top: -3px;
+        right: -13px;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: $sb-top-search-right-button-width;
+    bottom: 0;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    background-color: $sb-top-search-bg-color;
+    border-top-right-radius: $sb-top-search-border-radius;
+    border-bottom-right-radius: $sb-top-search-border-radius;
+    background-image: url('/themes/rialtotender/assets/img/design/search-button-white.svg');
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}

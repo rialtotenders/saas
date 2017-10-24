@@ -1,0 +1,10 @@
+name: Tags
+form: $/perevorot/blog/models/tag/blogTagFields.yaml
+modelClass: Perevorot\Blog\Models\Tag
+defaultRedirect: perevorot/blog/tags
+create:
+    redirect: 'perevorot/blog/tags/update/:id'
+    redirectClose: perevorot/blog/tags
+update:
+    redirect: perevorot/blog/tags
+    redirectClose: perevorot/blog/tags

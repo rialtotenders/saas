@@ -1,0 +1,4 @@
+fields:
+    messages:
+        label: Сообщения
+        type: textarea

@@ -1,0 +1,19 @@
+title = "Профиль"
+url = "/profile"
+layout = "default"
+is_hidden = 0
+
+[viewBag]
+localeUrl[en] = "/profile"
+localeUrl[ru] = "/profile"
+
+[session]
+security = "all"
+
+[Profile]
+==
+
+
+<div class="container">
+    {% component 'Profile' %}
+</div>

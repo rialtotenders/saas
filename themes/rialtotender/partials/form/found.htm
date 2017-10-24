@@ -1,0 +1,136 @@
+{% if banner %}
+<div class="block_banner_search js-block_banner_search">
+
+    <h3>{{ 'form.banner.title'|_ }} <span>{{ banner.category.ratio }}</span></h3>
+    <div class="open_more_link js-open_more_link"></div>
+    <div class="banner-content clearfix">
+        <div class="inline-layout">
+            <div class="info_tender_banner">
+                <p>{{ 'form.banner.subtitle'|_ }}</p>
+                <p class="price_banner">{{ banner.category.amount|number_format(0, '', ' ')  }} <span>{{ 'form.banner.currency'|_ }}</span></p>
+                <a class="banner_link_more" href="#">{{ 'form.banner.button'|_ }}</a>
+            </div>
+            <div class="link_banner">
+                <h4>{{ 'form.banner.top_five_customers'|_ }}</h4>
+                <ul>
+                    {% for code, name in banner.customers %}
+                    <li>
+                        <a class="banner_link_customer" href="?{% if banner.uri %}{{ banner.uri ~ '&' }}{% endif %}edrpou={{ code }}">{{ name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endif %}
+
+{% if noresults and query_array %}
+    <h3>{{ 'form.search.total_found'|_}}: 0</h3>
+    <div>{{ 'form.search.no_results'|_}}</div>
+{% elseif error %}
+    <h3>{{ 'form.search.total_found'|_}}: 0</h3>
+    <div>{{ 'form.search.error'|_}}</div>
+{% else %}
+    {% if start==10 %}
+        <h3>{{ 'form.search.total_found'|_}}: {{ total|number_format(0, '', ' ') }}</h3>
+
+        <div class="sb-table-list-header">
+            <div class="sb-table-list-header__table">
+                <div class="sb-table-list-header__cell">
+                    {{ 'form.search.tender_title'|_ }}
+                </div>
+                <div class="sb-table-list-header__cell">
+                    {{ 'form.search.customer_and_price'|_ }}
+                </div>
+                {% if search_type == 'tender' %}
+                <div class="sb-table-list-header__cell">
+                    {{ 'form.search.tender_status'|_ }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% for item in items %}
+        <div class="sb-table-list-item">
+            {#
+            <div>
+                <p class="sb-table-list-item__status">Прийом предложений (Осталось 2 дня)</p>
+                <p></p>
+            </div>
+            #}
+            <div class="sb-table-list-item__table">
+                <div class="sb-table-list-item__cell">
+                    {% if search_type == 'tender' %}
+                        <p><a href="{{ siteLocale }}tender/{{ item.tenderID }}/">{{ item.title }}</a></p>
+                        <p>{{ item.tenderID }}</p>
+                    {% elseif search_type == 'plan' %}
+                        <p><a href="{{ siteLocale }}plan/{{ item.planID }}/">{{ item.budget.description }}</a></p>
+                        <p>{{ item.planID }}</p>
+                    {% endif %}
+                </div>
+                <div class="sb-table-list-item__cell">
+                    {% if item.procuringEntity.name is not empty %}
+                        <p><a href="{{ siteLocale }}tender/search/?edrpou={{ item.procuringEntity.identifier.id}}" class="sb-table-list-item__link sb-table-list-item__link--fw-normal">{{ item.procuringEntity.name }}</a></p>
+                    {% endif %}
+                    <p>
+                        {% if search_type == 'tender' %}
+                            {% if item.value.amount >= 999999999 %}
+                            {{ 'tender.is_empty_price'|_ }}
+                            {% else %}
+                            {{ item.value.amount|number_format(0, '', ' ') }} {{ item.value.currency }}
+                            {% endif %}
+                        {% elseif search_type == 'plan' %}
+                            {{ item.budget.amount|number_format(0, '', ' ') }} {{ item.budget.currency }}
+                        {% endif %}
+                    </p>
+                </div>
+                {% if search_type == 'tender' %}
+                    <div class="sb-table-list-item__cell">
+                        <p>
+                            {% if dataStatus[item.status] %}
+                                {{ dataStatus[item.status] }}
+                            {% else %}
+                                {{ item.status }}
+                            {% endif %}
+                        </p>
+                        <p>
+                            {% if item.status == 'active.enquiries' %}
+                                {{ 'search.tender.until'|_ ~ ' ' ~ item.enquiryPeriod.endDate|date('d.m.Y H:i') }}
+                            {% elseif item.status == 'active.tendering' %}
+                                {{ 'search.tender.until'|_ ~ ' ' ~ item.tenderPeriod.endDate|date('d.m.Y H:i') }}
+                            {% elseif item.status == 'active.auction' %}
+                                {% if item.lots %}
+                                {{ 'search.tender.start_auction'|_ ~ ' ' ~ item.lots[0].auctionPeriod.startDate|date('d.m.Y') }}
+                                {% else %}
+                                {{ 'search.tender.start_auction'|_ ~ ' ' ~ item.auctionPeriod.startDate|date('d.m.Y H:i') }}
+                                {% endif %}
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endif %}
+                
+            </div>
+        </div>
+    {% endfor %}
+
+    {% if start <  total %}
+        <div class="c-s__more-button-wrap show-more" data-start="{{ start }}" data-gov="{{ is_gov }}">
+            <div class="sb-bigbutton sb-bigbutton--bg-color">
+                {{ 'form.search.show_more'|_ }}<br>
+                {% set start = start+1 %}
+
+                {{ start|number_format(0, '', ' ') }} —
+                {% if (start+page_limit) > total %}
+                    {{ total|number_format(0, '', ' ') }}
+                {% else %}
+                    {% set next = (start+page_limit) %}
+                    {{ next|number_format(0, '', ' ') }}
+                {% endif %}
+                {{ 'form.show_more_from'|_ }} {{ total|number_format(0, '', ' ') }}
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

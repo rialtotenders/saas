@@ -1,0 +1,44 @@
+fields:
+    title:
+        label: Название
+        oc.commentPosition: ''
+        span: full
+        required: 1
+        type: text
+    url:
+        label: Гиперссылка
+        span: left
+        type: text
+    tender_url:
+        label: 'Гиперссылка на тендер'
+        comment: 'Для указания данных тендера используйте формат вида: {tenderID}, {id}, {title}'
+        span: right
+        type: text
+    section0:
+        type: section
+    image:
+        label: Лого
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: left
+        required: 1
+        type: fileupload
+        imageHeight: 200
+    description:
+        label: Описание
+        size: large
+        span: right
+        type: textarea
+    section:
+        type: section
+    is_enabled:
+        label: 'На сайте'
+        span: auto
+        type: switch
+    is_index:
+        label: 'Выводить на главную'
+        span: auto
+        type: switch

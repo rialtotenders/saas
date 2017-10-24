@@ -1,0 +1,46 @@
+{% if contract_documents|length %}
+<h2>{{ 'contract.documents_title'|_ }}</h2>
+
+<div class="sb-table ">
+    <div class="table__table">
+
+        <div class="table__table-row table__table-row3">
+            <div class="table__table-cell table__table-cell--th">
+                {{ 'contract.documentType'|_ }}
+            </div>
+            <div class="table__table-cell table__table-cell--th">
+                {{ 'contract.datePublished'|_ }}
+            </div>
+            <div class="table__table-cell table__table-cell--th">
+                {{ 'contract.document_link'|_ }}
+            </div>
+        </div>
+
+        {% for document in contract_documents %}
+            {% if document.stroked is empty %}
+                <div class="table__table-row table__table-row3">
+                    <div class="table__table-cell">
+                        {% if document_types[document.documentType] %}
+                            {{ document_types[document.documentType] }}
+                        {% else %}
+                            {{ document.documentType }}
+                        {% endif %}
+                    </div>
+                    <div class="table__table-cell">
+                        <p>{{ document.dateModified|date('d.m.Y в H:i') }}<p>
+                    </div>
+                    <div class="table__table-cell">
+                        <a href="{{ document.url }}" class="table__doc-link table__doc-link--doc">{% if document.title == 'sign.p7s' %}Електронний цифровий підпис{% else %}{{ document.title }}{% endif %}</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% if user_contract and user_contract.status == 'active' %}
+<br><a href="{{ siteLocale }}contract/{{ user_contract.cid }}/documents" class="show-contract-documents-form">{{ 'contract.documents.show_form'|_ }}</a>
+{% endif %}
+
+

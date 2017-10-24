@@ -1,0 +1,80 @@
+<div class="w c-main" id="registration-form">
+    <div class="c">
+        <div class="registered-step tender-create">
+
+            <h3>{% if lot %}{{ 'tender.cancel_lot.title'|_ }}{% else %}{{ 'tender.delete.title'|_ }}{% endif %}</h3>
+            <div class="inline-layout ">
+                <div class="form-registration">
+                {% if lot %}
+                    <h4>{{ 'tender.cancel.lot'|_ ~ ' ' ~ lot_title }}</h4>
+                    <br>
+                {% endif %}
+                <form data-tender data-request-loading=".spinner" data-request="onTenderCancelling" data-request-complete="validation(this)">
+
+                    <input type="hidden" name="tenderID" value="{{ tender_id }}">
+
+                    <div class="form-holder">
+                        <textarea placeholder="{% if lot %}{{ 'tender.cancelling_lot.reason'|_ }}{% else %}{{ 'tender.cancelling.reason'|_ }}{% endif %}" name="reason"></textarea>
+                        <div class="error-holder none" data-validation="reason"></div>
+                    </div>
+
+                    <div class="file-button">
+                        {% component 'fileUploader' %}
+                    </div>
+
+                    <div class="block-button" id="for-spinner">
+                        <a href="{{ siteLocale }}tender/{{ tender_id }}{% if lot %}{{ '/lots/'~lot }} {% endif %}" class="prev_step long_link">{% if lot %}{{ 'user.tender.return_to_lot'|_ }}{% else %}{{ 'user.tender.return_to_tender'|_ }}{% endif %}</a>
+                        <button type="submit" class="next_step long_link" onClick="$('.error-holder').hide().html('');">{% if lot %}{{ 'user.tender.lot_cancel_submit'|_ }}{% else %}{{ 'user.tender.cancel_submit'|_ }}{% endif %}</button>
+                    </div>
+                </form>
+                </div>
+                <div class="desc-registration">
+                    <div class="block-desc">
+                        <div class="block-overflow">
+                            {% if message_title %}
+                                <h2>{{ message_title }}</h2>
+                            {% endif %}
+
+                            {% if message_text %}
+                                <br>
+                                {{ message_text|raw }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+</div></div></div></div>
+
+{% put scripts %}
+<script>
+    var opts = {
+        lines: 13 // The number of lines to draw
+        , length: 28 // The length of each line
+        , width: 14 // The line thickness
+        , radius: 42 // The radius of the inner circle
+        , scale: 0.25 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
+    };
+
+    jQuery(function($) {
+
+        var target = document.getElementById('for-spinner')
+        var spinner = new Spinner(opts).spin(target);
+
+        $('.spinner').hide();
+    });
+</script>
+{% endput %}
